@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Aligned Man — Daily & Monthly Goal Optimizer β1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080807;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --gold-dim: rgba(201,168,76,0.12);
+    --cream: #f0ead8;
+    --cream-dim: rgba(240,234,216,0.5);
+    --warm-dark: #181510;
+    --surface: #111009;
+    --border: rgba(201,168,76,0.18);
+    --mid: #6b6050;
+    --physical: #c9a84c;
+    --mental: #7aadbd;
+    --spiritual: #9b8ec4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 64px 24px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 16vw, 130px);
+    letter-spacing: 4px;
+    line-height: 0.88;
+    color: var(--cream);
+  }
+
+  header h1 em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .header-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--mid);
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .gold-rule {
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 24px auto 0;
+  }
+
+  /* ── THREE PILLARS LEGEND ── */
+  .pillars-legend {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    font-weight: 500;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .legend-dot.physical { background: var(--physical); }
+  .legend-dot.mental   { background: var(--mental); }
+  .legend-dot.spiritual { background: var(--spiritual); }
+
+  /* ── MONTH NAV ── */
+  .month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 32px;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .month-nav button {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .month-nav button:hover {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+  }
+
+  .month-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 4px;
+    color: var(--cream);
+  }
+
+  .month-title span {
+    color: var(--gold);
+  }
+
+  /* ── CALENDAR GRID ── */
+  .calendar-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .weekday-headers {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .weekday-label {
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding: 8px 0;
+    font-weight: 500;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  .day-cell {
+    background: var(--surface);
+    border: 1px solid rgba(201,168,76,0.08);
+    border-radius: 3px;
+    min-height: 88px;
+    padding: 10px 10px 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .day-cell:hover {
+    border-color: rgba(201,168,76,0.35);
+    background: #161410;
+    transform: translateY(-1px);
+  }
+
+  .day-cell.empty {
+    background: transparent;
+    border-color: transparent;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .day-cell.today {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .day-cell.today .day-num {
+    color: var(--gold);
+  }
+
+  .day-cell.has-data .day-num::after {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .day-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--cream-dim);
+    line-height: 1;
+  }
+
+  .day-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .day-pill {
+    height: 3px;
+    border-radius: 2px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+
+  .day-pill.physical  { background: var(--physical); }
+  .day-pill.mental    { background: var(--mental); }
+  .day-pill.spiritual { background: var(--spiritual); }
+  .day-pill.filled    { opacity: 1; }
+
+  .day-check {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-top: auto;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .day-cell.complete .day-check { opacity: 1; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8,8,7,0.88);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--warm-dark);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(16px);
+    transition: transform 0.3s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent;
+  }
+
+  .modal-overlay.open .modal {
+    transform: translateY(0);
+  }
+
+  .modal-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    background: var(--warm-dark);
+    z-index: 2;
+  }
+
+  .modal-date {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .modal-eyebrow {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .modal-day-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--cream);
+  }
+
+  .modal-weekday {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--mid);
+  }
+
+  .modal-close {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--mid);
+    width: 32px;
+    height: 32px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .modal-body {
+    padding: 24px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* ── PILLAR SECTION ── */
+  .pillar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pillar-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pillar-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .pillar-dot.physical  { background: var(--physical); }
+  .pillar-dot.mental    { background: var(--mental); }
+  .pillar-dot.spiritual { background: var(--spiritual); }
+
+  .pillar-name {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .pillar-name.physical  { color: var(--physical); }
+  .pillar-name.mental    { color: var(--mental); }
+  .pillar-name.spiritual { color: var(--spiritual); }
+
+  .preset-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .preset-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--cream-dim);
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .preset-btn:hover,
+  .preset-btn.selected {
+    border-color: currentColor;
+    color: var(--cream);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .preset-btn.physical.selected  { border-color: var(--physical); color: var(--physical); }
+  .preset-btn.mental.selected    { border-color: var(--mental); color: var(--mental); }
+  .preset-btn.spiritual.selected { border-color: var(--spiritual); color: var(--spiritual); }
+
+  .custom-input {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 10px 14px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+    min-height: 52px;
+  }
+
+  .custom-input::placeholder { color: var(--mid); }
+  .custom-input:focus { border-color: rgba(201,168,76,0.4); }
+
+  /* ── TIME SLOTS ── */
+  .time-section {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+
+  .time-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  .time-slots {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .time-slot-row {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .time-input {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    color: var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 8px 10px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+    text-align: center;
+  }
+
+  .time-input:focus { border-color: rgba(201,168,76,0.4); }
+
+  .slot-input {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 8px 12px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .slot-input::placeholder { color: var(--mid); }
+  .slot-input:focus { border-color: rgba(201,168,76,0.4); }
+
+  .add-slot-btn {
+    background: none;
+    border: 1px dashed rgba(201,168,76,0.25);
+    color: var(--mid);
+    padding: 8px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    width: 100%;
+    transition: all 0.2s;
+    margin-top: 4px;
+  }
+
+  .add-slot-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ── GOOGLE CAL LINK ── */
+  .gcal-section {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gcal-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 500;
+  }
+
+  .gcal-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    padding: 12px 20px;
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .gcal-btn:hover {
+    background: rgba(201,168,76,0.12);
+    border-color: var(--gold);
+  }
+
+  /* ── SAVE BUTTON ── */
+  .modal-footer {
+    padding: 0 28px 28px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .save-btn {
+    flex: 1;
+    background: var(--gold);
+    border: none;
+    color: var(--black);
+    padding: 14px;
+    border-radius: 2px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .save-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  .clear-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--mid);
+    padding: 14px 18px;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .clear-btn:hover {
+    border-color: #c0392b;
+    color: #c0392b;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .month-progress {
+    max-width: 900px;
+    margin: 0 auto 8px;
+    padding: 16px 20px 0;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 2px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .progress-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    min-width: 48px;
+    text-align: right;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 2px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  header { animation: fadeDown 0.7s ease both; }
+  .pillars-legend { animation: fadeUp 0.7s 0.15s ease both; }
+  .calendar-wrap { animation: fadeUp 0.7s 0.25s ease both; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    .day-cell { min-height: 60px; padding: 7px 7px 6px; }
+    .day-num { font-size: 16px; }
+    .day-pills { gap: 1px; }
+    .modal { border-radius: 4px; }
+    .modal-header, .modal-body { padding-left: 20px; padding-right: 20px; }
+    .modal-footer { padding-left: 20px; padding-right: 20px; }
+    .preset-btn { font-size: 10px; padding: 5px 9px; }
+  }
+
+  /* ── BODY PART SECTION ── */
+  .body-part-section {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(201,168,76,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 3px;
+    padding: 14px 14px 12px;
+    margin-top: 2px;
+    animation: fadeUp 0.25s ease both;
+  }
+
+  .body-part-section.visible {
+    display: flex !important;
+  }
+
+  .body-part-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .body-part-section .preset-btn {
+    border-color: rgba(201,168,76,0.2);
+    font-size: 11px;
+  }
+
+  .body-part-section .preset-btn.selected {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+
+  /* ── WEIGHT TRACKER (header) ── */
+  .weight-stats-bar {
+    max-width: 900px;
+    margin: 0 auto 0;
+    padding: 20px 20px 0;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+  }
+
+  .weight-stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .weight-stat-label {
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 500;
+  }
+
+  .weight-stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--cream);
+  }
+
+  .weight-stat-value.positive { color: #e07070; }
+  .weight-stat-value.negative { color: #7ac99b; }
+  .weight-stat-value.neutral  { color: var(--gold); }
+
+  .weight-stat-sub {
+    font-size: 9px;
+    color: var(--mid);
+    letter-spacing: 1px;
+  }
+
+  /* ── WEIGH-IN SECTION (modal) ── */
+  .weighin-section {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .weighin-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 500;
+  }
+
+  .weighin-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: end;
+  }
+
+  .weighin-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .weighin-field label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .weight-number-input {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    color: var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    padding: 10px 14px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+    -moz-appearance: textfield;
+  }
+
+  .weight-number-input::-webkit-outer-spin-button,
+  .weight-number-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .weight-number-input::placeholder { color: rgba(201,168,76,0.25); font-size: 22px; }
+  .weight-number-input:focus { border-color: rgba(201,168,76,0.5); }
+
+  .weighin-delta {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .weighin-delta-label {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .weighin-delta-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--cream-dim);
+  }
+
+  .weighin-delta-value.loss { color: #7ac99b; }
+  .weighin-delta-value.gain { color: #e07070; }
+
+  @media (max-width: 600px) {
+    .weight-stats-bar { grid-template-columns: 1fr 1fr; }
+    .weight-stats-bar .weight-stat-card:last-child { grid-column: 1 / -1; }
+    .weight-stat-value { font-size: 22px; }
+  }
+
+  /* ── WATER INTAKE ── */
+  .water-section {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .water-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 500;
+  }
+  .water-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: end;
+  }
+  .water-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .water-field label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .water-number-input {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    color: #7aadbd;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    padding: 10px 14px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+    -moz-appearance: textfield;
+  }
+  .water-number-input::-webkit-outer-spin-button,
+  .water-number-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .water-number-input::placeholder { color: rgba(122,173,189,0.25); font-size: 22px; }
+  .water-number-input:focus { border-color: rgba(122,173,189,0.5); }
+  .water-ref {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .water-ref-title {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .water-ref-line {
+    font-size: 10px;
+    color: var(--cream-dim);
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+  }
+
+  /* ── PRESET NOTE (expands under each selected button) ── */
+  .preset-note-wrap {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+    animation: fadeUp 0.2s ease both;
+  }
+  .preset-note-wrap.visible { display: flex; }
+  .preset-note-header {
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .preset-note-input {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 8px 12px;
+    width: 100%;
+    outline: none;
+    resize: none;
+    min-height: 44px;
+    transition: border-color 0.2s;
+  }
+  .preset-note-input::placeholder { color: var(--mid); }
+  .preset-note-input:focus { border-color: rgba(201,168,76,0.35); }
+
+  /* preset wrapper layout */
+  #physicalPresets, #mentalPresets, #spiritualPresets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  #physicalPresets [data-preset],
+  #mentalPresets [data-preset],
+  #spiritualPresets [data-preset] {
+    display: inline-block;
+    width: auto;
+  }
+  #physicalPresets .preset-notes-area,
+  #mentalPresets .preset-notes-area,
+  #spiritualPresets .preset-notes-area {
+    width: 100%;
+  }
+
+  /* ── EXPORT / IMPORT BAR ── */
+  .data-bar {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 16px 20px 0;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .data-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    padding: 9px 16px;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .data-btn:hover {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+  }
+
+  .data-btn.import-btn {
+    color: var(--cream-dim);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .data-btn.import-btn:hover {
+    border-color: var(--cream-dim);
+    color: var(--cream);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--warm-dark);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 12px 24px;
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    z-index: 999;
+    opacity: 0;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Beta Version 1.0</div>
+  <h1>THE ALIGNED<br><em>MAN</em></h1>
+  <div class="header-sub">Daily & Monthly Goal Optimizer</div>
+  <div class="gold-rule"></div>
+</header>
+
+<div class="pillars-legend">
+  <div class="legend-item"><div class="legend-dot physical"></div>Physical</div>
+  <div class="legend-item"><div class="legend-dot mental"></div>Mental</div>
+  <div class="legend-item"><div class="legend-dot spiritual"></div>Spiritual</div>
+</div>
+
+<div class="data-bar">
+  <button class="data-btn import-btn" id="importBtn">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+    Import Data
+  </button>
+  <button class="data-btn" id="exportBtn">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+    Export Data
+  </button>
+</div>
+<input type="file" id="importFile" accept=".json" style="display:none">
+<div class="toast" id="toast"></div>
+
+<div class="month-nav">
+  <button id="prevMonth">&#8592;</button>
+  <div class="month-title" id="monthTitle">JUNE <span>2026</span></div>
+  <button id="nextMonth">&#8594;</button>
+</div>
+
+<div class="month-progress">
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-pct" id="progressPct">0%</div>
+</div>
+
+<div class="weight-stats-bar" id="weightStatsBar">
+  <div class="weight-stat-card">
+    <div class="weight-stat-label">Start Weight</div>
+    <div class="weight-stat-value neutral" id="statStartWeight">— lbs</div>
+    <div class="weight-stat-sub">First weigh-in this month</div>
+  </div>
+  <div class="weight-stat-card">
+    <div class="weight-stat-label">Current Weight</div>
+    <div class="weight-stat-value neutral" id="statCurrentWeight">— lbs</div>
+    <div class="weight-stat-sub">Most recent entry</div>
+  </div>
+  <div class="weight-stat-card">
+    <div class="weight-stat-label">Monthly Change</div>
+    <div class="weight-stat-value neutral" id="statChange">— lbs</div>
+    <div class="weight-stat-sub" id="statChangePct">—% of body weight</div>
+  </div>
+</div>
+
+<div class="calendar-wrap">
+  <div class="weekday-headers">
+    <div class="weekday-label">Sun</div>
+    <div class="weekday-label">Mon</div>
+    <div class="weekday-label">Tue</div>
+    <div class="weekday-label">Wed</div>
+    <div class="weekday-label">Thu</div>
+    <div class="weekday-label">Fri</div>
+    <div class="weekday-label">Sat</div>
+  </div>
+  <div class="calendar-grid" id="calGrid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-date">
+        <div class="modal-eyebrow" id="modalEyebrow">Monday</div>
+        <div class="modal-day-num" id="modalDayNum">01</div>
+        <div class="modal-weekday" id="modalMonth">June 2026</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+        <button class="modal-close" id="modalClose">✕</button>
+        <a class="gcal-btn gcal-btn-top" id="gcalBtnTop" href="#" target="_blank" style="padding:8px 12px;font-size:10px;letter-spacing:2px;width:auto;gap:7px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+          Google Cal
+        </a>
+      </div>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- PHYSICAL -->
+      <div class="pillar-section">
+        <div class="pillar-label">
+          <div class="pillar-dot physical"></div>
+          <div class="pillar-name physical">Physical</div>
+        </div>
+        <div class="preset-grid" id="physicalPresets"></div>
+        <textarea class="custom-input" id="physicalCustom" placeholder="Add your own or override…" rows="2"></textarea>
+
+        <!-- BODY PART SECTION -->
+        <div class="body-part-section" id="bodyPartSection">
+          <div class="body-part-label">&#9776; Muscle Focus</div>
+          <div class="preset-grid" id="bodyPartPresets"></div>
+        </div>
+      </div>
+
+      <!-- MENTAL -->
+      <div class="pillar-section">
+        <div class="pillar-label">
+          <div class="pillar-dot mental"></div>
+          <div class="pillar-name mental">Mental</div>
+        </div>
+        <div class="preset-grid" id="mentalPresets"></div>
+        <textarea class="custom-input" id="mentalCustom" placeholder="Add your own or override…" rows="2"></textarea>
+      </div>
+
+      <!-- SPIRITUAL -->
+      <div class="pillar-section">
+        <div class="pillar-label">
+          <div class="pillar-dot spiritual"></div>
+          <div class="pillar-name spiritual">Spiritual</div>
+        </div>
+        <div class="preset-grid" id="spiritualPresets"></div>
+        <textarea class="custom-input" id="spiritualCustom" placeholder="Add your own or override…" rows="2"></textarea>
+      </div>
+
+      <!-- TIME SLOTS -->
+      <div class="time-section">
+        <div class="time-label">Time Blocks</div>
+        <div class="time-slots" id="timeSlots"></div>
+        <button class="add-slot-btn" id="addSlotBtn">+ Add Time Block</button>
+      </div>
+
+      <!-- WEIGH-IN -->
+      <div class="weighin-section">
+        <div class="weighin-label">&#9654; Daily Weigh-In</div>
+        <div class="weighin-row">
+          <div class="weighin-field">
+            <label>Today's Weight (lbs)</label>
+            <input class="weight-number-input" type="number" id="weightInput" placeholder="000.0" step="0.1" min="50" max="999">
+          </div>
+          <div class="weighin-delta" id="weighinDelta">
+            <div class="weighin-delta-label">vs. yesterday</div>
+            <div class="weighin-delta-value" id="weighinDeltaVal">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WATER INTAKE -->
+      <div class="water-section">
+        <div class="water-label">&#9676; Daily Water Intake</div>
+        <div class="water-row">
+          <div class="water-field">
+            <label>Fluid Ounces (fl oz)</label>
+            <input class="water-number-input" type="number" id="waterInput" placeholder="000" step="1" min="0" max="500">
+          </div>
+          <div class="water-ref">
+            <div class="water-ref-title">Reference</div>
+            <div class="water-ref-line">64 fl oz = 1/2 gallon</div>
+            <div class="water-ref-line">128 fl oz = 1 gallon</div>
+            <div class="water-ref-line">1 gallon = 4 quarts</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOOGLE CALENDAR -->
+      <div class="gcal-section">
+        <div class="gcal-label">Schedule in Google Calendar</div>
+        <a class="gcal-btn" id="gcalBtn" href="#" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+          Open Google Calendar
+        </a>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="clear-btn" id="clearBtn">Clear</button>
+      <button class="save-btn" id="saveBtn">SAVE DAY</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PHYSICAL_PRESETS = ['Weight Training', 'Run', 'Walk', 'Swim', 'Stretch', 'HIIT', 'Yoga', 'Bike', 'Biking', 'Boxing', 'Rest'];
+const BODY_PARTS = ['Chest', 'Triceps', 'Biceps', 'Back', 'Shoulders', 'Legs', 'Glutes', 'Core', 'Forearms', 'Full Body'];
+const MENTAL_PRESETS   = ['Journaling', 'Read', 'Meditate', 'Therapy', 'No Screen', 'Study', 'Podcast', 'Breathwork'];
+const SPIRITUAL_PRESETS = ['Prayer', 'Gratitude', 'Affirmations', 'Scripture', 'Nature', 'Reflect', 'Worship', 'Silence'];
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+let currentYear  = 2026;
+let currentMonth = 5; // June = 5 (0-indexed)
+let activeDay    = null;
+let data         = JSON.parse(localStorage.getItem('blueprint_data') || '{}');
+
+const today = new Date();
+
+function storageKey(year, month, day) {
+  return `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+}
+
+function saveData() {
+  localStorage.setItem('blueprint_data', JSON.stringify(data));
+}
+
+// ── BUILD CALENDAR ──
+function buildCalendar() {
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+  document.getElementById('monthTitle').innerHTML =
+    `${MONTHS[currentMonth].toUpperCase()} <span>${currentYear}</span>`;
+
+  // empty cells
+  for (let i = 0; i < firstDay; i++) {
+    const empty = document.createElement('div');
+    empty.className = 'day-cell empty';
+    grid.appendChild(empty);
+  }
+
+  let filled = 0;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = storageKey(currentYear, currentMonth, d);
+    const dayData = data[key];
+    const isToday = today.getFullYear() === currentYear &&
+                    today.getMonth() === currentMonth &&
+                    today.getDate() === d;
+
+    const cell = document.createElement('div');
+    cell.className = 'day-cell' +
+      (isToday ? ' today' : '') +
+      (dayData ? ' has-data' : '');
+
+    const physFilled = dayData && ((Array.isArray(dayData.physical) ? dayData.physical.length > 0 : !!dayData.physical) || dayData.physicalCustom);
+    const mentFilled = dayData && ((Array.isArray(dayData.mental)   ? dayData.mental.length   > 0 : !!dayData.mental)   || dayData.mentalCustom);
+    const spirFilled = dayData && ((Array.isArray(dayData.spiritual) ? dayData.spiritual.length > 0 : !!dayData.spiritual) || dayData.spiritualCustom);
+    const complete = physFilled && mentFilled && spirFilled;
+
+    if (complete) {
+      cell.classList.add('complete');
+      filled++;
+    }
+
+    cell.innerHTML = `
+      <div class="day-num">${d}</div>
+      <div class="day-pills">
+        <div class="day-pill physical ${physFilled ? 'filled' : ''}"></div>
+        <div class="day-pill mental ${mentFilled ? 'filled' : ''}"></div>
+        <div class="day-pill spiritual ${spirFilled ? 'filled' : ''}"></div>
+      </div>
+      <div class="day-check">✓ DONE</div>
+    `;
+
+    cell.addEventListener('click', () => openModal(d));
+    grid.appendChild(cell);
+  }
+
+  // progress
+  const pct = Math.round((filled / daysInMonth) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent  = pct + '%';
+
+  // weight stats
+  updateWeightStats(daysInMonth);
+}
+
+function updateWeightStats(daysInMonth) {
+  let firstWeight = null, lastWeight = null, firstDay = null, lastDay = null;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = storageKey(currentYear, currentMonth, d);
+    const w = data[key] && data[key].weight ? parseFloat(data[key].weight) : null;
+    if (w !== null) {
+      if (firstWeight === null) { firstWeight = w; firstDay = d; }
+      lastWeight = w; lastDay = d;
+    }
+  }
+
+  const startEl   = document.getElementById('statStartWeight');
+  const currentEl = document.getElementById('statCurrentWeight');
+  const changeEl  = document.getElementById('statChange');
+  const changePct = document.getElementById('statChangePct');
+
+  if (firstWeight !== null) {
+    startEl.textContent = firstWeight.toFixed(1) + ' lbs';
+    startEl.className = 'weight-stat-value neutral';
+  } else {
+    startEl.textContent = '— lbs';
+    startEl.className = 'weight-stat-value neutral';
+  }
+
+  if (lastWeight !== null) {
+    currentEl.textContent = lastWeight.toFixed(1) + ' lbs';
+    currentEl.className = 'weight-stat-value neutral';
+  } else {
+    currentEl.textContent = '— lbs';
+    currentEl.className = 'weight-stat-value neutral';
+  }
+
+  if (firstWeight !== null && lastWeight !== null && firstDay !== lastDay) {
+    const diff = lastWeight - firstWeight;
+    const pctChange = ((diff / firstWeight) * 100);
+    const sign = diff > 0 ? '+' : '';
+    changeEl.textContent = sign + diff.toFixed(1) + ' lbs';
+    changeEl.className = 'weight-stat-value ' + (diff > 0 ? 'positive' : diff < 0 ? 'negative' : 'neutral');
+    changePct.textContent = sign + pctChange.toFixed(2) + '% of body weight';
+  } else {
+    changeEl.textContent = '— lbs';
+    changeEl.className = 'weight-stat-value neutral';
+    changePct.textContent = '—% of body weight';
+  }
+}
+
+// ── MODAL ──
+function openModal(day) {
+  activeDay = day;
+  const key     = storageKey(currentYear, currentMonth, day);
+  const dayData = data[key] || {};
+  const dateObj = new Date(currentYear, currentMonth, day);
+
+  document.getElementById('modalEyebrow').textContent = DAYS[dateObj.getDay()];
+  document.getElementById('modalDayNum').textContent  = String(day).padStart(2, '0');
+  document.getElementById('modalMonth').textContent   = `${MONTHS[currentMonth]} ${currentYear}`;
+
+  buildPresets('physicalPresets',  PHYSICAL_PRESETS,  'physical',  dayData.physical  || [], dayData.physicalNotes  || {});
+  buildPresets('mentalPresets',    MENTAL_PRESETS,    'mental',    dayData.mental    || [], dayData.mentalNotes    || {});
+  buildPresets('spiritualPresets', SPIRITUAL_PRESETS, 'spiritual', dayData.spiritual || [], dayData.spiritualNotes || {});
+
+  // body parts
+  buildBodyParts(dayData.bodyParts || []);
+  const bp = document.getElementById('bodyPartSection');
+  const physArr = Array.isArray(dayData.physical) ? dayData.physical : (dayData.physical ? [dayData.physical] : []);
+  if (physArr.includes('Weight Training')) {
+    bp.classList.add('visible');
+  } else {
+    bp.classList.remove('visible');
+  }
+
+  document.getElementById('physicalCustom').value  = dayData.physicalCustom  || '';
+  document.getElementById('mentalCustom').value    = dayData.mentalCustom    || '';
+  document.getElementById('spiritualCustom').value = dayData.spiritualCustom || '';
+
+  // time slots
+  buildTimeSlots(dayData.slots || []);
+
+  // weigh-in
+  const weightInput = document.getElementById('weightInput');
+  weightInput.value = dayData.weight || '';
+  document.getElementById('waterInput').value = dayData.water || '';
+  // compute vs yesterday delta
+  const prevDay = day - 1;
+  const deltaEl = document.getElementById('weighinDeltaVal');
+  if (prevDay >= 1) {
+    const prevKey  = storageKey(currentYear, currentMonth, prevDay);
+    const prevData = data[prevKey];
+    if (prevData && prevData.weight && dayData.weight) {
+      const diff = parseFloat(dayData.weight) - parseFloat(prevData.weight);
+      const sign = diff > 0 ? '+' : '';
+      deltaEl.textContent = sign + diff.toFixed(1) + ' lbs';
+      deltaEl.className = 'weighin-delta-value ' + (diff > 0 ? 'gain' : diff < 0 ? 'loss' : '');
+    } else {
+      deltaEl.textContent = '—';
+      deltaEl.className = 'weighin-delta-value';
+    }
+  } else {
+    deltaEl.textContent = '—';
+    deltaEl.className = 'weighin-delta-value';
+  }
+
+  // google cal link
+  const gcalUrl = `https://calendar.google.com/calendar/r/day/${currentYear}/${currentMonth+1}/${day}`;
+  document.getElementById('gcalBtn').href    = gcalUrl;
+  document.getElementById('gcalBtnTop').href = gcalUrl;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  activeDay = null;
+}
+
+function buildPresets(containerId, presets, type, selected, notes) {
+  // selected is now an array; notes is an object {presetName: noteText}
+  const selectedArr = Array.isArray(selected) ? selected : (selected ? [selected] : []);
+  const notesObj = notes || {};
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+
+  presets.forEach(p => {
+    const isSelected = selectedArr.includes(p);
+
+    // wrapper holds button + optional note
+    const wrapper = document.createElement('div');
+    wrapper.style.width = '100%';
+    wrapper.dataset.preset = p;
+
+    const btn = document.createElement('button');
+    btn.className = 'preset-btn ' + type + (isSelected ? ' selected' : '');
+    btn.textContent = p;
+
+    // note area
+    const noteWrap = document.createElement('div');
+    noteWrap.className = 'preset-note-wrap' + (isSelected ? ' visible' : '');
+    noteWrap.innerHTML = '<div class="preset-note-header">Notes on ' + p + '</div><textarea class="preset-note-input" placeholder="What did you do / how did it go…" rows="2">' + (notesObj[p] || '') + '</textarea>';
+
+    const handleClick = function(e) {
+      e.preventDefault();
+      const wasSelected = btn.classList.contains('selected');
+      btn.classList.toggle('selected', !wasSelected);
+      noteWrap.classList.toggle('visible', !wasSelected);
+
+      // Weight Training body part toggle
+      if (containerId === 'physicalPresets') {
+        const bp = document.getElementById('bodyPartSection');
+        const wtBtn = container.querySelector('[data-preset="Weight Training"] .preset-btn');
+        if (wtBtn && wtBtn.classList.contains('selected')) {
+          bp.classList.add('visible');
+        } else {
+          bp.classList.remove('visible');
+        }
+      }
+    };
+
+    btn.addEventListener('touchend', handleClick, { passive: false });
+    btn.addEventListener('click', handleClick);
+
+    wrapper.appendChild(btn);
+    // put note wraps in a separate notes container below all buttons
+    wrapper._noteWrap = noteWrap;
+    container.appendChild(wrapper);
+  });
+
+  // append all note wraps below the button grid
+  const notesContainer = document.createElement('div');
+  notesContainer.className = 'preset-notes-area';
+  notesContainer.style.cssText = 'display:flex;flex-direction:column;gap:8px;margin-top:8px;width:100%;';
+  container.querySelectorAll('[data-preset]').forEach(w => {
+    if (w._noteWrap) notesContainer.appendChild(w._noteWrap);
+  });
+  container.appendChild(notesContainer);
+}
+
+function buildBodyParts(selected) {
+  const container = document.getElementById('bodyPartPresets');
+  container.innerHTML = '';
+  BODY_PARTS.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'preset-btn' + (selected.includes(p) ? ' selected' : '');
+    btn.textContent = p;
+    const toggle = function(e) {
+      e.preventDefault();
+      btn.classList.toggle('selected');
+    };
+    btn.addEventListener('touchend', toggle, { passive: false });
+    btn.addEventListener('click', toggle);
+    container.appendChild(btn);
+  });
+}
+
+function buildTimeSlots(slots) {
+  const container = document.getElementById('timeSlots');
+  container.innerHTML = '';
+  const defaultSlots = slots.length > 0 ? slots : [
+    { time: '06:00', label: '' },
+    { time: '12:00', label: '' },
+    { time: '18:00', label: '' },
+  ];
+  defaultSlots.forEach(s => addSlotRow(s.time, s.label));
+}
+
+function addSlotRow(time = '', label = '') {
+  const container = document.getElementById('timeSlots');
+  const row = document.createElement('div');
+  row.className = 'time-slot-row';
+  row.innerHTML = `
+    <input class="time-input" type="time" value="${time}">
+    <input class="slot-input" type="text" placeholder="What are you doing…" value="${label}">
+  `;
+  container.appendChild(row);
+}
+
+document.getElementById('addSlotBtn').addEventListener('click', () => addSlotRow());
+
+function getSelectedPresets(containerId) {
+  return Array.from(document.querySelectorAll('#' + containerId + ' [data-preset] .preset-btn.selected'))
+    .map(b => b.closest('[data-preset]').dataset.preset);
+}
+
+function getPresetNotes(containerId) {
+  const notes = {};
+  document.querySelectorAll('#' + containerId + ' [data-preset]').forEach(w => {
+    const noteEl = w._noteWrap ? w._noteWrap.querySelector('.preset-note-input') :
+      document.querySelector('#' + containerId + ' .preset-notes-area [data-preset="' + w.dataset.preset + '"] .preset-note-input');
+    if (noteEl && noteEl.value.trim()) {
+      notes[w.dataset.preset] = noteEl.value.trim();
+    }
+  });
+  return notes;
+}
+
+function getNotesByArea(containerId) {
+  const notes = {};
+  // notes are in .preset-notes-area children in order of presets
+  const noteWraps = document.querySelectorAll('#' + containerId + ' + .preset-notes-area .preset-note-wrap, #' + containerId + ' .preset-note-wrap');
+  noteWraps.forEach(nw => {
+    const header = nw.querySelector('.preset-note-header');
+    const textarea = nw.querySelector('.preset-note-input');
+    if (header && textarea && textarea.value.trim()) {
+      const name = header.textContent.replace('Notes on ', '').trim();
+      notes[name] = textarea.value.trim();
+    }
+  });
+  return notes;
+}
+
+function collectSlots() {
+  const rows = document.querySelectorAll('.time-slot-row');
+  return Array.from(rows).map(row => ({
+    time:  row.querySelector('.time-input').value,
+    label: row.querySelector('.slot-input').value,
+  })).filter(s => s.time || s.label);
+}
+
+document.getElementById('saveBtn').addEventListener('click', () => {
+  if (!activeDay) return;
+  const key = storageKey(currentYear, currentMonth, activeDay);
+  const selectedBodyParts = Array.from(
+    document.querySelectorAll('#bodyPartPresets .preset-btn.selected')
+  ).map(b => b.textContent);
+
+  data[key] = {
+    physical:        getSelectedPresets('physicalPresets'),
+    physicalNotes:   getNotesByArea('physicalPresets'),
+    bodyParts:       selectedBodyParts,
+    mental:          getSelectedPresets('mentalPresets'),
+    mentalNotes:     getNotesByArea('mentalPresets'),
+    spiritual:       getSelectedPresets('spiritualPresets'),
+    spiritualNotes:  getNotesByArea('spiritualPresets'),
+    physicalCustom:  document.getElementById('physicalCustom').value,
+    mentalCustom:    document.getElementById('mentalCustom').value,
+    spiritualCustom: document.getElementById('spiritualCustom').value,
+    slots:           collectSlots(),
+    weight:          document.getElementById('weightInput').value || null,
+    water:           document.getElementById('waterInput').value || null,
+  };
+  saveData();
+  closeModal();
+  buildCalendar();
+});
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  if (!activeDay) return;
+  const key = storageKey(currentYear, currentMonth, activeDay);
+  delete data[key];
+  saveData();
+  closeModal();
+  buildCalendar();
+});
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+
+document.getElementById('prevMonth').addEventListener('click', () => {
+  currentMonth--;
+  if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+  buildCalendar();
+});
+
+document.getElementById('nextMonth').addEventListener('click', () => {
+  currentMonth++;
+  if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+  buildCalendar();
+});
+
+buildCalendar();
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── EXPORT ──
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'aligned-man-data.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Data exported ✓');
+});
+
+// ── IMPORT ──
+document.getElementById('importBtn').addEventListener('click', () => {
+  document.getElementById('importFile').click();
+});
+
+document.getElementById('importFile').addEventListener('change', function() {
+  const file = this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      data = imported;
+      saveData();
+      buildCalendar();
+      showToast('Data imported ✓');
+    } catch(err) {
+      showToast('Invalid file — try again');
+    }
+  };
+  reader.readAsText(file);
+  this.value = '';
+});
+</script>
+</body>
+</html>
