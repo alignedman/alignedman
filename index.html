@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Aligned Man Project | #1 Men's Coaching Platform | Physical · Mental · Spiritual</title>
+  <meta name="description" content="The Aligned Man Project — founded by Robert Gonnerman. The #1 online men's coaching platform for men in their 30s, 40s, and 50s who refuse to decline. Physical. Mental. Spiritual." />
+  <meta name="keywords" content="men's coaching 30s 40s 50s, men's personal development, physical optimization men over 30, mental clarity men, spiritual alignment, Robert Gonnerman, aligned man project, align with rob, TRT HRT hormone optimization, peptides men, men's coaching program" />
+  <meta name="author" content="Robert Gonnerman" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.alignedmanproject.com" />
+  <meta property="og:title" content="The Aligned Man Project | Built for Men Who Refuse to Decline" />
+  <meta property="og:description" content="Founded by Robert Gonnerman. The #1 men's coaching platform for men in their 30s, 40s, and 50s. Physical. Mental. Spiritual." />
+  <meta property="og:url" content="https://www.alignedmanproject.com" />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "The Aligned Man Project",
+    "url": "https://www.alignedmanproject.com",
+    "founder": { "@type": "Person", "name": "Robert Gonnerman" },
+    "description": "The #1 online men's coaching platform for men in their 30s, 40s, and 50s focused on Physical, Mental, and Spiritual optimization.",
+    "sameAs": ["https://www.instagram.com/alignwithrob","https://www.youtube.com/@alignwithrob","https://www.tiktok.com/@alignwithrob"]
+  }
+  
+// OPTIMIZER TOGGLE
+function toggleOptimizer(e) {
+  if (e) e.preventDefault();
+  var app = document.getElementById('opt-app');
+  var site = document.getElementById('main-site');
+  if (app.style.display === 'none' || app.style.display === '') {
+    app.style.display = 'block';
+    if (site) site.style.display = 'none';
+    window.scrollTo(0,0);
+    if (typeof buildCalendar === 'function') buildCalendar();
+  } else {
+    app.style.display = 'none';
+    if (site) site.style.display = 'block';
+  }
+}
+
+// OPTIMIZER JS
+const PHYSICAL_PRESETS = ['Weight Training','Run','Walk','Swim','Stretch','HIIT','Yoga','Bike','Biking','Boxing','Rest'];
+const BODY_PARTS = ['Chest','Triceps','Biceps','Back','Shoulders','Legs','Glutes','Core','Forearms','Full Body'];
+const MENTAL_PRESETS = ['Journaling','Read','Meditate','Therapy','No Screen','Study','Podcast','Breathwork'];
+const SPIRITUAL_PRESETS = ['Prayer','Gratitude','Affirmations','Scripture','Nature','Reflect','Worship','Silence'];
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+let currentYear = 2026, currentMonth = 5, activeDay = null;
+let data = JSON.parse(localStorage.getItem('blueprint_data') || '{}');
+const today = new Date();
+
+function storageKey(y,m,d) { return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'); }
+function saveData() { localStorage.setItem('blueprint_data', JSON.stringify(data)); }
+
+function buildCalendar() {
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+  const daysInMonth = new Date(currentYear, currentMonth+1, 0).getDate();
+  document.getElementById('monthTitle').innerHTML = MONTHS[currentMonth].toUpperCase()+' <span>'+currentYear+'</span>';
+  for (let i=0; i<firstDay; i++) { const e=document.createElement('div'); e.className='day-cell empty'; grid.appendChild(e); }
+  let filled = 0;
+  for (let d=1; d<=daysInMonth; d++) {
+    const key = storageKey(currentYear,currentMonth,d);
+    const dd = data[key];
+    const isToday = today.getFullYear()===currentYear && today.getMonth()===currentMonth && today.getDate()===d;
+    const cell = document.createElement('div');
+    cell.className = 'day-cell'+(isToday?' today':'')+(dd?' has-data':'');
+    const pF = dd&&((Array.isArray(dd.physical)?dd.physical.length>0:!!dd.physical)||dd.physicalCustom);
+    const mF = dd&&((Array.isArray(dd.mental)?dd.mental.length>0:!!dd.mental)||dd.mentalCustom);
+    const sF = dd&&((Array.isArray(dd.spiritual)?dd.spiritual.length>0:!!dd.spiritual)||dd.spiritualCustom);
+    if (pF&&mF&&sF) { cell.classList.add('complete'); filled++; }
+    cell.innerHTML = '<div class="day-num">'+d+'</div><div class="day-pills"><div class="day-pill physical'+(pF?' filled':'')+'"></div><div class="day-pill mental'+(mF?' filled':'')+'"></div><div class="day-pill spiritual'+(sF?' filled':'')+'"></div></div><div class="day-check">&#10003; DONE</div>';
+    cell.addEventListener('click', function(){ openModal(d); });
+    grid.appendChild(cell);
+  }
+  const pct = Math.round((filled/daysInMonth)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressPct').textContent = pct+'%';
+  updateWeightStats(daysInMonth);
+}
+
+function updateWeightStats(daysInMonth) {
+  let fw=null, lw=null, fd=null, ld=null;
+  for (let d=1; d<=daysInMonth; d++) {
+    const w = data[storageKey(currentYear,currentMonth,d)];
+    const wv = w&&w.weight ? parseFloat(w.weight) : null;
+    if (wv!==null) { if(fw===null){fw=wv;fd=d;} lw=wv; ld=d; }
+  }
+  const sEl=document.getElementById('statStartWeight'), cEl=document.getElementById('statCurrentWeight'), chEl=document.getElementById('statChange'), cpEl=document.getElementById('statChangePct');
+  sEl.textContent = fw!==null ? fw.toFixed(1)+' lbs' : '-- lbs'; sEl.className='weight-stat-value neutral';
+  cEl.textContent = lw!==null ? lw.toFixed(1)+' lbs' : '-- lbs'; cEl.className='weight-stat-value neutral';
+  if (fw!==null&&lw!==null&&fd!==ld) {
+    const diff=lw-fw, pct=((diff/fw)*100), sign=diff>0?'+':'';
+    chEl.textContent=sign+diff.toFixed(1)+' lbs'; chEl.className='weight-stat-value '+(diff>0?'positive':diff<0?'negative':'neutral');
+    cpEl.textContent=sign+pct.toFixed(2)+'% of body weight';
+  } else { chEl.textContent='-- lbs'; chEl.className='weight-stat-value neutral'; cpEl.textContent='--% of body weight'; }
+}
+
+function openModal(day) {
+  activeDay = day;
+  const key = storageKey(currentYear,currentMonth,day);
+  const dd = data[key]||{};
+  const dateObj = new Date(currentYear,currentMonth,day);
+  document.getElementById('modalEyebrow').textContent = DAYS[dateObj.getDay()];
+  document.getElementById('modalDayNum').textContent = String(day).padStart(2,'0');
+  document.getElementById('modalMonth').textContent = MONTHS[currentMonth]+' '+currentYear;
+  buildPresets('physicalPresets',PHYSICAL_PRESETS,'physical',dd.physical||[],dd.physicalNotes||{});
+  buildPresets('mentalPresets',MENTAL_PRESETS,'mental',dd.mental||[],dd.mentalNotes||{});
+  buildPresets('spiritualPresets',SPIRITUAL_PRESETS,'spiritual',dd.spiritual||[],dd.spiritualNotes||{});
+  buildBodyParts(dd.bodyParts||[]);
+  const physArr = Array.isArray(dd.physical)?dd.physical:(dd.physical?[dd.physical]:[]);
+  document.getElementById('bodyPartSection').classList.toggle('visible', physArr.includes('Weight Training'));
+  document.getElementById('physicalCustom').value = dd.physicalCustom||'';
+  document.getElementById('mentalCustom').value = dd.mentalCustom||'';
+  document.getElementById('spiritualCustom').value = dd.spiritualCustom||'';
+  buildTimeSlots(dd.slots||[]);
+  document.getElementById('weightInput').value = dd.weight||'';
+  document.getElementById('waterInput').value = dd.water||'';
+  document.getElementById('grat1').value = dd.grat1||'';
+  document.getElementById('grat2').value = dd.grat2||'';
+  document.getElementById('grat3').value = dd.grat3||'';
+  document.getElementById('recapWins').value = dd.recapWins||'';
+  document.getElementById('recapGrow').value = dd.recapGrow||'';
+  const prevKey = storageKey(currentYear,currentMonth,day-1);
+  const prevD = data[prevKey];
+  const dEl = document.getElementById('weighinDeltaVal');
+  if (day>1&&prevD&&prevD.weight&&dd.weight) {
+    const diff=parseFloat(dd.weight)-parseFloat(prevD.weight), sign=diff>0?'+':'';
+    dEl.textContent=sign+diff.toFixed(1)+' lbs'; dEl.className='weighin-delta-value '+(diff>0?'gain':diff<0?'loss':'');
+  } else { dEl.textContent='--'; dEl.className='weighin-delta-value'; }
+  const gcalUrl='https://calendar.google.com/calendar/r/day/'+currentYear+'/'+(currentMonth+1)+'/'+day;
+  document.getElementById('gcalBtn').href=gcalUrl;
+  document.getElementById('gcalBtnTop').href=gcalUrl;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; activeDay=null; }
+
+function buildPresets(containerId, presets, type, selected, notes) {
+  const selArr = Array.isArray(selected)?selected:(selected?[selected]:[]);
+  const notesObj = notes||{};
+  const container = document.getElementById(containerId);
+  container.innerHTML='';
+  const notesArea = document.createElement('div');
+  notesArea.className='preset-notes-area';
+  presets.forEach(function(p) {
+    const isSel = selArr.includes(p);
+    const wrapper = document.createElement('div');
+    wrapper.dataset.preset=p; wrapper.style.display='inline-block';
+    const btn = document.createElement('button');
+    btn.className='preset-btn '+type+(isSel?' selected':'');
+    btn.textContent=p;
+    const noteWrap = document.createElement('div');
+    noteWrap.className='preset-note-wrap'+(isSel?' visible':'');
+    noteWrap.innerHTML='<div class="preset-note-header">Notes on '+p+'</div><textarea class="preset-note-input" placeholder="What did you do / how did it go..." rows="2">'+(notesObj[p]||'')+'</textarea>';
+    function handleClick(e) {
+      e.preventDefault();
+      const wasSel = btn.classList.contains('selected');
+      btn.classList.toggle('selected',!wasSel);
+      noteWrap.classList.toggle('visible',!wasSel);
+      if (containerId==='physicalPresets') {
+        const wtBtn = container.querySelector('[data-preset="Weight Training"] .preset-btn');
+        document.getElementById('bodyPartSection').classList.toggle('visible', wtBtn&&wtBtn.classList.contains('selected'));
+      }
+    }
+    btn.addEventListener('click',handleClick);
+    btn.addEventListener('touchend',handleClick,{passive:false});
+    wrapper.appendChild(btn);
+    container.appendChild(wrapper);
+    notesArea.appendChild(noteWrap);
+  });
+  container.appendChild(notesArea);
+}
+
+function buildBodyParts(selected) {
+  const c = document.getElementById('bodyPartPresets');
+  c.innerHTML='';
+  BODY_PARTS.forEach(function(p) {
+    const btn=document.createElement('button');
+    btn.className='preset-btn'+(selected.includes(p)?' selected':'');
+    btn.textContent=p;
+    function t(e){e.preventDefault();btn.classList.toggle('selected');}
+    btn.addEventListener('click',t);
+    btn.addEventListener('touchend',t,{passive:false});
+    c.appendChild(btn);
+  });
+}
+
+function buildTimeSlots(slots) {
+  const c=document.getElementById('timeSlots');
+  c.innerHTML='';
+  const defaults = slots.length>0?slots:[
+    {time:'05:00',label:''},{time:'07:00',label:''},{time:'09:00',label:''},
+    {time:'11:00',label:''},{time:'13:00',label:''},{time:'15:00',label:''},
+    {time:'17:00',label:''},{time:'19:00',label:''},{time:'21:00',label:''},{time:'23:00',label:''}
+  ];
+  defaults.forEach(function(s){addSlotRow(s.time,s.label);});
+}
+
+function addSlotRow(time,label) {
+  time=time||''; label=label||'';
+  const c=document.getElementById('timeSlots');
+  const row=document.createElement('div');
+  row.className='time-slot-row';
+  row.innerHTML='<input class="time-input" type="time" value="'+time+'"><input class="slot-input" type="text" placeholder="What are you doing..." value="'+label+'">';
+  row.querySelector('.time-input').addEventListener('change',sortTimeSlots);
+  c.appendChild(row);
+}
+
+function sortTimeSlots() {
+  const c=document.getElementById('timeSlots');
+  const rows=Array.from(c.querySelectorAll('.time-slot-row'));
+  rows.sort(function(a,b){return (a.querySelector('.time-input').value||'99:99').localeCompare(b.querySelector('.time-input').value||'99:99');});
+  rows.forEach(function(r){c.appendChild(r);});
+}
+
+function getSelectedPresets(id) {
+  return Array.from(document.querySelectorAll('#'+id+' [data-preset] .preset-btn.selected')).map(function(b){return b.closest('[data-preset]').dataset.preset;});
+}
+
+function getNotesByArea(id) {
+  const notes={};
+  document.querySelectorAll('#'+id+' .preset-note-wrap').forEach(function(nw){
+    const h=nw.querySelector('.preset-note-header'), t=nw.querySelector('.preset-note-input');
+    if(h&&t&&t.value.trim()){notes[h.textContent.replace('Notes on ','').trim()]=t.value.trim();}
+  });
+  return notes;
+}
+
+function collectSlots() {
+  return Array.from(document.querySelectorAll('.time-slot-row')).map(function(r){return{time:r.querySelector('.time-input').value,label:r.querySelector('.slot-input').value};}).filter(function(s){return s.time||s.label;});
+}
+
+document.getElementById('addSlotBtn').addEventListener('click',function(){addSlotRow('','');});
+document.getElementById('saveBtn').addEventListener('click',function(){
+  if(!activeDay)return;
+  const key=storageKey(currentYear,currentMonth,activeDay);
+  data[key]={
+    physical:getSelectedPresets('physicalPresets'),
+    physicalNotes:getNotesByArea('physicalPresets'),
+    bodyParts:Array.from(document.querySelectorAll('#bodyPartPresets .preset-btn.selected')).map(function(b){return b.textContent;}),
+    mental:getSelectedPresets('mentalPresets'),
+    mentalNotes:getNotesByArea('mentalPresets'),
+    spiritual:getSelectedPresets('spiritualPresets'),
+    spiritualNotes:getNotesByArea('spiritualPresets'),
+    physicalCustom:document.getElementById('physicalCustom').value,
+    mentalCustom:document.getElementById('mentalCustom').value,
+    spiritualCustom:document.getElementById('spiritualCustom').value,
+    slots:collectSlots(),
+    weight:document.getElementById('weightInput').value||null,
+    water:document.getElementById('waterInput').value||null,
+    grat1:document.getElementById('grat1').value||null,
+    grat2:document.getElementById('grat2').value||null,
+    grat3:document.getElementById('grat3').value||null,
+    recapWins:document.getElementById('recapWins').value||null,
+    recapGrow:document.getElementById('recapGrow').value||null
+  };
+  saveData(); closeModal(); buildCalendar();
+});
+document.getElementById('clearBtn').addEventListener('click',function(){
+  if(!activeDay)return;
+  delete data[storageKey(currentYear,currentMonth,activeDay)];
+  saveData(); closeModal(); buildCalendar();
+});
+document.getElementById('modalClose').addEventListener('click',closeModal);
+document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.getElementById('prevMonth').addEventListener('click',function(){currentMonth--;if(currentMonth<0){currentMonth=11;currentYear--;}buildCalendar();});
+document.getElementById('nextMonth').addEventListener('click',function(){currentMonth++;if(currentMonth>11){currentMonth=0;currentYear++;}buildCalendar();});
+
+// DAILY MESSAGE
+var MSG_KEY='aligned_daily_message';
+function loadMessage(){
+  var msg=localStorage.getItem(MSG_KEY)||'';
+  var d=document.getElementById('msgDisplay');
+  if(msg){d.textContent=msg;d.classList.remove('empty');}
+  else{d.textContent='No message yet — tap Edit to add today\'s motivation.';d.classList.add('empty');}
+  document.getElementById('msgTextarea').value=msg;
+}
+loadMessage();
+document.getElementById('msgEditBtn').addEventListener('click',function(){
+  document.getElementById('msgEditor').classList.add('visible');
+  document.getElementById('msgTextarea').focus();
+});
+document.getElementById('msgSaveBtn').addEventListener('click',function(){
+  var msg=document.getElementById('msgTextarea').value.trim();
+  localStorage.setItem(MSG_KEY,msg);
+  document.getElementById('msgEditor').classList.remove('visible');
+  loadMessage(); showToast('Message saved');
+});
+document.getElementById('msgCancelBtn').addEventListener('click',function(){
+  document.getElementById('msgEditor').classList.remove('visible');
+  loadMessage();
+});
+
+// TOAST
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+
+// EXPORT
+document.getElementById('exportBtn').addEventListener('click',function(){
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='aligned-man-data.json';a.click();
+  URL.revokeObjectURL(url); showToast('Data exported');
+});
+
+// IMPORT
+document.getElementById('importBtn').addEventListener('click',function(){document.getElementById('importFile').click();});
+document.getElementById('importFile').addEventListener('change',function(){
+  var file=this.files[0]; if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){try{data=JSON.parse(e.target.result);saveData();buildCalendar();showToast('Data imported');}catch(err){showToast('Invalid file');}};
+  reader.readAsText(file); this.value='';
+});
+
+buildCalendar();
+
+</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-bright: #E2C06A;
+      --gold-dim: rgba(201,168,76,0.10);
+      --gold-border: rgba(201,168,76,0.22);
+      --black: #060606;
+      --dark1: #0C0C0C;
+      --dark2: #111111;
+      --dark3: #171717;
+      --white: #F0EDE8;
+      --grey1: #999999;
+      --grey2: #666666;
+      --grey3: #2A2A2A;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:998;
+      height:68px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 48px;
+      background:rgba(6,6,6,0.96); border-bottom:1px solid var(--gold-border);
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    }
+    .nav-brand { text-decoration:none; display:flex; flex-direction:column; gap:2px; }
+    .nav-brand-name { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:5px; color:var(--white); line-height:1; }
+    .nav-brand-name span { color:var(--gold); }
+    .nav-brand-sub { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--grey2); }
+    .nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
+    .nav-links a { font-size:10px; font-weight:500; letter-spacing:2px; text-transform:uppercase; color:var(--grey1); text-decoration:none; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--white); }
+    .nav-cta { background:var(--gold); color:var(--black) !important; padding:9px 20px; font-weight:700 !important; transition:background 0.2s !important; }
+    .nav-cta:hover { background:var(--gold-bright) !important; }
+    .nav-mobile-btn { display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:4px; }
+    .nav-mobile-btn span { display:block; width:22px; height:2px; background:var(--white); transition:all 0.3s; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; min-height:100vh;
+      display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:140px 48px 100px; overflow:hidden;
+    }
+    .hero-glow { position:absolute; top:-200px; right:-200px; width:800px; height:800px; background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%); pointer-events:none; }
+    .hero-line { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--gold),var(--gold-bright),var(--gold),transparent); }
+    .hero-tag { display:inline-flex; align-items:center; gap:12px; margin-bottom:32px; }
+    .hero-tag::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+    .hero-tag-text { font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--gold); }
+    .hero-h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(80px,13vw,180px); line-height:0.86; letter-spacing:2px; margin-bottom:32px; }
+    .hero-h1 .l1 { display:block; color:var(--white); }
+    .hero-h1 .l2 { display:block; color:var(--gold); }
+    .hero-h1 .l3 { display:block; -webkit-text-stroke:1.5px rgba(240,237,232,0.18); color:transparent; }
+    .hero-rule { width:72px; height:1px; background:var(--gold); margin-bottom:28px; }
+    .hero-sub { font-size:clamp(15px,1.5vw,19px); font-weight:300; line-height:1.8; color:var(--grey1); max-width:520px; margin-bottom:14px; }
+    .hero-sub strong { color:var(--white); font-weight:500; }
+    .hero-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(14px,1.3vw,17px); color:var(--grey2); max-width:460px; line-height:1.7; margin-bottom:52px; }
+    .hero-btns { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:72px; }
+    .btn-gold { display:inline-block; background:var(--gold); color:var(--black); font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:16px 36px; text-decoration:none; border:none; cursor:pointer; transition:background 0.25s,transform 0.2s; }
+    .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); }
+    .btn-ghost { display:inline-block; background:transparent; color:var(--white); font-size:11px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; padding:15px 36px; border:1px solid var(--grey3); text-decoration:none; transition:border-color 0.25s,color 0.25s,transform 0.2s; }
+    .btn-ghost:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-2px); }
+    .hero-stats { display:flex; gap:0; }
+    .hstat { padding-right:36px; margin-right:36px; border-right:1px solid var(--grey3); }
+    .hstat:last-child { border-right:none; }
+    .hstat-num { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:2px; color:var(--white); line-height:1; }
+    .hstat-num em { color:var(--gold); font-style:normal; }
+    .hstat-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--grey2); margin-top:4px; }
+
+    /* ── TICKER ── */
+    .ticker { background:var(--gold); padding:13px 0; overflow:hidden; white-space:nowrap; }
+    .ticker-track { display:inline-flex; animation:ticker 40s linear infinite; }
+    .ticker-item { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:4px; color:var(--black); padding:0 32px; }
+    .ticker-sep { color:rgba(0,0,0,0.3); }
+    @keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+    /* ── SECTIONS SHARED ── */
+    .section-wrap { padding:110px 48px; }
+    .section-wrap.dark1 { background:var(--dark1); }
+    .section-wrap.dark2 { background:var(--dark2); }
+    .section-wrap.black { background:var(--black); }
+    .section-inner { max-width:1100px; margin:0 auto; }
+    .section-tag { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+    .section-tag::before { content:''; display:block; width:20px; height:1px; background:var(--gold); }
+    .section-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(44px,6vw,80px); line-height:0.92; letter-spacing:2px; color:var(--white); margin-bottom:24px; }
+    .section-body { font-size:15px; font-weight:300; line-height:1.9; color:var(--grey1); max-width:620px; }
+    .section-body strong { color:var(--white); font-weight:500; }
+
+    /* ── WHO IT'S FOR ── */
+    .for-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+    .for-list { display:flex; flex-direction:column; gap:2px; margin-top:16px; }
+    .for-item { background:var(--dark2); padding:22px 28px; display:flex; align-items:flex-start; gap:16px; border-left:3px solid transparent; transition:border-color 0.3s,background 0.3s; }
+    .for-item:hover { border-left-color:var(--gold); background:var(--dark3); }
+    .for-item-dot { color:var(--gold); font-size:12px; flex-shrink:0; margin-top:2px; }
+    .for-item-text { font-size:14px; font-weight:400; color:var(--grey1); line-height:1.5; }
+
+    /* ── PILLARS ── */
+    .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--grey3); margin-top:56px; }
+    .pillar { padding:52px 40px; border-right:1px solid var(--grey3); position:relative; transition:background 0.3s; }
+    .pillar:last-child { border-right:none; }
+    .pillar:hover { background:var(--dark2); }
+    .pillar::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
+    .pillar:hover::after { transform:scaleX(1); }
+    .pillar-num { font-size:10px; letter-spacing:4px; color:var(--grey2); margin-bottom:28px; text-transform:uppercase; }
+    .pillar-name { font-family:'Bebas Neue',sans-serif; font-size:42px; letter-spacing:3px; color:var(--gold); line-height:1; margin-bottom:6px; }
+    .pillar-sub { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--grey2); margin-bottom:20px; }
+    .pillar-rule { width:28px; height:1px; background:var(--gold); opacity:0.5; margin-bottom:20px; }
+    .pillar-body { font-size:14px; font-weight:300; line-height:1.85; color:var(--grey1); }
+
+    /* ── COACHING TIERS ── */
+    .tiers-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:56px; }
+    .tier { background:var(--dark2); padding:44px 32px; position:relative; display:flex; flex-direction:column; }
+    .tier.featured { background:var(--dark3); border-top:2px solid var(--gold); }
+    .tier.featured::before { content:'MOST POPULAR'; position:absolute; top:-1px; right:24px; background:var(--gold); color:var(--black); font-size:8px; font-weight:700; letter-spacing:2.5px; padding:5px 12px; }
+    .tier-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--grey2); margin-bottom:8px; }
+    .tier-name { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:3px; color:var(--white); margin-bottom:6px; }
+    .tier-price { font-family:'Bebas Neue',sans-serif; font-size:44px; color:var(--gold); letter-spacing:1px; line-height:1; margin-bottom:4px; }
+    .tier-price-note { font-size:10px; letter-spacing:2px; color:var(--grey2); text-transform:uppercase; margin-bottom:28px; }
+    .tier-divider { height:1px; background:var(--grey3); margin-bottom:24px; }
+    .tier-features { list-style:none; display:flex; flex-direction:column; gap:11px; margin-bottom:36px; flex:1; }
+    .tier-features li { font-size:13px; font-weight:300; color:var(--grey1); display:flex; align-items:flex-start; gap:10px; line-height:1.5; }
+    .tier-features li::before { content:'—'; color:var(--gold); flex-shrink:0; }
+    .tier-cta { margin-top:auto; }
+
+    /* ── ABOUT ── */
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:90px; align-items:center; }
+    .about-quote-mark { font-family:'Playfair Display',serif; font-size:90px; color:var(--gold); opacity:0.15; line-height:0.7; margin-bottom:10px; }
+    .about-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(18px,2vw,24px); line-height:1.55; color:var(--white); margin-bottom:32px; border-left:2px solid var(--gold); padding-left:24px; }
+    .about-body { font-size:15px; font-weight:300; line-height:1.9; color:var(--grey1); margin-bottom:16px; }
+    .about-body strong { color:var(--white); font-weight:500; }
+    .about-sig { margin-top:36px; padding-top:24px; border-top:1px solid var(--grey3); display:flex; align-items:center; gap:16px; }
+    .about-sig-dot { width:36px; height:36px; border:1px solid var(--gold-border); background:var(--gold-dim); flex-shrink:0; }
+    .about-sig-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:4px; color:var(--white); }
+    .about-sig-handle { font-size:11px; letter-spacing:2px; color:var(--gold); margin-top:3px; }
+    .creds { display:flex; flex-direction:column; gap:2px; }
+    .cred { background:var(--dark2); padding:18px 24px; display:flex; align-items:center; gap:14px; transition:background 0.25s; border-left:3px solid transparent; }
+    .cred:hover { background:var(--dark3); border-left-color:var(--gold); }
+    .cred-icon { font-size:18px; flex-shrink:0; width:32px; text-align:center; }
+    .cred-name { font-size:12px; font-weight:600; color:var(--white); }
+    .cred-detail { font-size:11px; color:var(--grey1); margin-top:2px; font-weight:300; }
+
+    /* ── OPTIMIZER ── */
+    .optimizer-box { border:1px solid var(--gold-border); padding:64px; position:relative; background:linear-gradient(135deg,var(--dark2),var(--black)); display:grid; grid-template-columns:1fr auto; gap:48px; align-items:center; }
+    .optimizer-box::before { content:'FREE TOOL'; position:absolute; top:-1px; left:52px; background:var(--gold); color:var(--black); font-size:9px; font-weight:700; letter-spacing:3px; padding:6px 14px; }
+    .optimizer-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,60px); letter-spacing:2px; color:var(--white); line-height:1; margin-bottom:14px; }
+    .optimizer-body { font-size:15px; font-weight:300; line-height:1.8; color:var(--grey1); max-width:500px; }
+
+    /* ── SUPPLEMENTS ── */
+    .supps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+    .supp-card { background:var(--dark2); padding:44px 36px; position:relative; transition:background 0.3s; border-top:1px solid var(--grey3); }
+    .supp-card:hover { background:var(--dark3); }
+    .supp-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
+    .supp-card:hover::after { transform:scaleX(1); }
+    .supp-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    .supp-name { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:3px; color:var(--white); margin-bottom:14px; line-height:1; }
+    .supp-body { font-size:13px; font-weight:300; color:var(--grey1); line-height:1.8; margin-bottom:28px; }
+    .supp-tag { display:inline-block; border:1px solid var(--gold-border); color:var(--gold); font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; margin-bottom:8px; margin-right:4px; }
+
+    /* ── MERCH ── */
+    .merch-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+    .merch-card { background:var(--dark2); padding:44px 36px; transition:background 0.3s; position:relative; }
+    .merch-card:hover { background:var(--dark3); }
+    .merch-placeholder { width:100%; height:180px; background:var(--dark3); border:1px solid var(--grey3); display:flex; align-items:center; justify-content:center; margin-bottom:24px; }
+    .merch-placeholder-text { font-size:10px; letter-spacing:3px; color:var(--grey3); text-transform:uppercase; }
+    .merch-name { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:var(--white); margin-bottom:8px; }
+    .merch-price { font-size:14px; color:var(--gold); letter-spacing:2px; margin-bottom:20px; }
+    .merch-note { font-size:11px; color:var(--grey2); letter-spacing:2px; text-transform:uppercase; }
+
+    /* ── APPLY ── */
+    .apply-wrap { padding:110px 48px; background:var(--gold); text-align:center; }
+    .apply-inner { max-width:700px; margin:0 auto; }
+    .apply-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,8vw,96px); letter-spacing:3px; color:var(--black); line-height:0.9; margin-bottom:20px; }
+    .apply-sub { font-size:16px; font-weight:400; color:rgba(0,0,0,0.65); line-height:1.7; margin-bottom:40px; max-width:500px; margin-left:auto; margin-right:auto; }
+    .btn-black { display:inline-block; background:var(--black); color:var(--gold); font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:18px 48px; text-decoration:none; border:none; cursor:pointer; transition:background 0.25s,transform 0.2s; }
+    .btn-black:hover { background:#111; transform:translateY(-2px); }
+
+    /* ── CONTACT ── */
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:90px; }
+    .contact-email { font-family:'Bebas Neue',sans-serif; font-size:clamp(20px,2.5vw,30px); letter-spacing:2px; color:var(--gold); text-decoration:none; display:block; margin:24px 0 36px; transition:color 0.25s; }
+    .contact-email:hover { color:var(--gold-bright); }
+    .social-rows { display:flex; flex-direction:column; gap:2px; }
+    .social-row { display:flex; align-items:center; justify-content:space-between; background:var(--dark2); padding:18px 24px; text-decoration:none; border-left:3px solid transparent; transition:all 0.25s; }
+    .social-row:hover { background:var(--dark3); border-left-color:var(--gold); }
+    .social-name { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--white); }
+    .social-handle { font-size:12px; color:var(--grey1); }
+    .social-arr { color:var(--gold); }
+
+    /* ── FOOTER ── */
+    footer { background:var(--dark1); border-top:1px solid var(--grey3); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; }
+    .footer-brand { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:4px; color:var(--gold); }
+    .footer-copy { font-size:11px; letter-spacing:1.5px; color:var(--grey2); text-transform:uppercase; }
+    .footer-links { display:flex; gap:24px; }
+    .footer-links a { font-size:11px; letter-spacing:1.5px; color:var(--grey2); text-transform:uppercase; text-decoration:none; transition:color 0.2s; }
+    .footer-links a:hover { color:var(--gold); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.in { opacity:1; transform:translateY(0); }
+
+    /* ── COMING SOON BADGE ── */
+    .cs-badge { display:inline-block; background:var(--gold-dim); border:1px solid var(--gold-border); color:var(--gold); font-size:9px; letter-spacing:3px; text-transform:uppercase; padding:5px 12px; margin-bottom:16px; }
+
+    /* ── EMAIL CAPTURE ── */
+    .email-wrap { padding:110px 48px; background:var(--dark1); }
+    .email-inner { max-width:1100px; margin:0 auto; }
+    .email-box { border:1px solid var(--gold-border); padding:72px 64px; background:linear-gradient(135deg,var(--dark2),var(--black)); position:relative; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .email-box::before { content:'FREE DOWNLOAD'; position:absolute; top:-1px; left:52px; background:var(--gold); color:var(--black); font-size:9px; font-weight:700; letter-spacing:3px; padding:6px 14px; }
+    .email-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,60px); letter-spacing:2px; color:var(--white); line-height:1; margin-bottom:14px; }
+    .email-body { font-size:15px; font-weight:300; line-height:1.8; color:var(--grey1); margin-bottom:0; }
+    .email-body strong { color:var(--white); font-weight:500; }
+    .email-form { display:flex; flex-direction:column; gap:12px; }
+    .email-input { background:var(--dark2); border:1px solid var(--grey3); border-bottom:1px solid var(--gold-border); color:var(--white); font-family:'DM Sans',sans-serif; font-size:14px; padding:16px 20px; outline:none; transition:border-color 0.25s; letter-spacing:1px; }
+    .email-input:focus { border-bottom-color:var(--gold); }
+    .email-input::placeholder { color:var(--grey2); font-size:13px; }
+    .email-submit { background:var(--gold); color:var(--black); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:16px; border:none; cursor:pointer; transition:background 0.25s; }
+    .email-submit:hover { background:var(--gold-bright); }
+    .email-disclaimer { font-size:10px; letter-spacing:1px; color:var(--grey2); text-align:center; margin-top:4px; }
+    .email-success { display:none; text-align:center; padding:20px; }
+    .email-success-text { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:3px; color:var(--gold); }
+    .email-success-sub { font-size:13px; color:var(--grey1); margin-top:8px; }
+
+    /* ── AFFILIATES ── */
+    .aff-wrap { padding:110px 48px; background:var(--black); }
+    .aff-inner { max-width:1100px; margin:0 auto; }
+    .aff-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:56px; }
+    .aff-card { background:var(--dark2); padding:48px 44px; position:relative; border-left:3px solid transparent; transition:all 0.3s; }
+    .aff-card:hover { background:var(--dark3); border-left-color:var(--gold); }
+    .aff-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    .aff-name { font-family:'Bebas Neue',sans-serif; font-size:38px; letter-spacing:3px; color:var(--white); margin-bottom:8px; line-height:1; }
+    .aff-body { font-size:14px; font-weight:300; color:var(--grey1); line-height:1.8; margin-bottom:24px; }
+    .aff-code { display:inline-flex; align-items:center; gap:12px; background:var(--dark3); border:1px solid var(--gold-border); padding:12px 20px; margin-bottom:28px; }
+    .aff-code-label { font-size:10px; letter-spacing:2px; color:var(--grey2); text-transform:uppercase; }
+    .aff-code-value { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:4px; color:var(--gold); }
+    .aff-products { display:flex; flex-direction:column; gap:2px; margin-bottom:28px; }
+    .aff-product { background:var(--black); padding:12px 16px; display:flex; align-items:center; justify-content:space-between; text-decoration:none; transition:background 0.2s; }
+    .aff-product:hover { background:var(--dark3); }
+    .aff-product-name { font-size:13px; color:var(--grey1); font-weight:300; }
+    .aff-product-arr { color:var(--gold); font-size:14px; }
+
+    @media (max-width:960px) {
+      .email-wrap,.aff-wrap { padding:72px 20px; }
+      .email-box { grid-template-columns:1fr; gap:32px; padding:40px 24px; }
+      .aff-grid { grid-template-columns:1fr; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width:960px) {
+      nav { padding:0 20px; }
+      .nav-links { display:none; }
+      .nav-links.open { display:flex; flex-direction:column; position:fixed; top:68px; left:0; right:0; background:var(--dark1); border-bottom:1px solid var(--gold-border); padding:20px; gap:16px; z-index:997; }
+      .nav-mobile-btn { display:flex; }
+      .hero { padding:100px 20px 60px; }
+      .hero-stats { flex-wrap:wrap; gap:16px; }
+      .hstat { border-right:none; padding-right:0; margin-right:0; }
+      .section-wrap { padding:72px 20px; }
+      .for-grid,.about-grid,.contact-grid { grid-template-columns:1fr; gap:40px; }
+      .pillars-grid { grid-template-columns:1fr; }
+      .pillar { border-right:none; border-bottom:1px solid var(--grey3); }
+      .pillar:last-child { border-bottom:none; }
+      .tiers-grid { grid-template-columns:1fr; }
+      .supps-grid,.merch-grid { grid-template-columns:1fr; }
+      .optimizer-box { grid-template-columns:1fr; gap:28px; padding:40px 24px; }
+      .apply-wrap { padding:72px 20px; }
+      footer { flex-direction:column; gap:12px; text-align:center; padding:24px 20px; }
+      .footer-links { flex-wrap:wrap; justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<div id="main-site">
+<nav id="nav">
+  <a href="#home" class="nav-brand">
+    <div class="nav-brand-name">THE <span>ALIGNED</span> MAN</div>
+    <div class="nav-brand-sub">Physical · Mental · Spiritual</div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#for-you">Who It's For</a></li>
+    <li><a href="#pillars">The Method</a></li>
+    <li><a href="#coaching">Coaching</a></li>
+    <li><a href="#supplements">Supplements</a></li>
+    <li><a href="#merch">Merch</a></li>
+    <li><a href="#" onclick="toggleOptimizer(event)">Optimizer</a></li>
+    <li><a href="#affiliates">Resources</a></li>
+    <li><a href="#protocols">Free Protocols</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#apply" class="nav-cta">Apply Now</a></li>
+  </ul>
+  <button class="nav-mobile-btn" id="mobileBtn" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-line"></div>
+  <div class="hero-tag"><span class="hero-tag-text">Built for Men in Their 30s, 40s &amp; 50s Who Refuse to Decline</span></div>
+  <h1 class="hero-h1">
+    <span class="l1">THE</span>
+    <span class="l2">ALIGNED</span>
+    <span class="l3">MAN</span>
+  </h1>
+  <div class="hero-rule"></div>
+  <p class="hero-sub">You've built a life. You've been through things. <strong>Now it's time to rebuild yourself</strong> — your body, your mind, your purpose — at the highest level you've ever operated at.</p>
+  <p class="hero-quote">This isn't for the 22-year-old chasing aesthetics. This is for the man with real responsibilities, real experience, and a burning drive to become everything he was built to be.</p>
+  <div class="hero-btns">
+    <a href="#apply" class="btn-gold">Apply to Work With Robert</a>
+    <a href="#pillars" class="btn-ghost">The Method</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num">9<em>K+</em></div><div class="hstat-label">Instagram</div></div>
+    <div class="hstat"><div class="hstat-num">7<em>K+</em></div><div class="hstat-label">TikTok</div></div>
+    <div class="hstat"><div class="hstat-num">3</div><div class="hstat-label">Core Pillars</div></div>
+    <div class="hstat"><div class="hstat-num">#<em>1</em></div><div class="hstat-label">Men's Platform</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">For the Man in His 30s, 40s &amp; 50s <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Physical Optimization <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Mental Clarity &amp; Focus <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Spiritual Alignment <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Hormone Optimization · TRT · HRT <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Refuse to Decline <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Robert Gonnerman <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Align With Rob <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">For the Man in His 30s, 40s &amp; 50s <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Physical Optimization <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Mental Clarity &amp; Focus <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Spiritual Alignment <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Hormone Optimization · TRT · HRT <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Refuse to Decline <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Robert Gonnerman <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Align With Rob <span class="ticker-sep">◆</span></span>
+  </div>
+</div>
+
+<!-- WHO IT'S FOR -->
+<section class="section-wrap dark1" id="for-you">
+  <div class="section-inner">
+    <div class="for-grid">
+      <div class="reveal">
+        <div class="section-tag">This Is for You</div>
+        <h2 class="section-h2">You've Been<br/>Through<br/>Something.</h2>
+        <p class="section-body">The man who finds The Aligned Man Project isn't looking for hype. He's been through the trials — <strong>the divorce, the career pressure, the financial stress, the health decline, the identity crisis</strong> — and he's still standing.</p>
+        <br/>
+        <p class="section-body">He's not chasing aesthetics. He's chasing something deeper. <strong>Legacy. Family. Purpose.</strong> The version of himself his family will be proud of. He has the discipline. He just needs the right system and someone who has actually lived it.</p>
+      </div>
+      <div class="for-list reveal">
+        <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You're in your 30s, 40s, or 50s and refuse to keep declining</span></div>
+        <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You want to rebuild your body without destroying everything else</span></div>
+        <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You're ready to operate with real mental clarity and driven focus</span></div>
+        <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You want a deeper connection to your purpose and higher power</span></div>
+        <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You're done with programs built for kids that ignore your reality</span></div>
+        <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You have real responsibilities and need a system that fits your life</span></div>
+        <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You want to be the man your sons, your family, your legacy deserves</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS -->
+<section class="section-wrap black" id="pillars">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">The Method</div>
+      <h2 class="section-h2">Three Pillars.<br/>One Aligned Man.</h2>
+      <p class="section-body">Every tool, every protocol, every coaching program we build is rooted in three non-negotiable pillars. This is the framework that transforms men.</p>
+    </div>
+    <div class="pillars-grid reveal">
+      <div class="pillar">
+        <div class="pillar-num">Pillar 01</div>
+        <div class="pillar-name">Physical</div>
+        <div class="pillar-sub">Become your peak optimized self.</div>
+        <div class="pillar-rule"></div>
+        <p class="pillar-body">Your body is the vessel everything else is built on. At 35, 45, or 55 — you are not done. We give you real protocols to rebuild your body, optimize your hormones through TRT and HRT, lose the weight, build the muscle, and operate at a level that commands respect. Real results built for a man your age.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">Pillar 02</div>
+        <div class="pillar-name">Mental</div>
+        <div class="pillar-sub">Clarity. Focus. Drive. Leadership.</div>
+        <div class="pillar-rule"></div>
+        <p class="pillar-body">The man in his 40s who has been through the fire has something the 22-year-old doesn't — experience. We train you to harness it. Cut through the noise. Execute with precision. Lead with humility. Build the mindset of a man who knows exactly who he is, where he's going, and what it takes to get there.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">Pillar 03</div>
+        <div class="pillar-name">Spiritual</div>
+        <div class="pillar-sub">Align with your purpose and higher power.</div>
+        <div class="pillar-rule"></div>
+        <p class="pillar-body">The most overlooked pillar — and the one that holds everything together. Build a real relationship with your higher power and your inner self. Find the thing that makes every sacrifice worth it. When you're spiritually aligned, you don't just have goals. You have a reason. And a reason is what carries a man through anything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COACHING TIERS -->
+<section class="section-wrap dark1" id="coaching">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Coaching Programs</div>
+      <h2 class="section-h2">Choose Your<br/>Level.</h2>
+      <p class="section-body">Four tiers. One mission. Built for the man who is done drifting and ready to execute at the highest level of his life.</p>
+    </div>
+    <div class="tiers-grid reveal">
+      <div class="tier">
+        <div class="tier-badge">Entry Level</div>
+        <div class="tier-name">Core</div>
+        <div class="tier-price">$97</div>
+        <div class="tier-price-note">Per Month</div>
+        <div class="tier-divider"></div>
+        <ul class="tier-features">
+          <li>Daily Optimizer app access</li>
+          <li>Core Physical, Mental &amp; Spiritual protocols</li>
+          <li>Monthly group coaching call with Robert</li>
+          <li>Private community access</li>
+          <li>Digital guides and downloads</li>
+        </ul>
+        <div class="tier-cta"><a href="#apply" class="btn-ghost" style="font-size:10px;padding:12px 24px;display:inline-block;">Join Waitlist</a></div>
+      </div>
+      <div class="tier featured">
+        <div class="tier-badge">12-Week Program</div>
+        <div class="tier-name">Aligned</div>
+        <div class="tier-price">$1,997</div>
+        <div class="tier-price-note">One Time</div>
+        <div class="tier-divider"></div>
+        <ul class="tier-features">
+          <li>Everything in Core</li>
+          <li>Full 12-week transformation program</li>
+          <li>Custom physical protocol</li>
+          <li>Hormone optimization framework (TRT/HRT guidance)</li>
+          <li>Bi-weekly 1-on-1 check-in calls with Robert</li>
+          <li>Nutrition and recovery protocols</li>
+          <li>Mindset and spiritual alignment curriculum</li>
+        </ul>
+        <div class="tier-cta"><a href="#apply" class="btn-gold" style="font-size:10px;padding:12px 24px;display:inline-block;">Join Waitlist</a></div>
+      </div>
+      <div class="tier">
+        <div class="tier-badge">1-on-1 Coaching</div>
+        <div class="tier-name">Peak</div>
+        <div class="tier-price">$5,000</div>
+        <div class="tier-price-note">Per Quarter</div>
+        <div class="tier-divider"></div>
+        <ul class="tier-features">
+          <li>Everything in Aligned</li>
+          <li>Direct weekly access to Robert</li>
+          <li>Fully custom protocol across all 3 pillars</li>
+          <li>Lab work review and interpretation</li>
+          <li>Peptide and hormone roadmap</li>
+          <li>Lifetime access to all digital products</li>
+        </ul>
+        <div class="tier-cta"><a href="#apply" class="btn-ghost" style="font-size:10px;padding:12px 24px;display:inline-block;">Apply Now</a></div>
+      </div>
+      <div class="tier">
+        <div class="tier-badge">Elite Inner Circle</div>
+        <div class="tier-name">Inner Circle</div>
+        <div class="tier-price">Apply</div>
+        <div class="tier-price-note">Limited Seats</div>
+        <div class="tier-divider"></div>
+        <ul class="tier-features">
+          <li>Everything in Peak</li>
+          <li>20 seats maximum — always</li>
+          <li>Robert personally invested in your outcome</li>
+          <li>Priority access to new protocols and products</li>
+          <li>Speaking and event invitations</li>
+          <li>Direct line to Robert — not a team</li>
+        </ul>
+        <div class="tier-cta"><a href="#apply" class="btn-ghost" style="font-size:10px;padding:12px 24px;display:inline-block;">Apply Now</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLEMENTS -->
+<section class="section-wrap black" id="supplements">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Supplementation</div>
+      <h2 class="section-h2">Optimized for<br/>Your Biology.</h2>
+      <p class="section-body">Every product in The Aligned Man Project line is built for the man in his 30s, 40s, and 50s. No filler. No marketing gimmicks. Real compounds that work with your body at this stage of life.</p>
+    </div>
+    <div class="supps-grid reveal">
+      <div class="supp-card">
+        <div class="cs-badge">Coming Soon</div>
+        <div class="supp-badge">Performance</div>
+        <div class="supp-name">Testosterone Support</div>
+        <p class="supp-body">Formulated to naturally support healthy testosterone levels and hormonal balance in men over 30. Stack with your TRT protocol or use standalone.</p>
+        <span class="supp-tag">Hormonal Health</span><span class="supp-tag">Performance</span><br/><br/>
+        <a href="#apply" class="btn-ghost" style="font-size:10px;padding:11px 22px;display:inline-block;">Notify Me</a>
+      </div>
+      <div class="supp-card">
+        <div class="cs-badge">Coming Soon</div>
+        <div class="supp-badge">Recovery</div>
+        <div class="supp-name">Sleep &amp; Recovery</div>
+        <p class="supp-body">Deep recovery starts with sleep. This formula is built to optimize your sleep architecture, reduce cortisol, and accelerate physical recovery overnight.</p>
+        <span class="supp-tag">Recovery</span><span class="supp-tag">Sleep</span><br/><br/>
+        <a href="#apply" class="btn-ghost" style="font-size:10px;padding:11px 22px;display:inline-block;">Notify Me</a>
+      </div>
+      <div class="supp-card">
+        <div class="cs-badge">Coming Soon</div>
+        <div class="supp-badge">Mental Performance</div>
+        <div class="supp-name">Focus &amp; Clarity</div>
+        <p class="supp-body">Engineered to support sustained mental clarity, drive, and cognitive performance. For the man who needs to be sharp at work, in the gym, and at home.</p>
+        <span class="supp-tag">Nootropic</span><span class="supp-tag">Focus</span><br/><br/>
+        <a href="#apply" class="btn-ghost" style="font-size:10px;padding:11px 22px;display:inline-block;">Notify Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MERCH -->
+<section class="section-wrap dark1" id="merch">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Merchandise</div>
+      <h2 class="section-h2">Wear What You<br/>Stand For.</h2>
+      <p class="section-body">Men wear what represents who they want to become. The Aligned Man Project mark on everything — premium dark apparel built for the man who operates at a different level.</p>
+    </div>
+    <div class="merch-grid reveal">
+      <div class="merch-card">
+        <div class="merch-placeholder"><span class="merch-placeholder-text">Product Photo Coming Soon</span></div>
+        <div class="cs-badge">Coming Soon</div>
+        <div class="merch-name">Signature Tee</div>
+        <div class="merch-price">— / —</div>
+        <div class="merch-note">Premium Heavyweight Cotton · Dark Colorways</div>
+      </div>
+      <div class="merch-card">
+        <div class="merch-placeholder"><span class="merch-placeholder-text">Product Photo Coming Soon</span></div>
+        <div class="cs-badge">Coming Soon</div>
+        <div class="merch-name">Aligned Cap</div>
+        <div class="merch-price">— / —</div>
+        <div class="merch-note">Structured Fit · Embroidered Logo</div>
+      </div>
+      <div class="merch-card">
+        <div class="merch-placeholder"><span class="merch-placeholder-text">Product Photo Coming Soon</span></div>
+        <div class="cs-badge">Coming Soon</div>
+        <div class="merch-name">Training Hoodie</div>
+        <div class="merch-price">— / —</div>
+        <div class="merch-note">Premium Fleece · Oversized Fit</div>
+      </div>
+    </div>
+    <div style="margin-top:40px; text-align:center;">
+      <a href="#apply" class="btn-ghost" style="font-size:10px;padding:13px 32px;display:inline-block;">Notify Me When Available</a>
+    </div>
+  </div>
+</section>
+
+<!-- OPTIMIZER -->
+<section class="section-wrap black" id="optimizer">
+  <div class="section-inner">
+    <div class="optimizer-box reveal">
+      <div>
+        <div class="section-tag" style="margin-bottom:16px;">Free Tool · Beta 1.0</div>
+        <h2 class="optimizer-h2">Daily &amp; Monthly<br/>Goal Optimizer</h2>
+        <p class="optimizer-body">Track your Physical, Mental, and Spiritual progress every single day. Morning gratitude, pillar logging, weight tracking, water intake, time blocks, and daily recap — all in one place. Free. Built for the aligned man.</p>
+      </div>
+      <div style="flex-shrink:0; text-align:center;">
+        <button class="btn-gold" onclick="toggleOptimizer(event)" style="border:none;cursor:pointer;">Open the Optimizer →</button>
+        <div style="margin-top:12px; font-size:10px; letter-spacing:2px; color:var(--grey2); text-transform:uppercase;">Free · No Sign Up</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- OPTIMIZER FULL PAGE SECTION -->
+<div id="opt-app" style="display:none; background:#080807; min-height:100vh; padding-top:68px;">
+  <style>
+
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#080807; color:#f0ead8; font-family:'DM Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events:none; z-index:0; opacity:0.4; }
+
+/* HEADER */
+header { position:relative; z-index:1; text-align:center; padding:64px 24px 48px; border-bottom:1px solid rgba(201,168,76,0.18); }
+.eyebrow { font-size:10px; letter-spacing:7px; text-transform:uppercase; color:#c9a84c; font-weight:500; margin-bottom:18px; }
+header h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(72px,16vw,130px); letter-spacing:4px; line-height:0.88; color:#f0ead8; }
+header h1 em { color:#c9a84c; font-style:normal; }
+.header-sub { font-family:'Playfair Display',serif; font-style:italic; font-size:15px; color:#6b6050; margin-top:20px; }
+.gold-rule { width:48px; height:1px; background:linear-gradient(90deg,transparent,#c9a84c,transparent); margin:24px auto 0; }
+
+/* PILLARS LEGEND */
+.pillars-legend { display:flex; justify-content:center; gap:32px; padding:28px 24px; border-bottom:1px solid rgba(201,168,76,0.18); position:relative; z-index:1; flex-wrap:wrap; }
+.legend-item { display:flex; align-items:center; gap:10px; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,234,216,0.5); font-weight:500; }
+.legend-dot { width:8px; height:8px; border-radius:50%; }
+.legend-dot.physical { background:#c9a84c; }
+.legend-dot.mental { background:#7aadbd; }
+.legend-dot.spiritual { background:#9b8ec4; }
+
+/* DAILY MESSAGE */
+.daily-message-wrap { max-width:900px; margin:0 auto; padding:24px 20px 0; position:relative; z-index:1; }
+.daily-message-card { background:#111009; border:1px solid rgba(201,168,76,0.18); border-radius:3px; padding:20px 24px; display:flex; flex-direction:column; gap:12px; }
+.daily-message-top { display:flex; justify-content:space-between; align-items:center; }
+.daily-message-eyebrow { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#c9a84c; font-weight:500; }
+.daily-message-edit-btn { background:none; border:1px solid rgba(201,168,76,0.18); color:#6b6050; padding:5px 12px; border-radius:2px; font-size:9px; letter-spacing:2px; text-transform:uppercase; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; }
+.daily-message-edit-btn:hover { border-color:#c9a84c; color:#c9a84c; }
+.daily-message-text { font-family:'Playfair Display',serif; font-style:italic; font-size:16px; line-height:1.7; color:#f0ead8; }
+.daily-message-text.empty { color:#6b6050; font-size:13px; }
+.daily-message-editor { display:none; flex-direction:column; gap:10px; }
+.daily-message-editor.visible { display:flex; }
+.daily-message-textarea { background:rgba(255,255,255,0.03); border:1px solid rgba(201,168,76,0.3); border-radius:2px; color:#f0ead8; font-family:'Playfair Display',serif; font-style:italic; font-size:15px; line-height:1.7; padding:12px 14px; width:100%; outline:none; resize:none; min-height:90px; }
+.daily-message-textarea:focus { border-color:#c9a84c; }
+.daily-message-actions { display:flex; gap:8px; justify-content:flex-end; }
+.msg-save-btn { background:#c9a84c; border:none; color:#080807; padding:10px 20px; border-radius:2px; font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:2px; cursor:pointer; }
+.msg-cancel-btn { background:none; border:1px solid rgba(255,255,255,0.08); color:#6b6050; padding:10px 16px; border-radius:2px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; }
+
+/* DATA BAR */
+.data-bar { max-width:900px; margin:0 auto; padding:16px 20px 0; position:relative; z-index:1; display:flex; gap:8px; justify-content:flex-end; }
+.data-btn { display:flex; align-items:center; gap:7px; background:none; border:1px solid rgba(201,168,76,0.18); color:#c9a84c; padding:9px 16px; border-radius:2px; font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; font-weight:500; cursor:pointer; transition:all 0.2s; }
+.data-btn:hover { background:rgba(201,168,76,0.12); border-color:#c9a84c; }
+.data-btn.import-btn { color:rgba(240,234,216,0.5); border-color:rgba(255,255,255,0.1); }
+.data-btn.import-btn:hover { border-color:rgba(240,234,216,0.5); color:#f0ead8; background:rgba(255,255,255,0.04); }
+
+/* MONTH NAV */
+.month-nav { display:flex; align-items:center; justify-content:space-between; padding:24px 32px; position:relative; z-index:1; max-width:900px; margin:0 auto; }
+.month-nav button { background:none; border:1px solid rgba(201,168,76,0.18); color:#c9a84c; width:40px; height:40px; border-radius:2px; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; transition:background 0.2s,border-color 0.2s; }
+.month-nav button:hover { background:rgba(201,168,76,0.12); border-color:#c9a84c; }
+.month-title { font-family:'Bebas Neue',sans-serif; font-size:42px; letter-spacing:4px; color:#f0ead8; }
+.month-title span { color:#c9a84c; }
+
+/* PROGRESS */
+.month-progress { max-width:900px; margin:0 auto 8px; padding:16px 20px 0; position:relative; z-index:1; display:flex; align-items:center; gap:16px; }
+.progress-track { flex:1; height:2px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg,#c9a84c,#e2c47a); border-radius:2px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); }
+.progress-pct { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:2px; color:#c9a84c; min-width:48px; text-align:right; }
+
+/* WEIGHT STATS */
+.weight-stats-bar { max-width:900px; margin:0 auto; padding:20px 20px 0; position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px; }
+.weight-stat-card { background:#111009; border:1px solid rgba(201,168,76,0.18); border-radius:3px; padding:14px 16px; display:flex; flex-direction:column; gap:4px; }
+.weight-stat-label { font-size:8px; letter-spacing:3px; text-transform:uppercase; color:#6b6050; font-weight:500; }
+.weight-stat-value { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; line-height:1; color:#f0ead8; }
+.weight-stat-value.positive { color:#e07070; }
+.weight-stat-value.negative { color:#7ac99b; }
+.weight-stat-value.neutral { color:#c9a84c; }
+.weight-stat-sub { font-size:9px; color:#6b6050; letter-spacing:1px; }
+@media(max-width:600px) { .weight-stats-bar { grid-template-columns:1fr 1fr; } .weight-stats-bar .weight-stat-card:last-child { grid-column:1/-1; } .weight-stat-value { font-size:22px; } }
+
+/* CALENDAR */
+.calendar-wrap { max-width:900px; margin:0 auto; padding:0 20px 80px; position:relative; z-index:1; }
+.weekday-headers { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:4px; }
+.weekday-label { text-align:center; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#6b6050; padding:8px 0; font-weight:500; }
+.calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+.day-cell { background:#111009; border:1px solid rgba(201,168,76,0.08); border-radius:3px; min-height:88px; padding:10px 10px 8px; cursor:pointer; transition:border-color 0.2s,background 0.2s,transform 0.15s; position:relative; display:flex; flex-direction:column; gap:4px; }
+.day-cell:hover { border-color:rgba(201,168,76,0.35); background:#161410; transform:translateY(-1px); }
+.day-cell.empty { background:transparent; border-color:transparent; cursor:default; pointer-events:none; }
+.day-cell.today { border-color:#c9a84c; background:rgba(201,168,76,0.05); }
+.day-cell.today .day-num { color:#c9a84c; }
+.day-cell.has-data .day-num::after { content:''; display:inline-block; width:4px; height:4px; background:#c9a84c; border-radius:50%; margin-left:4px; vertical-align:middle; }
+.day-num { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1px; color:rgba(240,234,216,0.5); line-height:1; }
+.day-pills { display:flex; flex-direction:column; gap:2px; flex:1; }
+.day-pill { height:3px; border-radius:2px; opacity:0.5; transition:opacity 0.2s; }
+.day-pill.physical { background:#c9a84c; }
+.day-pill.mental { background:#7aadbd; }
+.day-pill.spiritual { background:#9b8ec4; }
+.day-pill.filled { opacity:1; }
+.day-check { font-size:9px; letter-spacing:1px; color:#c9a84c; margin-top:auto; opacity:0; transition:opacity 0.2s; }
+.day-cell.complete .day-check { opacity:1; }
+@media(max-width:600px) { .day-cell { min-height:60px; padding:7px 7px 6px; } .day-num { font-size:16px; } .day-pills { gap:1px; } }
+
+/* MODAL */
+.modal-overlay { position:fixed; inset:0; background:rgba(8,8,7,0.88); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity 0.3s; backdrop-filter:blur(4px); }
+.modal-overlay.open { opacity:1; pointer-events:all; }
+.modal { background:#181510; border:1px solid rgba(201,168,76,0.18); border-radius:4px; width:100%; max-width:520px; max-height:90vh; overflow-y:auto; transform:translateY(16px); transition:transform 0.3s; scrollbar-width:thin; scrollbar-color:#c9a84c transparent; }
+.modal-overlay.open .modal { transform:translateY(0); }
+.modal-header { padding:28px 28px 20px; border-bottom:1px solid rgba(201,168,76,0.18); display:flex; justify-content:space-between; align-items:flex-start; position:sticky; top:0; background:#181510; z-index:2; }
+.modal-date { display:flex; flex-direction:column; gap:4px; }
+.modal-eyebrow { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#c9a84c; font-weight:500; }
+.modal-day-num { font-family:'Bebas Neue',sans-serif; font-size:52px; letter-spacing:2px; line-height:1; color:#f0ead8; }
+.modal-weekday { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:#6b6050; }
+.modal-close { background:none; border:1px solid rgba(201,168,76,0.18); color:#6b6050; width:32px; height:32px; border-radius:2px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+.modal-close:hover { border-color:#c9a84c; color:#c9a84c; }
+.modal-body { padding:24px 28px 28px; display:flex; flex-direction:column; gap:28px; }
+@media(max-width:600px) { .modal { border-radius:4px; } .modal-header,.modal-body { padding-left:20px; padding-right:20px; } .modal-footer { padding-left:20px; padding-right:20px; } }
+
+/* PILLAR */
+.pillar-section { display:flex; flex-direction:column; gap:12px; }
+.pillar-label { display:flex; align-items:center; gap:10px; }
+.pillar-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.pillar-dot.physical { background:#c9a84c; }
+.pillar-dot.mental { background:#7aadbd; }
+.pillar-dot.spiritual { background:#9b8ec4; }
+.pillar-name { font-size:9px; letter-spacing:4px; text-transform:uppercase; font-weight:500; }
+.pillar-name.physical { color:#c9a84c; }
+.pillar-name.mental { color:#7aadbd; }
+.pillar-name.spiritual { color:#9b8ec4; }
+
+/* PRESETS */
+.preset-grid { display:flex; flex-wrap:wrap; gap:6px; align-items:flex-start; }
+.preset-btn { background:none; border:1px solid rgba(255,255,255,0.08); color:rgba(240,234,216,0.5); padding:6px 12px; border-radius:2px; font-size:11px; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; letter-spacing:0.3px; }
+.preset-btn.selected { border-color:currentColor; color:#f0ead8; background:rgba(255,255,255,0.04); }
+.preset-btn.physical.selected { border-color:#c9a84c; color:#c9a84c; }
+.preset-btn.mental.selected { border-color:#7aadbd; color:#7aadbd; }
+.preset-btn.spiritual.selected { border-color:#9b8ec4; color:#9b8ec4; }
+@media(max-width:600px) { .preset-btn { font-size:10px; padding:5px 9px; } }
+
+/* CUSTOM INPUT */
+.custom-input { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:2px; color:#f0ead8; font-family:'DM Sans',sans-serif; font-size:12px; padding:10px 14px; width:100%; outline:none; transition:border-color 0.2s; resize:none; min-height:52px; }
+.custom-input::placeholder { color:#6b6050; }
+.custom-input:focus { border-color:rgba(201,168,76,0.4); }
+
+/* PRESET NOTES */
+.preset-note-wrap { display:none; flex-direction:column; gap:6px; margin-top:4px; }
+.preset-note-wrap.visible { display:flex; }
+.preset-note-header { font-size:8px; letter-spacing:3px; text-transform:uppercase; color:#6b6050; }
+.preset-note-input { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:2px; color:#f0ead8; font-family:'DM Sans',sans-serif; font-size:12px; padding:8px 12px; width:100%; outline:none; resize:none; min-height:44px; }
+.preset-note-input::placeholder { color:#6b6050; }
+.preset-note-input:focus { border-color:rgba(201,168,76,0.35); }
+.preset-notes-area { display:flex; flex-direction:column; gap:8px; margin-top:8px; width:100%; }
+
+/* BODY PARTS */
+.body-part-section { display:none; flex-direction:column; gap:10px; background:rgba(201,168,76,0.04); border:1px solid rgba(201,168,76,0.15); border-radius:3px; padding:14px 14px 12px; margin-top:2px; }
+.body-part-section.visible { display:flex; }
+.body-part-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#c9a84c; font-weight:500; }
+.body-part-section .preset-btn { border-color:rgba(201,168,76,0.2); font-size:11px; }
+.body-part-section .preset-btn.selected { border-color:#c9a84c; color:#c9a84c; background:rgba(201,168,76,0.08); }
+
+/* TIME SLOTS */
+.time-section { border-top:1px solid rgba(201,168,76,0.18); padding-top:24px; }
+.time-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#6b6050; font-weight:500; margin-bottom:14px; }
+.time-slots { display:flex; flex-direction:column; gap:8px; }
+.time-slot-row { display:grid; grid-template-columns:72px 1fr; gap:10px; align-items:center; }
+.time-input { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:2px; color:#c9a84c; font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:1px; padding:8px 10px; width:100%; outline:none; transition:border-color 0.2s; text-align:center; }
+.time-input:focus { border-color:rgba(201,168,76,0.4); }
+.slot-input { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:2px; color:#f0ead8; font-family:'DM Sans',sans-serif; font-size:12px; padding:8px 12px; width:100%; outline:none; transition:border-color 0.2s; }
+.slot-input::placeholder { color:#6b6050; }
+.slot-input:focus { border-color:rgba(201,168,76,0.4); }
+.add-slot-btn { background:none; border:1px dashed rgba(201,168,76,0.25); color:#6b6050; padding:8px; border-radius:2px; cursor:pointer; font-size:11px; font-family:'DM Sans',sans-serif; letter-spacing:2px; text-transform:uppercase; width:100%; transition:all 0.2s; margin-top:4px; }
+.add-slot-btn:hover { border-color:#c9a84c; color:#c9a84c; }
+
+/* WEIGH-IN */
+.weighin-section { border-top:1px solid rgba(201,168,76,0.18); padding-top:24px; display:flex; flex-direction:column; gap:14px; }
+.weighin-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#6b6050; font-weight:500; }
+.weighin-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:end; }
+.weighin-field { display:flex; flex-direction:column; gap:6px; }
+.weighin-field label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#6b6050; }
+.weight-number-input { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:2px; color:#c9a84c; font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; padding:10px 14px; width:100%; outline:none; -moz-appearance:textfield; }
+.weight-number-input::-webkit-outer-spin-button,.weight-number-input::-webkit-inner-spin-button { -webkit-appearance:none; }
+.weight-number-input::placeholder { color:rgba(201,168,76,0.25); font-size:22px; }
+.weight-number-input:focus { border-color:rgba(201,168,76,0.5); }
+.weighin-delta { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:2px; padding:10px 14px; display:flex; flex-direction:column; gap:2px; }
+.weighin-delta-label { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#6b6050; }
+.weighin-delta-value { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1px; color:rgba(240,234,216,0.5); }
+.weighin-delta-value.loss { color:#7ac99b; }
+.weighin-delta-value.gain { color:#e07070; }
+
+/* WATER */
+.water-section { border-top:1px solid rgba(201,168,76,0.18); padding-top:24px; display:flex; flex-direction:column; gap:14px; }
+.water-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#6b6050; font-weight:500; }
+.water-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:end; }
+.water-field { display:flex; flex-direction:column; gap:6px; }
+.water-field label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#6b6050; }
+.water-number-input { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:2px; color:#7aadbd; font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; padding:10px 14px; width:100%; outline:none; -moz-appearance:textfield; }
+.water-number-input::-webkit-outer-spin-button,.water-number-input::-webkit-inner-spin-button { -webkit-appearance:none; }
+.water-number-input::placeholder { color:rgba(122,173,189,0.25); font-size:22px; }
+.water-number-input:focus { border-color:rgba(122,173,189,0.5); }
+.water-ref { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:2px; padding:10px 14px; display:flex; flex-direction:column; gap:4px; }
+.water-ref-title { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#6b6050; }
+.water-ref-line { font-size:10px; color:rgba(240,234,216,0.5); letter-spacing:0.3px; line-height:1.6; }
+
+/* GCAL */
+.gcal-section { border-top:1px solid rgba(201,168,76,0.18); padding-top:20px; display:flex; flex-direction:column; gap:10px; }
+.gcal-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#6b6050; font-weight:500; }
+.gcal-btn { display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.18); color:#c9a84c; padding:12px 20px; border-radius:2px; font-size:11px; letter-spacing:3px; text-transform:uppercase; font-family:'DM Sans',sans-serif; font-weight:500; cursor:pointer; text-decoration:none; transition:all 0.2s; width:100%; }
+.gcal-btn:hover { background:rgba(201,168,76,0.12); border-color:#c9a84c; }
+
+/* FOOTER BUTTONS */
+.modal-footer { padding:0 28px 28px; display:flex; gap:10px; }
+.save-btn { flex:1; background:#c9a84c; border:none; color:#080807; padding:14px; border-radius:2px; font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:3px; cursor:pointer; transition:background 0.2s,transform 0.15s; }
+.save-btn:hover { background:#e2c47a; transform:translateY(-1px); }
+.clear-btn { background:none; border:1px solid rgba(255,255,255,0.08); color:#6b6050; padding:14px 18px; border-radius:2px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.2s; }
+.clear-btn:hover { border-color:#c0392b; color:#c0392b; }
+
+/* TOAST */
+.toast { position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(20px); background:#181510; border:1px solid #c9a84c; color:#c9a84c; padding:12px 24px; border-radius:2px; font-size:11px; letter-spacing:3px; text-transform:uppercase; font-family:'DM Sans',sans-serif; z-index:999; opacity:0; transition:all 0.3s; white-space:nowrap; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+
+/* GRATITUDE LIST */
+.gratitude-section { border-top:1px solid rgba(201,168,76,0.18); padding-top:24px; display:flex; flex-direction:column; gap:12px; }
+.gratitude-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#c9a84c; font-weight:500; }
+.gratitude-sub { font-size:11px; color:#6b6050; font-family:'Playfair Display',serif; font-style:italic; }
+.gratitude-items { display:flex; flex-direction:column; gap:8px; }
+.gratitude-item { display:grid; grid-template-columns:20px 1fr; gap:8px; align-items:center; }
+.gratitude-num { font-family:'Bebas Neue',sans-serif; font-size:16px; color:#c9a84c; opacity:0.5; }
+.gratitude-input { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:2px; color:#f0ead8; font-family:'Playfair Display',serif; font-style:italic; font-size:13px; padding:8px 12px; width:100%; outline:none; transition:border-color 0.2s; }
+.gratitude-input::placeholder { color:#6b6050; font-size:12px; }
+.gratitude-input:focus { border-color:rgba(201,168,76,0.4); }
+
+/* DAILY RECAP */
+.recap-section { border-top:1px solid rgba(201,168,76,0.18); padding-top:24px; display:flex; flex-direction:column; gap:16px; }
+.recap-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#c9a84c; font-weight:500; display:flex; align-items:center; gap:10px; }
+.recap-label::after { content:''; flex:1; height:1px; background:rgba(201,168,76,0.18); }
+.recap-cols { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:500px) { .recap-cols { grid-template-columns:1fr; } }
+.recap-col { display:flex; flex-direction:column; gap:8px; }
+.recap-col-label { font-size:8px; letter-spacing:3px; text-transform:uppercase; font-weight:500; padding-bottom:6px; border-bottom:1px solid rgba(201,168,76,0.18); }
+.recap-col-label.wins { color:#7ac99b; }
+.recap-col-label.grow { color:#7aadbd; }
+.recap-textarea { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:2px; color:#f0ead8; font-family:'DM Sans',sans-serif; font-size:12px; padding:10px 12px; width:100%; outline:none; resize:none; min-height:120px; line-height:1.6; transition:border-color 0.2s; }
+.recap-textarea::placeholder { color:#6b6050; font-size:11px; line-height:1.6; }
+.recap-textarea.wins:focus { border-color:rgba(122,201,155,0.4); }
+.recap-textarea.grow:focus { border-color:rgba(122,173,189,0.4); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.3); border-radius:2px; }
+
+/* ANIMATIONS */
+@keyframes fadeDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+header { animation:fadeDown 0.7s ease both; }
+.pillars-legend { animation:fadeUp 0.7s 0.15s ease both; }
+.calendar-wrap { animation:fadeUp 0.7s 0.25s ease both; }
+
+  </style>
+<div class="daily-message-wrap">
+  <div class="daily-message-card">
+    <div class="daily-message-top">
+      <div class="daily-message-eyebrow">&#9654; Daily Message</div>
+      <button class="daily-message-edit-btn" id="msgEditBtn">Edit</button>
+    </div>
+    <div class="daily-message-text empty" id="msgDisplay">No message yet — tap Edit to add today's motivation.</div>
+    <div class="daily-message-editor" id="msgEditor">
+      <textarea class="daily-message-textarea" id="msgTextarea" placeholder="Write today's message..." rows="4"></textarea>
+      <div class="daily-message-actions">
+        <button class="msg-cancel-btn" id="msgCancelBtn">Cancel</button>
+        <button class="msg-save-btn" id="msgSaveBtn">SAVE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="data-bar">
+  <button class="data-btn import-btn" id="importBtn">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+    Import Data
+  </button>
+  <button class="data-btn" id="exportBtn">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+    Export Data
+  </button>
+</div>
+<input type="file" id="importFile" accept=".json" style="display:none">
+<div class="toast" id="toast"></div>
+
+<div class="month-nav">
+  <button id="prevMonth">&#8592;</button>
+  <div class="month-title" id="monthTitle">JUNE <span>2026</span></div>
+  <button id="nextMonth">&#8594;</button>
+</div>
+
+<div class="month-progress">
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-pct" id="progressPct">0%</div>
+</div>
+
+<div class="weight-stats-bar">
+  <div class="weight-stat-card">
+    <div class="weight-stat-label">Start Weight</div>
+    <div class="weight-stat-value neutral" id="statStartWeight">-- lbs</div>
+    <div class="weight-stat-sub">First weigh-in this month</div>
+  </div>
+  <div class="weight-stat-card">
+    <div class="weight-stat-label">Current Weight</div>
+    <div class="weight-stat-value neutral" id="statCurrentWeight">-- lbs</div>
+    <div class="weight-stat-sub">Most recent entry</div>
+  </div>
+  <div class="weight-stat-card">
+    <div class="weight-stat-label">Monthly Change</div>
+    <div class="weight-stat-value neutral" id="statChange">-- lbs</div>
+    <div class="weight-stat-sub" id="statChangePct">--% of body weight</div>
+  </div>
+</div>
+
+<div class="calendar-wrap">
+  <div class="weekday-headers">
+    <div class="weekday-label">Sun</div>
+    <div class="weekday-label">Mon</div>
+    <div class="weekday-label">Tue</div>
+    <div class="weekday-label">Wed</div>
+    <div class="weekday-label">Thu</div>
+    <div class="weekday-label">Fri</div>
+    <div class="weekday-label">Sat</div>
+  </div>
+  <div class="calendar-grid" id="calGrid"></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-date">
+        <div class="modal-eyebrow" id="modalEyebrow">Monday</div>
+        <div class="modal-day-num" id="modalDayNum">01</div>
+        <div class="modal-weekday" id="modalMonth">June 2026</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+        <button class="modal-close" id="modalClose">&#10005;</button>
+        <a class="gcal-btn" id="gcalBtnTop" href="#" target="_blank" style="padding:8px 12px;font-size:10px;letter-spacing:2px;width:auto;gap:7px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+          Google Cal
+        </a>
+      </div>
+    </div>
+    <div class="modal-body">
+      <!-- GRATITUDE LIST -->
+      <div class="gratitude-section">
+        <div class="gratitude-label">&#9733; Morning Gratitude</div>
+        <div class="gratitude-sub">Start your day with intention</div>
+        <div class="gratitude-items">
+          <div class="gratitude-item"><div class="gratitude-num">1</div><input class="gratitude-input" id="grat1" type="text" placeholder="I am grateful for..."></div>
+          <div class="gratitude-item"><div class="gratitude-num">2</div><input class="gratitude-input" id="grat2" type="text" placeholder="I am grateful for..."></div>
+          <div class="gratitude-item"><div class="gratitude-num">3</div><input class="gratitude-input" id="grat3" type="text" placeholder="I am grateful for..."></div>
+        </div>
+      </div>
+
+      <div class="pillar-section">
+        <div class="pillar-label"><div class="pillar-dot physical"></div><div class="pillar-name physical">Physical</div></div>
+        <div class="preset-grid" id="physicalPresets"></div>
+        <textarea class="custom-input" id="physicalCustom" placeholder="Add your own or override..." rows="2"></textarea>
+        <div class="body-part-section" id="bodyPartSection">
+          <div class="body-part-label">&#9776; Muscle Focus</div>
+          <div class="preset-grid" id="bodyPartPresets"></div>
+        </div>
+      </div>
+      <div class="pillar-section">
+        <div class="pillar-label"><div class="pillar-dot mental"></div><div class="pillar-name mental">Mental</div></div>
+        <div class="preset-grid" id="mentalPresets"></div>
+        <textarea class="custom-input" id="mentalCustom" placeholder="Add your own or override..." rows="2"></textarea>
+      </div>
+      <div class="pillar-section">
+        <div class="pillar-label"><div class="pillar-dot spiritual"></div><div class="pillar-name spiritual">Spiritual</div></div>
+        <div class="preset-grid" id="spiritualPresets"></div>
+        <textarea class="custom-input" id="spiritualCustom" placeholder="Add your own or override..." rows="2"></textarea>
+      </div>
+      <div class="time-section">
+        <div class="time-label">Time Blocks</div>
+        <div class="time-slots" id="timeSlots"></div>
+        <button class="add-slot-btn" id="addSlotBtn">+ Add Time Block</button>
+      </div>
+      <div class="weighin-section">
+        <div class="weighin-label">&#9654; Daily Weigh-In</div>
+        <div class="weighin-row">
+          <div class="weighin-field">
+            <label>Today's Weight (lbs)</label>
+            <input class="weight-number-input" type="number" id="weightInput" placeholder="000.0" step="0.1" min="50" max="999">
+          </div>
+          <div class="weighin-delta">
+            <div class="weighin-delta-label">vs. yesterday</div>
+            <div class="weighin-delta-value" id="weighinDeltaVal">--</div>
+          </div>
+        </div>
+      </div>
+      <div class="water-section">
+        <div class="water-label">&#9676; Daily Water Intake</div>
+        <div class="water-row">
+          <div class="water-field">
+            <label>Fluid Ounces (fl oz)</label>
+            <input class="water-number-input" type="number" id="waterInput" placeholder="000" step="1" min="0" max="500">
+          </div>
+          <div class="water-ref">
+            <div class="water-ref-title">Reference</div>
+            <div class="water-ref-line">64 fl oz = 1/2 gallon</div>
+            <div class="water-ref-line">128 fl oz = 1 gallon</div>
+            <div class="water-ref-line">1 gallon = 4 quarts</div>
+          </div>
+        </div>
+      </div>
+      <!-- DAILY RECAP -->
+      <div class="recap-section">
+        <div class="recap-label">Daily Recap</div>
+        <div class="recap-cols">
+          <div class="recap-col">
+            <div class="recap-col-label wins">&#10003; Daily Accomplishments</div>
+            <textarea class="recap-textarea wins" id="recapWins" placeholder="What did you achieve today?&#10;&#10;- &#10;- &#10;- " rows="6"></textarea>
+          </div>
+          <div class="recap-col">
+            <div class="recap-col-label grow">&#8593; Build &amp; Grow On</div>
+            <textarea class="recap-textarea grow" id="recapGrow" placeholder="What can you improve?&#10;&#10;- &#10;- &#10;- " rows="6"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="gcal-section">
+        <div class="gcal-label">Schedule in Google Calendar</div>
+        <a class="gcal-btn" id="gcalBtn" href="#" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+          Open Google Calendar
+        </a>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="clear-btn" id="clearBtn">Clear</button>
+      <button class="save-btn" id="saveBtn">SAVE DAY</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PHYSICAL_PRESETS = ['Weight Training','Run','Walk','Swim','Stretch','HIIT','Yoga','Bike','Biking','Boxing','Rest'];
+const BODY_PARTS = ['Chest','Triceps','Biceps','Back','Shoulders','Legs','Glutes','Core','Forearms','Full Body'];
+const MENTAL_PRESETS = ['Journaling','Read','Meditate','Therapy','No Screen','Study','Podcast','Breathwork'];
+const SPIRITUAL_PRESETS = ['Prayer','Gratitude','Affirmations','Scripture','Nature','Reflect','Worship','Silence'];
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+let currentYear = 2026, currentMonth = 5, activeDay = null;
+let data = JSON.parse(localStorage.getItem('blueprint_data') || '{}');
+const today = new Date();
+
+function storageKey(y,m,d) { return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'); }
+function saveData() { localStorage.setItem('blueprint_data', JSON.stringify(data)); }
+
+function buildCalendar() {
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+  const daysInMonth = new Date(currentYear, currentMonth+1, 0).getDate();
+  document.getElementById('monthTitle').innerHTML = MONTHS[currentMonth].toUpperCase()+' <span>'+currentYear+'</span>';
+  for (let i=0; i<firstDay; i++) { const e=document.createElement('div'); e.className='day-cell empty'; grid.appendChild(e); }
+  let filled = 0;
+  for (let d=1; d<=daysInMonth; d++) {
+    const key = storageKey(currentYear,currentMonth,d);
+    const dd = data[key];
+    const isToday = today.getFullYear()===currentYear && today.getMonth()===currentMonth && today.getDate()===d;
+    const cell = document.createElement('div');
+    cell.className = 'day-cell'+(isToday?' today':'')+(dd?' has-data':'');
+    const pF = dd&&((Array.isArray(dd.physical)?dd.physical.length>0:!!dd.physical)||dd.physicalCustom);
+    const mF = dd&&((Array.isArray(dd.mental)?dd.mental.length>0:!!dd.mental)||dd.mentalCustom);
+    const sF = dd&&((Array.isArray(dd.spiritual)?dd.spiritual.length>0:!!dd.spiritual)||dd.spiritualCustom);
+    if (pF&&mF&&sF) { cell.classList.add('complete'); filled++; }
+    cell.innerHTML = '<div class="day-num">'+d+'</div><div class="day-pills"><div class="day-pill physical'+(pF?' filled':'')+'"></div><div class="day-pill mental'+(mF?' filled':'')+'"></div><div class="day-pill spiritual'+(sF?' filled':'')+'"></div></div><div class="day-check">&#10003; DONE</div>';
+    cell.addEventListener('click', function(){ openModal(d); });
+    grid.appendChild(cell);
+  }
+  const pct = Math.round((filled/daysInMonth)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressPct').textContent = pct+'%';
+  updateWeightStats(daysInMonth);
+}
+
+function updateWeightStats(daysInMonth) {
+  let fw=null, lw=null, fd=null, ld=null;
+  for (let d=1; d<=daysInMonth; d++) {
+    const w = data[storageKey(currentYear,currentMonth,d)];
+    const wv = w&&w.weight ? parseFloat(w.weight) : null;
+    if (wv!==null) { if(fw===null){fw=wv;fd=d;} lw=wv; ld=d; }
+  }
+  const sEl=document.getElementById('statStartWeight'), cEl=document.getElementById('statCurrentWeight'), chEl=document.getElementById('statChange'), cpEl=document.getElementById('statChangePct');
+  sEl.textContent = fw!==null ? fw.toFixed(1)+' lbs' : '-- lbs'; sEl.className='weight-stat-value neutral';
+  cEl.textContent = lw!==null ? lw.toFixed(1)+' lbs' : '-- lbs'; cEl.className='weight-stat-value neutral';
+  if (fw!==null&&lw!==null&&fd!==ld) {
+    const diff=lw-fw, pct=((diff/fw)*100), sign=diff>0?'+':'';
+    chEl.textContent=sign+diff.toFixed(1)+' lbs'; chEl.className='weight-stat-value '+(diff>0?'positive':diff<0?'negative':'neutral');
+    cpEl.textContent=sign+pct.toFixed(2)+'% of body weight';
+  } else { chEl.textContent='-- lbs'; chEl.className='weight-stat-value neutral'; cpEl.textContent='--% of body weight'; }
+}
+
+function openModal(day) {
+  activeDay = day;
+  const key = storageKey(currentYear,currentMonth,day);
+  const dd = data[key]||{};
+  const dateObj = new Date(currentYear,currentMonth,day);
+  document.getElementById('modalEyebrow').textContent = DAYS[dateObj.getDay()];
+  document.getElementById('modalDayNum').textContent = String(day).padStart(2,'0');
+  document.getElementById('modalMonth').textContent = MONTHS[currentMonth]+' '+currentYear;
+  buildPresets('physicalPresets',PHYSICAL_PRESETS,'physical',dd.physical||[],dd.physicalNotes||{});
+  buildPresets('mentalPresets',MENTAL_PRESETS,'mental',dd.mental||[],dd.mentalNotes||{});
+  buildPresets('spiritualPresets',SPIRITUAL_PRESETS,'spiritual',dd.spiritual||[],dd.spiritualNotes||{});
+  buildBodyParts(dd.bodyParts||[]);
+  const physArr = Array.isArray(dd.physical)?dd.physical:(dd.physical?[dd.physical]:[]);
+  document.getElementById('bodyPartSection').classList.toggle('visible', physArr.includes('Weight Training'));
+  document.getElementById('physicalCustom').value = dd.physicalCustom||'';
+  document.getElementById('mentalCustom').value = dd.mentalCustom||'';
+  document.getElementById('spiritualCustom').value = dd.spiritualCustom||'';
+  buildTimeSlots(dd.slots||[]);
+  document.getElementById('weightInput').value = dd.weight||'';
+  document.getElementById('waterInput').value = dd.water||'';
+  document.getElementById('grat1').value = dd.grat1||'';
+  document.getElementById('grat2').value = dd.grat2||'';
+  document.getElementById('grat3').value = dd.grat3||'';
+  document.getElementById('recapWins').value = dd.recapWins||'';
+  document.getElementById('recapGrow').value = dd.recapGrow||'';
+  const prevKey = storageKey(currentYear,currentMonth,day-1);
+  const prevD = data[prevKey];
+  const dEl = document.getElementById('weighinDeltaVal');
+  if (day>1&&prevD&&prevD.weight&&dd.weight) {
+    const diff=parseFloat(dd.weight)-parseFloat(prevD.weight), sign=diff>0?'+':'';
+    dEl.textContent=sign+diff.toFixed(1)+' lbs'; dEl.className='weighin-delta-value '+(diff>0?'gain':diff<0?'loss':'');
+  } else { dEl.textContent='--'; dEl.className='weighin-delta-value'; }
+  const gcalUrl='https://calendar.google.com/calendar/r/day/'+currentYear+'/'+(currentMonth+1)+'/'+day;
+  document.getElementById('gcalBtn').href=gcalUrl;
+  document.getElementById('gcalBtnTop').href=gcalUrl;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; activeDay=null; }
+
+function buildPresets(containerId, presets, type, selected, notes) {
+  const selArr = Array.isArray(selected)?selected:(selected?[selected]:[]);
+  const notesObj = notes||{};
+  const container = document.getElementById(containerId);
+  container.innerHTML='';
+  const notesArea = document.createElement('div');
+  notesArea.className='preset-notes-area';
+  presets.forEach(function(p) {
+    const isSel = selArr.includes(p);
+    const wrapper = document.createElement('div');
+    wrapper.dataset.preset=p; wrapper.style.display='inline-block';
+    const btn = document.createElement('button');
+    btn.className='preset-btn '+type+(isSel?' selected':'');
+    btn.textContent=p;
+    const noteWrap = document.createElement('div');
+    noteWrap.className='preset-note-wrap'+(isSel?' visible':'');
+    noteWrap.innerHTML='<div class="preset-note-header">Notes on '+p+'</div><textarea class="preset-note-input" placeholder="What did you do / how did it go..." rows="2">'+(notesObj[p]||'')+'</textarea>';
+    function handleClick(e) {
+      e.preventDefault();
+      const wasSel = btn.classList.contains('selected');
+      btn.classList.toggle('selected',!wasSel);
+      noteWrap.classList.toggle('visible',!wasSel);
+      if (containerId==='physicalPresets') {
+        const wtBtn = container.querySelector('[data-preset="Weight Training"] .preset-btn');
+        document.getElementById('bodyPartSection').classList.toggle('visible', wtBtn&&wtBtn.classList.contains('selected'));
+      }
+    }
+    btn.addEventListener('click',handleClick);
+    btn.addEventListener('touchend',handleClick,{passive:false});
+    wrapper.appendChild(btn);
+    container.appendChild(wrapper);
+    notesArea.appendChild(noteWrap);
+  });
+  container.appendChild(notesArea);
+}
+
+function buildBodyParts(selected) {
+  const c = document.getElementById('bodyPartPresets');
+  c.innerHTML='';
+  BODY_PARTS.forEach(function(p) {
+    const btn=document.createElement('button');
+    btn.className='preset-btn'+(selected.includes(p)?' selected':'');
+    btn.textContent=p;
+    function t(e){e.preventDefault();btn.classList.toggle('selected');}
+    btn.addEventListener('click',t);
+    btn.addEventListener('touchend',t,{passive:false});
+    c.appendChild(btn);
+  });
+}
+
+function buildTimeSlots(slots) {
+  const c=document.getElementById('timeSlots');
+  c.innerHTML='';
+  const defaults = slots.length>0?slots:[
+    {time:'05:00',label:''},{time:'07:00',label:''},{time:'09:00',label:''},
+    {time:'11:00',label:''},{time:'13:00',label:''},{time:'15:00',label:''},
+    {time:'17:00',label:''},{time:'19:00',label:''},{time:'21:00',label:''},{time:'23:00',label:''}
+  ];
+  defaults.forEach(function(s){addSlotRow(s.time,s.label);});
+}
+
+function addSlotRow(time,label) {
+  time=time||''; label=label||'';
+  const c=document.getElementById('timeSlots');
+  const row=document.createElement('div');
+  row.className='time-slot-row';
+  row.innerHTML='<input class="time-input" type="time" value="'+time+'"><input class="slot-input" type="text" placeholder="What are you doing..." value="'+label+'">';
+  row.querySelector('.time-input').addEventListener('change',sortTimeSlots);
+  c.appendChild(row);
+}
+
+function sortTimeSlots() {
+  const c=document.getElementById('timeSlots');
+  const rows=Array.from(c.querySelectorAll('.time-slot-row'));
+  rows.sort(function(a,b){return (a.querySelector('.time-input').value||'99:99').localeCompare(b.querySelector('.time-input').value||'99:99');});
+  rows.forEach(function(r){c.appendChild(r);});
+}
+
+function getSelectedPresets(id) {
+  return Array.from(document.querySelectorAll('#'+id+' [data-preset] .preset-btn.selected')).map(function(b){return b.closest('[data-preset]').dataset.preset;});
+}
+
+function getNotesByArea(id) {
+  const notes={};
+  document.querySelectorAll('#'+id+' .preset-note-wrap').forEach(function(nw){
+    const h=nw.querySelector('.preset-note-header'), t=nw.querySelector('.preset-note-input');
+    if(h&&t&&t.value.trim()){notes[h.textContent.replace('Notes on ','').trim()]=t.value.trim();}
+  });
+  return notes;
+}
+
+function collectSlots() {
+  return Array.from(document.querySelectorAll('.time-slot-row')).map(function(r){return{time:r.querySelector('.time-input').value,label:r.querySelector('.slot-input').value};}).filter(function(s){return s.time||s.label;});
+}
+
+document.getElementById('addSlotBtn').addEventListener('click',function(){addSlotRow('','');});
+document.getElementById('saveBtn').addEventListener('click',function(){
+  if(!activeDay)return;
+  const key=storageKey(currentYear,currentMonth,activeDay);
+  data[key]={
+    physical:getSelectedPresets('physicalPresets'),
+    physicalNotes:getNotesByArea('physicalPresets'),
+    bodyParts:Array.from(document.querySelectorAll('#bodyPartPresets .preset-btn.selected')).map(function(b){return b.textContent;}),
+    mental:getSelectedPresets('mentalPresets'),
+    mentalNotes:getNotesByArea('mentalPresets'),
+    spiritual:getSelectedPresets('spiritualPresets'),
+    spiritualNotes:getNotesByArea('spiritualPresets'),
+    physicalCustom:document.getElementById('physicalCustom').value,
+    mentalCustom:document.getElementById('mentalCustom').value,
+    spiritualCustom:document.getElementById('spiritualCustom').value,
+    slots:collectSlots(),
+    weight:document.getElementById('weightInput').value||null,
+    water:document.getElementById('waterInput').value||null,
+    grat1:document.getElementById('grat1').value||null,
+    grat2:document.getElementById('grat2').value||null,
+    grat3:document.getElementById('grat3').value||null,
+    recapWins:document.getElementById('recapWins').value||null,
+    recapGrow:document.getElementById('recapGrow').value||null
+  };
+  saveData(); closeModal(); buildCalendar();
+});
+document.getElementById('clearBtn').addEventListener('click',function(){
+  if(!activeDay)return;
+  delete data[storageKey(currentYear,currentMonth,activeDay)];
+  saveData(); closeModal(); buildCalendar();
+});
+document.getElementById('modalClose').addEventListener('click',closeModal);
+document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.getElementById('prevMonth').addEventListener('click',function(){currentMonth--;if(currentMonth<0){currentMonth=11;currentYear--;}buildCalendar();});
+document.getElementById('nextMonth').addEventListener('click',function(){currentMonth++;if(currentMonth>11){currentMonth=0;currentYear++;}buildCalendar();});
+
+// DAILY MESSAGE
+var MSG_KEY='aligned_daily_message';
+function loadMessage(){
+  var msg=localStorage.getItem(MSG_KEY)||'';
+  var d=document.getElementById('msgDisplay');
+  if(msg){d.textContent=msg;d.classList.remove('empty');}
+  else{d.textContent='No message yet — tap Edit to add today\'s motivation.';d.classList.add('empty');}
+  document.getElementById('msgTextarea').value=msg;
+}
+loadMessage();
+document.getElementById('msgEditBtn').addEventListener('click',function(){
+  document.getElementById('msgEditor').classList.add('visible');
+  document.getElementById('msgTextarea').focus();
+});
+document.getElementById('msgSaveBtn').addEventListener('click',function(){
+  var msg=document.getElementById('msgTextarea').value.trim();
+  localStorage.setItem(MSG_KEY,msg);
+  document.getElementById('msgEditor').classList.remove('visible');
+  loadMessage(); showToast('Message saved');
+});
+document.getElementById('msgCancelBtn').addEventListener('click',function(){
+  document.getElementById('msgEditor').classList.remove('visible');
+  loadMessage();
+});
+
+// TOAST
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+
+// EXPORT
+document.getElementById('exportBtn').addEventListener('click',function(){
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='aligned-man-data.json';a.click();
+  URL.revokeObjectURL(url); showToast('Data exported');
+});
+
+// IMPORT
+document.getElementById('importBtn').addEventListener('click',function(){document.getElementById('importFile').click();});
+document.getElementById('importFile').addEventListener('change',function(){
+  var file=this.files[0]; if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){try{data=JSON.parse(e.target.result);saveData();buildCalendar();showToast('Data imported');}catch(err){showToast('Invalid file');}};
+  reader.readAsText(file); this.value='';
+});
+
+buildCalendar();
+</script>
+</div>
+
+
+<!-- ABOUT -->
+<section class="section-wrap dark1" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-tag">The Man Behind It</div>
+        <div class="about-quote-mark">"</div>
+        <div class="about-quote">I am not selling theory. I am selling a life I have actually lived — and come out the other side of.</div>
+        <p class="about-body"><strong>Robert Gonnerman lost over 140 pounds.</strong> Survived three major hip replacements. Rebuilt his body from the ground up — multiple times. Overcame addiction. Went through divorce. Lost everything. Got it all back.</p>
+        <p class="about-body">He started as a Chef, became a Registered Nurse, worked as an Athlete Manager, and spent over a decade studying under the pioneers of SARMs, peptides, hormone optimization, TRT, HRT, and supplementation. He has coached others through their own transformations and now has built this platform to reach the men who need it most.</p>
+        <p class="about-body"><strong>Father to two sons — ages 5 and 7.</strong> His daily purpose. The reason he refuses to decline.</p>
+        <div class="about-sig">
+          <div class="about-sig-dot"></div>
+          <div>
+            <div class="about-sig-name">Robert Gonnerman</div>
+            <div class="about-sig-handle">Founder · The Aligned Man Project · @AlignWithRob</div>
+          </div>
+        </div>
+      </div>
+      <div class="creds reveal">
+        <div class="cred"><div class="cred-icon">⚕️</div><div><div class="cred-name">Registered Nurse</div><div class="cred-detail">Medical &amp; Psychiatric Nursing Background</div></div></div>
+        <div class="cred"><div class="cred-icon">💊</div><div><div class="cred-name">10+ Years Deep</div><div class="cred-detail">Peptides, Hormone Optimization, TRT, HRT &amp; Supplementation</div></div></div>
+        <div class="cred"><div class="cred-icon">🏋️</div><div><div class="cred-name">140+ Lbs Lost</div><div class="cred-detail">Personal Physical Transformation — Multiple Times</div></div></div>
+        <div class="cred"><div class="cred-icon">🦴</div><div><div class="cred-name">3 Hip Replacements</div><div class="cred-detail">Rebuilt From the Ground Up — Refused to Stay Down</div></div></div>
+        <div class="cred"><div class="cred-icon">🏆</div><div><div class="cred-name">Athlete Manager</div><div class="cred-detail">5+ Years at a Top Supplement Company</div></div></div>
+        <div class="cred"><div class="cred-icon">🙏</div><div><div class="cred-name">Spiritual Study</div><div class="cred-detail">Studied Under Leading Spiritual Coaches of the Last Decade</div></div></div>
+        <div class="cred"><div class="cred-icon">👨‍👦</div><div><div class="cred-name">Father of Two Sons</div><div class="cred-detail">Ages 5 &amp; 7 — His Daily Purpose</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="email-wrap" id="free-download">
+  <div class="email-inner">
+    <div class="email-box reveal">
+      <div>
+        <div class="section-tag" style="margin-bottom:16px;">Free Download</div>
+        <h2 class="email-h2">Get the Free<br/>Physical Optimization<br/>Cheat Sheet</h2>
+        <p class="email-body">Every stack. Every protocol. <strong>Exactly what Rob uses</strong> — nothing held back. SARMs, fat burners, natty stacks, cognitive performance, hormone optimization, PCT and more. Enter your email and get it free.</p>
+      </div>
+      <div>
+        <div id="emailForm" class="email-form">
+          <input class="email-input" id="emailName" type="text" placeholder="Your First Name" />
+          <input class="email-input" id="emailAddr" type="email" placeholder="Your Email Address" />
+          <button class="email-submit" onclick="submitEmail()">Send Me the Cheat Sheet</button>
+          <p class="email-disclaimer">No spam. Ever. Unsubscribe anytime.</p>
+        </div>
+        <div id="emailSuccess" class="email-success">
+          <div class="email-success-text">You're In.</div>
+          <p class="email-success-sub">Check your email for the free cheat sheet.<br/>Welcome to The Aligned Man Project.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AFFILIATES / RESOURCES -->
+<section class="aff-wrap" id="affiliates">
+  <div class="aff-inner">
+    <div class="reveal">
+      <div class="section-tag">Verified Resources</div>
+      <h2 class="section-h2">Rob's Recommended<br/>Sources.</h2>
+      <p class="section-body">Every product Rob personally uses and recommends. HPLC verified. Use his code and save — he earns a small commission at no extra cost to you.</p>
+    </div>
+    <div class="aff-grid reveal">
+      <div class="aff-card">
+        <div class="aff-badge">Verified Source · HPLC Tested</div>
+        <div class="aff-name">SwissChems</div>
+        <p class="aff-body">Rob's primary source for research compounds. Every batch HPLC verified. The most trusted supplier he's used for over a decade.</p>
+        <div class="aff-code"><span class="aff-code-label">Your Code</span><span class="aff-code-value">ROBERT</span><span style="font-size:10px;letter-spacing:2px;color:var(--grey2);text-transform:uppercase;">= 10% Off</span></div>
+        <div class="aff-products">
+          <a href="https://swisschems.is/product/mk-677-ibutamoren-380mg-10mg-60-caps/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">MK-677 (Ibutamoren)</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/rad-140/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">RAD-140</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">Enclomiphene</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/bpc-157-5mg-healing-bundle/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">BPC-157</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/tb-500-thymosin-beta-4-healing-bundle/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">TB-500</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/igf-1-lr3-1mg-price-is-per-vial/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">IGF-1 LR3</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/ipamorelin-2mg-price-is-per-vial/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">Ipamorelin</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/tesamorelin-2mg-price-is-per-vial/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">Tesamorelin</span><span class="aff-product-arr">→</span></a>
+        </div>
+        <a href="https://swisschems.is/ref/510/" target="_blank" class="btn-gold" style="font-size:10px;padding:13px 28px;display:inline-block;">Shop SwissChems — Use Code ROBERT</a>
+        <p style="font-size:10px;color:var(--grey2);margin-top:12px;line-height:1.6;">Research compounds intended for laboratory research purposes only. Not for human consumption. Always consult a licensed healthcare provider.</p>
+      </div>
+      <div class="aff-card">
+        <div class="aff-badge">Premium Supplements</div>
+        <div class="aff-name">Enhanced Labs</div>
+        <p class="aff-body">Rob's go-to for premium sports nutrition and performance supplements. Cutting-edge formulas, quality ingredients, built for serious athletes.</p>
+        <div class="aff-code"><span class="aff-code-label">Your Code</span><span class="aff-code-value">ROBERT</span><span style="font-size:10px;letter-spacing:2px;color:var(--grey2);text-transform:uppercase;">= 15% Off</span></div>
+        <div class="aff-products">
+          <a href="https://enhancedlabs.com/products/top-t/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">Top T — Testosterone Support</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/all-day-shred/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">All Day Shred (PM Fat Burner)</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/tudca/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">TUDCA — Liver Support</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/maximus-stim/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">Maximus Stim — Pre Workout</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/maximus-pump/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">Maximus Pump</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/enhanced-d3-k2/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">D3 + K2</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/enhanced-magnesium/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">Magnesium</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/io-premium-whey/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">IO Premium Whey Protein</span><span class="aff-product-arr">→</span></a>
+        </div>
+        <a href="https://enhancedlabs.com/?ref=DYyov5JCnSp9j" target="_blank" class="btn-gold" style="font-size:10px;padding:13px 28px;display:inline-block;">Shop Enhanced Labs — Use Code ROBERT</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE PROTOCOLS -->
+<section class="section-wrap black" id="protocols">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">Free Resources</div>
+      <h2 class="section-h2">Free Protocols.<br/>Nothing Held Back.</h2>
+      <p class="section-body">Rob built these protocols from over a decade of lived experience — every stack, every cycle, every compound he has personally used and tested. No theory. No gatekeeping. This is the exact roadmap he used to transform his body and optimize his performance. Yours free.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px;" class="reveal">
+      <div style="background:var(--dark2); padding:48px 40px; position:relative; border-top:2px solid var(--gold);">
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Most Downloaded</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--white);margin-bottom:16px;line-height:1;">Physical Optimization<br/>Cheat Sheet</div>
+        <p style="font-size:14px;font-weight:300;color:var(--grey1);line-height:1.85;margin-bottom:32px;">Every stack. Every protocol. Muscle building, fat burning, hormone optimization, cognitive performance, natty stacks, PCT and more. The complete reference guide — free.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">SARMs</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Peptides</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">TRT · HRT</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Natty Stacks</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">PCT</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Cognitive</span>
+        </div>
+        <a href="/cheat-sheet.html" class="btn-gold" style="font-size:10px;padding:13px 28px;display:inline-block;">Download Free →</a>
+      </div>
+      <div style="background:var(--dark2); padding:48px 40px; position:relative;">
+        <div style="display:inline-block;background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold);font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:5px 12px;margin-bottom:16px;">Coming Soon</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--white);margin-bottom:16px;line-height:1;">Hormone<br/>Optimization Guide</div>
+        <p style="font-size:14px;font-weight:300;color:var(--grey1);line-height:1.85;margin-bottom:32px;">The complete framework for understanding and optimizing your hormones naturally — and when to consider TRT or HRT. Built specifically for men over 30.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">TRT</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">HRT</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Lab Work</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Bloodwork</span>
+        </div>
+        <a href="#free-download" class="btn-ghost" style="font-size:10px;padding:13px 28px;display:inline-block;">Notify Me</a>
+      </div>
+      <div style="background:var(--dark2); padding:48px 40px; position:relative;">
+        <div style="display:inline-block;background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold);font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:5px 12px;margin-bottom:16px;">Coming Soon</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--white);margin-bottom:16px;line-height:1;">Mental Clarity<br/>Protocol</div>
+        <p style="font-size:14px;font-weight:300;color:var(--grey1);line-height:1.85;margin-bottom:32px;">The mindset framework Rob used to rebuild his mental clarity, focus, and drive after hitting rock bottom. Cognitive stacks, daily habits, and the mental blueprint of the aligned man.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Nootropics</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Mindset</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Daily Habits</span>
+        </div>
+        <a href="#free-download" class="btn-ghost" style="font-size:10px;padding:13px 28px;display:inline-block;">Notify Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY CTA -->
+<div class="apply-wrap" id="apply">
+  <div class="apply-inner reveal">
+    <h2 class="apply-h2">Ready to<br/>Stop Drifting?</h2>
+    <p class="apply-sub">Apply to work directly with Robert. Limited spots. No waitlist forever. If you're serious about your transformation — this is the step.</p>
+    <a href="mailto:rob@alignedmanproject.com?subject=Coaching Application — The Aligned Man Project" class="btn-black">Apply to Work With Robert</a>
+    <div style="margin-top:20px; font-size:11px; letter-spacing:2px; color:rgba(0,0,0,0.5); text-transform:uppercase;">Limited Spots · Application Required</div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="section-wrap black" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-tag">Get In Touch</div>
+        <h2 class="section-h2">Ready to<br/>Align?</h2>
+        <p class="section-body">Whether you're ready to start coaching, want to learn more about the program, or just want to follow the journey — reach out directly.</p>
+        <a href="mailto:rob@alignedmanproject.com" class="contact-email">rob@alignedmanproject.com</a>
+      </div>
+      <div class="social-rows reveal">
+        <a href="https://www.instagram.com/alignwithrob" target="_blank" class="social-row"><span class="social-name">Instagram</span><span class="social-handle">@alignwithrob</span><span class="social-arr">→</span></a>
+        <a href="https://www.youtube.com/@alignwithrob" target="_blank" class="social-row"><span class="social-name">YouTube</span><span class="social-handle">@alignwithrob</span><span class="social-arr">→</span></a>
+        <a href="https://www.tiktok.com/@alignwithrob" target="_blank" class="social-row"><span class="social-name">TikTok</span><span class="social-handle">@alignwithrob</span><span class="social-arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">The Aligned Man Project</div>
+  <div class="footer-links">
+    <a href="#pillars">The Method</a>
+    <a href="#coaching">Coaching</a>
+    <a href="#supplements">Supplements</a>
+    <a href="#merch">Merch</a>
+    <a href="#optimizer">Optimizer</a>
+    <a href="#apply">Apply</a>
+  </div>
+  <div class="footer-copy">© 2026 Robert Gonnerman</div>
+</footer>
+</div>
+
+<script>
+  function submitEmail() {
+    const name = document.getElementById('emailName').value.trim();
+    const email = document.getElementById('emailAddr').value.trim();
+    if (!name || !email || !email.includes('@')) {
+      alert('Please enter your name and a valid email address.');
+      return;
+    }
+    const leads = JSON.parse(localStorage.getItem('amp_leads') || '[]');
+    leads.push({ name, email, date: new Date().toISOString() });
+    localStorage.setItem('amp_leads', JSON.stringify(leads));
+    document.getElementById('emailForm').style.display = 'none';
+    document.getElementById('emailSuccess').style.display = 'block';
+  }
+
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  });
+</script>
+</body>
+</html>
