@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/optimizer", "destination": "/optimizer.html" },
+    { "source": "/cheat-sheet", "destination": "/cheat-sheet.html" }
+  ]
+}
