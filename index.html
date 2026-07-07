@@ -415,6 +415,31 @@
     .recap-textarea{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:12px;padding:10px 12px;width:100%;outline:none;resize:none;min-height:120px;line-height:1.6;}
     .recap-textarea::placeholder{color:var(--mid);font-size:11px;}
 
+
+    /* ── POPUP ── */
+    #popup-overlay{position:fixed;inset:0;z-index:9000;background:rgba(6,6,6,0.88);display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity 0.4s ease;}
+    #popup-overlay.show{opacity:1;pointer-events:all;}
+    .popup-box{background:var(--dark2);border:1px solid var(--gold-border);max-width:500px;width:100%;padding:52px 44px;position:relative;text-align:center;}
+    .popup-box::before{content:'FREE DOWNLOAD';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 20px;white-space:nowrap;}
+    .popup-close{position:absolute;top:16px;right:16px;background:none;border:1px solid var(--grey3);color:var(--grey1);width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+    .popup-close:hover{border-color:var(--gold);color:var(--gold);}
+    .popup-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+    .popup-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,52px);letter-spacing:2px;color:var(--white);line-height:0.95;margin-bottom:16px;}
+    .popup-title span{color:var(--gold);}
+    .popup-sub{font-size:14px;font-weight:300;color:var(--grey1);line-height:1.7;margin-bottom:24px;}
+    .popup-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px;}
+    .popup-tag{border:1px solid var(--gold-border);color:var(--gold);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;}
+    .popup-form{display:flex;flex-direction:column;gap:10px;}
+    .popup-input{background:var(--dark1);border:1px solid var(--grey3);border-bottom:1px solid var(--gold-border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none;transition:border-color 0.25s;text-align:center;}
+    .popup-input:focus{border-bottom-color:var(--gold);}
+    .popup-input::placeholder{color:var(--grey2);font-size:12px;}
+    .popup-submit{background:var(--gold);color:var(--black);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px;border:none;cursor:pointer;transition:background 0.25s;}
+    .popup-submit:hover{background:var(--gold-bright);}
+    .popup-disclaimer{font-size:10px;letter-spacing:1px;color:var(--grey2);margin-top:8px;}
+    .popup-success{display:none;padding:12px 0;text-align:center;}
+    .popup-success-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--gold);}
+    .popup-success-sub{font-size:13px;color:var(--grey1);margin-top:8px;line-height:1.6;}
+
     /* MOBILE */
     @media(max-width:960px){
       nav{padding:0 20px;}
@@ -471,6 +496,32 @@
   </ul>
 </nav>
 
+
+<!-- POPUP -->
+<div id="popup-overlay">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <div class="popup-eyebrow">Free Download</div>
+    <h2 class="popup-title">Get Your Free<br/><span>Protocol</span> Now</h2>
+    <p class="popup-sub">Rob's complete Physical Optimization Cheat Sheet — every stack, every compound, nothing held back.</p>
+    <div class="popup-tags">
+      <span class="popup-tag">SARMs</span><span class="popup-tag">Peptides</span>
+      <span class="popup-tag">TRT · HRT</span><span class="popup-tag">PCT</span>
+      <span class="popup-tag">Natty Stacks</span><span class="popup-tag">Cognitive</span>
+    </div>
+    <div id="popupForm" class="popup-form">
+      <input class="popup-input" id="popupName" type="text" placeholder="Your First Name" />
+      <input class="popup-input" id="popupEmail" type="email" placeholder="Your Email Address" />
+      <button class="popup-submit" onclick="submitPopup()">Get the Free Cheat Sheet →</button>
+      <p class="popup-disclaimer">No spam. Ever. Unsubscribe anytime.</p>
+    </div>
+    <div id="popupSuccess" class="popup-success">
+      <div class="popup-success-title">You're In. 🔥</div>
+      <p class="popup-success-sub">Scroll down to <strong style="color:var(--gold)">Free Protocols</strong> to access your cheat sheet.</p>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════ HOME VIEW ═══════════ -->
 <div id="homeView" class="view active">
 
@@ -478,7 +529,7 @@
 <section class="hero" id="home">
   <div class="hero-glow"></div>
   <div class="hero-line"></div>
-  <div class="hero-tag"><span class="hero-tag-text">Built for Men in Their 30s, 40s &amp; 50s Who Refuse to Decline</span></div>
+  <div class="hero-tag"><span class="hero-tag-text">For Disciplined Men, Late 20s to 50s — Who Don't Break.</span></div>
   <h1 class="hero-h1"><span class="l1">THE</span><span class="l2">ALIGNED</span><span class="l3">MAN</span></h1>
   <div class="hero-rule"></div>
   <p class="hero-sub">You've built a life. You've been through things. <strong>Now it's time to rebuild yourself</strong> — your body, your mind, your purpose — at the highest level you've ever operated at.</p>
@@ -1313,6 +1364,37 @@ function initOptimizer(){
 
   buildCalendar();
 }
+
+  // POPUP
+  function showPopup(){
+    if(sessionStorage.getItem('popup_seen'))return;
+    document.getElementById('popup-overlay').classList.add('show');
+  }
+  function closePopup(){
+    document.getElementById('popup-overlay').classList.remove('show');
+    sessionStorage.setItem('popup_seen','1');
+  }
+  async function submitPopup(){
+    var name=document.getElementById('popupName').value.trim();
+    var email=document.getElementById('popupEmail').value.trim();
+    if(!name||!email||!email.includes('@')){alert('Please enter your name and email.');return;}
+    var btn=document.querySelector('.popup-submit');
+    btn.textContent='Sending...';btn.disabled=true;
+    try{
+      await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,tags:['cheat-sheet','free-protocol']})});
+    }catch(e){
+      var leads=JSON.parse(localStorage.getItem('amp_leads')||'[]');
+      leads.push({name,email,date:new Date().toISOString()});
+      localStorage.setItem('amp_leads',JSON.stringify(leads));
+    }
+    document.getElementById('popupForm').style.display='none';
+    document.getElementById('popupSuccess').style.display='block';
+    sessionStorage.setItem('popup_seen','1');
+    setTimeout(function(){closePopup();},2500);
+  }
+  // Show popup after 4 seconds
+  setTimeout(showPopup, 4000);
+
 </script>
 </body>
 </html>
