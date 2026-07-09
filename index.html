@@ -1110,7 +1110,7 @@ function unlock(){
     sessionStorage.setItem('amp_access','granted');
     document.getElementById('lock').style.display='none';
     document.getElementById('site').style.display='block';
-    initOptimizer();
+    if(!window._optimizerInit){window._optimizerInit=true;initOptimizer();}
   } else {
     err.textContent='Incorrect access code.';
     document.getElementById('lockInput').value='';
@@ -1122,7 +1122,7 @@ document.addEventListener('DOMContentLoaded',function(){
   if(sessionStorage.getItem('amp_access')==='granted'){
     document.getElementById('lock').style.display='none';
     document.getElementById('site').style.display='block';
-    initOptimizer();
+    if(!window._optimizerInit){window._optimizerInit=true;initOptimizer();}
   }
 });
 
@@ -1159,7 +1159,7 @@ var MENTAL_PRESETS=['Journaling','Read','Meditate','Therapy','No Screen','Study'
 var SPIRITUAL_PRESETS=['Prayer','Gratitude','Affirmations','Scripture','Nature','Reflect','Worship','Silence'];
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-var currentYear=2026,currentMonth=5,activeDay=null;
+var today=new Date(),currentYear=today.getFullYear(),currentMonth=today.getMonth(),activeDay=null;
 var optData=JSON.parse(localStorage.getItem('blueprint_data')||'{}');
 var today=new Date();
 
@@ -1321,12 +1321,35 @@ function initOptimizer(){
   if(addSlotBtnEl)addSlotBtnEl.addEventListener('click',function(){addSlotRow('','');});
 
   var saveBtnEl=document.getElementById('saveBtn');
-  if(saveBtnEl)saveBtnEl.addEventListener('click',function(){
+  if(saveBtnEl)saveBtnEl.onclick=function(){
     if(!activeDay)return;
     var key=storageKey(currentYear,currentMonth,activeDay);
-    optData[key]={physical:getSelectedPresets('physicalPresets'),physicalNotes:getNotesByArea('physicalPresets'),bodyParts:Array.from(document.querySelectorAll('#bodyPartPresets .preset-btn.selected')).map(function(b){return b.textContent;}),mental:getSelectedPresets('mentalPresets'),mentalNotes:getNotesByArea('mentalPresets'),spiritual:getSelectedPresets('spiritualPresets'),spiritualNotes:getNotesByArea('spiritualPresets'),physicalCustom:document.getElementById('physicalCustom').value,mentalCustom:document.getElementById('mentalCustom').value,spiritualCustom:document.getElementById('spiritualCustom').value,slots:collectSlots(),weight:document.getElementById('weightInput').value||null,water:document.getElementById('waterInput').value||null,grat1:document.getElementById('grat1').value||null,grat2:document.getElementById('grat2').value||null,grat3:document.getElementById('grat3').value||null,recapWins:document.getElementById('recapWins').value||null,recapGrow:document.getElementById('recapGrow').value||null};
-    saveData();closeModal();buildCalendar();showToast('Day saved');
-  });
+    var entry={
+      physical:getSelectedPresets('physicalPresets'),
+      physicalNotes:getNotesByArea('physicalPresets'),
+      bodyParts:Array.from(document.querySelectorAll('#bodyPartPresets .preset-btn.selected')).map(function(b){return b.textContent;}),
+      mental:getSelectedPresets('mentalPresets'),
+      mentalNotes:getNotesByArea('mentalPresets'),
+      spiritual:getSelectedPresets('spiritualPresets'),
+      spiritualNotes:getNotesByArea('spiritualPresets'),
+      physicalCustom:document.getElementById('physicalCustom').value,
+      mentalCustom:document.getElementById('mentalCustom').value,
+      spiritualCustom:document.getElementById('spiritualCustom').value,
+      slots:collectSlots(),
+      weight:document.getElementById('weightInput').value||null,
+      water:document.getElementById('waterInput').value||null,
+      grat1:document.getElementById('grat1').value||null,
+      grat2:document.getElementById('grat2').value||null,
+      grat3:document.getElementById('grat3').value||null,
+      recapWins:document.getElementById('recapWins').value||null,
+      recapGrow:document.getElementById('recapGrow').value||null
+    };
+    optData[key]=entry;
+    localStorage.setItem('blueprint_data',JSON.stringify(optData));
+    closeModal();
+    buildCalendar();
+    showToast('Day saved ✓');
+  };
 
   var clearBtnEl=document.getElementById('clearBtn');
   if(clearBtnEl)clearBtnEl.addEventListener('click',function(){if(!activeDay)return;delete optData[storageKey(currentYear,currentMonth,activeDay)];saveData();closeModal();buildCalendar();});
