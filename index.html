@@ -357,8 +357,8 @@
     .time-section{border-top:1px solid var(--border);padding-top:24px;}
     .time-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:14px;}
     .time-slots{display:flex;flex-direction:column;gap:8px;}
-    .time-slot-row{display:grid;grid-template-columns:100px 1fr auto;gap:8px;align-items:center;}
-    .time-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--gold);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:8px 6px;width:100%;outline:none;text-align:center;min-width:90px;}
+    .time-slot-row{display:grid;grid-template-columns:130px 1fr auto;gap:8px;align-items:center;}
+    .time-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--gold);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:8px 4px;width:100%;min-width:130px;outline:none;text-align:center;}
     .slot-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:12px;padding:8px 12px;width:100%;outline:none;}
     .slot-input::placeholder{color:var(--mid);}
     .add-slot-btn{background:none;border:1px dashed rgba(201,168,76,0.25);color:var(--mid);padding:8px;border-radius:2px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;width:100%;transition:all 0.2s;margin-top:4px;}
@@ -439,6 +439,22 @@
     .popup-success{display:none;padding:12px 0;text-align:center;}
     .popup-success-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--gold);}
     .popup-success-sub{font-size:13px;color:var(--grey1);margin-top:8px;line-height:1.6;}
+
+
+    .exercise-section{display:none;flex-direction:column;gap:10px;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:3px;padding:14px;margin-top:8px;}
+    .exercise-section.visible{display:flex;}
+    .exercise-section-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:500;}
+    .exercise-row{display:flex;flex-direction:column;gap:6px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:2px;padding:10px;}
+    .exercise-row-nums{display:grid;grid-template-columns:70px 1fr 1fr 1fr 1fr 30px;gap:6px;align-items:center;}
+    .exercise-select{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.2);border-radius:2px;color:var(--gold);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:10px 12px;width:100%;outline:none;cursor:pointer;}
+    .exercise-select option{background:#181510;color:#f0ead8;}
+    .exercise-num-select{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--gold);font-family:'DM Sans',sans-serif;font-size:12px;padding:8px 6px;width:100%;outline:none;cursor:pointer;text-align:center;}
+    .exercise-num-select option{background:#181510;color:#f0ead8;}
+    .exercise-del-btn{background:none;border:none;color:#666;cursor:pointer;font-size:15px;padding:4px;}
+    .exercise-del-btn:hover{color:#c0392b;}
+    .exercise-col-labels{display:none;}
+    .add-exercise-btn{background:none;border:1px dashed rgba(201,168,76,0.25);color:var(--mid);padding:7px;border-radius:2px;cursor:pointer;font-size:10px;font-family:'DM Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;width:100%;transition:all 0.2s;}
+    .add-exercise-btn:hover{border-color:var(--gold);color:var(--gold);}
 
     /* MOBILE */
     @media(max-width:960px){
@@ -1044,11 +1060,17 @@
         <div class="pillar-section">
           <div class="pillar-label"><div class="pillar-dot physical"></div><div class="pillar-name-label physical">Physical</div></div>
           <div class="preset-grid" id="physicalPresets"></div>
-          <textarea class="custom-input" id="physicalCustom" placeholder="Add your own..." rows="2"></textarea>
           <div class="body-part-section" id="bodyPartSection">
             <div class="body-part-label">&#9776; Muscle Focus</div>
             <div class="preset-grid" id="bodyPartPresets"></div>
           </div>
+          <div class="exercise-section" id="exerciseSection">
+            <div class="exercise-section-label">&#128170; Exercises · Sets · Reps</div>
+            <div class="exercise-col-labels"><span>Exercise</span><span>Sets</span><span>R1</span><span>R2</span><span>R3</span><span>R4</span><span></span></div>
+            <div id="exerciseRows"></div>
+            <button class="add-exercise-btn" id="addExerciseBtn" type="button">+ Add Exercise</button>
+          </div>
+          <textarea class="custom-input" id="physicalCustom" placeholder="Add your own..." rows="2"></textarea>
         </div>
         <div class="pillar-section">
           <div class="pillar-label"><div class="pillar-dot mental"></div><div class="pillar-name-label mental">Mental</div></div>
@@ -1218,6 +1240,15 @@ function openModal(day){
   buildPresets('mentalPresets',MENTAL_PRESETS,'mental',dd.mental||[],dd.mentalNotes||{});
   buildPresets('spiritualPresets',SPIRITUAL_PRESETS,'spiritual',dd.spiritual||[],dd.spiritualNotes||{});
   buildBodyParts(dd.bodyParts||[]);
+  document.getElementById('exerciseRows').innerHTML='';
+  if(dd.exercises&&dd.exercises.length>0){
+    document.getElementById('exerciseSection').classList.add('visible');
+    dd.exercises.forEach(function(ex){addExerciseRow(null,ex.exercise,ex.sets,ex.reps);});
+  } else if(dd.bodyParts&&dd.bodyParts.length>0){
+    document.getElementById('exerciseSection').classList.add('visible');
+  } else {
+    document.getElementById('exerciseSection').classList.remove('visible');
+  }
   var physArr=Array.isArray(dd.physical)?dd.physical:(dd.physical?[dd.physical]:[]);
   document.getElementById('bodyPartSection').classList.toggle('visible',physArr.includes('Weight Training'));
   document.getElementById('physicalCustom').value=dd.physicalCustom||'';
@@ -1284,7 +1315,7 @@ function buildBodyParts(selected){
     var btn=document.createElement('button');
     btn.className='preset-btn'+(selected.includes(p)?' selected':'');
     btn.textContent=p;
-    function t(e){e.preventDefault();btn.classList.toggle('selected');}
+    function t(e){e.preventDefault();btn.classList.toggle('selected');refreshExerciseSection();}
     btn.addEventListener('click',t);btn.addEventListener('touchend',t,{passive:false});
     c.appendChild(btn);
   });
@@ -1300,8 +1331,29 @@ function addSlotRow(time,label){
   time=time||'';label=label||'';
   var c=document.getElementById('timeSlots');
   var row=document.createElement('div');row.className='time-slot-row';
-  row.innerHTML='<input class="time-input" type="time" value="'+time+'"><input class="slot-input" type="text" placeholder="What are you doing..." value="'+label+'">';
-  c.appendChild(row);
+  row.innerHTML='<input class="time-input" type="time" value="'+time+'" step="900"><input class="slot-input" type="text" placeholder="What are you doing..." value="'+label+'"><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#666;cursor:pointer;font-size:15px;padding:0 4px;">✕</button>';
+  // Insert in correct time order
+  var rows=Array.from(c.querySelectorAll('.time-slot-row'));
+  var inserted=false;
+  if(time){
+    for(var i=0;i<rows.length;i++){
+      var existingTime=rows[i].querySelector('.time-input').value||'99:99';
+      if(time<existingTime){c.insertBefore(row,rows[i]);inserted=true;break;}
+    }
+  }
+  if(!inserted)c.appendChild(row);
+  // Re-sort all rows when a time is changed
+  row.querySelector('.time-input').addEventListener('change',function(){sortTimeSlots();});
+}
+
+function sortTimeSlots(){
+  var c=document.getElementById('timeSlots');
+  var data=Array.from(c.querySelectorAll('.time-slot-row')).map(function(r){
+    return{time:r.querySelector('.time-input').value,label:r.querySelector('.slot-input').value};
+  });
+  data.sort(function(a,b){return (a.time||'99:99').localeCompare(b.time||'99:99');});
+  c.innerHTML='';
+  data.forEach(function(d){addSlotRow(d.time,d.label);});
 }
 
 function getSelectedPresets(id){return Array.from(document.querySelectorAll('#'+id+' [data-preset] .preset-btn.selected')).map(function(b){return b.closest('[data-preset]').dataset.preset;});}
@@ -1316,7 +1368,79 @@ function collectSlots(){return Array.from(document.querySelectorAll('.time-slot-
 
 function showToast(msg){var t=document.getElementById('optToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
 
+
+var EXERCISES={
+'Chest':['Barbell Bench Press','Incline Dumbbell Press','Dumbbell Bench Press','Cable Fly','Incline Barbell Press','Chest Dip','Push-Up','Pec Deck Machine','Decline Bench Press','Machine Chest Press'],
+'Triceps':['Tricep Pushdown','Skull Crushers','Overhead Tricep Extension','Close-Grip Bench Press','Tricep Dips','Rope Pushdown','Single-Arm Cable Extension','Diamond Push-Up','JM Press','Machine Tricep Extension'],
+'Biceps':['Barbell Curl','Dumbbell Curl','Hammer Curl','Preacher Curl','Incline Dumbbell Curl','Cable Curl','Concentration Curl','EZ-Bar Curl','Spider Curl','Machine Bicep Curl'],
+'Back':['Deadlift','Pull-Up','Barbell Row','Lat Pulldown','Seated Cable Row','T-Bar Row','Dumbbell Row','Chin-Up','Face Pull','Straight-Arm Pulldown'],
+'Shoulders':['Overhead Press','Dumbbell Shoulder Press','Lateral Raise','Front Raise','Rear Delt Fly','Arnold Press','Upright Row','Cable Lateral Raise','Machine Shoulder Press','Shrugs'],
+'Legs':['Barbell Squat','Leg Press','Romanian Deadlift','Leg Extension','Leg Curl','Walking Lunge','Hack Squat','Bulgarian Split Squat','Calf Raise','Goblet Squat'],
+'Glutes':['Hip Thrust','Barbell Glute Bridge','Romanian Deadlift','Bulgarian Split Squat','Cable Kickback','Sumo Deadlift','Walking Lunge','Step-Up','Good Morning','Frog Pump'],
+'Core':['Plank','Hanging Leg Raise','Cable Crunch','Russian Twist','Ab Wheel Rollout','Bicycle Crunch','Dead Bug','Mountain Climber','Side Plank','Decline Sit-Up'],
+'Forearms':['Wrist Curl','Reverse Wrist Curl','Farmer\'s Carry','Reverse Curl','Plate Pinch','Dead Hang','Behind-Back Wrist Curl','Wrist Roller','Towel Pull-Up','Gripper Squeeze'],
+'Full Body':['Deadlift','Barbell Squat','Clean and Press','Kettlebell Swing','Thruster','Burpee','Snatch','Turkish Get-Up','Man Maker','Farmer\'s Carry']
+};
+
+function addExerciseRow(muscle,exercise,sets,reps){
+  var container=document.getElementById('exerciseRows');
+  var row=document.createElement('div');
+  row.className='exercise-row';
+  row.style.marginBottom='6px';
+  var repsArr=Array.isArray(reps)?reps:(reps?[reps]:[]);
+
+  var allExercises=[];
+  var selectedMuscles=Array.from(document.querySelectorAll('#bodyPartPresets .preset-btn.selected')).map(function(b){return b.textContent;});
+  if(selectedMuscles.length===0)selectedMuscles=Object.keys(EXERCISES);
+  selectedMuscles.forEach(function(m){
+    if(EXERCISES[m]){EXERCISES[m].forEach(function(ex){allExercises.push(m+' — '+ex);});}
+  });
+
+  var exOptions='<option value="">Select exercise...</option>';
+  allExercises.forEach(function(ex){
+    exOptions+='<option value="'+ex+'"'+(exercise===ex?' selected':'')+'>'+ex+'</option>';
+  });
+
+  var setOptions='<option value="">Sets</option>';
+  for(var s=1;s<=5;s++){setOptions+='<option value="'+s+'"'+(sets==s?' selected':'')+'>'+s+' sets</option>';}
+
+  var repSelects='';
+  for(var i=0;i<4;i++){
+    var repOptions='<option value="">R'+(i+1)+'</option>';
+    for(var r=1;r<=25;r++){repOptions+='<option value="'+r+'"'+(repsArr[i]==r?' selected':'')+'>'+r+'</option>';}
+    repSelects+='<select class="exercise-num-select ex-rep" data-rep="'+i+'">'+repOptions+'</select>';
+  }
+
+  row.innerHTML='<select class="exercise-select">'+exOptions+'</select><div class="exercise-row-nums"><select class="exercise-num-select ex-sets">'+setOptions+'</select>'+repSelects+'<button class="exercise-del-btn" type="button" onclick="this.closest(\'.exercise-row\').remove()">✕</button></div>';
+  container.appendChild(row);
+}
+
+function refreshExerciseSection(){
+  var selectedMuscles=Array.from(document.querySelectorAll('#bodyPartPresets .preset-btn.selected')).map(function(b){return b.textContent;});
+  var exSection=document.getElementById('exerciseSection');
+  if(selectedMuscles.length>0){
+    exSection.classList.add('visible');
+    if(document.getElementById('exerciseRows').children.length===0){addExerciseRow();}
+  } else {
+    exSection.classList.remove('visible');
+  }
+}
+
+function collectExercises(){
+  return Array.from(document.querySelectorAll('#exerciseRows .exercise-row')).map(function(r){
+    var reps=Array.from(r.querySelectorAll('.ex-rep')).map(function(s){return s.value;});
+    return{
+      exercise:r.querySelector('.exercise-select').value,
+      sets:r.querySelector('.ex-sets').value,
+      reps:reps
+    };
+  }).filter(function(e){return e.exercise;});
+}
+
 function initOptimizer(){
+  var addExerciseBtnEl=document.getElementById('addExerciseBtn');
+  if(addExerciseBtnEl)addExerciseBtnEl.onclick=function(){addExerciseRow();};
+
   var addSlotBtnEl=document.getElementById('addSlotBtn');
   if(addSlotBtnEl)addSlotBtnEl.addEventListener('click',function(){addSlotRow('','');});
 
@@ -1342,7 +1466,8 @@ function initOptimizer(){
       grat2:document.getElementById('grat2').value||null,
       grat3:document.getElementById('grat3').value||null,
       recapWins:document.getElementById('recapWins').value||null,
-      recapGrow:document.getElementById('recapGrow').value||null
+      recapGrow:document.getElementById('recapGrow').value||null,
+      exercises:collectExercises()
     };
     optData[key]=entry;
     localStorage.setItem('blueprint_data',JSON.stringify(optData));
