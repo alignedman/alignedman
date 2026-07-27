@@ -9,552 +9,373 @@
   <meta name="author" content="Robert Gonnerman" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.alignedmanproject.com" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"The Aligned Man Project","url":"https://www.alignedmanproject.com","founder":{"@type":"Person","name":"Robert Gonnerman"},"description":"The #1 online men's coaching platform for men in their 30s, 40s, and 50s focused on Physical, Mental, and Spiritual optimization.","sameAs":["https://www.instagram.com/alignedmanproject","https://www.youtube.com/@alignedmanproject","https://www.tiktok.com/@alignedmanproject"]}</script>
+  <meta property="og:title" content="The Aligned Man Project | Built for Men Who Refuse to Decline" />
+  <meta property="og:description" content="Founded by Robert Gonnerman. The #1 men's coaching platform for men in their 30s, 40s, and 50s. Physical. Mental. Spiritual." />
+  <meta property="og:url" content="https://www.alignedmanproject.com" />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "The Aligned Man Project",
+    "url": "https://www.alignedmanproject.com",
+    "founder": { "@type": "Person", "name": "Robert Gonnerman" },
+    "description": "The #1 online men's coaching platform for men in their 30s, 40s, and 50s focused on Physical, Mental, and Spiritual optimization.",
+    "sameAs": ["https://www.instagram.com/alignwithrob","https://www.youtube.com/@alignwithrob","https://www.tiktok.com/@alignwithrob"]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet" />
+
   <style>
     :root {
-      --gold:#C9A84C; --gold-bright:#E2C06A; --gold-dim:rgba(201,168,76,0.10); --gold-border:rgba(201,168,76,0.22);
-      --black:#060606; --dark1:#0C0C0C; --dark2:#111111; --dark3:#171717;
-      --white:#F0EDE8; --grey1:#999; --grey2:#666; --grey3:#2A2A2A;
-      --physical:#c9a84c; --mental:#7aadbd; --spiritual:#9b8ec4;
-      --cream:#f0ead8; --cream-dim:rgba(240,234,216,0.5); --warm-dark:#181510; --surface:#111009; --border:rgba(201,168,76,0.18); --mid:#6b6050;
+      --gold: #C9A84C;
+      --gold-bright: #E2C06A;
+      --gold-dim: rgba(201,168,76,0.10);
+      --gold-border: rgba(201,168,76,0.22);
+      --black: #060606;
+      --dark1: #0C0C0C;
+      --dark2: #111111;
+      --dark3: #171717;
+      --white: #F0EDE8;
+      --grey1: #999999;
+      --grey2: #666666;
+      --grey3: #2A2A2A;
     }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
 
-    /* LOCK */
-    #lock{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
-    .lock-top{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-    .lock-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--grey2);margin-bottom:40px;}
-    .lock-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,12vw,100px);letter-spacing:3px;line-height:0.9;text-align:center;margin-bottom:8px;}
-    .lock-title span{color:var(--gold);}
-    .lock-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--grey1);margin-bottom:48px;}
-    .lock-input{width:100%;max-width:300px;background:var(--dark2);border:1px solid var(--grey3);border-bottom:1px solid var(--gold-border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;letter-spacing:6px;text-align:center;padding:16px 20px;outline:none;text-transform:uppercase;display:block;margin-bottom:12px;transition:border-color 0.25s;}
-    .lock-input:focus{border-bottom-color:var(--gold);}
-    .lock-input::placeholder{letter-spacing:3px;color:var(--grey2);font-size:11px;}
-    .lock-btn{width:100%;max-width:300px;background:var(--gold);color:var(--black);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px;border:none;cursor:pointer;transition:background 0.25s;display:block;}
-    .lock-btn:hover{background:var(--gold-bright);}
-    .lock-error{font-size:11px;letter-spacing:2px;color:#c0392b;text-transform:uppercase;height:20px;text-align:center;margin-top:12px;}
-    .lock-footer{position:absolute;bottom:32px;font-size:10px;letter-spacing:4px;color:var(--grey3);text-transform:uppercase;}
+    /* ── NAV ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:998;
+      height:68px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 48px;
+      background:rgba(6,6,6,0.96); border-bottom:1px solid var(--gold-border);
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    }
+    .nav-brand { text-decoration:none; display:flex; flex-direction:column; gap:2px; }
+    .nav-brand-name { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:5px; color:var(--white); line-height:1; }
+    .nav-brand-name span { color:var(--gold); }
+    .nav-brand-sub { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--grey2); }
+    .nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
+    .nav-links a { font-size:10px; font-weight:500; letter-spacing:2px; text-transform:uppercase; color:var(--grey1); text-decoration:none; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--white); }
+    .nav-cta { background:var(--gold); color:var(--black) !important; padding:9px 20px; font-weight:700 !important; transition:background 0.2s !important; }
+    .nav-cta:hover { background:var(--gold-bright) !important; }
+    .nav-mobile-btn { display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:4px; }
+    .nav-mobile-btn span { display:block; width:22px; height:2px; background:var(--white); transition:all 0.3s; }
 
-    /* SITE VIEWS */
-    #site{display:none;}
-    .view{display:none;}
-    .view.active{display:block;}
+    /* ── HERO ── */
+    .hero {
+      position:relative; min-height:100vh;
+      display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:140px 48px 100px; overflow:hidden;
+    }
+    .hero-glow { position:absolute; top:-200px; right:-200px; width:800px; height:800px; background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%); pointer-events:none; }
+    .hero-line { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--gold),var(--gold-bright),var(--gold),transparent); }
+    .hero-tag { display:inline-flex; align-items:center; gap:12px; margin-bottom:32px; }
+    .hero-tag::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+    .hero-tag-text { font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--gold); }
+    .hero-h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(80px,13vw,180px); line-height:0.86; letter-spacing:2px; margin-bottom:32px; }
+    .hero-h1 .l1 { display:block; color:var(--white); }
+    .hero-h1 .l2 { display:block; color:var(--gold); }
+    .hero-h1 .l3 { display:block; -webkit-text-stroke:1.5px rgba(240,237,232,0.18); color:transparent; }
+    .hero-rule { width:72px; height:1px; background:var(--gold); margin-bottom:28px; }
+    .hero-sub { font-size:clamp(15px,1.5vw,19px); font-weight:300; line-height:1.8; color:var(--grey1); max-width:520px; margin-bottom:14px; }
+    .hero-sub strong { color:var(--white); font-weight:500; }
+    .hero-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(14px,1.3vw,17px); color:var(--grey2); max-width:460px; line-height:1.7; margin-bottom:52px; }
+    .hero-btns { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:72px; }
+    .btn-gold { display:inline-block; background:var(--gold); color:var(--black); font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:16px 36px; text-decoration:none; border:none; cursor:pointer; transition:background 0.25s,transform 0.2s; }
+    .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); }
+    .btn-ghost { display:inline-block; background:transparent; color:var(--white); font-size:11px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; padding:15px 36px; border:1px solid var(--grey3); text-decoration:none; transition:border-color 0.25s,color 0.25s,transform 0.2s; }
+    .btn-ghost:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-2px); }
+    .hero-stats { display:flex; gap:0; }
+    .hstat { padding-right:36px; margin-right:36px; border-right:1px solid var(--grey3); }
+    .hstat:last-child { border-right:none; }
+    .hstat-num { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:2px; color:var(--white); line-height:1; }
+    .hstat-num em { color:var(--gold); font-style:normal; }
+    .hstat-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--grey2); margin-top:4px; }
 
-    /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:998;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(6,6,6,0.96);border-bottom:1px solid var(--gold-border);backdrop-filter:blur(16px);}
-    .nav-brand{text-decoration:none;display:flex;flex-direction:column;gap:2px;}
-    .nav-brand-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:5px;color:var(--white);line-height:1;}
-    .nav-brand-name span{color:var(--gold);}
-    .nav-brand-sub{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--grey2);}
-    .nav-links{display:flex;align-items:center;gap:24px;list-style:none;}
-    .nav-links a{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--grey1);text-decoration:none;transition:color 0.2s;cursor:pointer;}
-    .nav-links a:hover{color:var(--white);}
-    .nav-cta{background:var(--gold);color:var(--black)!important;padding:9px 20px;font-weight:700!important;transition:background 0.2s!important;}
-    .nav-cta:hover{background:var(--gold-bright)!important;}
+    /* ── TICKER ── */
+    .ticker { background:var(--gold); padding:13px 0; overflow:hidden; white-space:nowrap; }
+    .ticker-track { display:inline-flex; animation:ticker 40s linear infinite; }
+    .ticker-item { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:4px; color:var(--black); padding:0 32px; }
+    .ticker-sep { color:rgba(0,0,0,0.3); }
+    @keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
 
-    /* BUTTONS */
-    .btn-gold{display:inline-block;background:var(--gold);color:var(--black);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:16px 36px;text-decoration:none;border:none;cursor:pointer;transition:background 0.25s,transform 0.2s;}
-    .btn-gold:hover{background:var(--gold-bright);transform:translateY(-2px);}
-    .btn-ghost{display:inline-block;background:transparent;color:var(--white);font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;padding:15px 36px;border:1px solid var(--grey3);text-decoration:none;transition:border-color 0.25s,color 0.25s,transform 0.2s;cursor:pointer;}
-    .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+    /* ── SECTIONS SHARED ── */
+    .section-wrap { padding:110px 48px; }
+    .section-wrap.dark1 { background:var(--dark1); }
+    .section-wrap.dark2 { background:var(--dark2); }
+    .section-wrap.black { background:var(--black); }
+    .section-inner { max-width:1100px; margin:0 auto; }
+    .section-tag { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+    .section-tag::before { content:''; display:block; width:20px; height:1px; background:var(--gold); }
+    .section-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(44px,6vw,80px); line-height:0.92; letter-spacing:2px; color:var(--white); margin-bottom:24px; }
+    .section-body { font-size:15px; font-weight:300; line-height:1.9; color:var(--grey1); max-width:620px; }
+    .section-body strong { color:var(--white); font-weight:500; }
 
-    /* HERO */
-    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:140px 48px 100px;overflow:hidden;}
-    .hero-glow{position:absolute;top:-200px;right:-200px;width:800px;height:800px;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%);pointer-events:none;}
-    .hero-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold-bright),var(--gold),transparent);}
-    .hero-tag{display:inline-flex;align-items:center;gap:12px;margin-bottom:32px;}
-    .hero-tag::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
-    .hero-tag-text{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--gold);}
-    .hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,13vw,180px);line-height:0.86;letter-spacing:2px;margin-bottom:32px;}
-    .hero-h1 .l1{display:block;color:var(--white);}
-    .hero-h1 .l2{display:block;color:var(--gold);}
-    .hero-h1 .l3{display:block;-webkit-text-stroke:1.5px rgba(240,237,232,0.18);color:transparent;}
-    .hero-rule{width:72px;height:1px;background:var(--gold);margin-bottom:28px;}
-    .hero-sub{font-size:clamp(15px,1.5vw,19px);font-weight:300;line-height:1.8;color:var(--grey1);max-width:520px;margin-bottom:14px;}
-    .hero-sub strong{color:var(--white);font-weight:500;}
-    .hero-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(14px,1.3vw,17px);color:var(--grey2);max-width:460px;line-height:1.7;margin-bottom:52px;}
-    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:72px;}
-    .hero-stats{display:flex;gap:0;}
-    .hstat{padding-right:36px;margin-right:36px;border-right:1px solid var(--grey3);}
-    .hstat:last-child{border-right:none;}
-    .hstat-num{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;color:var(--white);line-height:1;}
-    .hstat-num em{color:var(--gold);font-style:normal;}
-    .hstat-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--grey2);margin-top:4px;}
+    /* ── WHO IT'S FOR ── */
+    .for-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+    .for-list { display:flex; flex-direction:column; gap:2px; margin-top:16px; }
+    .for-item { background:var(--dark2); padding:22px 28px; display:flex; align-items:flex-start; gap:16px; border-left:3px solid transparent; transition:border-color 0.3s,background 0.3s; }
+    .for-item:hover { border-left-color:var(--gold); background:var(--dark3); }
+    .for-item-dot { color:var(--gold); font-size:12px; flex-shrink:0; margin-top:2px; }
+    .for-item-text { font-size:14px; font-weight:400; color:var(--grey1); line-height:1.5; }
 
-    /* TICKER */
-    .ticker{background:var(--gold);padding:13px 0;overflow:hidden;white-space:nowrap;}
-    .ticker-track{display:inline-flex;animation:ticker 40s linear infinite;}
-    .ticker-item{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:4px;color:var(--black);padding:0 32px;}
-    .ticker-sep{color:rgba(0,0,0,0.3);}
-    @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+    /* ── PILLARS ── */
+    .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--grey3); margin-top:56px; }
+    .pillar { padding:52px 40px; border-right:1px solid var(--grey3); position:relative; transition:background 0.3s; }
+    .pillar:last-child { border-right:none; }
+    .pillar:hover { background:var(--dark2); }
+    .pillar::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
+    .pillar:hover::after { transform:scaleX(1); }
+    .pillar-num { font-size:10px; letter-spacing:4px; color:var(--grey2); margin-bottom:28px; text-transform:uppercase; }
+    .pillar-name { font-family:'Bebas Neue',sans-serif; font-size:42px; letter-spacing:3px; color:var(--gold); line-height:1; margin-bottom:6px; }
+    .pillar-sub { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--grey2); margin-bottom:20px; }
+    .pillar-rule { width:28px; height:1px; background:var(--gold); opacity:0.5; margin-bottom:20px; }
+    .pillar-body { font-size:14px; font-weight:300; line-height:1.85; color:var(--grey1); }
 
-    /* SECTIONS */
-    .section-wrap{padding:110px 48px;}
-    .section-inner{max-width:1100px;margin:0 auto;}
-    .section-tag{font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-    .section-tag::before{content:'';display:block;width:20px;height:1px;background:var(--gold);}
-    .section-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,80px);line-height:0.92;letter-spacing:2px;color:var(--white);margin-bottom:24px;}
-    .section-body{font-size:15px;font-weight:300;line-height:1.9;color:var(--grey1);max-width:620px;}
-    .section-body strong{color:var(--white);font-weight:500;}
+    /* ── COACHING TIERS ── */
+    .tiers-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:56px; }
+    .tier { background:var(--dark2); padding:44px 32px; position:relative; display:flex; flex-direction:column; }
+    .tier.featured { background:var(--dark3); border-top:2px solid var(--gold); }
+    .tier.featured::before { content:'MOST POPULAR'; position:absolute; top:-1px; right:24px; background:var(--gold); color:var(--black); font-size:8px; font-weight:700; letter-spacing:2.5px; padding:5px 12px; }
+    .tier-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--grey2); margin-bottom:8px; }
+    .tier-name { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:3px; color:var(--white); margin-bottom:6px; }
+    .tier-price { font-family:'Bebas Neue',sans-serif; font-size:44px; color:var(--gold); letter-spacing:1px; line-height:1; margin-bottom:4px; }
+    .tier-price-note { font-size:10px; letter-spacing:2px; color:var(--grey2); text-transform:uppercase; margin-bottom:28px; }
+    .tier-divider { height:1px; background:var(--grey3); margin-bottom:24px; }
+    .tier-features { list-style:none; display:flex; flex-direction:column; gap:11px; margin-bottom:36px; flex:1; }
+    .tier-features li { font-size:13px; font-weight:300; color:var(--grey1); display:flex; align-items:flex-start; gap:10px; line-height:1.5; }
+    .tier-features li::before { content:'—'; color:var(--gold); flex-shrink:0; }
+    .tier-cta { margin-top:auto; }
 
-    /* FOR YOU */
-    .for-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-    .for-list{display:flex;flex-direction:column;gap:2px;margin-top:16px;}
-    .for-item{background:var(--dark2);padding:22px 28px;display:flex;align-items:flex-start;gap:16px;border-left:3px solid transparent;transition:border-color 0.3s,background 0.3s;}
-    .for-item:hover{border-left-color:var(--gold);background:var(--dark3);}
-    .for-item-dot{color:var(--gold);font-size:12px;flex-shrink:0;margin-top:2px;}
-    .for-item-text{font-size:14px;color:var(--grey1);line-height:1.5;}
+    /* ── ABOUT ── */
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:90px; align-items:center; }
+    .about-quote-mark { font-family:'Playfair Display',serif; font-size:90px; color:var(--gold); opacity:0.15; line-height:0.7; margin-bottom:10px; }
+    .about-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(18px,2vw,24px); line-height:1.55; color:var(--white); margin-bottom:32px; border-left:2px solid var(--gold); padding-left:24px; }
+    .about-body { font-size:15px; font-weight:300; line-height:1.9; color:var(--grey1); margin-bottom:16px; }
+    .about-body strong { color:var(--white); font-weight:500; }
+    .about-sig { margin-top:36px; padding-top:24px; border-top:1px solid var(--grey3); display:flex; align-items:center; gap:16px; }
+    .about-sig-dot { width:36px; height:36px; border:1px solid var(--gold-border); background:var(--gold-dim); flex-shrink:0; }
+    .about-sig-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:4px; color:var(--white); }
+    .about-sig-handle { font-size:11px; letter-spacing:2px; color:var(--gold); margin-top:3px; }
+    .creds { display:flex; flex-direction:column; gap:2px; }
+    .cred { background:var(--dark2); padding:18px 24px; display:flex; align-items:center; gap:14px; transition:background 0.25s; border-left:3px solid transparent; }
+    .cred:hover { background:var(--dark3); border-left-color:var(--gold); }
+    .cred-icon { font-size:18px; flex-shrink:0; width:32px; text-align:center; }
+    .cred-name { font-size:12px; font-weight:600; color:var(--white); }
+    .cred-detail { font-size:11px; color:var(--grey1); margin-top:2px; font-weight:300; }
 
-    /* PILLARS */
-    .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--grey3);margin-top:56px;}
-    .pillar{padding:52px 40px;border-right:1px solid var(--grey3);position:relative;transition:background 0.3s;}
-    .pillar:last-child{border-right:none;}
-    .pillar:hover{background:var(--dark1);}
-    .pillar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease;}
-    .pillar:hover::after{transform:scaleX(1);}
-    .pillar-num{font-size:10px;letter-spacing:4px;color:var(--grey2);margin-bottom:28px;text-transform:uppercase;}
-    .pillar-name{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:3px;color:var(--gold);line-height:1;margin-bottom:6px;}
-    .pillar-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--grey2);margin-bottom:20px;}
-    .pillar-rule{width:28px;height:1px;background:var(--gold);opacity:0.5;margin-bottom:20px;}
-    .pillar-body{font-size:14px;font-weight:300;line-height:1.85;color:var(--grey1);}
+    /* ── OPTIMIZER ── */
+    .optimizer-box { border:1px solid var(--gold-border); padding:64px; position:relative; background:linear-gradient(135deg,var(--dark2),var(--black)); display:grid; grid-template-columns:1fr auto; gap:48px; align-items:center; }
+    .optimizer-box::before { content:'FREE TOOL'; position:absolute; top:-1px; left:52px; background:var(--gold); color:var(--black); font-size:9px; font-weight:700; letter-spacing:3px; padding:6px 14px; }
+    .optimizer-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,60px); letter-spacing:2px; color:var(--white); line-height:1; margin-bottom:14px; }
+    .optimizer-body { font-size:15px; font-weight:300; line-height:1.8; color:var(--grey1); max-width:500px; }
 
-    /* TIERS */
-    .tiers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:56px;}
-    .tier{background:var(--dark2);padding:44px 32px;position:relative;display:flex;flex-direction:column;}
-    .tier.featured{background:var(--dark3);border-top:2px solid var(--gold);}
-    .tier.featured::before{content:'MOST POPULAR';position:absolute;top:-1px;right:24px;background:var(--gold);color:var(--black);font-size:8px;font-weight:700;letter-spacing:2.5px;padding:5px 12px;}
-    .tier-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--grey2);margin-bottom:8px;}
-    .tier-name{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px;color:var(--white);margin-bottom:6px;}
-    .tier-price{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--gold);letter-spacing:1px;line-height:1;margin-bottom:4px;}
-    .tier-price-note{font-size:10px;letter-spacing:2px;color:var(--grey2);text-transform:uppercase;margin-bottom:28px;}
-    .tier-divider{height:1px;background:var(--grey3);margin-bottom:24px;}
-    .tier-features{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:36px;flex:1;}
-    .tier-features li{font-size:13px;font-weight:300;color:var(--grey1);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
-    .tier-features li::before{content:'—';color:var(--gold);flex-shrink:0;}
-    .tier-cta{margin-top:auto;}
+    /* ── SUPPLEMENTS ── */
+    .supps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+    .supp-card { background:var(--dark2); padding:44px 36px; position:relative; transition:background 0.3s; border-top:1px solid var(--grey3); }
+    .supp-card:hover { background:var(--dark3); }
+    .supp-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
+    .supp-card:hover::after { transform:scaleX(1); }
+    .supp-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    .supp-name { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:3px; color:var(--white); margin-bottom:14px; line-height:1; }
+    .supp-body { font-size:13px; font-weight:300; color:var(--grey1); line-height:1.8; margin-bottom:28px; }
+    .supp-tag { display:inline-block; border:1px solid var(--gold-border); color:var(--gold); font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; margin-bottom:8px; margin-right:4px; }
 
-    /* ABOUT */
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center;}
-    .about-quote-mark{font-family:'Playfair Display',serif;font-size:90px;color:var(--gold);opacity:0.15;line-height:0.7;margin-bottom:10px;}
-    .about-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(18px,2vw,24px);line-height:1.55;color:var(--white);margin-bottom:32px;border-left:2px solid var(--gold);padding-left:24px;}
-    .about-body{font-size:15px;font-weight:300;line-height:1.9;color:var(--grey1);margin-bottom:16px;}
-    .about-body strong{color:var(--white);font-weight:500;}
-    .about-sig{margin-top:36px;padding-top:24px;border-top:1px solid var(--grey3);display:flex;align-items:center;gap:16px;}
-    .about-sig-dot{width:36px;height:36px;border:1px solid var(--gold-border);background:var(--gold-dim);flex-shrink:0;}
-    .about-sig-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:var(--white);}
-    .about-sig-handle{font-size:11px;letter-spacing:2px;color:var(--gold);margin-top:3px;}
-    .creds{display:flex;flex-direction:column;gap:2px;}
-    .cred{background:var(--dark2);padding:18px 24px;display:flex;align-items:center;gap:14px;transition:background 0.25s;border-left:3px solid transparent;}
-    .cred:hover{background:var(--dark3);border-left-color:var(--gold);}
-    .cred-icon{font-size:18px;flex-shrink:0;width:32px;text-align:center;}
-    .cred-name{font-size:12px;font-weight:600;color:var(--white);}
-    .cred-detail{font-size:11px;color:var(--grey1);margin-top:2px;font-weight:300;}
+    /* ── MERCH ── */
+    .merch-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+    .merch-card { background:var(--dark2); padding:44px 36px; transition:background 0.3s; position:relative; }
+    .merch-card:hover { background:var(--dark3); }
+    .merch-placeholder { width:100%; height:180px; background:var(--dark3); border:1px solid var(--grey3); display:flex; align-items:center; justify-content:center; margin-bottom:24px; }
+    .merch-placeholder-text { font-size:10px; letter-spacing:3px; color:var(--grey3); text-transform:uppercase; }
+    .merch-name { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:var(--white); margin-bottom:8px; }
+    .merch-price { font-size:14px; color:var(--gold); letter-spacing:2px; margin-bottom:20px; }
+    .merch-note { font-size:11px; color:var(--grey2); letter-spacing:2px; text-transform:uppercase; }
 
-    /* SUPPLEMENTS */
-    .supps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;}
-    .supp-card{background:var(--dark2);padding:44px 36px;position:relative;transition:background 0.3s;border-top:1px solid var(--grey3);}
-    .supp-card:hover{background:var(--dark3);}
-    .supp-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
-    .supp-name{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px;color:var(--white);margin-bottom:14px;line-height:1;}
-    .supp-body{font-size:13px;font-weight:300;color:var(--grey1);line-height:1.8;margin-bottom:28px;}
-    .supp-tag{display:inline-block;border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;margin-bottom:8px;margin-right:4px;}
-    .cs-badge{display:inline-block;background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold);font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:5px 12px;margin-bottom:16px;}
+    /* ── APPLY ── */
+    .apply-wrap { padding:110px 48px; background:var(--gold); text-align:center; }
+    .apply-inner { max-width:700px; margin:0 auto; }
+    .apply-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,8vw,96px); letter-spacing:3px; color:var(--black); line-height:0.9; margin-bottom:20px; }
+    .apply-sub { font-size:16px; font-weight:400; color:rgba(0,0,0,0.65); line-height:1.7; margin-bottom:40px; max-width:500px; margin-left:auto; margin-right:auto; }
+    .btn-black { display:inline-block; background:var(--black); color:var(--gold); font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:18px 48px; text-decoration:none; border:none; cursor:pointer; transition:background 0.25s,transform 0.2s; }
+    .btn-black:hover { background:#111; transform:translateY(-2px); }
 
-    /* MERCH */
-    .merch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;}
-    .merch-card{background:var(--dark2);padding:44px 36px;transition:background 0.3s;position:relative;}
-    .merch-card:hover{background:var(--dark3);}
-    .merch-placeholder{width:100%;height:180px;background:var(--dark3);border:1px solid var(--grey3);display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
-    .merch-placeholder-text{font-size:10px;letter-spacing:3px;color:var(--grey3);text-transform:uppercase;}
-    .merch-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--white);margin-bottom:8px;}
-    .merch-price{font-size:14px;color:var(--gold);letter-spacing:2px;margin-bottom:20px;}
-    .merch-note{font-size:11px;color:var(--grey2);letter-spacing:2px;text-transform:uppercase;}
+    /* ── APPLICATION FORM ── */
+    .appform-wrap { padding:100px 48px 120px; background:var(--dark1); border-top:1px solid var(--gold-border); }
+    .appform-inner { max-width:720px; margin:0 auto; }
+    .appform-eyebrow { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:14px; }
+    .appform-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(34px,5vw,54px); letter-spacing:3px; color:var(--white); line-height:1; text-align:center; margin-bottom:16px; }
+    .appform-note { font-size:14px; color:var(--grey1); line-height:1.7; text-align:center; max-width:520px; margin:0 auto 56px; }
+    .q { margin-bottom:38px; }
+    .q-num { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:3px; color:var(--gold); display:block; margin-bottom:6px; }
+    .q-label { display:block; font-size:15px; font-weight:500; color:var(--white); line-height:1.5; margin-bottom:14px; }
+    .q-label span { color:var(--grey2); font-weight:400; font-size:13px; }
+    .q input[type=text], .q input[type=email], .q input[type=tel], .q select, .q textarea {
+      width:100%; background:var(--black); border:1px solid var(--grey3); color:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:15px; padding:14px 16px; border-radius:0;
+      transition:border-color 0.2s; -webkit-appearance:none; appearance:none;
+    }
+    .q select { background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%); background-position:calc(100% - 20px) 21px,calc(100% - 14px) 21px; background-size:6px 6px,6px 6px; background-repeat:no-repeat; }
+    .q textarea { min-height:110px; resize:vertical; line-height:1.6; }
+    .q input:focus, .q select:focus, .q textarea:focus { outline:none; border-color:var(--gold); }
+    .q-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .q-choices { display:flex; flex-direction:column; gap:2px; }
+    .q-choice { display:flex; align-items:center; gap:14px; background:var(--black); border:1px solid var(--grey3); padding:14px 16px; cursor:pointer; transition:all 0.2s; }
+    .q-choice:hover { border-color:var(--gold-border); background:var(--dark2); }
+    .q-choice input { accent-color:var(--gold); width:16px; height:16px; flex:none; }
+    .q-choice span { font-size:14px; color:var(--white); }
+    .q-choice.on { border-color:var(--gold); background:var(--gold-dim); }
+    .appform-submit { width:100%; background:var(--gold); color:var(--black); font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:20px; border:none; cursor:pointer; transition:background 0.25s; margin-top:12px; }
+    .appform-submit:hover { background:var(--gold-bright); }
+    .appform-submit:disabled { opacity:0.5; cursor:wait; }
+    .appform-legal { font-size:11px; color:var(--grey2); line-height:1.7; text-align:center; margin-top:26px; }
+    .appform-success { display:none; text-align:center; padding:70px 20px; }
+    .appform-success .as-mark { font-family:'Bebas Neue',sans-serif; font-size:56px; letter-spacing:3px; color:var(--gold); line-height:1; margin-bottom:18px; }
+    .appform-success p { font-size:15px; color:var(--grey1); line-height:1.8; max-width:460px; margin:0 auto; }
+    .appform-error { display:none; font-size:14px; color:#E06B5A; text-align:center; margin-top:18px; }
+    .hp { position:absolute; left:-9999px; opacity:0; height:0; width:0; }
 
-    /* AFFILIATES */
-    .aff-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:56px;}
-    .aff-card{background:var(--dark2);padding:48px 44px;position:relative;border-left:3px solid transparent;transition:all 0.3s;}
-    .aff-card:hover{background:var(--dark3);border-left-color:var(--gold);}
-    .aff-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
-    .aff-name{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;color:var(--white);margin-bottom:8px;line-height:1;}
-    .aff-body{font-size:14px;font-weight:300;color:var(--grey1);line-height:1.8;margin-bottom:24px;}
-    .aff-code{display:inline-flex;align-items:center;gap:12px;background:var(--dark3);border:1px solid var(--gold-border);padding:12px 20px;margin-bottom:28px;}
-    .aff-code-label{font-size:10px;letter-spacing:2px;color:var(--grey2);text-transform:uppercase;}
-    .aff-code-value{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:4px;color:var(--gold);}
-    .aff-products{display:flex;flex-direction:column;gap:2px;margin-bottom:28px;}
-    .aff-product{background:var(--black);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background 0.2s;}
-    .aff-product:hover{background:var(--dark3);}
-    .aff-product-name{font-size:13px;color:var(--grey1);font-weight:300;}
-    .aff-product-arr{color:var(--gold);font-size:14px;}
+    /* ── CONTACT ── */
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:90px; }
+    .contact-email { font-family:'Bebas Neue',sans-serif; font-size:clamp(20px,2.5vw,30px); letter-spacing:2px; color:var(--gold); text-decoration:none; display:block; margin:24px 0 36px; transition:color 0.25s; }
+    .contact-email:hover { color:var(--gold-bright); }
+    .social-rows { display:flex; flex-direction:column; gap:2px; }
+    .social-row { display:flex; align-items:center; justify-content:space-between; background:var(--dark2); padding:18px 24px; text-decoration:none; border-left:3px solid transparent; transition:all 0.25s; }
+    .social-row:hover { background:var(--dark3); border-left-color:var(--gold); }
+    .social-name { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--white); }
+    .social-handle { font-size:12px; color:var(--grey1); }
+    .social-arr { color:var(--gold); }
 
-    /* EMAIL */
-    .email-box{border:1px solid var(--gold-border);padding:72px 64px;background:linear-gradient(135deg,var(--dark2),var(--black));position:relative;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-    .email-box::before{content:'FREE DOWNLOAD';position:absolute;top:-1px;left:52px;background:var(--gold);color:var(--black);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 14px;}
-    .email-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);letter-spacing:2px;color:var(--white);line-height:1;margin-bottom:14px;}
-    .email-body{font-size:15px;font-weight:300;line-height:1.8;color:var(--grey1);}
-    .email-body strong{color:var(--white);font-weight:500;}
-    .email-form{display:flex;flex-direction:column;gap:12px;}
-    .email-input{background:var(--dark2);border:1px solid var(--grey3);border-bottom:1px solid var(--gold-border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:16px 20px;outline:none;transition:border-color 0.25s;}
-    .email-input:focus{border-bottom-color:var(--gold);}
-    .email-input::placeholder{color:var(--grey2);font-size:13px;}
-    .email-submit{background:var(--gold);color:var(--black);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px;border:none;cursor:pointer;transition:background 0.25s;}
-    .email-submit:hover{background:var(--gold-bright);}
-    .email-disclaimer{font-size:10px;letter-spacing:1px;color:var(--grey2);text-align:center;margin-top:4px;}
-    .email-success{display:none;text-align:center;padding:20px;}
-    .email-success-text{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--gold);}
-    .email-success-sub{font-size:13px;color:var(--grey1);margin-top:8px;}
+    /* ── FOOTER ── */
+    footer { background:var(--dark1); border-top:1px solid var(--grey3); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; }
+    .footer-brand { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:4px; color:var(--gold); }
+    .footer-copy { font-size:11px; letter-spacing:1.5px; color:var(--grey2); text-transform:uppercase; }
+    .footer-links { display:flex; gap:24px; }
+    .footer-links a { font-size:11px; letter-spacing:1.5px; color:var(--grey2); text-transform:uppercase; text-decoration:none; transition:color 0.2s; }
+    .footer-links a:hover { color:var(--gold); }
 
-    /* PROTOCOLS */
-    .protocols-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;}
-    .proto-card{background:var(--dark2);padding:48px 40px;position:relative;}
-    .proto-card.featured{border-top:2px solid var(--gold);}
-    .proto-name{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--white);margin-bottom:16px;line-height:1;}
-    .proto-body{font-size:14px;font-weight:300;color:var(--grey1);line-height:1.85;margin-bottom:32px;}
-    .proto-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
-    .proto-tag{border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;}
-    .proto-tag-dim{border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;}
+    /* ── REVEAL ── */
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.in { opacity:1; transform:translateY(0); }
 
-    /* APPLY */
-    .apply-wrap{padding:110px 48px;background:var(--gold);text-align:center;}
-    .apply-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,96px);letter-spacing:3px;color:var(--black);line-height:0.9;margin-bottom:20px;}
-    .apply-sub{font-size:16px;font-weight:400;color:rgba(0,0,0,0.65);line-height:1.7;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;}
-    .btn-black{display:inline-block;background:var(--black);color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:18px 48px;text-decoration:none;border:none;cursor:pointer;transition:background 0.25s,transform 0.2s;}
-    .btn-black:hover{background:#111;transform:translateY(-2px);}
+    /* ── COMING SOON BADGE ── */
+    .cs-badge { display:inline-block; background:var(--gold-dim); border:1px solid var(--gold-border); color:var(--gold); font-size:9px; letter-spacing:3px; text-transform:uppercase; padding:5px 12px; margin-bottom:16px; }
 
-    /* CONTACT */
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;}
-    .contact-email{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,2.5vw,30px);letter-spacing:2px;color:var(--gold);text-decoration:none;display:block;margin:24px 0 36px;transition:color 0.25s;}
-    .contact-email:hover{color:var(--gold-bright);}
-    .social-rows{display:flex;flex-direction:column;gap:2px;}
-    .social-row{display:flex;align-items:center;justify-content:space-between;background:var(--dark2);padding:18px 24px;text-decoration:none;border-left:3px solid transparent;transition:all 0.25s;}
-    .social-row:hover{background:var(--dark3);border-left-color:var(--gold);}
-    .social-name{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--white);}
-    .social-handle{font-size:12px;color:var(--grey1);}
-    .social-arr{color:var(--gold);}
+    /* ── EMAIL CAPTURE ── */
+    .email-wrap { padding:110px 48px; background:var(--dark1); }
+    .email-inner { max-width:1100px; margin:0 auto; }
+    .email-box { border:1px solid var(--gold-border); padding:72px 64px; background:linear-gradient(135deg,var(--dark2),var(--black)); position:relative; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .email-box::before { content:'FREE DOWNLOAD'; position:absolute; top:-1px; left:52px; background:var(--gold); color:var(--black); font-size:9px; font-weight:700; letter-spacing:3px; padding:6px 14px; }
+    .email-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,60px); letter-spacing:2px; color:var(--white); line-height:1; margin-bottom:14px; }
+    .email-body { font-size:15px; font-weight:300; line-height:1.8; color:var(--grey1); margin-bottom:0; }
+    .email-body strong { color:var(--white); font-weight:500; }
+    .email-form { display:flex; flex-direction:column; gap:12px; }
+    .email-input { background:var(--dark2); border:1px solid var(--grey3); border-bottom:1px solid var(--gold-border); color:var(--white); font-family:'DM Sans',sans-serif; font-size:14px; padding:16px 20px; outline:none; transition:border-color 0.25s; letter-spacing:1px; }
+    .email-input:focus { border-bottom-color:var(--gold); }
+    .email-input::placeholder { color:var(--grey2); font-size:13px; }
+    .email-submit { background:var(--gold); color:var(--black); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:16px; border:none; cursor:pointer; transition:background 0.25s; }
+    .email-submit:hover { background:var(--gold-bright); }
+    .email-disclaimer { font-size:10px; letter-spacing:1px; color:var(--grey2); text-align:center; margin-top:4px; }
+    .email-success { display:none; text-align:center; padding:20px; }
+    .email-success-text { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:3px; color:var(--gold); }
+    .email-success-sub { font-size:13px; color:var(--grey1); margin-top:8px; }
 
-    /* FOOTER */
-    footer{background:var(--dark1);border-top:1px solid var(--grey3);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;}
-    .footer-brand{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:4px;color:var(--gold);}
-    .footer-links{display:flex;gap:24px;}
-    .footer-links a{font-size:11px;letter-spacing:1.5px;color:var(--grey2);text-transform:uppercase;text-decoration:none;cursor:pointer;transition:color 0.2s;}
-    .footer-links a:hover{color:var(--gold);}
-    .footer-copy{font-size:11px;letter-spacing:1.5px;color:var(--grey2);text-transform:uppercase;}
+    /* ── AFFILIATES ── */
+    .aff-wrap { padding:110px 48px; background:var(--black); }
+    .aff-inner { max-width:1100px; margin:0 auto; }
+    .aff-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:56px; }
+    .aff-card { background:var(--dark2); padding:48px 44px; position:relative; border-left:3px solid transparent; transition:all 0.3s; }
+    .aff-card:hover { background:var(--dark3); border-left-color:var(--gold); }
+    .aff-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    .aff-name { font-family:'Bebas Neue',sans-serif; font-size:38px; letter-spacing:3px; color:var(--white); margin-bottom:8px; line-height:1; }
+    .aff-body { font-size:14px; font-weight:300; color:var(--grey1); line-height:1.8; margin-bottom:24px; }
+    .aff-code { display:inline-flex; align-items:center; gap:12px; background:var(--dark3); border:1px solid var(--gold-border); padding:12px 20px; margin-bottom:28px; }
+    .aff-code-label { font-size:10px; letter-spacing:2px; color:var(--grey2); text-transform:uppercase; }
+    .aff-code-value { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:4px; color:var(--gold); }
+    .aff-products { display:flex; flex-direction:column; gap:2px; margin-bottom:28px; }
+    .aff-product { background:var(--black); padding:12px 16px; display:flex; align-items:center; justify-content:space-between; text-decoration:none; transition:background 0.2s; }
+    .aff-product:hover { background:var(--dark3); }
+    .aff-product-name { font-size:13px; color:var(--grey1); font-weight:300; }
+    .aff-product-arr { color:var(--gold); font-size:14px; }
 
-    /* ═══ OPTIMIZER VIEW ═══ */
-    #optimizerView{background:var(--black);min-height:100vh;padding-top:68px;}
-    .opt-back{display:inline-flex;align-items:center;gap:8px;color:var(--gold);font-size:10px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;background:rgba(8,8,7,0.85);border:1px solid var(--border);padding:8px 16px;border-radius:2px;cursor:pointer;margin:20px 0 0 20px;transition:all 0.2s;}
-    .opt-back:hover{background:var(--gold-dim);}
-    .opt-header{position:relative;z-index:1;text-align:center;padding:40px 24px 40px;border-bottom:1px solid var(--border);}
-    .opt-eyebrow{font-size:10px;letter-spacing:7px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:18px;}
-    .opt-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,110px);letter-spacing:4px;line-height:0.88;color:var(--cream);}
-    .opt-header h1 em{color:var(--gold);font-style:normal;}
-    .opt-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--mid);margin-top:16px;}
-    .gold-rule{width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:20px auto 0;}
-    .pillars-legend{display:flex;justify-content:center;gap:32px;padding:24px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
-    .legend-item{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cream-dim);font-weight:500;}
-    .legend-dot{width:8px;height:8px;border-radius:50%;}
-    .legend-dot.physical{background:var(--physical);}
-    .legend-dot.mental{background:var(--mental);}
-    .legend-dot.spiritual{background:var(--spiritual);}
-    .daily-message-wrap{max-width:900px;margin:0 auto;padding:20px 20px 0;}
-    .daily-message-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:20px 24px;display:flex;flex-direction:column;gap:12px;}
-    .daily-message-top{display:flex;justify-content:space-between;align-items:center;}
-    .daily-message-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:500;}
-    .daily-message-edit-btn{background:none;border:1px solid var(--border);color:var(--mid);padding:5px 12px;border-radius:2px;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;}
-    .daily-message-edit-btn:hover{border-color:var(--gold);color:var(--gold);}
-    .daily-message-text{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.7;color:var(--cream);}
-    .daily-message-text.empty{color:var(--mid);font-size:13px;}
-    .daily-message-editor{display:none;flex-direction:column;gap:10px;}
-    .daily-message-editor.visible{display:flex;}
-    .daily-message-textarea{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.3);border-radius:2px;color:var(--cream);font-family:'Playfair Display',serif;font-style:italic;font-size:15px;line-height:1.7;padding:12px 14px;width:100%;outline:none;resize:none;min-height:90px;}
-    .daily-message-textarea:focus{border-color:var(--gold);}
-    .daily-message-actions{display:flex;gap:8px;justify-content:flex-end;}
-    .msg-save-btn{background:var(--gold);border:none;color:var(--black);padding:10px 20px;border-radius:2px;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;cursor:pointer;}
-    .msg-cancel-btn{background:none;border:1px solid rgba(255,255,255,0.08);color:var(--mid);padding:10px 16px;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
-    .data-bar{max-width:900px;margin:0 auto;padding:12px 20px 0;display:flex;gap:8px;justify-content:flex-end;}
-    .data-btn{display:flex;align-items:center;gap:7px;background:none;border:1px solid var(--border);color:var(--gold);padding:9px 16px;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:500;cursor:pointer;transition:all 0.2s;}
-    .data-btn:hover{background:var(--gold-dim);border-color:var(--gold);}
-    .data-btn.import-btn{color:var(--cream-dim);border-color:rgba(255,255,255,0.1);}
-    .month-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;max-width:900px;margin:0 auto;}
-    .month-nav button{background:none;border:1px solid var(--border);color:var(--gold);width:40px;height:40px;border-radius:2px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
-    .month-nav button:hover{background:var(--gold-dim);border-color:var(--gold);}
-    .month-title{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:4px;color:var(--cream);}
-    .month-title span{color:var(--gold);}
-    .month-progress{max-width:900px;margin:0 auto 8px;padding:12px 20px 0;display:flex;align-items:center;gap:16px;}
-    .progress-track{flex:1;height:2px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
-    .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light, #e2c47a));border-radius:2px;transition:width 0.5s cubic-bezier(0.4,0,0.2,1);}
-    .progress-pct{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--gold);min-width:48px;text-align:right;}
-    .weight-stats-bar{max-width:900px;margin:0 auto;padding:16px 20px 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;}
-    .weight-stat-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;}
-    .weight-stat-label{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);font-weight:500;}
-    .weight-stat-value{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;line-height:1;color:var(--cream);}
-    .weight-stat-value.positive{color:#e07070;}
-    .weight-stat-value.negative{color:#7ac99b;}
-    .weight-stat-value.neutral{color:var(--gold);}
-    .weight-stat-sub{font-size:9px;color:var(--mid);letter-spacing:1px;}
-    .calendar-wrap{max-width:900px;margin:0 auto;padding:0 20px 80px;}
-    .weekday-headers{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px;}
-    .weekday-label{text-align:center;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);padding:8px 0;font-weight:500;}
-    .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
-    .day-cell{background:var(--surface);border:1px solid rgba(201,168,76,0.08);border-radius:3px;min-height:88px;padding:10px 10px 8px;cursor:pointer;transition:border-color 0.2s,background 0.2s,transform 0.15s;position:relative;display:flex;flex-direction:column;gap:4px;}
-    .day-cell:hover{border-color:rgba(201,168,76,0.35);background:#161410;transform:translateY(-1px);}
-    .day-cell.empty{background:transparent;border-color:transparent;cursor:default;pointer-events:none;}
-    .day-cell.today{border-color:var(--gold);background:rgba(201,168,76,0.05);}
-    .day-cell.today .day-num{color:var(--gold);}
-    .day-num{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--cream-dim);line-height:1;}
-    .day-pills{display:flex;flex-direction:column;gap:2px;flex:1;}
-    .day-pill{height:3px;border-radius:2px;opacity:0.5;}
-    .day-pill.physical{background:var(--physical);}
-    .day-pill.mental{background:var(--mental);}
-    .day-pill.spiritual{background:var(--spiritual);}
-    .day-pill.filled{opacity:1;}
-    .day-check{font-size:9px;letter-spacing:1px;color:var(--gold);margin-top:auto;opacity:0;}
-    .day-cell.complete .day-check{opacity:1;}
-    .modal-overlay{position:fixed;inset:0;background:rgba(8,8,7,0.88);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(4px);}
-    .modal-overlay.open{opacity:1;pointer-events:all;}
-    .modal{background:var(--warm-dark);border:1px solid var(--border);border-radius:4px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;transform:translateY(16px);transition:transform 0.3s;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;}
-    .modal-overlay.open .modal{transform:translateY(0);}
-    .modal-header{padding:28px 28px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;position:sticky;top:0;background:var(--warm-dark);z-index:2;}
-    .modal-date{display:flex;flex-direction:column;gap:4px;}
-    .modal-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:500;}
-    .modal-day-num{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;line-height:1;color:var(--cream);}
-    .modal-weekday{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--mid);}
-    .modal-close{background:none;border:1px solid var(--border);color:var(--mid);width:32px;height:32px;border-radius:2px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-    .modal-close:hover{border-color:var(--gold);color:var(--gold);}
-    .modal-body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:28px;}
-    .pillar-section{display:flex;flex-direction:column;gap:12px;}
-    .pillar-label{display:flex;align-items:center;gap:10px;}
-    .pillar-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-    .pillar-dot.physical{background:var(--physical);}
-    .pillar-dot.mental{background:var(--mental);}
-    .pillar-dot.spiritual{background:var(--spiritual);}
-    .pillar-name-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:500;}
-    .pillar-name-label.physical{color:var(--physical);}
-    .pillar-name-label.mental{color:var(--mental);}
-    .pillar-name-label.spiritual{color:var(--spiritual);}
-    .preset-grid{display:flex;flex-wrap:wrap;gap:6px;}
-    .preset-btn{background:none;border:1px solid rgba(255,255,255,0.08);color:var(--cream-dim);padding:6px 12px;border-radius:2px;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;}
-    .preset-btn.selected{border-color:currentColor;color:var(--cream);background:rgba(255,255,255,0.04);}
-    .preset-btn.physical.selected{border-color:var(--physical);color:var(--physical);}
-    .preset-btn.mental.selected{border-color:var(--mental);color:var(--mental);}
-    .preset-btn.spiritual.selected{border-color:var(--spiritual);color:var(--spiritual);}
-    .custom-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:12px;padding:10px 14px;width:100%;outline:none;resize:none;min-height:52px;}
-    .custom-input::placeholder{color:var(--mid);}
-    .preset-note-wrap{display:none;flex-direction:column;gap:6px;margin-top:4px;}
-    .preset-note-wrap.visible{display:flex;}
-    .preset-note-header{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);}
-    .preset-note-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:12px;padding:8px 12px;width:100%;outline:none;resize:none;min-height:44px;}
-    .preset-notes-area{display:flex;flex-direction:column;gap:8px;margin-top:8px;width:100%;}
-    .body-part-section{display:none;flex-direction:column;gap:10px;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:3px;padding:14px;margin-top:2px;}
-    .body-part-section.visible{display:flex;}
-    .body-part-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:500;}
-    .body-part-section .preset-btn{border-color:rgba(201,168,76,0.2);}
-    .body-part-section .preset-btn.selected{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.08);}
-    .time-section{border-top:1px solid var(--border);padding-top:24px;}
-    .time-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:14px;}
-    .time-slots{display:flex;flex-direction:column;gap:8px;}
-    .time-slot-row{display:grid;grid-template-columns:130px 1fr auto;gap:8px;align-items:center;}
-    .time-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--gold);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:8px 4px;width:100%;min-width:130px;outline:none;text-align:center;}
-    .slot-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:12px;padding:8px 12px;width:100%;outline:none;}
-    .slot-input::placeholder{color:var(--mid);}
-    .add-slot-btn{background:none;border:1px dashed rgba(201,168,76,0.25);color:var(--mid);padding:8px;border-radius:2px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;width:100%;transition:all 0.2s;margin-top:4px;}
-    .add-slot-btn:hover{border-color:var(--gold);color:var(--gold);}
-    .weighin-section{border-top:1px solid var(--border);padding-top:24px;display:flex;flex-direction:column;gap:14px;}
-    .weighin-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);font-weight:500;}
-    .weighin-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end;}
-    .weighin-field{display:flex;flex-direction:column;gap:6px;}
-    .weighin-field label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);}
-    .weight-number-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:26px;padding:10px 14px;width:100%;outline:none;-moz-appearance:textfield;}
-    .weight-number-input::-webkit-outer-spin-button,.weight-number-input::-webkit-inner-spin-button{-webkit-appearance:none;}
-    .weighin-delta{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:2px;padding:10px 14px;display:flex;flex-direction:column;gap:2px;}
-    .weighin-delta-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);}
-    .weighin-delta-value{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--cream-dim);}
-    .weighin-delta-value.loss{color:#7ac99b;}
-    .weighin-delta-value.gain{color:#e07070;}
-    .water-section{border-top:1px solid var(--border);padding-top:24px;display:flex;flex-direction:column;gap:14px;}
-    .water-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);font-weight:500;}
-    .water-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end;}
-    .water-field{display:flex;flex-direction:column;gap:6px;}
-    .water-field label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);}
-    .water-number-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:#7aadbd;font-family:'Bebas Neue',sans-serif;font-size:26px;padding:10px 14px;width:100%;outline:none;-moz-appearance:textfield;}
-    .water-number-input::-webkit-outer-spin-button,.water-number-input::-webkit-inner-spin-button{-webkit-appearance:none;}
-    .water-ref{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:2px;padding:10px 14px;display:flex;flex-direction:column;gap:4px;}
-    .water-ref-title{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);}
-    .water-ref-line{font-size:10px;color:var(--cream-dim);line-height:1.6;}
-    .gcal-section{border-top:1px solid var(--border);padding-top:20px;display:flex;flex-direction:column;gap:10px;}
-    .gcal-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--mid);font-weight:500;}
-    .gcal-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(201,168,76,0.06);border:1px solid var(--border);color:var(--gold);padding:12px 20px;border-radius:2px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;transition:all 0.2s;width:100%;}
-    .gcal-btn:hover{background:rgba(201,168,76,0.12);border-color:var(--gold);}
-    .modal-footer{padding:0 28px 28px;display:flex;gap:10px;}
-    .save-btn{flex:1;background:var(--gold);border:none;color:var(--black);padding:14px;border-radius:2px;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:3px;cursor:pointer;transition:background 0.2s;}
-    .save-btn:hover{background:var(--gold-bright);}
-    .clear-btn{background:none;border:1px solid rgba(255,255,255,0.08);color:var(--mid);padding:14px 18px;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
-    .clear-btn:hover{border-color:#c0392b;color:#c0392b;}
-    .opt-toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--warm-dark);border:1px solid var(--gold);color:var(--gold);padding:12px 24px;border-radius:2px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:'DM Sans',sans-serif;z-index:9999;opacity:0;transition:all 0.3s;white-space:nowrap;}
-    .opt-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-    .gratitude-section{border-top:1px solid var(--border);padding-top:24px;display:flex;flex-direction:column;gap:12px;}
-    .gratitude-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:500;}
-    .gratitude-sub{font-size:11px;color:var(--mid);font-family:'Playfair Display',serif;font-style:italic;}
-    .gratitude-items{display:flex;flex-direction:column;gap:8px;}
-    .gratitude-item{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:center;}
-    .gratitude-num{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--gold);opacity:0.5;}
-    .gratitude-input{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--cream);font-family:'Playfair Display',serif;font-style:italic;font-size:13px;padding:8px 12px;width:100%;outline:none;}
-    .gratitude-input::placeholder{color:var(--mid);font-size:12px;}
-    .recap-section{border-top:1px solid var(--border);padding-top:24px;display:flex;flex-direction:column;gap:16px;}
-    .recap-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:500;display:flex;align-items:center;gap:10px;}
-    .recap-label::after{content:'';flex:1;height:1px;background:var(--border);}
-    .recap-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-    .recap-col{display:flex;flex-direction:column;gap:8px;}
-    .recap-col-label{font-size:8px;letter-spacing:3px;text-transform:uppercase;font-weight:500;padding-bottom:6px;border-bottom:1px solid var(--border);}
-    .recap-col-label.wins{color:#7ac99b;}
-    .recap-col-label.grow{color:#7aadbd;}
-    .recap-textarea{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:12px;padding:10px 12px;width:100%;outline:none;resize:none;min-height:120px;line-height:1.6;}
-    .recap-textarea::placeholder{color:var(--mid);font-size:11px;}
+    @media (max-width:960px) {
+      .email-wrap,.aff-wrap { padding:72px 20px; }
+      .email-box { grid-template-columns:1fr; gap:32px; padding:40px 24px; }
+      .aff-grid { grid-template-columns:1fr; }
+    }
 
-
-    /* ── POPUP ── */
-    #popup-overlay{position:fixed;inset:0;z-index:9000;background:rgba(6,6,6,0.88);display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity 0.4s ease;}
-    #popup-overlay.show{opacity:1;pointer-events:all;}
-    .popup-box{background:var(--dark2);border:1px solid var(--gold-border);max-width:500px;width:100%;padding:52px 44px;position:relative;text-align:center;}
-    .popup-box::before{content:'FREE DOWNLOAD';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 20px;white-space:nowrap;}
-    .popup-close{position:absolute;top:16px;right:16px;background:none;border:1px solid var(--grey3);color:var(--grey1);width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-    .popup-close:hover{border-color:var(--gold);color:var(--gold);}
-    .popup-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
-    .popup-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,52px);letter-spacing:2px;color:var(--white);line-height:0.95;margin-bottom:16px;}
-    .popup-title span{color:var(--gold);}
-    .popup-sub{font-size:14px;font-weight:300;color:var(--grey1);line-height:1.7;margin-bottom:24px;}
-    .popup-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px;}
-    .popup-tag{border:1px solid var(--gold-border);color:var(--gold);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;}
-    .popup-form{display:flex;flex-direction:column;gap:10px;}
-    .popup-input{background:var(--dark1);border:1px solid var(--grey3);border-bottom:1px solid var(--gold-border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none;transition:border-color 0.25s;text-align:center;}
-    .popup-input:focus{border-bottom-color:var(--gold);}
-    .popup-input::placeholder{color:var(--grey2);font-size:12px;}
-    .popup-submit{background:var(--gold);color:var(--black);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px;border:none;cursor:pointer;transition:background 0.25s;}
-    .popup-submit:hover{background:var(--gold-bright);}
-    .popup-disclaimer{font-size:10px;letter-spacing:1px;color:var(--grey2);margin-top:8px;}
-    .popup-success{display:none;padding:12px 0;text-align:center;}
-    .popup-success-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--gold);}
-    .popup-success-sub{font-size:13px;color:var(--grey1);margin-top:8px;line-height:1.6;}
-
-
-    .exercise-section{display:none;flex-direction:column;gap:10px;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:3px;padding:14px;margin-top:8px;}
-    .exercise-section.visible{display:flex;}
-    .exercise-section-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:500;}
-    .exercise-row{display:flex;flex-direction:column;gap:6px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:2px;padding:10px;}
-    .exercise-row-nums{display:grid;grid-template-columns:70px 1fr 1fr 1fr 1fr 30px;gap:6px;align-items:center;}
-    .exercise-select{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.2);border-radius:2px;color:var(--gold);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:10px 12px;width:100%;outline:none;cursor:pointer;}
-    .exercise-select option{background:#181510;color:#f0ead8;}
-    .exercise-num-select{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:2px;color:var(--gold);font-family:'DM Sans',sans-serif;font-size:12px;padding:8px 6px;width:100%;outline:none;cursor:pointer;text-align:center;}
-    .exercise-num-select option{background:#181510;color:#f0ead8;}
-    .exercise-del-btn{background:none;border:none;color:#666;cursor:pointer;font-size:15px;padding:4px;}
-    .exercise-del-btn:hover{color:#c0392b;}
-    .exercise-col-labels{display:none;}
-    .add-exercise-btn{background:none;border:1px dashed rgba(201,168,76,0.25);color:var(--mid);padding:7px;border-radius:2px;cursor:pointer;font-size:10px;font-family:'DM Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;width:100%;transition:all 0.2s;}
-    .add-exercise-btn:hover{border-color:var(--gold);color:var(--gold);}
-
-    /* MOBILE */
-    @media(max-width:960px){
-      nav{padding:0 20px;}
-      .nav-links{display:none;}
-      .hero{padding:100px 20px 60px;}
-      .section-wrap{padding:72px 20px;}
-      .for-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:40px;}
-      .pillars-grid{grid-template-columns:1fr;}
-      .pillar{border-right:none;border-bottom:1px solid var(--grey3);}
-      .pillar:last-child{border-bottom:none;}
-      .tiers-grid{grid-template-columns:1fr;}
-      .supps-grid,.merch-grid,.protocols-grid,.aff-grid{grid-template-columns:1fr;}
-      .email-box{grid-template-columns:1fr;gap:32px;padding:40px 24px;}
-      .apply-wrap{padding:72px 20px;}
-      footer{flex-direction:column;gap:12px;text-align:center;padding:24px 20px;}
-      .footer-links{flex-wrap:wrap;justify-content:center;}
-      .weight-stats-bar{grid-template-columns:1fr 1fr;}
-      .weight-stats-bar .weight-stat-card:last-child{grid-column:1/-1;}
+    /* ── MOBILE ── */
+    @media (max-width:960px) {
+      nav { padding:0 20px; }
+      .nav-links { display:none; }
+      .nav-links.open { display:flex; flex-direction:column; position:fixed; top:68px; left:0; right:0; background:var(--dark1); border-bottom:1px solid var(--gold-border); padding:20px; gap:16px; z-index:997; }
+      .nav-mobile-btn { display:flex; }
+      .hero { padding:100px 20px 60px; }
+      .hero-stats { flex-wrap:wrap; gap:16px; }
+      .hstat { border-right:none; padding-right:0; margin-right:0; }
+      .section-wrap { padding:72px 20px; }
+      .for-grid,.about-grid,.contact-grid { grid-template-columns:1fr; gap:40px; }
+      .pillars-grid { grid-template-columns:1fr; }
+      .pillar { border-right:none; border-bottom:1px solid var(--grey3); }
+      .pillar:last-child { border-bottom:none; }
+      .tiers-grid { grid-template-columns:1fr; }
+      .supps-grid,.merch-grid { grid-template-columns:1fr; }
+      .optimizer-box { grid-template-columns:1fr; gap:28px; padding:40px 24px; }
+      .apply-wrap { padding:72px 20px; }
+      .appform-wrap { padding:64px 20px 88px; }
+      .q-row { grid-template-columns:1fr; gap:0; }
+      .q-row .q { margin-bottom:24px; }
+      footer { flex-direction:column; gap:12px; text-align:center; padding:24px 20px; }
+      .footer-links { flex-wrap:wrap; justify-content:center; }
     }
   </style>
-<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
-<!-- LOCK -->
-<div id="lock">
-  <div class="lock-top"></div>
-  <div class="lock-eyebrow">The Aligned Man Project — Private Preview</div>
-  <div class="lock-title">THE<br/><span>ALIGNED</span><br/>MAN</div>
-  <p class="lock-sub">This site is currently in private preview.</p>
-  <input class="lock-input" id="lockInput" type="password" placeholder="Enter Access Code" autocomplete="off" />
-  <div class="lock-error" id="lockError"></div>
-  <button class="lock-btn" onclick="unlock()">Enter</button>
-  <div class="lock-footer">Physical · Mental · Spiritual</div>
-</div>
-
-<!-- SITE -->
-<div id="site">
-
 <!-- NAV -->
-<nav>
-  <a href="#" class="nav-brand" onclick="showView('homeView');return false;">
+<nav id="nav">
+  <a href="#home" class="nav-brand">
     <div class="nav-brand-name">THE <span>ALIGNED</span> MAN</div>
     <div class="nav-brand-sub">Physical · Mental · Spiritual</div>
   </a>
-  <ul class="nav-links">
-    <li><a onclick="showView('homeView');scrollTo('#for-you')">Who It's For</a></li>
-    <li><a onclick="showView('homeView');scrollTo('#pillars')">The Method</a></li>
-    <li><a onclick="showView('homeView');scrollTo('#coaching')">Coaching</a></li>
-    <li><a onclick="showView('homeView');scrollTo('#supplements')">Supplements</a></li>
-    <li><a onclick="showView('homeView');scrollTo('#telehealth')">Telehealth <span style="color:var(--gold);font-size:8px;vertical-align:super;">COMING SOON</span></a></li>
-    <li><a onclick="showView('homeView');scrollTo('#merch')">Merch</a></li>
-    <li><a onclick="showView('optimizerView')">Optimizer</a></li>
-    <li><a onclick="showView('homeView');scrollTo('#affiliates')">Resources</a></li>
-    <li><a onclick="showView('homeView');scrollTo('#apply')" class="nav-cta">Apply Now for Coaching</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#for-you">Who It's For</a></li>
+    <li><a href="#pillars">The Method</a></li>
+    <li><a href="#coaching">Coaching</a></li>
+    <li><a href="#supplements">Supplements</a></li>
+    <li><a href="#merch">Merch</a></li>
+    <li><a href="#optimizer">Optimizer</a></li>
+    <li><a href="#affiliates">Resources</a></li>
+    <li><a href="#protocols">Free Protocols</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#apply" class="nav-cta">Apply Now</a></li>
   </ul>
+  <button class="nav-mobile-btn" id="mobileBtn" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-
-
-<!-- POPUP -->
-<div id="popup-overlay">
-  <div class="popup-box">
-    <button class="popup-close" onclick="closePopup()">✕</button>
-    <div class="popup-eyebrow">Free Download</div>
-    <h2 class="popup-title">Get Your Free<br/><span>Protocol</span> Now</h2>
-    <p class="popup-sub">Rob's complete Physical Optimization Cheat Sheet — every stack, every compound, nothing held back.</p>
-    <div class="popup-tags">
-      <span class="popup-tag">SARMs</span><span class="popup-tag">Peptides</span>
-      <span class="popup-tag">TRT · HRT</span><span class="popup-tag">PCT</span>
-      <span class="popup-tag">Natty Stacks</span><span class="popup-tag">Cognitive</span>
-    </div>
-    <div id="popupForm" class="popup-form">
-      <input class="popup-input" id="popupName" type="text" placeholder="Your First Name" />
-      <input class="popup-input" id="popupEmail" type="email" placeholder="Your Email Address" />
-      <button class="popup-submit" onclick="submitPopup()">Get the Free Cheat Sheet →</button>
-      <p class="popup-disclaimer">No spam. Ever. Unsubscribe anytime.</p>
-    </div>
-    <div id="popupSuccess" class="popup-success">
-      <div class="popup-success-title">You're In. 🔥</div>
-      <p class="popup-success-sub">Scroll down to <strong style="color:var(--gold)">Free Protocols</strong> to access your cheat sheet.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ HOME VIEW ═══════════ -->
-<div id="homeView" class="view active">
 
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-glow"></div>
   <div class="hero-line"></div>
-  <div class="hero-tag"><span class="hero-tag-text">For Disciplined Men, Late 20s to 50s — Who Don't Break.</span></div>
-  <h1 class="hero-h1"><span class="l1">THE</span><span class="l2">ALIGNED</span><span class="l3">MAN</span></h1>
+  <div class="hero-tag"><span class="hero-tag-text">Built for Men in Their 30s, 40s &amp; 50s Who Refuse to Decline</span></div>
+  <h1 class="hero-h1">
+    <span class="l1">THE</span>
+    <span class="l2">ALIGNED</span>
+    <span class="l3">MAN</span>
+  </h1>
   <div class="hero-rule"></div>
   <p class="hero-sub">You've built a life. You've been through things. <strong>Now it's time to rebuild yourself</strong> — your body, your mind, your purpose — at the highest level you've ever operated at.</p>
   <p class="hero-quote">This isn't for the 22-year-old chasing aesthetics. This is for the man with real responsibilities, real experience, and a burning drive to become everything he was built to be.</p>
   <div class="hero-btns">
-    <button class="btn-gold" onclick="showView('homeView');scrollTo('#apply')">Apply to Work With Robert</button>
-    <button class="btn-ghost" onclick="showView('homeView');scrollTo('#pillars')">The Method</button>
+    <a href="#apply" class="btn-gold">Apply to Work With Robert</a>
+    <a href="#pillars" class="btn-ghost">The Method</a>
   </div>
   <div class="hero-stats">
     <div class="hstat"><div class="hstat-num">9<em>K+</em></div><div class="hstat-label">Instagram</div></div>
@@ -574,7 +395,7 @@
     <span class="ticker-item">Hormone Optimization · TRT · HRT <span class="ticker-sep">◆</span></span>
     <span class="ticker-item">Refuse to Decline <span class="ticker-sep">◆</span></span>
     <span class="ticker-item">Robert Gonnerman <span class="ticker-sep">◆</span></span>
-    <span class="ticker-item">@AlignedManProject <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Align With Rob <span class="ticker-sep">◆</span></span>
     <span class="ticker-item">For the Man in His 30s, 40s &amp; 50s <span class="ticker-sep">◆</span></span>
     <span class="ticker-item">Physical Optimization <span class="ticker-sep">◆</span></span>
     <span class="ticker-item">Mental Clarity &amp; Focus <span class="ticker-sep">◆</span></span>
@@ -582,73 +403,77 @@
     <span class="ticker-item">Hormone Optimization · TRT · HRT <span class="ticker-sep">◆</span></span>
     <span class="ticker-item">Refuse to Decline <span class="ticker-sep">◆</span></span>
     <span class="ticker-item">Robert Gonnerman <span class="ticker-sep">◆</span></span>
-    <span class="ticker-item">@AlignedManProject <span class="ticker-sep">◆</span></span>
+    <span class="ticker-item">Align With Rob <span class="ticker-sep">◆</span></span>
   </div>
 </div>
 
 <!-- WHO IT'S FOR -->
-<section class="section-wrap" style="background:var(--dark1);" id="for-you">
+<section class="section-wrap dark1" id="for-you">
   <div class="section-inner">
     <div class="for-grid">
-      <div>
+      <div class="reveal">
         <div class="section-tag">This Is for You</div>
         <h2 class="section-h2">You've Been<br/>Through<br/>Something.</h2>
         <p class="section-body">The man who finds The Aligned Man Project isn't looking for hype. He's been through the trials — <strong>the divorce, the career pressure, the financial stress, the health decline, the identity crisis</strong> — and he's still standing.</p>
         <br/>
-        <p class="section-body">He's not chasing aesthetics. He's chasing something deeper. <strong>Legacy. Family. Purpose.</strong> The version of himself his family will be proud of.</p>
+        <p class="section-body">He's not chasing aesthetics. He's chasing something deeper. <strong>Legacy. Family. Purpose.</strong> The version of himself his family will be proud of. He has the discipline. He just needs the right system and someone who has actually lived it.</p>
       </div>
-      <div class="for-list">
+      <div class="for-list reveal">
         <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You're in your 30s, 40s, or 50s and refuse to keep declining</span></div>
         <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You want to rebuild your body without destroying everything else</span></div>
         <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You're ready to operate with real mental clarity and driven focus</span></div>
         <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You want a deeper connection to your purpose and higher power</span></div>
         <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You're done with programs built for kids that ignore your reality</span></div>
         <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You have real responsibilities and need a system that fits your life</span></div>
-        <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You want to be the man your family and legacy deserves</span></div>
+        <div class="for-item"><span class="for-item-dot">◆</span><span class="for-item-text">You want to be the man your sons, your family, your legacy deserves</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PILLARS -->
-<section class="section-wrap" style="background:var(--black);" id="pillars">
+<!-- THREE PILLARS -->
+<section class="section-wrap black" id="pillars">
   <div class="section-inner">
-    <div class="section-tag">The Method</div>
-    <h2 class="section-h2">Three Pillars.<br/>One Aligned Man.</h2>
-    <p class="section-body">Every tool, every protocol, every coaching program we build is rooted in three non-negotiable pillars.</p>
-    <div class="pillars-grid">
+    <div class="reveal">
+      <div class="section-tag">The Method</div>
+      <h2 class="section-h2">Three Pillars.<br/>One Aligned Man.</h2>
+      <p class="section-body">Every tool, every protocol, every coaching program we build is rooted in three non-negotiable pillars. This is the framework that transforms men.</p>
+    </div>
+    <div class="pillars-grid reveal">
       <div class="pillar">
         <div class="pillar-num">Pillar 01</div>
         <div class="pillar-name">Physical</div>
         <div class="pillar-sub">Become your peak optimized self.</div>
         <div class="pillar-rule"></div>
-        <p class="pillar-body">Your body is the vessel everything else is built on. At 35, 45, or 55 — you are not done. We give you real protocols to rebuild your body, optimize your hormones through TRT and HRT, lose the weight, build the muscle, and operate at a level that commands respect.</p>
+        <p class="pillar-body">Your body is the vessel everything else is built on. At 35, 45, or 55 — you are not done. We give you real protocols to rebuild your body, optimize your hormones through TRT and HRT, lose the weight, build the muscle, and operate at a level that commands respect. Real results built for a man your age.</p>
       </div>
       <div class="pillar">
         <div class="pillar-num">Pillar 02</div>
         <div class="pillar-name">Mental</div>
         <div class="pillar-sub">Clarity. Focus. Drive. Leadership.</div>
         <div class="pillar-rule"></div>
-        <p class="pillar-body">The man in his 40s who has been through the fire has something the 22-year-old doesn't — experience. We train you to harness it. Cut through the noise. Execute with precision. Lead with humility. Build the mindset of a man who knows exactly who he is.</p>
+        <p class="pillar-body">The man in his 40s who has been through the fire has something the 22-year-old doesn't — experience. We train you to harness it. Cut through the noise. Execute with precision. Lead with humility. Build the mindset of a man who knows exactly who he is, where he's going, and what it takes to get there.</p>
       </div>
       <div class="pillar">
         <div class="pillar-num">Pillar 03</div>
         <div class="pillar-name">Spiritual</div>
         <div class="pillar-sub">Align with your purpose and higher power.</div>
         <div class="pillar-rule"></div>
-        <p class="pillar-body">The most overlooked pillar — and the one that holds everything together. Build a real relationship with your higher power and your inner self. Find the thing that makes every sacrifice worth it. When you're spiritually aligned, you don't just have goals. You have a reason.</p>
+        <p class="pillar-body">The most overlooked pillar — and the one that holds everything together. Build a real relationship with your higher power and your inner self. Find the thing that makes every sacrifice worth it. When you're spiritually aligned, you don't just have goals. You have a reason. And a reason is what carries a man through anything.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COACHING -->
-<section class="section-wrap" style="background:var(--dark1);" id="coaching">
+<!-- COACHING TIERS -->
+<section class="section-wrap dark1" id="coaching">
   <div class="section-inner">
-    <div class="section-tag">Coaching Programs</div>
-    <h2 class="section-h2">Choose Your<br/>Level.</h2>
-    <p class="section-body">Four tiers. One mission. Built for the man who is done drifting and ready to execute at the highest level of his life.</p>
-    <div class="tiers-grid">
+    <div class="reveal">
+      <div class="section-tag">Coaching Programs</div>
+      <h2 class="section-h2">Choose Your<br/>Level.</h2>
+      <p class="section-body">Four tiers. One mission. Built for the man who is done drifting and ready to execute at the highest level of his life.</p>
+    </div>
+    <div class="tiers-grid reveal">
       <div class="tier">
         <div class="tier-badge">Entry Level</div>
         <div class="tier-name">Core</div>
@@ -656,13 +481,13 @@
         <div class="tier-price-note">Per Month</div>
         <div class="tier-divider"></div>
         <ul class="tier-features">
-          <li>Daily Optimizer access</li>
+          <li>Daily Optimizer app access</li>
           <li>Core Physical, Mental &amp; Spiritual protocols</li>
           <li>Monthly group coaching call with Robert</li>
           <li>Private community access</li>
           <li>Digital guides and downloads</li>
         </ul>
-        <div class="tier-cta"><button class="btn-ghost" style="font-size:10px;padding:12px 24px;" onclick="scrollTo('#apply')">Join Waitlist</button></div>
+        <div class="tier-cta"><a href="#apply" class="btn-ghost" style="font-size:10px;padding:12px 24px;display:inline-block;">Join Waitlist</a></div>
       </div>
       <div class="tier featured">
         <div class="tier-badge">12-Week Program</div>
@@ -674,12 +499,12 @@
           <li>Everything in Core</li>
           <li>Full 12-week transformation program</li>
           <li>Custom physical protocol</li>
-          <li>Hormone optimization framework (TRT/HRT)</li>
-          <li>Bi-weekly 1-on-1 check-ins with Robert</li>
+          <li>Hormone optimization framework (TRT/HRT guidance)</li>
+          <li>Bi-weekly 1-on-1 check-in calls with Robert</li>
           <li>Nutrition and recovery protocols</li>
           <li>Mindset and spiritual alignment curriculum</li>
         </ul>
-        <div class="tier-cta"><button class="btn-gold" style="font-size:10px;padding:12px 24px;" onclick="scrollTo('#apply')">Join Waitlist</button></div>
+        <div class="tier-cta"><a href="#apply" class="btn-gold" style="font-size:10px;padding:12px 24px;display:inline-block;">Join Waitlist</a></div>
       </div>
       <div class="tier">
         <div class="tier-badge">1-on-1 Coaching</div>
@@ -695,7 +520,7 @@
           <li>Peptide and hormone roadmap</li>
           <li>Lifetime access to all digital products</li>
         </ul>
-        <div class="tier-cta"><button class="btn-ghost" style="font-size:10px;padding:12px 24px;" onclick="scrollTo('#apply')">Apply Now</button></div>
+        <div class="tier-cta"><a href="#apply" class="btn-ghost" style="font-size:10px;padding:12px 24px;display:inline-block;">Apply Now</a></div>
       </div>
       <div class="tier">
         <div class="tier-badge">Elite Inner Circle</div>
@@ -708,88 +533,61 @@
           <li>20 seats maximum — always</li>
           <li>Robert personally invested in your outcome</li>
           <li>Priority access to new protocols and products</li>
+          <li>Speaking and event invitations</li>
           <li>Direct line to Robert — not a team</li>
         </ul>
-        <div class="tier-cta"><button class="btn-ghost" style="font-size:10px;padding:12px 24px;" onclick="scrollTo('#apply')">Apply Now</button></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- OPTIMIZER CTA -->
-<section class="section-wrap" style="background:var(--black);" id="optimizer">
-  <div class="section-inner">
-    <div style="border:1px solid var(--gold-border);padding:64px;background:linear-gradient(135deg,var(--dark2),var(--black));position:relative;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;">
-      <div style="position:absolute;top:-1px;left:52px;background:var(--gold);color:var(--black);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 14px;">FREE TOOL</div>
-      <div>
-        <div class="section-tag" style="margin-bottom:16px;">Free Tool</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);letter-spacing:2px;color:var(--white);line-height:1;margin-bottom:14px;">Daily &amp; Monthly<br/>Goal Optimizer</h2>
-        <p style="font-size:15px;font-weight:300;line-height:1.8;color:var(--grey1);">Track your Physical, Mental, and Spiritual progress every single day. Log your training, mindset, weight, water intake, and spiritual practice — all in one place.</p>
-      </div>
-      <div style="flex-shrink:0;text-align:center;">
-        <button class="btn-gold" onclick="showView('optimizerView')">Open the Optimizer →</button>
-        <div style="margin-top:12px;font-size:10px;letter-spacing:2px;color:var(--grey2);text-transform:uppercase;">Free · No Sign Up</div>
+        <div class="tier-cta"><a href="#apply" class="btn-ghost" style="font-size:10px;padding:12px 24px;display:inline-block;">Apply Now</a></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- SUPPLEMENTS -->
-<section class="section-wrap" style="background:var(--dark1);" id="supplements">
+<section class="section-wrap black" id="supplements">
   <div class="section-inner">
-    <div class="section-tag">Supplementation</div>
-    <h2 class="section-h2">Optimized for<br/>Your Biology.</h2>
-    <p class="section-body">Every product built for the man in his 30s, 40s, and 50s. No filler. Real compounds that work with your body at this stage of life.</p>
-    <div class="supps-grid">
+    <div class="reveal">
+      <div class="section-tag">Supplementation</div>
+      <h2 class="section-h2">Optimized for<br/>Your Biology.</h2>
+      <p class="section-body">Every product in The Aligned Man Project line is built for the man in his 30s, 40s, and 50s. No filler. No marketing gimmicks. Real compounds that work with your body at this stage of life.</p>
+    </div>
+    <div class="supps-grid reveal">
       <div class="supp-card">
         <div class="cs-badge">Coming Soon</div>
         <div class="supp-badge">Performance</div>
         <div class="supp-name">Testosterone Support</div>
         <p class="supp-body">Formulated to naturally support healthy testosterone levels and hormonal balance in men over 30. Stack with your TRT protocol or use standalone.</p>
-        <span class="supp-tag">Hormonal Health</span><span class="supp-tag">Performance</span>
-        <br/><br/><button class="btn-ghost" style="font-size:10px;padding:11px 22px;" onclick="scrollTo('#free-download')">Notify Me</button>
+        <span class="supp-tag">Hormonal Health</span><span class="supp-tag">Performance</span><br/><br/>
+        <a href="#apply" class="btn-ghost" style="font-size:10px;padding:11px 22px;display:inline-block;">Notify Me</a>
       </div>
       <div class="supp-card">
         <div class="cs-badge">Coming Soon</div>
         <div class="supp-badge">Recovery</div>
         <div class="supp-name">Sleep &amp; Recovery</div>
         <p class="supp-body">Deep recovery starts with sleep. This formula is built to optimize your sleep architecture, reduce cortisol, and accelerate physical recovery overnight.</p>
-        <span class="supp-tag">Recovery</span><span class="supp-tag">Sleep</span>
-        <br/><br/><button class="btn-ghost" style="font-size:10px;padding:11px 22px;" onclick="scrollTo('#free-download')">Notify Me</button>
+        <span class="supp-tag">Recovery</span><span class="supp-tag">Sleep</span><br/><br/>
+        <a href="#apply" class="btn-ghost" style="font-size:10px;padding:11px 22px;display:inline-block;">Notify Me</a>
       </div>
       <div class="supp-card">
         <div class="cs-badge">Coming Soon</div>
         <div class="supp-badge">Mental Performance</div>
         <div class="supp-name">Focus &amp; Clarity</div>
-        <p class="supp-body">Engineered to support sustained mental clarity, drive, and cognitive performance for the man who needs to be sharp everywhere.</p>
-        <span class="supp-tag">Nootropic</span><span class="supp-tag">Focus</span>
-        <br/><br/><button class="btn-ghost" style="font-size:10px;padding:11px 22px;" onclick="scrollTo('#free-download')">Notify Me</button>
+        <p class="supp-body">Engineered to support sustained mental clarity, drive, and cognitive performance. For the man who needs to be sharp at work, in the gym, and at home.</p>
+        <span class="supp-tag">Nootropic</span><span class="supp-tag">Focus</span><br/><br/>
+        <a href="#apply" class="btn-ghost" style="font-size:10px;padding:11px 22px;display:inline-block;">Notify Me</a>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- TELEHEALTH COMING SOON -->
-<section class="section-wrap" style="background:var(--black);" id="telehealth">
-  <div class="section-inner">
-    <div style="border:1px solid var(--gold-border);padding:64px;background:linear-gradient(135deg,var(--dark2),var(--black));position:relative;text-align:center;">
-      <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 20px;white-space:nowrap;">COMING SOON</div>
-      <div class="section-tag" style="justify-content:center;margin-bottom:16px;">Phase Two</div>
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:2px;color:var(--white);line-height:0.95;margin-bottom:16px;">Telehealth &amp;<br/>Clinical Optimization</h2>
-      <p style="font-size:15px;font-weight:300;line-height:1.9;color:var(--grey1);max-width:560px;margin:0 auto 28px;">Licensed clinical care is coming to The Aligned Man Project — hormone optimization, lab work, and provider-guided protocols, delivered through telehealth. Built on the same three pillars. Backed by real medicine.</p>
-      <button class="btn-ghost" onclick="scrollTo('#free-download')">Get Notified at Launch</button>
-    </div>
-  </div>
-</section>
-
 <!-- MERCH -->
-<section class="section-wrap" style="background:var(--black);" id="merch">
+<section class="section-wrap dark1" id="merch">
   <div class="section-inner">
-    <div class="section-tag">Merchandise</div>
-    <h2 class="section-h2">Wear What You<br/>Stand For.</h2>
-    <p class="section-body">Premium dark apparel built for the man who operates at a different level.</p>
-    <div class="merch-grid">
+    <div class="reveal">
+      <div class="section-tag">Merchandise</div>
+      <h2 class="section-h2">Wear What You<br/>Stand For.</h2>
+      <p class="section-body">Men wear what represents who they want to become. The Aligned Man Project mark on everything — premium dark apparel built for the man who operates at a different level.</p>
+    </div>
+    <div class="merch-grid reveal">
       <div class="merch-card">
         <div class="merch-placeholder"><span class="merch-placeholder-text">Product Photo Coming Soon</span></div>
         <div class="cs-badge">Coming Soon</div>
@@ -812,79 +610,93 @@
         <div class="merch-note">Premium Fleece · Oversized Fit</div>
       </div>
     </div>
+    <div style="margin-top:40px; text-align:center;">
+      <a href="#apply" class="btn-ghost" style="font-size:10px;padding:13px 32px;display:inline-block;">Notify Me When Available</a>
+    </div>
   </div>
 </section>
 
-<!-- FREE PROTOCOLS -->
-<section class="section-wrap" style="background:var(--dark1);" id="protocols">
+<!-- OPTIMIZER -->
+<section class="section-wrap black" id="optimizer">
   <div class="section-inner">
-    <div class="section-tag">Free Resources</div>
-    <h2 class="section-h2">Free Protocols.<br/>Nothing Held Back.</h2>
-    <p class="section-body">Rob built these protocols from over a decade of lived experience. No theory. No gatekeeping.</p>
-    <div class="protocols-grid">
-      <div class="proto-card featured">
-        <div class="cs-badge" style="background:var(--gold);color:var(--black);border:none;">Most Downloaded</div>
-        <div class="proto-name">Physical Optimization<br/>Cheat Sheet</div>
-        <p class="proto-body">Every stack. Every protocol. Muscle building, fat burning, hormone optimization, cognitive performance, natty stacks, PCT and more.</p>
-        <div class="proto-tags">
-          <span class="proto-tag">SARMs</span><span class="proto-tag">Peptides</span><span class="proto-tag">TRT · HRT</span><span class="proto-tag">Natty Stacks</span><span class="proto-tag">PCT</span><span class="proto-tag">Cognitive</span>
+    <div class="optimizer-box reveal">
+      <div>
+        <div class="section-tag" style="margin-bottom:16px;">Free Tool</div>
+        <h2 class="optimizer-h2">Daily &amp; Monthly<br/>Goal Optimizer</h2>
+        <p class="optimizer-body">Track your Physical, Mental, and Spiritual progress every single day. Morning gratitude, pillar logging, weight tracking, water intake, time blocks, and daily recap — all in one place. Free. Built for the aligned man.</p>
+      </div>
+      <div style="flex-shrink:0; text-align:center;">
+        <a href="https://alignedman.vercel.app" class="btn-gold" target="_blank" rel="noopener">Open the Optimizer →</a>
+        <div style="margin-top:12px; font-size:10px; letter-spacing:2px; color:var(--grey2); text-transform:uppercase;">Free · No Sign Up</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section-wrap dark1" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-tag">The Man Behind It</div>
+        <div class="about-quote-mark">"</div>
+        <div class="about-quote">I am not selling theory. I am selling a life I have actually lived — and come out the other side of.</div>
+        <p class="about-body"><strong>Robert Gonnerman lost over 140 pounds.</strong> Survived three major hip replacements. Rebuilt his body from the ground up — multiple times. Overcame addiction. Went through divorce. Lost everything. Got it all back.</p>
+        <p class="about-body">He started as a Chef, became a Registered Nurse, worked as an Athlete Manager, and spent over a decade studying under the pioneers of SARMs, peptides, hormone optimization, TRT, HRT, and supplementation. He has coached others through their own transformations and now has built this platform to reach the men who need it most.</p>
+        <p class="about-body"><strong>Father to two sons — ages 5 and 7.</strong> His daily purpose. The reason he refuses to decline.</p>
+        <div class="about-sig">
+          <div class="about-sig-dot"></div>
+          <div>
+            <div class="about-sig-name">Robert Gonnerman</div>
+            <div class="about-sig-handle">Founder · The Aligned Man Project · @AlignWithRob</div>
+          </div>
         </div>
-        <button class="btn-gold" style="font-size:10px;padding:13px 28px;" onclick="scrollTo('#free-download')">Get Free Access →</button>
       </div>
-      <div class="proto-card">
-        <div class="cs-badge">Coming Soon</div>
-        <div class="proto-name">Hormone<br/>Optimization Guide</div>
-        <p class="proto-body">The complete framework for understanding and optimizing your hormones — and when to consider TRT or HRT. Built specifically for men over 30.</p>
-        <div class="proto-tags"><span class="proto-tag-dim">TRT</span><span class="proto-tag-dim">HRT</span><span class="proto-tag-dim">Lab Work</span><span class="proto-tag-dim">Bloodwork</span></div>
-        <button class="btn-ghost" style="font-size:10px;padding:13px 28px;" onclick="scrollTo('#free-download')">Notify Me</button>
-      </div>
-      <div class="proto-card">
-        <div class="cs-badge">Coming Soon</div>
-        <div class="proto-name">Mental Clarity<br/>Protocol</div>
-        <p class="proto-body">The mindset framework Rob used to rebuild his mental clarity, focus, and drive after hitting rock bottom. Cognitive stacks, daily habits, and the mental blueprint.</p>
-        <div class="proto-tags"><span class="proto-tag-dim">Nootropics</span><span class="proto-tag-dim">Mindset</span><span class="proto-tag-dim">Daily Habits</span></div>
-        <button class="btn-ghost" style="font-size:10px;padding:13px 28px;" onclick="scrollTo('#free-download')">Notify Me</button>
+      <div class="creds reveal">
+        <div class="cred"><div class="cred-icon">⚕️</div><div><div class="cred-name">Registered Nurse</div><div class="cred-detail">Medical &amp; Psychiatric Nursing Background</div></div></div>
+        <div class="cred"><div class="cred-icon">💊</div><div><div class="cred-name">10+ Years Deep</div><div class="cred-detail">Peptides, Hormone Optimization, TRT, HRT &amp; Supplementation</div></div></div>
+        <div class="cred"><div class="cred-icon">🏋️</div><div><div class="cred-name">140+ Lbs Lost</div><div class="cred-detail">Personal Physical Transformation — Multiple Times</div></div></div>
+        <div class="cred"><div class="cred-icon">🦴</div><div><div class="cred-name">3 Hip Replacements</div><div class="cred-detail">Rebuilt From the Ground Up — Refused to Stay Down</div></div></div>
+        <div class="cred"><div class="cred-icon">🏆</div><div><div class="cred-name">Athlete Manager</div><div class="cred-detail">5+ Years at a Top Supplement Company</div></div></div>
+        <div class="cred"><div class="cred-icon">🙏</div><div><div class="cred-name">Spiritual Study</div><div class="cred-detail">Studied Under Leading Spiritual Coaches of the Last Decade</div></div></div>
+        <div class="cred"><div class="cred-icon">👨‍👦</div><div><div class="cred-name">Father of Two Sons</div><div class="cred-detail">Ages 5 &amp; 7 — His Daily Purpose</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- EMAIL CAPTURE -->
-<section class="section-wrap" style="background:var(--black);" id="free-download">
-  <div class="section-inner">
-    <div class="email-box">
+<section class="email-wrap" id="free-download">
+  <div class="email-inner">
+    <div class="email-box reveal">
       <div>
         <div class="section-tag" style="margin-bottom:16px;">Free Download</div>
         <h2 class="email-h2">Get the Free<br/>Physical Optimization<br/>Cheat Sheet</h2>
-        <p class="email-body">Every stack. Every protocol. <strong>Exactly what Rob uses</strong> — nothing held back. Enter your email and get it free.</p>
+        <p class="email-body">The full reference Rob built for himself — <strong>nothing held back</strong>. Training, recovery, body composition, energy, focus, and the resources he actually uses. Enter your email and get it free.</p>
       </div>
       <div>
-        <div id="emailForm" class="email-form">
-          <input class="email-input" id="emailName" type="text" placeholder="Your First Name" />
-          <input class="email-input" id="emailAddr" type="email" placeholder="Your Email Address" />
-          <button class="email-submit" onclick="submitEmail()">Send Me the Cheat Sheet</button>
+        <div class="email-form">
+          <a href="/cheat-sheet.html" class="email-submit" style="text-decoration:none; text-align:center; display:block;">Send Me the Cheat Sheet</a>
           <p class="email-disclaimer">No spam. Ever. Unsubscribe anytime.</p>
-        </div>
-        <div id="emailSuccess" class="email-success">
-          <div class="email-success-text">You're In.</div>
-          <p class="email-success-sub">Check your email for the free cheat sheet.<br/>Welcome to The Aligned Man Project.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- AFFILIATES -->
-<section class="section-wrap" style="background:var(--dark1);" id="affiliates">
-  <div class="section-inner">
-    <div class="section-tag">Verified Resources</div>
-    <h2 class="section-h2">Rob's Recommended<br/>Sources.</h2>
-    <p class="section-body">Every product Rob personally uses and recommends. HPLC verified. Use his code and save.</p>
-    <div class="aff-grid">
+<!-- AFFILIATES / RESOURCES -->
+<section class="aff-wrap" id="affiliates">
+  <div class="aff-inner">
+    <div class="reveal">
+      <div class="section-tag">Verified Resources</div>
+      <h2 class="section-h2">Rob's Recommended<br/>Sources.</h2>
+      <p class="section-body">Every product Rob personally uses and recommends. HPLC verified. Use his code and save — he earns a small commission at no extra cost to you.</p>
+    </div>
+    <div class="aff-grid reveal">
       <div class="aff-card">
         <div class="aff-badge">Verified Source · HPLC Tested</div>
         <div class="aff-name">SwissChems</div>
-        <p class="aff-body">Rob's primary source for research compounds. Every batch HPLC verified. Trusted for over a decade.</p>
+        <p class="aff-body">Rob's primary source for research compounds. Every batch HPLC verified. The most trusted supplier he's used for over a decade.</p>
         <div class="aff-code"><span class="aff-code-label">Your Code</span><span class="aff-code-value">ROBERT</span><span style="font-size:10px;letter-spacing:2px;color:var(--grey2);text-transform:uppercase;">= 10% Off</span></div>
         <div class="aff-products">
           <a href="https://swisschems.is/product/mk-677-ibutamoren-380mg-10mg-60-caps/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">MK-677 (Ibutamoren)</span><span class="aff-product-arr">→</span></a>
@@ -892,20 +704,26 @@
           <a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">Enclomiphene</span><span class="aff-product-arr">→</span></a>
           <a href="https://swisschems.is/product/bpc-157-5mg-healing-bundle/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">BPC-157</span><span class="aff-product-arr">→</span></a>
           <a href="https://swisschems.is/product/tb-500-thymosin-beta-4-healing-bundle/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">TB-500</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/igf-1-lr3-1mg-price-is-per-vial/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">IGF-1 LR3</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/ipamorelin-2mg-price-is-per-vial/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">Ipamorelin</span><span class="aff-product-arr">→</span></a>
+          <a href="https://swisschems.is/product/tesamorelin-2mg-price-is-per-vial/ref/510/" target="_blank" class="aff-product"><span class="aff-product-name">Tesamorelin</span><span class="aff-product-arr">→</span></a>
         </div>
         <a href="https://swisschems.is/ref/510/" target="_blank" class="btn-gold" style="font-size:10px;padding:13px 28px;display:inline-block;">Shop SwissChems — Use Code ROBERT</a>
-        <p style="font-size:10px;color:var(--grey2);margin-top:12px;line-height:1.6;">Research compounds for laboratory research purposes only. Not for human consumption. Consult a licensed healthcare provider.</p>
+        <p style="font-size:10px;color:var(--grey2);margin-top:12px;line-height:1.6;">Research compounds intended for laboratory research purposes only. Not for human consumption. Always consult a licensed healthcare provider.</p>
       </div>
       <div class="aff-card">
         <div class="aff-badge">Premium Supplements</div>
         <div class="aff-name">Enhanced Labs</div>
-        <p class="aff-body">Rob's go-to for premium sports nutrition and performance supplements. Cutting-edge formulas, quality ingredients.</p>
+        <p class="aff-body">Rob's go-to for premium sports nutrition and performance supplements. Cutting-edge formulas, quality ingredients, built for serious athletes.</p>
         <div class="aff-code"><span class="aff-code-label">Your Code</span><span class="aff-code-value">ROBERT</span><span style="font-size:10px;letter-spacing:2px;color:var(--grey2);text-transform:uppercase;">= 15% Off</span></div>
         <div class="aff-products">
           <a href="https://enhancedlabs.com/products/top-t/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">Top T — Testosterone Support</span><span class="aff-product-arr">→</span></a>
           <a href="https://enhancedlabs.com/products/all-day-shred/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">All Day Shred (PM Fat Burner)</span><span class="aff-product-arr">→</span></a>
           <a href="https://enhancedlabs.com/products/tudca/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">TUDCA — Liver Support</span><span class="aff-product-arr">→</span></a>
           <a href="https://enhancedlabs.com/products/maximus-stim/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">Maximus Stim — Pre Workout</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/maximus-pump/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">Maximus Pump</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/enhanced-d3-k2/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">D3 + K2</span><span class="aff-product-arr">→</span></a>
+          <a href="https://enhancedlabs.com/products/enhanced-magnesium/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">Magnesium</span><span class="aff-product-arr">→</span></a>
           <a href="https://enhancedlabs.com/products/io-premium-whey/?ref=DYyov5JCnSp9j" target="_blank" class="aff-product"><span class="aff-product-name">IO Premium Whey Protein</span><span class="aff-product-arr">→</span></a>
         </div>
         <a href="https://enhancedlabs.com/?ref=DYyov5JCnSp9j" target="_blank" class="btn-gold" style="font-size:10px;padding:13px 28px;display:inline-block;">Shop Enhanced Labs — Use Code ROBERT</a>
@@ -914,31 +732,51 @@
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section-wrap" style="background:var(--dark1);" id="about">
+<!-- FREE PROTOCOLS -->
+<section class="section-wrap black" id="protocols">
   <div class="section-inner">
-    <div class="about-grid">
-      <div>
-        <div class="section-tag">The Man Behind It</div>
-        <div class="about-quote-mark">"</div>
-        <div class="about-quote">I am not selling theory. I am selling a life I have actually lived — and come out the other side of.</div>
-        <p class="about-body"><strong>Robert Gonnerman had three surgeries to his left hip — then made the decision to get into the best physical shape of his life.</strong> Lost over 140 pounds naturally. Rebuilt his body from the ground up. Overcame addiction. Went through divorce. Lost everything. Got it all back.</p>
-        <p class="about-body">He started as a Chef, became a Registered Nurse, worked as an Athlete Manager, and spent over a decade studying hormone optimization, TRT, HRT, peptides, and supplementation. <strong>Father to two sons — ages 5 and 7.</strong> His daily purpose.</p>
-        <div class="about-sig">
-          <div class="about-sig-dot"></div>
-          <div>
-            <div class="about-sig-name">Robert Gonnerman</div>
-            <div class="about-sig-handle">Founder · The Aligned Man Project · @AlignedManProject</div>
-          </div>
+    <div class="reveal">
+      <div class="section-tag">Free Resources</div>
+      <h2 class="section-h2">Free Protocols.<br/>Nothing Held Back.</h2>
+      <p class="section-body">Rob built these protocols from over a decade of lived experience — every stack, every cycle, every compound he has personally used and tested. No theory. No gatekeeping. This is the exact roadmap he used to transform his body and optimize his performance. Yours free.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px;" class="reveal">
+      <div style="background:var(--dark2); padding:48px 40px; position:relative; border-top:2px solid var(--gold);">
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Most Downloaded</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--white);margin-bottom:16px;line-height:1;">Physical Optimization<br/>Cheat Sheet</div>
+        <p style="font-size:14px;font-weight:300;color:var(--grey1);line-height:1.85;margin-bottom:32px;">Every stack. Every protocol. Muscle building, fat burning, hormone optimization, cognitive performance, natty stacks, PCT and more. The complete reference guide — free.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">SARMs</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Peptides</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">TRT · HRT</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Natty Stacks</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">PCT</span>
+          <span style="border:1px solid var(--gold-border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Cognitive</span>
         </div>
+        <a href="/cheat-sheet.html" class="btn-gold" style="font-size:10px;padding:13px 28px;display:inline-block;">Download Free →</a>
       </div>
-      <div class="creds">
-        <div class="cred"><div class="cred-icon">⚕️</div><div><div class="cred-name">Registered Nurse</div><div class="cred-detail">Medical &amp; Psychiatric Nursing Background</div></div></div>
-        <div class="cred"><div class="cred-icon">💊</div><div><div class="cred-name">10+ Years Deep</div><div class="cred-detail">Peptides, Hormone Optimization, TRT, HRT &amp; Supplementation</div></div></div>
-        <div class="cred"><div class="cred-icon">🏋️</div><div><div class="cred-name">140+ Lbs Lost</div><div class="cred-detail">Personal Physical Transformation — Multiple Times</div></div></div>
-        <div class="cred"><div class="cred-icon">🦴</div><div><div class="cred-name">3 Hip Surgeries</div><div class="cred-detail">Rebuilt From the Ground Up — Never Stayed Down</div></div></div>
-        <div class="cred"><div class="cred-icon">🏆</div><div><div class="cred-name">Athlete Manager</div><div class="cred-detail">5+ Years at a Top Supplement Company</div></div></div>
-        <div class="cred"><div class="cred-icon">👨‍👦</div><div><div class="cred-name">Father of Two Sons</div><div class="cred-detail">Ages 5 &amp; 7 — His Daily Purpose</div></div></div>
+      <div style="background:var(--dark2); padding:48px 40px; position:relative;">
+        <div style="display:inline-block;background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold);font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:5px 12px;margin-bottom:16px;">Coming Soon</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--white);margin-bottom:16px;line-height:1;">Hormone<br/>Optimization Guide</div>
+        <p style="font-size:14px;font-weight:300;color:var(--grey1);line-height:1.85;margin-bottom:32px;">The complete framework for understanding and optimizing your hormones naturally — and when to consider TRT or HRT. Built specifically for men over 30.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">TRT</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">HRT</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Lab Work</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Bloodwork</span>
+        </div>
+        <a href="#free-download" class="btn-ghost" style="font-size:10px;padding:13px 28px;display:inline-block;">Notify Me</a>
+      </div>
+      <div style="background:var(--dark2); padding:48px 40px; position:relative;">
+        <div style="display:inline-block;background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold);font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:5px 12px;margin-bottom:16px;">Coming Soon</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--white);margin-bottom:16px;line-height:1;">Mental Clarity<br/>Protocol</div>
+        <p style="font-size:14px;font-weight:300;color:var(--grey1);line-height:1.85;margin-bottom:32px;">The mindset framework Rob used to rebuild his mental clarity, focus, and drive after hitting rock bottom. Cognitive stacks, daily habits, and the mental blueprint of the aligned man.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Nootropics</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Mindset</span>
+          <span style="border:1px solid var(--grey3);color:var(--grey2);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;">Daily Habits</span>
+        </div>
+        <a href="#free-download" class="btn-ghost" style="font-size:10px;padding:13px 28px;display:inline-block;">Notify Me</a>
       </div>
     </div>
   </div>
@@ -946,45 +784,174 @@
 
 <!-- APPLY -->
 <div class="apply-wrap" id="apply">
-  <div style="max-width:700px;margin:0 auto;">
+  <div class="apply-inner reveal">
     <h2 class="apply-h2">Ready to<br/>Stop Drifting?</h2>
-    <p class="apply-sub">Apply to work directly with Robert. Limited spots. If you're serious about your transformation — this is the step.</p>
-    <a href="mailto:rob@alignedmanproject.com?subject=Coaching Application — The Aligned Man Project" class="btn-black">Apply to Work With Robert</a>
-    <div style="margin-top:20px;font-size:11px;letter-spacing:2px;color:rgba(0,0,0,0.5);text-transform:uppercase;">Limited Spots · Application Required</div>
+    <p class="apply-sub" style="margin-bottom:0;">Apply to work directly with Robert. Limited spots. This application takes about five minutes — answer it honestly and it goes straight to his inbox.</p>
+    <div style="margin-top:24px; font-size:11px; letter-spacing:2px; color:rgba(0,0,0,0.5); text-transform:uppercase;">Limited Spots · Application Required</div>
   </div>
 </div>
 
-<!-- CONTACT -->
-<section class="section-wrap" style="background:var(--black);" id="contact">
-  <div class="section-inner">
-    <div class="contact-grid">
-      <div>
-        <div class="section-tag">Get In Touch</div>
-        <h2 class="section-h2">Ready to<br/>Align?</h2>
-        <p class="section-body">Whether you're ready to start coaching, want to learn more, or just want to follow the journey — reach out directly.</p>
-        <a href="mailto:rob@alignedmanproject.com" class="contact-email">rob@alignedmanproject.com</a>
-      </div>
-      <div class="social-rows">
-        <a href="https://www.instagram.com/alignedmanproject" target="_blank" class="social-row"><span class="social-name">Instagram</span><span class="social-handle">@alignedmanproject</span><span class="social-arr">→</span></a>
-        <a href="https://www.youtube.com/@alignedmanproject" target="_blank" class="social-row"><span class="social-name">YouTube</span><span class="social-handle">@alignedmanproject</span><span class="social-arr">→</span></a>
-        <a href="https://www.tiktok.com/@alignedmanproject" target="_blank" class="social-row"><span class="social-name">TikTok</span><span class="social-handle">@alignedmanproject</span><span class="social-arr">→</span></a>
-        <a href="https://www.facebook.com/alignedmanproject" target="_blank" class="social-row"><span class="social-name">Facebook</span><span class="social-handle">@alignedmanproject</span><span class="social-arr">→</span></a>
-      </div>
+<!-- APPLICATION FORM -->
+<section class="appform-wrap" id="apply-form">
+  <div class="appform-inner">
+
+    <div id="applyFormBox" class="reveal">
+      <div class="appform-eyebrow">The Application</div>
+      <h2 class="appform-h2">Tell Me Where You Are</h2>
+      <p class="appform-note">Every answer matters. Robert reads these personally and replies to the ones that show up honest. Vague answers don't get a reply.</p>
+
+      <form id="applyForm" novalidate>
+        <input type="hidden" name="access_key" id="w3fKey" value="a4c0c63e-4d50-4632-b956-322900bc5f0c" />
+        <input type="hidden" name="subject" value="New Coaching Application — The Aligned Man Project" />
+        <input type="hidden" name="from_name" value="Aligned Man Project Application" />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+        <div class="q-row">
+          <div class="q">
+            <span class="q-num">01</span>
+            <label class="q-label" for="f-name">Full name</label>
+            <input type="text" id="f-name" name="Name" autocomplete="name" required />
+          </div>
+          <div class="q">
+            <span class="q-num">02</span>
+            <label class="q-label" for="f-age">Age</label>
+            <input type="text" id="f-age" name="Age" inputmode="numeric" required />
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q">
+            <span class="q-num">03</span>
+            <label class="q-label" for="f-email">Email</label>
+            <input type="email" id="f-email" name="Email" autocomplete="email" required />
+          </div>
+          <div class="q">
+            <span class="q-num">04</span>
+            <label class="q-label" for="f-phone">Phone <span>(optional)</span></label>
+            <input type="tel" id="f-phone" name="Phone" autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="q-row">
+          <div class="q">
+            <span class="q-num">05</span>
+            <label class="q-label" for="f-loc">City and state</label>
+            <input type="text" id="f-loc" name="Location" required />
+          </div>
+          <div class="q">
+            <span class="q-num">06</span>
+            <label class="q-label" for="f-social">Instagram or TikTok handle</label>
+            <input type="text" id="f-social" name="Social Handle" placeholder="@" />
+          </div>
+        </div>
+
+        <div class="q">
+          <span class="q-num">07</span>
+          <label class="q-label" for="f-tier">Which program are you applying for?</label>
+          <select id="f-tier" name="Program" required>
+            <option value="">Select one</option>
+            <option>Core — $97 / month</option>
+            <option>Aligned — $1,997 / 12 weeks</option>
+            <option>Peak — $5,000 / quarter</option>
+            <option>Inner Circle — Apply only</option>
+            <option>Not sure yet — I want Robert to tell me</option>
+          </select>
+        </div>
+
+        <div class="q">
+          <span class="q-num">08</span>
+          <label class="q-label" for="f-now">Where are you right now? <span>Physically, mentally, spiritually — be blunt.</span></label>
+          <textarea id="f-now" name="Where They Are Now" required></textarea>
+        </div>
+
+        <div class="q">
+          <span class="q-num">09</span>
+          <label class="q-label" for="f-three">Name three things in your life that brought you to this point. <span>The moments, decisions, or losses that put you here looking for guidance.</span></label>
+          <textarea id="f-three" name="3 Things That Brought Them Here" style="min-height:130px;" required></textarea>
+        </div>
+
+        <div class="q">
+          <span class="q-num">10</span>
+          <label class="q-label" for="f-goal">Twelve months from now, what does aligned look like for you?</label>
+          <textarea id="f-goal" name="12 Month Vision" required></textarea>
+        </div>
+
+        <div class="q">
+          <span class="q-num">11</span>
+          <label class="q-label" for="f-tried">What have you already tried, and why didn't it stick?</label>
+          <textarea id="f-tried" name="What They Have Tried" required></textarea>
+        </div>
+
+        <div class="q">
+          <span class="q-num">12</span>
+          <label class="q-label">Are you in a position to invest in coaching right now?</label>
+          <div class="q-choices">
+            <label class="q-choice"><input type="radio" name="Investment Readiness" value="Yes — ready to start today" required /><span>Yes — ready to start today</span></label>
+            <label class="q-choice"><input type="radio" name="Investment Readiness" value="Yes — within the next 30 days" /><span>Yes — within the next 30 days</span></label>
+            <label class="q-choice"><input type="radio" name="Investment Readiness" value="Need to know the numbers first" /><span>Need to know the numbers first</span></label>
+            <label class="q-choice"><input type="radio" name="Investment Readiness" value="Not yet — just gathering information" /><span>Not yet — just gathering information</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <span class="q-num">13</span>
+          <label class="q-label" for="f-commit">On a scale of 1 to 10, how committed are you to changing this?</label>
+          <select id="f-commit" name="Commitment Level" required>
+            <option value="">Select one</option>
+            <option>10 — All in, whatever it takes</option>
+            <option>9</option>
+            <option>8</option>
+            <option>7</option>
+            <option>6 or below</option>
+          </select>
+        </div>
+
+        <div class="q">
+          <span class="q-num">14</span>
+          <label class="q-label" for="f-found">How did you find The Aligned Man Project?</label>
+          <input type="text" id="f-found" name="How They Found Us" />
+        </div>
+
+        <div class="q">
+          <span class="q-num">15</span>
+          <label class="q-label" for="f-anything">Anything else Robert should know? <span>(optional)</span></label>
+          <textarea id="f-anything" name="Anything Else" style="min-height:80px;"></textarea>
+        </div>
+
+        <button type="submit" class="appform-submit" id="applyBtn">Send My Application</button>
+        <div class="appform-error" id="applyError"></div>
+
+        <p class="appform-legal">
+          The Aligned Man Project provides coaching and education. It is not medical advice, diagnosis, or treatment, and it does not replace care from your own licensed provider. Individual results vary. Submitting this application does not guarantee acceptance.
+        </p>
+      </form>
     </div>
+
+    <div class="appform-success" id="applySuccess">
+      <div class="as-mark">Application Received</div>
+      <p>Your application is in Robert's inbox. He reads every one personally. If you're a fit, you'll hear back directly — usually within 48 hours. Watch your email, and check spam once.</p>
+      <p style="margin-top:26px; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold);">Physical · Mental · Spiritual</p>
+    </div>
+
   </div>
 </section>
 
-<!-- MEDICAL DISCLAIMER -->
-<section style="background:var(--dark1);border-top:1px solid var(--grey3);padding:48px;">
-  <div style="max-width:900px;margin:0 auto;text-align:center;">
-    <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Disclaimer</div>
-    <p style="font-size:11px;font-weight:300;color:var(--grey2);line-height:1.9;">
-      The Aligned Man Project provides content for informational, educational, and motivational purposes only. Nothing on this website, or on any associated social media channel, constitutes medical advice, nursing advice, diagnosis, or treatment. Robert Gonnerman is a Registered Nurse; however, no content shared through The Aligned Man Project is provided in his capacity as a nurse, and no nurse-patient or provider-patient relationship is created through this website, its programs, or any interaction on social media. All content reflects personal research, personal experience, and personal opinion only.
-      <br/><br/>
-      Statements on this website have not been evaluated by the Food and Drug Administration. Any products, compounds, or protocols referenced are not intended to diagnose, treat, cure, or prevent any disease. Research compounds referenced anywhere on this site are intended for laboratory research purposes only and are not approved for human consumption. Nothing on this site should be construed as a recommendation, directive, or endorsement to use any substance.
-      <br/><br/>
-      Always consult a licensed physician or qualified healthcare provider before beginning any exercise program, nutrition plan, supplementation protocol, or hormone optimization strategy, and before making any decision related to your health. Never disregard professional medical advice or delay seeking it because of something you read or saw on this website or associated social media. Individual results vary. By using this website you agree that Robert Gonnerman and The Aligned Man Project are not liable for any decisions you make based on this content. Affiliate links on this site earn a commission at no additional cost to you.
-    </p>
+<!-- CONTACT -->
+<section class="section-wrap black" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-tag">Get In Touch</div>
+        <h2 class="section-h2">Ready to<br/>Align?</h2>
+        <p class="section-body">Whether you're ready to start coaching, want to learn more about the program, or just want to follow the journey — reach out directly.</p>
+        <a href="mailto:rob@alignedmanproject.com" class="contact-email">rob@alignedmanproject.com</a>
+      </div>
+      <div class="social-rows reveal">
+        <a href="https://www.instagram.com/alignwithrob" target="_blank" class="social-row"><span class="social-name">Instagram</span><span class="social-handle">@alignwithrob</span><span class="social-arr">→</span></a>
+        <a href="https://www.youtube.com/@alignwithrob" target="_blank" class="social-row"><span class="social-name">YouTube</span><span class="social-handle">@alignwithrob</span><span class="social-arr">→</span></a>
+        <a href="https://www.tiktok.com/@alignwithrob" target="_blank" class="social-row"><span class="social-name">TikTok</span><span class="social-handle">@alignwithrob</span><span class="social-arr">→</span></a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -992,589 +959,100 @@
 <footer>
   <div class="footer-brand">The Aligned Man Project</div>
   <div class="footer-links">
-    <a onclick="showView('homeView');scrollTo('#pillars')">The Method</a>
-    <a onclick="showView('homeView');scrollTo('#coaching')">Coaching</a>
-    <a onclick="showView('homeView');scrollTo('#supplements')">Supplements</a>
-    <a onclick="showView('homeView');scrollTo('#telehealth')">Telehealth</a>
-    <a onclick="showView('homeView');scrollTo('#merch')">Merch</a>
-    <a onclick="showView('optimizerView')">Optimizer</a>
-    <a onclick="showView('homeView');scrollTo('#apply')">Apply</a>
+    <a href="#pillars">The Method</a>
+    <a href="#coaching">Coaching</a>
+    <a href="#supplements">Supplements</a>
+    <a href="#merch">Merch</a>
+    <a href="#optimizer">Optimizer</a>
+    <a href="#apply">Apply</a>
   </div>
   <div class="footer-copy">© 2026 Robert Gonnerman</div>
 </footer>
 
-</div><!-- end homeView -->
-
-<!-- ═══════════ OPTIMIZER VIEW ═══════════ -->
-<div id="optimizerView" class="view">
-  <div id="optimizerApp">
-    <button class="opt-back" onclick="showView('homeView')">← Back to Site</button>
-    <div class="opt-header">
-      <div class="opt-eyebrow">Beta Version 1.0</div>
-      <h1>THE ALIGNED<br><em>MAN</em></h1>
-      <div class="opt-sub">Daily &amp; Monthly Goal Optimizer</div>
-      <div class="gold-rule"></div>
-    </div>
-    <div class="pillars-legend">
-      <div class="legend-item"><div class="legend-dot physical"></div>Physical</div>
-      <div class="legend-item"><div class="legend-dot mental"></div>Mental</div>
-      <div class="legend-item"><div class="legend-dot spiritual"></div>Spiritual</div>
-    </div>
-    <div class="daily-message-wrap">
-      <div class="daily-message-card">
-        <div class="daily-message-top">
-          <div class="daily-message-eyebrow">&#9654; Daily Message</div>
-          <button class="daily-message-edit-btn" id="msgEditBtn">Edit</button>
-        </div>
-        <div class="daily-message-text empty" id="msgDisplay">No message yet — tap Edit to add today's motivation.</div>
-        <div class="daily-message-editor" id="msgEditor">
-          <textarea class="daily-message-textarea" id="msgTextarea" placeholder="Write today's message..." rows="4"></textarea>
-          <div class="daily-message-actions">
-            <button class="msg-cancel-btn" id="msgCancelBtn">Cancel</button>
-            <button class="msg-save-btn" id="msgSaveBtn">SAVE</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="data-bar">
-      <button class="data-btn import-btn" id="importBtn">Import Data</button>
-      <button class="data-btn" id="exportBtn">Export Data</button>
-    </div>
-    <input type="file" id="importFile" accept=".json" style="display:none">
-    <div class="opt-toast" id="optToast"></div>
-    <div class="month-nav">
-      <button id="prevMonth">&#8592;</button>
-      <div class="month-title" id="monthTitle">JUNE <span>2026</span></div>
-      <button id="nextMonth">&#8594;</button>
-    </div>
-    <div class="month-progress">
-      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-      <div class="progress-pct" id="progressPct">0%</div>
-    </div>
-    <div class="weight-stats-bar">
-      <div class="weight-stat-card"><div class="weight-stat-label">Start Weight</div><div class="weight-stat-value neutral" id="statStartWeight">-- lbs</div><div class="weight-stat-sub">First weigh-in this month</div></div>
-      <div class="weight-stat-card"><div class="weight-stat-label">Current Weight</div><div class="weight-stat-value neutral" id="statCurrentWeight">-- lbs</div><div class="weight-stat-sub">Most recent entry</div></div>
-      <div class="weight-stat-card"><div class="weight-stat-label">Monthly Change</div><div class="weight-stat-value neutral" id="statChange">-- lbs</div><div class="weight-stat-sub" id="statChangePct">--% of body weight</div></div>
-    </div>
-    <div class="calendar-wrap">
-      <div class="weekday-headers">
-        <div class="weekday-label">Sun</div><div class="weekday-label">Mon</div><div class="weekday-label">Tue</div>
-        <div class="weekday-label">Wed</div><div class="weekday-label">Thu</div><div class="weekday-label">Fri</div><div class="weekday-label">Sat</div>
-      </div>
-      <div class="calendar-grid" id="calGrid"></div>
-    </div>
-  </div>
-
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-date">
-          <div class="modal-eyebrow" id="modalEyebrow">Monday</div>
-          <div class="modal-day-num" id="modalDayNum">01</div>
-          <div class="modal-weekday" id="modalMonth">June 2026</div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
-          <button class="modal-close" id="modalClose">&#10005;</button>
-          <a class="gcal-btn" id="gcalBtnTop" href="#" target="_blank" style="padding:8px 12px;font-size:10px;width:auto;">Google Cal</a>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="gratitude-section">
-          <div class="gratitude-label">&#9733; Morning Gratitude</div>
-          <div class="gratitude-sub">Start your day with intention</div>
-          <div class="gratitude-items">
-            <div class="gratitude-item"><div class="gratitude-num">1</div><input class="gratitude-input" id="grat1" type="text" placeholder="I am grateful for..."></div>
-            <div class="gratitude-item"><div class="gratitude-num">2</div><input class="gratitude-input" id="grat2" type="text" placeholder="I am grateful for..."></div>
-            <div class="gratitude-item"><div class="gratitude-num">3</div><input class="gratitude-input" id="grat3" type="text" placeholder="I am grateful for..."></div>
-          </div>
-        </div>
-        <div class="pillar-section">
-          <div class="pillar-label"><div class="pillar-dot physical"></div><div class="pillar-name-label physical">Physical</div></div>
-          <div class="preset-grid" id="physicalPresets"></div>
-          <div class="body-part-section" id="bodyPartSection">
-            <div class="body-part-label">&#9776; Muscle Focus</div>
-            <div class="preset-grid" id="bodyPartPresets"></div>
-          </div>
-          <div class="exercise-section" id="exerciseSection">
-            <div class="exercise-section-label">&#128170; Exercises · Sets · Reps</div>
-            <div class="exercise-col-labels"><span>Exercise</span><span>Sets</span><span>R1</span><span>R2</span><span>R3</span><span>R4</span><span></span></div>
-            <div id="exerciseRows"></div>
-            <button class="add-exercise-btn" id="addExerciseBtn" type="button">+ Add Exercise</button>
-          </div>
-          <textarea class="custom-input" id="physicalCustom" placeholder="Add your own..." rows="2"></textarea>
-        </div>
-        <div class="pillar-section">
-          <div class="pillar-label"><div class="pillar-dot mental"></div><div class="pillar-name-label mental">Mental</div></div>
-          <div class="preset-grid" id="mentalPresets"></div>
-          <textarea class="custom-input" id="mentalCustom" placeholder="Add your own..." rows="2"></textarea>
-        </div>
-        <div class="pillar-section">
-          <div class="pillar-label"><div class="pillar-dot spiritual"></div><div class="pillar-name-label spiritual">Spiritual</div></div>
-          <div class="preset-grid" id="spiritualPresets"></div>
-          <textarea class="custom-input" id="spiritualCustom" placeholder="Add your own..." rows="2"></textarea>
-        </div>
-        <div class="time-section">
-          <div class="time-label">Time Blocks</div>
-          <div class="time-slots" id="timeSlots"></div>
-          <button class="add-slot-btn" id="addSlotBtn">+ Add Time Block</button>
-        </div>
-        <div class="weighin-section">
-          <div class="weighin-label">&#9654; Daily Weigh-In</div>
-          <div class="weighin-row">
-            <div class="weighin-field"><label>Today's Weight (lbs)</label><input class="weight-number-input" type="number" id="weightInput" placeholder="000.0" step="0.1" min="50" max="999"></div>
-            <div class="weighin-delta"><div class="weighin-delta-label">vs. yesterday</div><div class="weighin-delta-value" id="weighinDeltaVal">--</div></div>
-          </div>
-        </div>
-        <div class="water-section">
-          <div class="water-label">&#9676; Daily Water Intake</div>
-          <div class="water-row">
-            <div class="water-field"><label>Fluid Ounces (fl oz)</label><input class="water-number-input" type="number" id="waterInput" placeholder="000" step="1" min="0" max="500"></div>
-            <div class="water-ref"><div class="water-ref-title">Reference</div><div class="water-ref-line">64 fl oz = 1/2 gallon</div><div class="water-ref-line">128 fl oz = 1 gallon</div></div>
-          </div>
-        </div>
-        <div class="recap-section">
-          <div class="recap-label">Daily Recap</div>
-          <div class="recap-cols">
-            <div class="recap-col"><div class="recap-col-label wins">&#10003; Wins</div><textarea class="recap-textarea wins" id="recapWins" placeholder="What did you achieve today?" rows="6"></textarea></div>
-            <div class="recap-col"><div class="recap-col-label grow">&#8593; Grow On</div><textarea class="recap-textarea grow" id="recapGrow" placeholder="What can you improve?" rows="6"></textarea></div>
-          </div>
-        </div>
-        <div class="gcal-section">
-          <div class="gcal-label">Schedule in Google Calendar</div>
-          <a class="gcal-btn" id="gcalBtn" href="#" target="_blank">Open Google Calendar</a>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="clear-btn" id="clearBtn">Clear</button>
-        <button class="save-btn" id="saveBtn">SAVE DAY</button>
-      </div>
-    </div>
-  </div>
-</div><!-- end optimizerView -->
-
-</div><!-- end site -->
-
 <script>
-// ═══ LOCK ═══
-function unlock(){
-  var val=document.getElementById('lockInput').value.trim().toUpperCase();
-  var err=document.getElementById('lockError');
-  if(val==='ERNIE85'){
-    sessionStorage.setItem('amp_access','granted');
-    document.getElementById('lock').style.display='none';
-    document.getElementById('site').style.display='block';
-    if(!window._optimizerInit){window._optimizerInit=true;initOptimizer();}
-  } else {
-    err.textContent='Incorrect access code.';
-    document.getElementById('lockInput').value='';
-    setTimeout(function(){err.textContent='';},2500);
+  const W3F_ENDPOINT = 'https://api.web3forms.com/submit';
+  function ampKey() {
+    const k = document.getElementById('w3fKey');
+    const v = k ? k.value.trim() : '';
+    return (v && v.indexOf('REPLACE_WITH') === -1) ? v : null;
   }
-}
-document.addEventListener('DOMContentLoaded',function(){
-  document.getElementById('lockInput').addEventListener('keydown',function(e){if(e.key==='Enter')unlock();});
-  if(sessionStorage.getItem('amp_access')==='granted'){
-    document.getElementById('lock').style.display='none';
-    document.getElementById('site').style.display='block';
-    if(!window._optimizerInit){window._optimizerInit=true;initOptimizer();}
-  }
-});
 
-// ═══ VIEW SWITCHING ═══
-function showView(viewId){
-  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
-  document.getElementById(viewId).classList.add('active');
-  window.scrollTo(0,0);
-}
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.q-choice input[type=radio]').forEach(r => {
+      r.addEventListener('change', () => {
+        const group = document.getElementsByName(r.name);
+        group.forEach ? group.forEach(x => x.closest('.q-choice').classList.remove('on'))
+                      : Array.prototype.forEach.call(group, x => x.closest('.q-choice').classList.remove('on'));
+        r.closest('.q-choice').classList.add('on');
+      });
+    });
 
-function scrollTo(id){
-  setTimeout(function(){
-    var el=document.querySelector(id);
-    if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
-  },100);
-}
+    const form = document.getElementById('applyForm');
+    if (!form) return;
 
-// ═══ EMAIL ═══
-function submitEmail(){
-  var name=document.getElementById('emailName').value.trim();
-  var email=document.getElementById('emailAddr').value.trim();
-  if(!name||!email||!email.includes('@')){alert('Please enter your name and a valid email.');return;}
-  var leads=JSON.parse(localStorage.getItem('amp_leads')||'[]');
-  leads.push({name:name,email:email,date:new Date().toISOString()});
-  localStorage.setItem('amp_leads',JSON.stringify(leads));
-  document.getElementById('emailForm').style.display='none';
-  document.getElementById('emailSuccess').style.display='block';
-}
-
-// ═══ OPTIMIZER ═══
-var PHYSICAL_PRESETS=['Weight Training','Run','Walk','Swim','Stretch','HIIT','Yoga','Bike','Boxing','Rest'];
-var BODY_PARTS=['Chest','Triceps','Biceps','Back','Shoulders','Legs','Glutes','Core','Forearms','Full Body'];
-var MENTAL_PRESETS=['Journaling','Read','Meditate','Therapy','No Screen','Study','Podcast','Breathwork'];
-var SPIRITUAL_PRESETS=['Prayer','Gratitude','Affirmations','Scripture','Nature','Reflect','Worship','Silence'];
-var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-var DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-var today=new Date(),currentYear=today.getFullYear(),currentMonth=today.getMonth(),activeDay=null;
-var optData=JSON.parse(localStorage.getItem('blueprint_data')||'{}');
-var today=new Date();
-
-function storageKey(y,m,d){return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');}
-function saveData(){localStorage.setItem('blueprint_data',JSON.stringify(optData));}
-
-function buildCalendar(){
-  var grid=document.getElementById('calGrid');
-  if(!grid)return;
-  grid.innerHTML='';
-  var firstDay=new Date(currentYear,currentMonth,1).getDay();
-  var daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
-  document.getElementById('monthTitle').innerHTML=MONTHS[currentMonth].toUpperCase()+' <span>'+currentYear+'</span>';
-  for(var i=0;i<firstDay;i++){var e=document.createElement('div');e.className='day-cell empty';grid.appendChild(e);}
-  var filled=0;
-  for(var d=1;d<=daysInMonth;d++){
-    var key=storageKey(currentYear,currentMonth,d);
-    var dd=optData[key];
-    var isToday=today.getFullYear()===currentYear&&today.getMonth()===currentMonth&&today.getDate()===d;
-    var cell=document.createElement('div');
-    cell.className='day-cell'+(isToday?' today':'')+(dd?' has-data':'');
-    var pF=dd&&((Array.isArray(dd.physical)?dd.physical.length>0:!!dd.physical)||dd.physicalCustom);
-    var mF=dd&&((Array.isArray(dd.mental)?dd.mental.length>0:!!dd.mental)||dd.mentalCustom);
-    var sF=dd&&((Array.isArray(dd.spiritual)?dd.spiritual.length>0:!!dd.spiritual)||dd.spiritualCustom);
-    if(pF&&mF&&sF){cell.classList.add('complete');filled++;}
-    cell.innerHTML='<div class="day-num">'+d+'</div><div class="day-pills"><div class="day-pill physical'+(pF?' filled':'')+'"></div><div class="day-pill mental'+(mF?' filled':'')+'"></div><div class="day-pill spiritual'+(sF?' filled':'')+'"></div></div><div class="day-check">&#10003; DONE</div>';
-    (function(day){cell.addEventListener('click',function(){openModal(day);});})(d);
-    grid.appendChild(cell);
-  }
-  var pct=Math.round((filled/daysInMonth)*100);
-  document.getElementById('progressFill').style.width=pct+'%';
-  document.getElementById('progressPct').textContent=pct+'%';
-  updateWeightStats(daysInMonth);
-}
-
-function updateWeightStats(daysInMonth){
-  var fw=null,lw=null,fd=null,ld=null;
-  for(var d=1;d<=daysInMonth;d++){var w=optData[storageKey(currentYear,currentMonth,d)];var wv=w&&w.weight?parseFloat(w.weight):null;if(wv!==null){if(fw===null){fw=wv;fd=d;}lw=wv;ld=d;}}
-  var sEl=document.getElementById('statStartWeight'),cEl=document.getElementById('statCurrentWeight'),chEl=document.getElementById('statChange'),cpEl=document.getElementById('statChangePct');
-  if(!sEl)return;
-  sEl.textContent=fw!==null?fw.toFixed(1)+' lbs':'-- lbs';sEl.className='weight-stat-value neutral';
-  cEl.textContent=lw!==null?lw.toFixed(1)+' lbs':'-- lbs';cEl.className='weight-stat-value neutral';
-  if(fw!==null&&lw!==null&&fd!==ld){var diff=lw-fw,pct=((diff/fw)*100),sign=diff>0?'+':'';chEl.textContent=sign+diff.toFixed(1)+' lbs';chEl.className='weight-stat-value '+(diff>0?'positive':diff<0?'negative':'neutral');cpEl.textContent=sign+pct.toFixed(2)+'% of body weight';}
-  else{chEl.textContent='-- lbs';chEl.className='weight-stat-value neutral';cpEl.textContent='--% of body weight';}
-}
-
-function openModal(day){
-  activeDay=day;
-  var key=storageKey(currentYear,currentMonth,day);
-  var dd=optData[key]||{};
-  var dateObj=new Date(currentYear,currentMonth,day);
-  document.getElementById('modalEyebrow').textContent=DAYS[dateObj.getDay()];
-  document.getElementById('modalDayNum').textContent=String(day).padStart(2,'0');
-  document.getElementById('modalMonth').textContent=MONTHS[currentMonth]+' '+currentYear;
-  buildPresets('physicalPresets',PHYSICAL_PRESETS,'physical',dd.physical||[],dd.physicalNotes||{});
-  buildPresets('mentalPresets',MENTAL_PRESETS,'mental',dd.mental||[],dd.mentalNotes||{});
-  buildPresets('spiritualPresets',SPIRITUAL_PRESETS,'spiritual',dd.spiritual||[],dd.spiritualNotes||{});
-  buildBodyParts(dd.bodyParts||[]);
-  document.getElementById('exerciseRows').innerHTML='';
-  if(dd.exercises&&dd.exercises.length>0){
-    document.getElementById('exerciseSection').classList.add('visible');
-    dd.exercises.forEach(function(ex){addExerciseRow(null,ex.exercise,ex.sets,ex.reps);});
-  } else if(dd.bodyParts&&dd.bodyParts.length>0){
-    document.getElementById('exerciseSection').classList.add('visible');
-  } else {
-    document.getElementById('exerciseSection').classList.remove('visible');
-  }
-  var physArr=Array.isArray(dd.physical)?dd.physical:(dd.physical?[dd.physical]:[]);
-  document.getElementById('bodyPartSection').classList.toggle('visible',physArr.includes('Weight Training'));
-  document.getElementById('physicalCustom').value=dd.physicalCustom||'';
-  document.getElementById('mentalCustom').value=dd.mentalCustom||'';
-  document.getElementById('spiritualCustom').value=dd.spiritualCustom||'';
-  buildTimeSlots(dd.slots||[]);
-  document.getElementById('weightInput').value=dd.weight||'';
-  document.getElementById('waterInput').value=dd.water||'';
-  document.getElementById('grat1').value=dd.grat1||'';
-  document.getElementById('grat2').value=dd.grat2||'';
-  document.getElementById('grat3').value=dd.grat3||'';
-  document.getElementById('recapWins').value=dd.recapWins||'';
-  document.getElementById('recapGrow').value=dd.recapGrow||'';
-  var prevKey=storageKey(currentYear,currentMonth,day-1);
-  var prevD=optData[prevKey];
-  var dEl=document.getElementById('weighinDeltaVal');
-  if(day>1&&prevD&&prevD.weight&&dd.weight){var diff=parseFloat(dd.weight)-parseFloat(prevD.weight),sign=diff>0?'+':'';dEl.textContent=sign+diff.toFixed(1)+' lbs';dEl.className='weighin-delta-value '+(diff>0?'gain':diff<0?'loss':'');}
-  else{dEl.textContent='--';dEl.className='weighin-delta-value';}
-  var gcalUrl='https://calendar.google.com/calendar/r/day/'+currentYear+'/'+(currentMonth+1)+'/'+day;
-  document.getElementById('gcalBtn').href=gcalUrl;
-  document.getElementById('gcalBtnTop').href=gcalUrl;
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';activeDay=null;}
-
-function buildPresets(containerId,presets,type,selected,notes){
-  var selArr=Array.isArray(selected)?selected:(selected?[selected]:[]);
-  var notesObj=notes||{};
-  var container=document.getElementById(containerId);
-  container.innerHTML='';
-  var notesArea=document.createElement('div');
-  notesArea.className='preset-notes-area';
-  presets.forEach(function(p){
-    var isSel=selArr.includes(p);
-    var wrapper=document.createElement('div');
-    wrapper.dataset.preset=p;wrapper.style.display='inline-block';
-    var btn=document.createElement('button');
-    btn.className='preset-btn '+type+(isSel?' selected':'');
-    btn.textContent=p;
-    var noteWrap=document.createElement('div');
-    noteWrap.className='preset-note-wrap'+(isSel?' visible':'');
-    noteWrap.innerHTML='<div class="preset-note-header">Notes on '+p+'</div><textarea class="preset-note-input" placeholder="What did you do..." rows="2">'+(notesObj[p]||'')+'</textarea>';
-    function handleClick(e){
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      var wasSel=btn.classList.contains('selected');
-      btn.classList.toggle('selected',!wasSel);
-      noteWrap.classList.toggle('visible',!wasSel);
-      if(containerId==='physicalPresets'){var wtBtn=container.querySelector('[data-preset="Weight Training"] .preset-btn');document.getElementById('bodyPartSection').classList.toggle('visible',wtBtn&&wtBtn.classList.contains('selected'));}
-    }
-    btn.addEventListener('click',handleClick);
-    btn.addEventListener('touchend',handleClick,{passive:false});
-    wrapper.appendChild(btn);
-    container.appendChild(wrapper);
-    notesArea.appendChild(noteWrap);
-  });
-  container.appendChild(notesArea);
-}
+      const btn = document.getElementById('applyBtn');
+      const err = document.getElementById('applyError');
+      err.style.display = 'none';
 
-function buildBodyParts(selected){
-  var c=document.getElementById('bodyPartPresets');c.innerHTML='';
-  BODY_PARTS.forEach(function(p){
-    var btn=document.createElement('button');
-    btn.className='preset-btn'+(selected.includes(p)?' selected':'');
-    btn.textContent=p;
-    function t(e){e.preventDefault();btn.classList.toggle('selected');refreshExerciseSection();}
-    btn.addEventListener('click',t);btn.addEventListener('touchend',t,{passive:false});
-    c.appendChild(btn);
-  });
-}
+      const missing = Array.prototype.filter.call(form.querySelectorAll('[required]'), el => {
+        if (el.type === 'radio') return !form.querySelector('input[name="' + el.name + '"]:checked');
+        return !el.value.trim();
+      });
+      if (missing.length) {
+        err.textContent = 'A few answers are still blank. Fill them in and send again.';
+        err.style.display = 'block';
+        missing[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (missing[0].focus) missing[0].focus();
+        return;
+      }
 
-function buildTimeSlots(slots){
-  var c=document.getElementById('timeSlots');c.innerHTML='';
-  var defaults=slots.length>0?slots:[{time:'05:00',label:''},{time:'07:00',label:''},{time:'09:00',label:''},{time:'11:00',label:''},{time:'13:00',label:''},{time:'15:00',label:''},{time:'17:00',label:''},{time:'19:00',label:''},{time:'21:00',label:''},{time:'23:00',label:''}];
-  defaults.forEach(function(s){addSlotRow(s.time,s.label);});
-}
+      const data = Object.fromEntries(new FormData(form).entries());
+      const key = ampKey();
 
-function addSlotRow(time,label){
-  time=time||'';label=label||'';
-  var c=document.getElementById('timeSlots');
-  var row=document.createElement('div');row.className='time-slot-row';
-  row.innerHTML='<input class="time-input" type="time" value="'+time+'" step="900"><input class="slot-input" type="text" placeholder="What are you doing..." value="'+label+'"><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#666;cursor:pointer;font-size:15px;padding:0 4px;">✕</button>';
-  // Insert in correct time order
-  var rows=Array.from(c.querySelectorAll('.time-slot-row'));
-  var inserted=false;
-  if(time){
-    for(var i=0;i<rows.length;i++){
-      var existingTime=rows[i].querySelector('.time-input').value||'99:99';
-      if(time<existingTime){c.insertBefore(row,rows[i]);inserted=true;break;}
-    }
-  }
-  if(!inserted)c.appendChild(row);
-  // Re-sort all rows when a time is changed
-  row.querySelector('.time-input').addEventListener('change',function(){sortTimeSlots();});
-}
+      if (!key) {
+        const body = Object.keys(data)
+          .filter(k => ['access_key','subject','from_name','botcheck'].indexOf(k) === -1)
+          .map(k => k + ':\n' + data[k]).join('\n\n');
+        window.location.href = 'mailto:rob@alignedmanproject.com?subject='
+          + encodeURIComponent('Coaching Application — ' + (data.Name || ''))
+          + '&body=' + encodeURIComponent(body);
+        return;
+      }
 
-function sortTimeSlots(){
-  var c=document.getElementById('timeSlots');
-  var data=Array.from(c.querySelectorAll('.time-slot-row')).map(function(r){
-    return{time:r.querySelector('.time-input').value,label:r.querySelector('.slot-input').value};
-  });
-  data.sort(function(a,b){return (a.time||'99:99').localeCompare(b.time||'99:99');});
-  c.innerHTML='';
-  data.forEach(function(d){addSlotRow(d.time,d.label);});
-}
-
-function getSelectedPresets(id){return Array.from(document.querySelectorAll('#'+id+' [data-preset] .preset-btn.selected')).map(function(b){return b.closest('[data-preset]').dataset.preset;});}
-
-function getNotesByArea(id){
-  var notes={};
-  document.querySelectorAll('#'+id+' .preset-note-wrap').forEach(function(nw){var h=nw.querySelector('.preset-note-header'),t=nw.querySelector('.preset-note-input');if(h&&t&&t.value.trim()){notes[h.textContent.replace('Notes on ','').trim()]=t.value.trim();}});
-  return notes;
-}
-
-function collectSlots(){return Array.from(document.querySelectorAll('.time-slot-row')).map(function(r){return{time:r.querySelector('.time-input').value,label:r.querySelector('.slot-input').value};}).filter(function(s){return s.time||s.label;});}
-
-function showToast(msg){var t=document.getElementById('optToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
-
-
-var EXERCISES={
-'Chest':['Barbell Bench Press','Incline Dumbbell Press','Dumbbell Bench Press','Cable Fly','Incline Barbell Press','Chest Dip','Push-Up','Pec Deck Machine','Decline Bench Press','Machine Chest Press'],
-'Triceps':['Tricep Pushdown','Skull Crushers','Overhead Tricep Extension','Close-Grip Bench Press','Tricep Dips','Rope Pushdown','Single-Arm Cable Extension','Diamond Push-Up','JM Press','Machine Tricep Extension'],
-'Biceps':['Barbell Curl','Dumbbell Curl','Hammer Curl','Preacher Curl','Incline Dumbbell Curl','Cable Curl','Concentration Curl','EZ-Bar Curl','Spider Curl','Machine Bicep Curl'],
-'Back':['Deadlift','Pull-Up','Barbell Row','Lat Pulldown','Seated Cable Row','T-Bar Row','Dumbbell Row','Chin-Up','Face Pull','Straight-Arm Pulldown'],
-'Shoulders':['Overhead Press','Dumbbell Shoulder Press','Lateral Raise','Front Raise','Rear Delt Fly','Arnold Press','Upright Row','Cable Lateral Raise','Machine Shoulder Press','Shrugs'],
-'Legs':['Barbell Squat','Leg Press','Romanian Deadlift','Leg Extension','Leg Curl','Walking Lunge','Hack Squat','Bulgarian Split Squat','Calf Raise','Goblet Squat'],
-'Glutes':['Hip Thrust','Barbell Glute Bridge','Romanian Deadlift','Bulgarian Split Squat','Cable Kickback','Sumo Deadlift','Walking Lunge','Step-Up','Good Morning','Frog Pump'],
-'Core':['Plank','Hanging Leg Raise','Cable Crunch','Russian Twist','Ab Wheel Rollout','Bicycle Crunch','Dead Bug','Mountain Climber','Side Plank','Decline Sit-Up'],
-'Forearms':['Wrist Curl','Reverse Wrist Curl','Farmer\'s Carry','Reverse Curl','Plate Pinch','Dead Hang','Behind-Back Wrist Curl','Wrist Roller','Towel Pull-Up','Gripper Squeeze'],
-'Full Body':['Deadlift','Barbell Squat','Clean and Press','Kettlebell Swing','Thruster','Burpee','Snatch','Turkish Get-Up','Man Maker','Farmer\'s Carry']
-};
-
-function addExerciseRow(muscle,exercise,sets,reps){
-  var container=document.getElementById('exerciseRows');
-  var row=document.createElement('div');
-  row.className='exercise-row';
-  row.style.marginBottom='6px';
-  var repsArr=Array.isArray(reps)?reps:(reps?[reps]:[]);
-
-  var allExercises=[];
-  var selectedMuscles=Array.from(document.querySelectorAll('#bodyPartPresets .preset-btn.selected')).map(function(b){return b.textContent;});
-  if(selectedMuscles.length===0)selectedMuscles=Object.keys(EXERCISES);
-  selectedMuscles.forEach(function(m){
-    if(EXERCISES[m]){EXERCISES[m].forEach(function(ex){allExercises.push(m+' — '+ex);});}
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      try {
+        const res = await fetch(W3F_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        if (!json.success) throw new Error(json.message || 'Send failed');
+        document.getElementById('applyFormBox').style.display = 'none';
+        document.getElementById('applySuccess').style.display = 'block';
+        document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+      } catch (ex) {
+        btn.disabled = false;
+        btn.textContent = 'Send My Application';
+        err.innerHTML = 'That did not send. Email your answers directly to <a href="mailto:rob@alignedmanproject.com" style="color:var(--gold);">rob@alignedmanproject.com</a> and Robert will pick it up.';
+        err.style.display = 'block';
+      }
+    });
   });
 
-  var exOptions='<option value="">Select exercise...</option>';
-  allExercises.forEach(function(ex){
-    exOptions+='<option value="'+ex+'"'+(exercise===ex?' selected':'')+'>'+ex+'</option>';
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   });
-
-  var setOptions='<option value="">Sets</option>';
-  for(var s=1;s<=5;s++){setOptions+='<option value="'+s+'"'+(sets==s?' selected':'')+'>'+s+' sets</option>';}
-
-  var repSelects='';
-  for(var i=0;i<4;i++){
-    var repOptions='<option value="">R'+(i+1)+'</option>';
-    for(var r=1;r<=25;r++){repOptions+='<option value="'+r+'"'+(repsArr[i]==r?' selected':'')+'>'+r+'</option>';}
-    repSelects+='<select class="exercise-num-select ex-rep" data-rep="'+i+'">'+repOptions+'</select>';
-  }
-
-  row.innerHTML='<select class="exercise-select">'+exOptions+'</select><div class="exercise-row-nums"><select class="exercise-num-select ex-sets">'+setOptions+'</select>'+repSelects+'<button class="exercise-del-btn" type="button" onclick="this.closest(\'.exercise-row\').remove()">✕</button></div>';
-  container.appendChild(row);
-}
-
-function refreshExerciseSection(){
-  var selectedMuscles=Array.from(document.querySelectorAll('#bodyPartPresets .preset-btn.selected')).map(function(b){return b.textContent;});
-  var exSection=document.getElementById('exerciseSection');
-  if(selectedMuscles.length>0){
-    exSection.classList.add('visible');
-    if(document.getElementById('exerciseRows').children.length===0){addExerciseRow();}
-  } else {
-    exSection.classList.remove('visible');
-  }
-}
-
-function collectExercises(){
-  return Array.from(document.querySelectorAll('#exerciseRows .exercise-row')).map(function(r){
-    var reps=Array.from(r.querySelectorAll('.ex-rep')).map(function(s){return s.value;});
-    return{
-      exercise:r.querySelector('.exercise-select').value,
-      sets:r.querySelector('.ex-sets').value,
-      reps:reps
-    };
-  }).filter(function(e){return e.exercise;});
-}
-
-function initOptimizer(){
-  var addExerciseBtnEl=document.getElementById('addExerciseBtn');
-  if(addExerciseBtnEl)addExerciseBtnEl.onclick=function(){addExerciseRow();};
-
-  var addSlotBtnEl=document.getElementById('addSlotBtn');
-  if(addSlotBtnEl)addSlotBtnEl.addEventListener('click',function(){addSlotRow('','');});
-
-  var saveBtnEl=document.getElementById('saveBtn');
-  if(saveBtnEl)saveBtnEl.onclick=function(){
-    if(!activeDay)return;
-    var key=storageKey(currentYear,currentMonth,activeDay);
-    var entry={
-      physical:getSelectedPresets('physicalPresets'),
-      physicalNotes:getNotesByArea('physicalPresets'),
-      bodyParts:Array.from(document.querySelectorAll('#bodyPartPresets .preset-btn.selected')).map(function(b){return b.textContent;}),
-      mental:getSelectedPresets('mentalPresets'),
-      mentalNotes:getNotesByArea('mentalPresets'),
-      spiritual:getSelectedPresets('spiritualPresets'),
-      spiritualNotes:getNotesByArea('spiritualPresets'),
-      physicalCustom:document.getElementById('physicalCustom').value,
-      mentalCustom:document.getElementById('mentalCustom').value,
-      spiritualCustom:document.getElementById('spiritualCustom').value,
-      slots:collectSlots(),
-      weight:document.getElementById('weightInput').value||null,
-      water:document.getElementById('waterInput').value||null,
-      grat1:document.getElementById('grat1').value||null,
-      grat2:document.getElementById('grat2').value||null,
-      grat3:document.getElementById('grat3').value||null,
-      recapWins:document.getElementById('recapWins').value||null,
-      recapGrow:document.getElementById('recapGrow').value||null,
-      exercises:collectExercises()
-    };
-    optData[key]=entry;
-    localStorage.setItem('blueprint_data',JSON.stringify(optData));
-    closeModal();
-    buildCalendar();
-    showToast('Day saved ✓');
-  };
-
-  var clearBtnEl=document.getElementById('clearBtn');
-  if(clearBtnEl)clearBtnEl.addEventListener('click',function(){if(!activeDay)return;delete optData[storageKey(currentYear,currentMonth,activeDay)];saveData();closeModal();buildCalendar();});
-
-  var modalCloseEl=document.getElementById('modalClose');
-  if(modalCloseEl)modalCloseEl.addEventListener('click',closeModal);
-
-  var modalOverlayEl=document.getElementById('modalOverlay');
-  if(modalOverlayEl)modalOverlayEl.addEventListener('click',function(e){if(e.target===this)closeModal();});
-
-  var prevMonthEl=document.getElementById('prevMonth');
-  if(prevMonthEl)prevMonthEl.addEventListener('click',function(){currentMonth--;if(currentMonth<0){currentMonth=11;currentYear--;}buildCalendar();});
-
-  var nextMonthEl=document.getElementById('nextMonth');
-  if(nextMonthEl)nextMonthEl.addEventListener('click',function(){currentMonth++;if(currentMonth>11){currentMonth=0;currentYear++;}buildCalendar();});
-
-  // Daily message
-  var MSG_KEY='aligned_daily_message';
-  function loadMessage(){var msg=localStorage.getItem(MSG_KEY)||'';var d=document.getElementById('msgDisplay');if(!d)return;if(msg){d.textContent=msg;d.classList.remove('empty');}else{d.textContent="No message yet — tap Edit to add today's motivation.";d.classList.add('empty');}var ta=document.getElementById('msgTextarea');if(ta)ta.value=msg;}
-  loadMessage();
-  var msgEditBtn=document.getElementById('msgEditBtn');
-  if(msgEditBtn)msgEditBtn.addEventListener('click',function(){var ed=document.getElementById('msgEditor');if(ed){ed.classList.add('visible');document.getElementById('msgTextarea').focus();}});
-  var msgSaveBtn=document.getElementById('msgSaveBtn');
-  if(msgSaveBtn)msgSaveBtn.addEventListener('click',function(){var msg=document.getElementById('msgTextarea').value.trim();localStorage.setItem(MSG_KEY,msg);document.getElementById('msgEditor').classList.remove('visible');loadMessage();showToast('Message saved');});
-  var msgCancelBtn=document.getElementById('msgCancelBtn');
-  if(msgCancelBtn)msgCancelBtn.addEventListener('click',function(){document.getElementById('msgEditor').classList.remove('visible');loadMessage();});
-
-  // Export/Import
-  var exportBtn=document.getElementById('exportBtn');
-  if(exportBtn)exportBtn.addEventListener('click',function(){var blob=new Blob([JSON.stringify(optData,null,2)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='aligned-man-data.json';a.click();URL.revokeObjectURL(url);showToast('Data exported');});
-  var importBtn=document.getElementById('importBtn');
-  if(importBtn)importBtn.addEventListener('click',function(){document.getElementById('importFile').click();});
-  var importFile=document.getElementById('importFile');
-  if(importFile)importFile.addEventListener('change',function(){var file=this.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{optData=JSON.parse(e.target.result);saveData();buildCalendar();showToast('Data imported');}catch(err){showToast('Invalid file');}};reader.readAsText(file);this.value='';});
-
-  buildCalendar();
-}
-
-  // POPUP
-  function showPopup(){
-    if(sessionStorage.getItem('popup_seen'))return;
-    document.getElementById('popup-overlay').classList.add('show');
-  }
-  function closePopup(){
-    document.getElementById('popup-overlay').classList.remove('show');
-    sessionStorage.setItem('popup_seen','1');
-  }
-  async function submitPopup(){
-    var name=document.getElementById('popupName').value.trim();
-    var email=document.getElementById('popupEmail').value.trim();
-    if(!name||!email||!email.includes('@')){alert('Please enter your name and email.');return;}
-    var btn=document.querySelector('.popup-submit');
-    btn.textContent='Sending...';btn.disabled=true;
-    try{
-      await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,tags:['cheat-sheet','free-protocol']})});
-    }catch(e){
-      var leads=JSON.parse(localStorage.getItem('amp_leads')||'[]');
-      leads.push({name,email,date:new Date().toISOString()});
-      localStorage.setItem('amp_leads',JSON.stringify(leads));
-    }
-    document.getElementById('popupForm').style.display='none';
-    document.getElementById('popupSuccess').style.display='block';
-    sessionStorage.setItem('popup_seen','1');
-    setTimeout(function(){closePopup();},2500);
-  }
-  // Show popup after 4 seconds
-  setTimeout(showPopup, 4000);
-
 </script>
 </body>
 </html>
