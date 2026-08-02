@@ -509,7 +509,7 @@ const MENTAL_PRESETS=['Journaling','Read','Meditate','Therapy','No Screen','Stud
 const SPIRITUAL_PRESETS=['Prayer','Gratitude','Affirmations','Scripture','Nature','Reflect','Worship','Silence'];
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-let currentYear=2026,currentMonth=5,activeDay=null;
+const today=new Date();let currentYear=today.getFullYear(),currentMonth=today.getMonth(),activeDay=null;
 let data=JSON.parse(localStorage.getItem('blueprint_data')||'{}');
 const today=new Date();
 function storageKey(y,m,d){return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');}
@@ -706,16 +706,13 @@ function addSlotRow(time,label){
   const row=document.createElement('div');row.className='time-slot-row';
   row.innerHTML='<input class="time-input" type="time" value="'+time+'" step="900"><input class="slot-input" type="text" placeholder="What are you doing..." value="'+label+'"><button type="button" class="slot-del-btn" onclick="this.closest(\'.time-slot-row\').remove()" style="background:none;border:none;color:#666;cursor:pointer;font-size:15px;padding:0 4px;">&#10005;</button>';
   const timeEl = row.querySelector('.time-input');
-  // Prevent any parent form / Enter-key from submitting or bubbling to close the modal
   timeEl.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); e.stopPropagation(); timeEl.blur(); } });
   row.querySelector('.slot-input').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); e.stopPropagation(); } });
-  // Only re-sort AFTER the user has finished (blur), never mid-edit, and never steal focus from an active field
   timeEl.addEventListener('blur', function(){ setTimeout(sortTimeSlots, 50); });
   c.appendChild(row);
 }
 function sortTimeSlots(){
   const c=document.getElementById('timeSlots');
-  // Never re-sort while a time input in this container is still focused
   if(c.contains(document.activeElement) && document.activeElement.classList.contains('time-input')) return;
   const rows=Array.from(c.querySelectorAll('.time-slot-row'));
   const data=rows.map(function(r){return{time:r.querySelector('.time-input').value,label:r.querySelector('.slot-input').value};});
