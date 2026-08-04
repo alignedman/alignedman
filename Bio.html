@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meet Rob Gonnerman | Bio | The Aligned Man Project</title>
+<meta name="description" content="The 4-month identity transformation program for disciplined men, late 20s to 50s — who don't break. Physical. Mental. Spiritual." />
+<script defer src="/_vercel/insights/script.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{--gold:#C9A84C;--gold-light:#E2C270;--gold-dim:#8A6E30;--black:#0A0A0A;--surface:#111111;--surface2:#181818;--border:#2A2A2A;--text:#E8E8E8;--muted:#888888;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;}
+  a{color:var(--gold);text-decoration:none;}
+
+  .topbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.97);border-bottom:1px solid var(--border);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(12px);}
+  .topbar .brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--gold);}
+  .topbar-cta{background:var(--gold);color:var(--black);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:12px 24px;transition:background .2s;}
+  .topbar-cta:hover{background:var(--gold-light);}
+  .topbar .back{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:10px 18px;margin-right:14px;transition:all .2s;}
+  .topbar .back:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* HERO */
+  .hero{background:linear-gradient(165deg,#0d0d0d 0%,#151009 55%,#0a0a0a 100%);border-bottom:1px solid var(--border);padding:110px 40px 90px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;height:420px;background:radial-gradient(ellipse,rgba(201,168,76,0.13) 0%,transparent 70%);pointer-events:none;}
+  .hero .eyebrow{font-size:11px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:14px;justify-content:center;}
+  .hero .eyebrow::before,.hero .eyebrow::after{content:'';display:block;width:36px;height:1px;background:var(--gold);}
+  .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,104px);letter-spacing:3px;line-height:.92;color:#fff;margin-bottom:18px;}
+  .hero h1 span{color:var(--gold);}
+  .hero .sub{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:var(--muted);max-width:620px;margin:0 auto 14px;}
+  .hero .position{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:44px;}
+  .hero-cta{display:inline-block;background:var(--gold);color:var(--black);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:19px 46px;transition:background .2s;}
+  .hero-cta:hover{background:var(--gold-light);}
+  .hero-note{display:block;margin-top:14px;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 40px;}
+  section{padding:90px 0;}
+  .sec-tag{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+  .sec-tag::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+  h2.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5.5vw,62px);letter-spacing:2px;line-height:.95;color:#fff;margin-bottom:26px;}
+  h2.sec-title span{color:var(--gold);}
+
+  /* STORY */
+  .story{background:var(--black);}
+  .story-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:start;}
+  .story-copy p{font-size:16px;font-weight:300;color:#c9c9c9;margin-bottom:20px;}
+  .story-copy p strong{color:#fff;font-weight:600;}
+  .story-quote{border-left:3px solid var(--gold);background:var(--surface);padding:26px 30px;margin:30px 0;}
+  .story-quote .q{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:var(--gold-light);line-height:1.6;margin-bottom:10px;}
+  .story-quote .who{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+  .story-facts{display:flex;flex-direction:column;gap:2px;position:sticky;top:96px;}
+  .fact{background:var(--surface);border-left:3px solid var(--gold-dim);padding:22px 26px;transition:border-color .25s,background .25s;}
+  .fact:hover{border-left-color:var(--gold);background:var(--surface2);}
+  .fact .num{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;color:var(--gold);line-height:1;}
+  .fact .lbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+  /* TRAP */
+  .trap{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .trap-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .trap-copy p{font-size:16px;font-weight:300;color:#c9c9c9;margin-bottom:18px;}
+  .trap-copy p strong{color:var(--gold);font-weight:600;}
+  .trap-box{background:var(--black);border:1px solid var(--gold-dim);padding:44px 40px;position:relative;}
+  .trap-box::before{content:'THE DIFFERENTIATOR';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 20px;white-space:nowrap;}
+  .trap-box .big{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,76px);letter-spacing:2px;color:#fff;line-height:.95;text-align:center;}
+  .trap-box .big span{color:var(--gold);}
+  .trap-box .small{font-size:13px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.8;}
+
+  /* PHASES */
+  .phases-list{display:flex;flex-direction:column;gap:2px;margin-top:44px;}
+  .phase{display:grid;grid-template-columns:120px 1fr;gap:34px;background:var(--surface);border-left:3px solid transparent;padding:38px 40px;transition:border-color .25s,background .25s;}
+  .phase:hover{border-left-color:var(--gold);background:var(--surface2);}
+  .phase-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--gold);line-height:1;letter-spacing:2px;}
+  .phase-num small{display:block;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+  .phase h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;color:#fff;margin-bottom:10px;}
+  .phase p{font-size:15px;font-weight:300;color:#bdbdbd;}
+  .phase .pillars-line{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-top:14px;}
+
+  /* PILLARS */
+  .pillars{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:44px;}
+  .pillar{background:var(--black);padding:46px 36px;border-top:3px solid var(--gold-dim);transition:border-color .25s;}
+  .pillar:hover{border-top-color:var(--gold);}
+  .pillar .ico{font-size:26px;margin-bottom:18px;}
+  .pillar h3{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px;color:var(--gold);margin-bottom:14px;}
+  .pillar p.lead{font-size:14px;color:#c9c9c9;font-weight:300;margin-bottom:20px;}
+  .pillar ul{list-style:none;}
+  .pillar li{font-size:13px;color:var(--muted);padding:9px 0 9px 22px;border-bottom:1px solid var(--border);position:relative;}
+  .pillar li::before{content:'◆';position:absolute;left:0;color:var(--gold);font-size:8px;top:14px;}
+  .pillar li:last-child{border-bottom:none;}
+
+  /* TIERS */
+  .tier-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;}
+  .tier{background:var(--surface);border:1px solid var(--border);padding:44px 40px;position:relative;display:flex;flex-direction:column;transition:border-color .25s;}
+  .tier:hover{border-color:var(--gold-dim);}
+  .tier.featured{border:1px solid var(--gold);}
+  .tier.featured::before{content:'MOST POPULAR';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 20px;}
+  .tier .t-name{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:#fff;}
+  .tier .t-price{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:1px;color:var(--gold);line-height:1;margin:14px 0 4px;}
+  .tier .t-per{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+  .tier .t-for{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.6;}
+  .tier ul{list-style:none;margin-bottom:34px;flex:1;}
+  .tier li{font-size:14px;color:#c9c9c9;font-weight:300;padding:10px 0 10px 26px;border-bottom:1px solid var(--border);position:relative;}
+  .tier li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:700;}
+  .tier li:last-child{border-bottom:none;}
+  .tier li strong{color:#fff;font-weight:600;}
+  .tier-btn{display:block;text-align:center;background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px;transition:all .2s;}
+  .tier-btn:hover{background:var(--gold);color:var(--black);}
+  .tier.featured .tier-btn{background:var(--gold);color:var(--black);}
+  .tier.featured .tier-btn:hover{background:var(--gold-light);}
+
+  /* GUARANTEE STRIP */
+  .strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 40px;text-align:center;}
+  .strip .line{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,4vw,42px);letter-spacing:3px;color:#fff;}
+  .strip .line span{color:var(--gold);}
+  .strip .sub{font-size:13px;color:var(--muted);margin-top:10px;letter-spacing:1px;}
+
+  /* FINAL CTA */
+  .final{background:linear-gradient(165deg,#0d0d0d 0%,#151009 55%,#0a0a0a 100%);text-align:center;padding:110px 40px;}
+  .final h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,84px);letter-spacing:3px;line-height:.95;color:#fff;margin-bottom:18px;}
+  .final h2 span{color:var(--gold);}
+  .final p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto 40px;font-weight:300;}
+
+  /* FOOTER */
+  .site-footer{background:var(--black);border-top:1px solid var(--border);padding:48px 40px;text-align:center;}
+  .site-footer .brand{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px;color:var(--gold);margin-bottom:6px;}
+  .site-footer .pillars-line{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:24px;}
+  .site-footer .disclaimer{font-size:11px;color:#666;max-width:720px;margin:0 auto;line-height:1.8;}
+
+  @media(max-width:860px){
+    .topbar,.hero,.strip,.final,.site-footer{padding-left:20px;padding-right:20px;}
+    .wrap{padding:0 20px;}
+    section{padding:64px 0;}
+    .story-grid,.trap-inner{grid-template-columns:1fr;gap:36px;}
+    .story-facts{position:static;}
+    .pillar-grid{grid-template-columns:1fr;}
+    .tier-grid{grid-template-columns:1fr;}
+    .phase{grid-template-columns:1fr;gap:14px;padding:30px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">THE ALIGNED MAN PROJECT</div>
+  <div style="display:flex;align-items:center;gap:0;">
+    <a href="/" class="back" style="margin-right:14px;">← Main Site</a>
+    <a href="/bio.html" class="back" style="margin-right:14px;">Bio</a>
+    <a href="/coaching.html" class="back" style="margin-right:14px;">Coaching</a>
+    <a href="/#apply" class="topbar-cta">Apply Now</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">For Disciplined Men, Late 20s to 50s — Who Don't Break</div>
+  <h1>THE ALIGNED<br/><span>METHOD&trade;</span></h1>
+  <p class="sub" style="margin-bottom:26px;">You've tried motivation. You've tried diets. You've tried workouts.<br/>Nothing lasted. This isn't another program — <strong style="color:#fff;font-style:normal;">it's a complete rebuild.</strong></p>
+  <div class="position">A 4-Month Identity Transformation · Physical · Mental · Spiritual</div>
+  <a href="/#apply" class="hero-cta">Apply for Coaching</a>
+  <span class="hero-note">We don't accept everyone. Applications are reviewed personally by Rob.</span>
+</section>
+
+<!-- STORY -->
+<section class="hero">
+  <div class="eyebrow">The Man Behind The Method</div>
+  <h1>MEET YOUR<br/><span>COACH</span></h1>
+  <p class="sub">Not a guru who read the books. A man who lived every word of it.</p>
+</section>
+<!-- STORY -->
+<section class="story">
+  <div class="wrap">
+    <div class="sec-tag">The Proof Behind The Method</div>
+    <h2 class="sec-title">I Didn't Read About This.<br/><span>I Lived It.</span></h2>
+    <p style="font-size:14px;letter-spacing:1px;color:var(--muted);margin-bottom:34px;">Built by a Registered Nurse who spent a decade rebuilding — physically, mentally, and spiritually — before ever coaching another man through it.</p>
+    <div class="story-grid">
+      <div class="story-copy">
+        <p><strong>I was 140+ pounds overweight.</strong> Burnt out. Watching my body, my marriage, and my identity fall apart at the same time. I know exactly what it feels like to look in the mirror and not recognize the man staring back.</p>
+        <p>The physical rebuild came first — because it had to. When your body is failing, everything built on top of it fails with it. I lost the 140+ pounds. I rebuilt my strength, my energy, and my health from the ground up. Not with a magic program. With discipline, with knowledge earned from a decade learning under the pioneer coaches of men's optimization — and with a decision I refused to take back.</p>
+        <div class="story-quote">
+          <div class="q">"You're gonna go through hell. So you might as well just go through it one way or another."</div>
+          <div class="who">— My mother. The philosophy behind every trial I've faced.</div>
+        </div>
+        <p><strong>Then life tested everything else.</strong> Divorce. Losing everything. Going back to school at 35 while raising my two sons, becoming a Registered Nurse at 39. Working the transplant floor and psychiatric units. Five years as an Athlete Manager inside a major supplement company, training and educating alongside the best in the game.</p>
+        <p>Every pillar of this program exists because I had to rebuild it in my own life first. <strong>I'm not selling theory. I'm selling a life I actually lived</strong> — and a system built from every trial that tried to break me and didn't.</p>
+      </div>
+      <div class="story-facts">
+        <div class="fact"><div class="num">140+</div><div class="lbl">Pounds Lost</div></div>
+        <div class="fact"><div class="num">39</div><div class="lbl">Age Became a Registered Nurse</div></div>
+        <div class="fact"><div class="num">10</div><div class="lbl">Years in Men's Optimization</div></div>
+        <div class="fact"><div class="num">RN</div><div class="lbl">Registered Nurse — Medical &amp; Psychiatric</div></div>
+        <div class="fact"><div class="num">5</div><div class="lbl">Years Athlete Manager — Supplement Industry</div></div>
+        <div class="fact"><div class="num">2</div><div class="lbl">Sons — My Daily Purpose</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- BIO -->
+<section style="background:var(--black);">
+  <div class="wrap">
+    <div class="sec-tag">Meet Your Coach</div>
+    <h2 class="sec-title">Rob Gonnerman.<br/><span>Founder, The Aligned Man Project.</span></h2>
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:50px;align-items:start;margin-top:10px;">
+      <div>
+        <img src="/images/rob-scrubs.jpg" alt="Rob Gonnerman, Registered Nurse" style="width:100%;border:1px solid var(--border);display:block;" />
+        <div style="margin-top:16px;text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--gold);">ROB GONNERMAN</div>
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px;">Founder &middot; RN &middot; Coach</div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:15px;font-weight:300;color:#c9c9c9;margin-bottom:18px;">Before The Aligned Man Project, Rob spent five years as an Athlete Manager inside a major supplement company — trained and educated alongside pioneer coaches in men's optimization, bodybuilding, and performance.</p>
+        <p style="font-size:15px;font-weight:300;color:#c9c9c9;margin-bottom:18px;">Went back to school at 35 while raising his two sons — became a Registered Nurse at 39. Now works medical and psychiatric units, bringing a clinical understanding of the mind and body that no online coach can match.</p>
+        <p style="font-size:15px;font-weight:300;color:#c9c9c9;margin-bottom:18px;">Over the past decade, Rob has studied a wide range of spiritual traditions and gone through intensive personal therapy — doing the internal work himself before ever asking a client to do it. The Mental and Spiritual pillars aren't borrowed frameworks. They're the product of his own alignment, tested and rebuilt over ten years.</p>
+        <p style="font-size:15px;font-weight:300;color:#c9c9c9;margin-bottom:18px;"><strong style="color:#fff;">Successfully co-parenting two sons</strong> who are his daily purpose. Lost 140+ pounds and rebuilt his body, his mind, and his life from the ground up — not once, but every time it was tested.</p>
+        <div style="border-left:3px solid var(--gold);background:var(--surface);padding:20px 26px;margin-top:26px;">
+          <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--gold-light);line-height:1.6;">"I'm not a guru who read the books. I'm a man who lived every word of this — and now I give it to the men who need it."</p>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:44px;">
+      <div style="position:relative;background:var(--surface);">
+        <img src="/images/rob-and-sons.jpg" alt="Rob with his two sons" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      </div>
+      <div style="position:relative;background:var(--surface);">
+        <img src="/images/rob-and-son-pool.jpg" alt="Rob with his son" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      </div>
+    </div>
+    <p style="font-size:12px;color:#666;margin-top:14px;letter-spacing:1px;text-align:center;">His daily purpose. The reason none of this was ever optional.</p>
+  </div>
+</section>
+
+<!-- THE TRANSFORMATION -->
+<section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="sec-tag">The Transformation</div>
+    <h2 class="sec-title">140+ Pounds. <span>One Decision.</span></h2>
+    <p style="font-size:15px;color:var(--muted);max-width:620px;font-weight:300;margin-bottom:40px;">This is not a stock photo program. This is the founder's own rebuild — the same method, the same pillars, the same standard you'll be held to.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;max-width:760px;">
+      <div style="position:relative;background:var(--black);">
+        <img src="/images/before-front.jpg" alt="Rob before transformation" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(45%) contrast(0.95);" />
+        <div style="position:absolute;top:16px;left:16px;background:rgba(10,10,10,0.88);border:1px solid var(--border);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:3px;padding:7px 16px;">BEFORE</div>
+      </div>
+      <div style="position:relative;background:var(--black);">
+        <img src="/images/after-1.jpg" alt="Rob after transformation — the rebuild" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        <div style="position:absolute;top:16px;left:16px;background:var(--gold);color:var(--black);font-size:10px;font-weight:700;letter-spacing:3px;padding:7px 16px;">AFTER</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#666;margin-top:14px;letter-spacing:1px;">Individual results vary. This transformation reflects years of consistent work across all three pillars.</p>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="brand">THE ALIGNED MAN PROJECT</div>
+  <div class="pillars-line">Physical · Mental · Spiritual</div>
+  <p class="disclaimer">
+    The Aligned Man Project provides coaching, educational, and motivational content only. Nothing on this page constitutes medical advice, nursing advice, diagnosis, or treatment. Robert Gonnerman is a Registered Nurse; however, no content or coaching provided through The Aligned Man Project is delivered in his capacity as a nurse, and no nurse-patient or provider-patient relationship is created. Always consult a licensed physician before beginning any exercise, nutrition, or optimization program. Individual results vary.
+    <br/><br/>© The Aligned Man Project · alignedmanproject.com
+  </p>
+</footer>
+
+</body>
+</html>
