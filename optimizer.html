@@ -293,9 +293,35 @@ header { animation:fadeDown 0.7s ease both; }
     .exercise-del-btn:hover{color:#c0392b;}
     .add-exercise-btn{background:none;border:1px dashed rgba(201,168,76,0.25);color:var(--mid,#888);padding:7px;border-radius:2px;cursor:pointer;font-size:10px;font-family:'DM Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;width:100%;transition:all 0.2s;}
     .add-exercise-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* PASSWORD LOCK */
+    #ampLock{position:fixed;inset:0;z-index:99999;background:#0a0a0a;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
+    #ampLock .lk-top{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+    #ampLock .lk-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#666;margin-bottom:36px;font-family:'DM Sans',sans-serif;}
+    #ampLock .lk-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,11vw,84px);letter-spacing:3px;line-height:0.9;text-align:center;margin-bottom:8px;color:#fff;}
+    #ampLock .lk-title span{color:var(--gold);}
+    #ampLock .lk-sub{font-size:13px;color:#888;margin-bottom:40px;font-family:'DM Sans',sans-serif;text-align:center;}
+    #ampLock input{width:100%;max-width:300px;background:#151515;border:1px solid #2a2a2a;border-bottom:1px solid rgba(201,168,76,0.4);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;letter-spacing:6px;text-align:center;padding:16px 20px;outline:none;text-transform:uppercase;display:block;margin-bottom:12px;}
+    #ampLock input:focus{border-bottom-color:var(--gold);}
+    #ampLock button{width:100%;max-width:300px;background:var(--gold);color:#0a0a0a;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px;border:none;cursor:pointer;display:block;}
+    #ampLock .lk-err{font-size:11px;letter-spacing:2px;color:#c0392b;text-transform:uppercase;height:20px;margin-top:12px;font-family:'DM Sans',sans-serif;}
+    #ampLock .lk-foot{position:absolute;bottom:30px;font-size:10px;letter-spacing:4px;color:#444;text-transform:uppercase;font-family:'DM Sans',sans-serif;}
 </style>
 </head>
 <body>
+<!-- PASSWORD LOCK -->
+<div id="ampLock">
+  <div class="lk-top"></div>
+  <div class="lk-eyebrow">Members Only</div>
+  <div class="lk-title">DAILY <span>OPTIMIZER</span></div>
+  <div class="lk-sub">Enter your access code to continue</div>
+  <input id="ampLockInput" type="password" placeholder="Access Code" autocomplete="off" />
+  <button type="button" onclick="ampUnlock()">Enter</button>
+  <div class="lk-err" id="ampLockErr"></div>
+  <div class="lk-foot">Physical &middot; Mental &middot; Spiritual</div>
+</div>
+<div id="ampSite" style="display:none;">
+
 
 <a href="/" class="back-link">← Back to Site</a>
 
@@ -785,6 +811,30 @@ document.getElementById('exportBtn').addEventListener('click',function(){var blo
 document.getElementById('importBtn').addEventListener('click',function(){document.getElementById('importFile').click();});
 document.getElementById('importFile').addEventListener('change',function(){var file=this.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{data=JSON.parse(e.target.result);saveData();buildCalendar();showToast('Data imported');}catch(err){showToast('Invalid file');}};reader.readAsText(file);this.value='';});
 buildCalendar();
+</script>
+</div><!-- /ampSite -->
+<script>
+function ampUnlock(){
+  var v=document.getElementById('ampLockInput').value.trim().toUpperCase();
+  if(v==='ERNIE85'){
+    sessionStorage.setItem('amp_opt_access','granted');
+    document.getElementById('ampLock').style.display='none';
+    document.getElementById('ampSite').style.display='block';
+  } else {
+    document.getElementById('ampLockErr').textContent='Incorrect code';
+  }
+}
+(function(){
+  function init(){
+    var inp=document.getElementById('ampLockInput');
+    if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();ampUnlock();}});
+    if(sessionStorage.getItem('amp_opt_access')==='granted'){
+      document.getElementById('ampLock').style.display='none';
+      document.getElementById('ampSite').style.display='block';
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+})();
 </script>
 </body>
 </html>
