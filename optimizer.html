@@ -1,7 +1,8 @@
-<!-- AMP VERSION STAMP | optimizer.html | Daily Optimizer | LAST UPDATED: 2026-08-13 | STATUS: LOCKED (ERNIE85) | The Aligned Man Project LLC -->
+<!-- AMP VERSION STAMP | optimizer.html | Daily Optimizer | LAST UPDATED: 2026-08-15 | STATUS: LOCKED (ERNIE85) | The Aligned Man Project LLC -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="robots" content="noindex, nofollow" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Aligned Man — Daily & Monthly Goal Optimizer β1.0</title>
@@ -813,6 +814,16 @@ document.getElementById('importBtn').addEventListener('click',function(){documen
 document.getElementById('importFile').addEventListener('change',function(){var file=this.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){try{data=JSON.parse(e.target.result);saveData();buildCalendar();showToast('Data imported');}catch(err){showToast('Invalid file');}};reader.readAsText(file);this.value='';});
 buildCalendar();
 </script>
+
+<footer style="border-top:1px solid rgba(255,255,255,0.08);padding:30px 20px;text-align:center;font-family:'DM Sans',sans-serif;">
+  <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#666;margin-bottom:12px;">The Aligned Man Project</div>
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;">
+    <a href="/" style="color:#777;margin:0 10px;text-decoration:none;">Main Site</a>
+    <a href="/privacy.html" style="color:#777;margin:0 10px;text-decoration:none;">Privacy Policy</a>
+    <a href="/terms.html" style="color:#777;margin:0 10px;text-decoration:none;">Terms of Service</a>
+  </div>
+  <div style="font-size:10px;color:#555;margin-top:14px;">&copy; 2026 The Aligned Man Project LLC</div>
+</footer>
 </div><!-- /ampSite -->
 <script>
 function ampUnlock(){
