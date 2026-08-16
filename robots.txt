@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /optimizer.html
+Disallow: /api/
+
+Sitemap: https://alignedmanproject.com/sitemap.xml
