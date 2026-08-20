@@ -1,4 +1,4 @@
-<!-- AMP VERSION STAMP | cheat-sheet.html | Cheat Sheet FREE EDITION (2 of 17) | LAST UPDATED: 2026-08-17 | STATUS: LIVE (public) | The Aligned Man Project LLC -->
+<!-- AMP VERSION STAMP | cheat-sheet.html | Cheat Sheet FREE EDITION (2 of 17) | LAST UPDATED: 2026-08-20 | STATUS: LIVE (public) | The Aligned Man Project LLC -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -164,7 +164,7 @@
       <span class="gate-tag">Sexual Performance</span>
     </div>
     <input class="gate-input" id="gateName" type="text" placeholder="Your First Name" />
-    <input class="gate-input" id="gateEmail" type="email" placeholder="Your Email Address" />
+    <input class="gate-input" id="gateEmail" type="email" placeholder="Your Email Address" />\n<input type="text" id="hp_website" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;height:0;width:0;border:0;padding:0;" aria-hidden="true" />
     <div class="gate-error" id="gateError"></div>
     <button class="gate-btn" onclick="unlockSheet()">Get Instant Free Access →</button>
     <p class="gate-disclaimer">For disciplined men, late 20s to 50s — who don't break.<br/>No spam. Unsubscribe anytime. Use code <strong style="color:var(--gold)">ROBERT</strong> at checkout.</p>
@@ -478,7 +478,7 @@ async function subscribeToMailchimp(name, email) {
     const res = await fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, tags: ['cheat-sheet', 'free-protocol'] })
+      body: JSON.stringify({ name, email, website: (document.getElementById('hp_website')||{}).value || '', ts: window.__ampT || 0, tags: ['cheat-sheet', 'free-protocol'] })
     });
     const data = await res.json();
     return data.success || data.existing;
@@ -513,5 +513,5 @@ if (sessionStorage.getItem('cs_unlocked') === 'yes') {
   document.getElementById('cheatsheet').style.display = 'block';
 }
 </script>
-</body>
+<script>window.__ampT = Date.now();</script>\n</body>
 </html>
