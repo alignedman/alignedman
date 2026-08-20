@@ -1,14 +1,30 @@
 // api/subscribe.js — Vercel Serverless Function
-// Upload this as api/subscribe.js in your GitHub repo
+// Bot-hardened 2026-08-20: honeypot + time-trap + stricter validation
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { email, name } = req.body;
+  const { email, name, website, ts } = req.body;
 
-  if (!email || !email.includes('@')) {
+  // Honeypot: hidden "website" field. Humans never see it; bots fill it.
+  if (website) {
+    return res.status(200).json({ success: true }); // silently accept, never subscribe
+  }
+
+  // Time-trap: form must be open at least 3 seconds before submit.
+  const elapsed = Date.now() - Number(ts || 0);
+  if (!ts || isNaN(elapsed) || elapsed < 3000) {
+    return res.status(200).json({ success: true }); // silently drop instant submits
+  }
+
+  // Stricter email validation
+  const emailOk = typeof email === 'string'
+    && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)
+    && email.length <= 254
+    && !/@(vtext\.com|txt\.att\.net|tmomail\.net|vzwpix\.com|mypixmessages\.com)$/i.test(email);
+  if (!emailOk) {
     return res.status(400).json({ error: 'Valid email required' });
   }
 
@@ -20,7 +36,7 @@ export default async function handler(req, res) {
     email_address: email,
     status: 'subscribed',
     merge_fields: {
-      FNAME: name || ''
+      FNAME: (typeof name === 'string' ? name.slice(0, 80) : '')
     },
     tags: ['cheat-sheet', 'free-protocol']
   };
