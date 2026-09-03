@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Standards Audit — The Aligned Man Project</title>
+<meta name="description" content="21 questions. Three scores. Four minutes. An honest read on where your standard actually is — Physical, Mental, Spiritual.">
+
+<!-- ============================================================
+     THE STANDARDS AUDIT  ·  drop-in page for alignedmanproject.com
+     ============================================================
+     THIS FILE IS READY TO DEPLOY. NOTHING TO EDIT.
+
+     Already wired:
+       · Mailchimp form (audience 139465) — live form action, bot-trap field
+       · Auto-applies the "Standards Audit" tag on signup
+       · Writes scores into merge fields PHYS / MENT / SPIR / LOWEST
+       · Final CTA points at /coaching.html ($150 Stripe link)
+
+     OPTIONAL / LATER:
+       EDIT-1  Meta Pixel ID — only needed when you start running ads.
+               Leave it as-is until then; the page works fine without it.
+       Swap the CTA to /assessment.html if you build that page.
+     ============================================================ -->
+
+<!-- EDIT-1 ▸ replace YOUR_PIXEL_ID with your Meta pixel ID -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'YOUR_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+:root{
+  --bg:#0E1110;
+  --panel:#171B19;
+  --panel-2:#1F2421;
+  --line:#2C332E;
+  --line-2:#404940;
+  --text:#EDEFEA;
+  --text-2:#9BA398;
+  --text-3:#6E766B;
+  --accent:#8FB865;
+  --accent-dim:#1E2618;
+  --phys:#D69C5A;
+  --ment:#6FAAC0;
+  --spir:#A18FC9;
+  --crit:#D97757;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.ui,button,label{font-family:Archivo,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+
+/* ---------- top bar ---------- */
+.bar{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(14,17,16,.94);backdrop-filter:blur(8px);z-index:10}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:52px}
+.brand{font-family:Archivo,sans-serif;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--text-2);text-decoration:none}
+.counter{font-family:Archivo,sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--text-3);font-variant-numeric:tabular-nums}
+.track{height:2px;background:var(--line)}
+.track i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s ease}
+@media(prefers-reduced-motion:reduce){.track i{transition:none}}
+
+/* ---------- intro ---------- */
+.screen{display:none;padding:44px 0 80px}
+.screen.on{display:block}
+.eyebrow{font-family:Archivo,sans-serif;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:Archivo,sans-serif;font-size:clamp(32px,8vw,46px);line-height:1.02;font-weight:800;letter-spacing:-.025em;text-transform:uppercase;margin:14px 0 0;text-wrap:balance}
+.lede{font-size:19px;color:var(--text-2);margin:18px 0 0}
+.facts{list-style:none;padding:0;margin:28px 0 0;border-top:1px solid var(--line)}
+.facts li{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);font-size:16px;color:var(--text-2)}
+.facts b{color:var(--accent);font-family:Archivo,sans-serif;font-size:12px;font-weight:800;letter-spacing:.1em;min-width:64px;padding-top:3px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:block;width:100%;font-family:Archivo,sans-serif;font-size:14px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;padding:17px 20px;border-radius:3px;
+  background:var(--accent);color:#0E1110;border:0;cursor:pointer;text-align:center;
+  text-decoration:none;margin-top:26px;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{background:var(--line);color:var(--text-3);cursor:not-allowed}
+.btn.ghost{background:transparent;border:1px solid var(--line-2);color:var(--text-2);margin-top:12px}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);filter:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.fine{font-size:13px;color:var(--text-3);text-align:center;margin:14px 0 0;line-height:1.5}
+
+/* ---------- questions ---------- */
+.pill{
+  display:inline-block;font-family:Archivo,sans-serif;font-size:10px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border:1px solid currentColor;border-radius:2px;
+}
+.pill.p{color:var(--phys)} .pill.m{color:var(--ment)} .pill.s{color:var(--spir)}
+.qtext{font-size:24px;line-height:1.3;font-weight:600;margin:18px 0 26px;text-wrap:balance}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{
+  display:block;border:1px solid var(--line);background:var(--panel);border-radius:3px;
+  padding:15px 17px;cursor:pointer;font-family:"Source Serif 4",serif;font-size:16.5px;
+  line-height:1.4;color:var(--text);transition:border-color .12s,background .12s;text-align:left;width:100%;
+}
+.opt:hover{border-color:var(--line-2);background:var(--panel-2)}
+.opt.sel{border-color:var(--accent);background:var(--accent-dim)}
+.navrow{display:flex;gap:10px;margin-top:26px;align-items:center}
+.back{
+  background:transparent;border:0;color:var(--text-3);font-family:Archivo,sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:10px 0;
+}
+.back:hover{color:var(--text)}
+.back[hidden]{display:none!important}
+
+/* ---------- gate ---------- */
+.gatebox{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:26px 22px;margin-top:26px}
+label.f{display:block;font-family:Archivo,sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);margin-bottom:8px}
+input[type=text],input[type=email],input[type=tel]{
+  width:100%;background:var(--bg);border:1px solid var(--line-2);color:var(--text);
+  border-radius:3px;padding:14px 15px;font-family:"Source Serif 4",serif;font-size:17px;margin-bottom:18px;
+}
+input::placeholder{color:var(--text-3)}
+.optin{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;font-size:14px;color:var(--text-2);line-height:1.45}
+.optin input{margin:3px 0 0;width:17px;height:17px;accent-color:var(--accent)}
+
+/* ---------- results ---------- */
+.scores{display:grid;gap:10px;margin:26px 0 0}
+.sc{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:18px 20px}
+.sc.low{border-color:currentColor;background:var(--panel-2)}
+.sc .row{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sc .nm{font-family:Archivo,sans-serif;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.sc .vl{font-family:Archivo,sans-serif;font-size:34px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.sc .band{font-family:Archivo,sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-top:6px}
+.meter{height:5px;background:var(--line);border-radius:3px;margin-top:13px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:currentColor;transition:width .7s cubic-bezier(.2,.7,.3,1)}
+@media(prefers-reduced-motion:reduce){.meter i{transition:none}}
+.sc.p{color:var(--phys)} .sc.m{color:var(--ment)} .sc.s{color:var(--spir)}
+.sc .nm,.sc .vl{color:currentColor}
+.verdict{border-left:3px solid var(--accent);background:var(--panel);padding:20px 22px;margin:30px 0 0;border-radius:0 3px 3px 0}
+.verdict h3{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.verdict p{margin:0 0 14px;color:var(--text)}
+.verdict p:last-child{margin:0}
+.offer{border:1px solid var(--accent);background:var(--accent-dim);border-radius:4px;padding:26px 22px;margin-top:30px}
+.offer h2{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:0 0 12px;line-height:1.15;text-wrap:balance}
+.offer ul{margin:16px 0 0;padding-left:19px;color:var(--text-2);font-size:16px}
+.offer li{margin-bottom:7px}
+footer{border-top:1px solid var(--line);margin-top:60px;padding:22px 0 40px;text-align:center;font-family:Archivo,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="brand" href="/">The Aligned Man Project</a>
+    <span class="counter" id="counter" hidden></span>
+  </div>
+  <div class="track"><i id="track"></i></div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<div class="screen on" id="s-intro">
+  <div class="wrap">
+    <span class="eyebrow">Free · 4 minutes · No pitch until you ask</span>
+    <h1>The Standards Audit</h1>
+    <p class="lede">Twenty-one questions. Three scores. An honest read on where your standard actually is — and it's usually not where you think.</p>
+    <ul class="facts">
+      <li><b>Physical</b><span>Training, sleep, food, bloodwork, the body you're operating out of.</span></li>
+      <li><b>Mental</b><span>Discipline, recovery from setbacks, whether your word still means something.</span></li>
+      <li><b>Spiritual</b><span>Purpose, service, what you're carrying, who's watching you.</span></li>
+    </ul>
+    <button class="btn" id="start">Start the audit</button>
+    <p class="fine">Answer these honestly or don't bother. Nobody sees your answers but you and me.</p>
+  </div>
+</div>
+
+<!-- ============ QUESTIONS ============ -->
+<div class="screen" id="s-q">
+  <div class="wrap">
+    <span class="pill" id="q-pill">Physical</span>
+    <h2 class="qtext" id="q-text"></h2>
+    <div class="opts" id="q-opts"></div>
+    <div class="navrow"><button class="back" id="back" hidden>← Back</button></div>
+  </div>
+</div>
+
+<!-- ============ EMAIL GATE ============ -->
+<div class="screen" id="s-gate">
+  <div class="wrap">
+    <span class="eyebrow">Done — 21 of 21</span>
+    <h1>Your scores are ready</h1>
+    <p class="lede">Where should I send the full breakdown? You'll see your three scores on the next screen either way.</p>
+
+    <!-- WIRED — live Mailchimp form for The Aligned Man Project (audience 139465).
+         Auto-applies the "Standards Audit" tag so this sequence fires separately
+         from the cheat-sheet one. Merge fields PHYS/MENT/SPIR/LOWEST already exist. -->
+    <form class="gatebox" id="gate-form"
+          action="https://alignedmanproject.us20.list-manage.com/subscribe/post?u=17c175e986ffb647f5a56a01a&amp;id=b8200886aa&amp;f_id=00e383e0f0"
+          method="post" target="_blank" novalidate>
+      <label class="f" for="fname">First name</label>
+      <input type="text" id="fname" name="FNAME" placeholder="Rob" autocomplete="given-name" required>
+
+      <label class="f" for="email">Email</label>
+      <input type="email" id="email" name="EMAIL" placeholder="you@email.com" autocomplete="email" required>
+
+      <label class="f" for="phone">Mobile <span style="color:var(--text-3);letter-spacing:0;text-transform:none;font-weight:400">— optional</span></label>
+      <input type="tel" id="phone" name="PHONE" placeholder="Optional" autocomplete="tel">
+
+      <label class="optin">
+        <input type="checkbox" name="SMSOK" value="yes">
+        <span>Text me too. Three messages over eight days, then I stop. Reply STOP anytime.</span>
+      </label>
+
+      <input type="hidden" name="PHYS" id="h-phys">
+      <input type="hidden" name="MENT" id="h-ment">
+      <input type="hidden" name="SPIR" id="h-spir">
+      <input type="hidden" name="LOWEST" id="h-low">
+      <!-- Mailchimp bot-trap field. Must keep this exact name. Leave empty. -->
+      <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_17c175e986ffb647f5a56a01a_b8200886aa" tabindex="-1" value=""></div>
+
+      <button class="btn" type="submit">Show me my scores</button>
+      <p class="fine">No spam. Unsubscribe any time. I don't sell lists.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ============ RESULTS ============ -->
+<div class="screen" id="s-result">
+  <div class="wrap">
+    <span class="eyebrow">Your Standards Audit</span>
+    <h1 id="r-head">Here's where you stand</h1>
+
+    <div class="scores" id="r-scores"></div>
+
+    <div class="verdict">
+      <h3>The read</h3>
+      <div id="r-verdict"></div>
+    </div>
+
+    <div class="offer">
+      <h2>Sixty minutes. Three pillars. One honest answer.</h2>
+      <p style="color:var(--text-2);margin:0">A score tells you where you stand. It doesn't tell you what to do about it, in what order, or what's actually holding the rest down. That's what the assessment is for.</p>
+      <ul>
+        <li>A written three-pillar assessment in your hands within 48 hours</li>
+        <li>Your weakest link named, and why it's the one holding the rest down</li>
+        <li>A 90-day sequence — in order, not a list of everything at once</li>
+        <li>A straight answer on whether coaching is right for you. Including no, if it's no.</li>
+      </ul>
+      <!-- Points at coaching.html, where the $150 Stripe link lives. Works today.
+           If you later build a dedicated /assessment.html, swap the href below. -->
+      <a class="btn" id="cta" href="/coaching.html">Book the assessment — $150</a>
+      <p class="fine">Credited back in full when you start a program within 14 days. If you don't start, the written report is still yours.</p>
+    </div>
+
+    <a class="btn ghost" href="/">Back to The Aligned Man Project</a>
+  </div>
+</div>
+
+<footer>Physical · Mental · Spiritual</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------------------------------------------------------
+   QUESTIONS — 7 per pillar. Options are scored 0 (worst) to 3 (best).
+   Edit the wording freely; keep four options and keep them in
+   worst-to-best order or the scoring breaks.
+   --------------------------------------------------------------- */
+var Q = [
+ {p:"P",t:"How many days in the last 30 did you train with intent — not just 'went to the gym'?",
+  o:["None","A handful, when the week allowed","Around 12 to 15","Twenty or more"]},
+ {p:"P",t:"How many hours do you actually sleep? Not the number you tell people.",
+  o:["Under five","Five to six","Six to seven","Seven or more, most nights"]},
+ {p:"P",t:"When did you last see your own bloodwork?",
+  o:["Never, or I can't remember","Years ago","Within the last two years","This year — and I know the numbers"]},
+ {p:"P",t:"Carry something heavy up two flights of stairs. What happens?",
+  o:["I'd find a reason not to","I'd do it and need a minute","Fine, but I'd notice","Wouldn't think about it"]},
+ {p:"P",t:"How many days last week did you eat like a man with a goal?",
+  o:["None","One or two","Most of them","All of them"]},
+ {p:"P",t:"What time do you stop eating, drinking, or scrolling at night?",
+  o:["Whenever I fall asleep","It varies wildly","Usually around the same time","Same time, deliberately"]},
+ {p:"P",t:"If your doctor ran every test tomorrow, would you want to see the results?",
+  o:["No. I'd rather not know","I'd be nervous about it","Yes, with some hesitation","Yes — I'd want the data"]},
+
+ {p:"M",t:"Something knocks you off. How long until you're back on standard?",
+  o:["Weeks — or I don't come back","About a week","A couple of days","Same day or the next one"]},
+ {p:"M",t:"How many things did you say you'd do this month and didn't?",
+  o:["More than I want to count","Several","One or two","I did what I said"]},
+ {p:"M",t:"Who holds you to a standard you can't talk your way out of?",
+  o:["Nobody","Someone, but I can dodge it","One person, sometimes","Someone real, consistently"]},
+ {p:"M",t:"What's the last hard thing you finished that nobody made you do?",
+  o:["I can't think of one","A long time ago","Sometime this year","Recently — and there's another one running"]},
+ {p:"M",t:"How much of your day runs on decisions you already made in advance?",
+  o:["Almost none. I decide as I go","Mornings, maybe","About half of it","Most of it is already decided"]},
+ {p:"M",t:"Be honest. What are you avoiding right now?",
+  o:["Something big, and I know exactly what","A few things I keep pushing","One thing, and I've put a date on it","Nothing I'm not already handling"]},
+ {p:"M",t:"Are you rebuilding, or maintaining a version of yourself you've outgrown?",
+  o:["Maintaining, and I know it","Mostly maintaining","Starting to rebuild","Actively rebuilding"]},
+
+ {p:"S",t:"Can you say what you're building toward in one sentence?",
+  o:["No","Vaguely","Roughly, yes","Yes — I could say it right now"]},
+ {p:"S",t:"Who depends on you being the man you say you are?",
+  o:["Nobody, and that's part of it","People do, and I'm not delivering","A few, and mostly I show up","People do, and I show up"]},
+ {p:"S",t:"When did you last do something for someone that cost you and gained you nothing?",
+  o:["I can't remember","A while back","This month","This week"]},
+ {p:"S",t:"What are you still carrying that you've never put down?",
+  o:["Something heavy I've never dealt with","A few things I don't look at","I've worked on it. Not finished","I've dealt with mine"]},
+ {p:"S",t:"Is there anything in your week that isn't about output?",
+  o:["No. Everything is production","Rarely","Some","Yes, deliberately"]},
+ {p:"S",t:"If your kids described your values from watching you, would they get it right?",
+  o:["No — and that's hard to admit","Partly","Mostly","Yes"]},
+ {p:"S",t:"What would the man you were at 25 say about the man you are now?",
+  o:["He'd be disappointed","He'd be confused","He'd be alright with it","He'd be proud"]}
+];
+
+var NAMES = {P:"Physical", M:"Mental", S:"Spiritual"};
+var CLS   = {P:"p", M:"m", S:"s"};
+
+/* Verdict copy per pillar, per band. Edit freely — this is the
+   highest-leverage writing on the page. */
+var VERDICT = {
+ P:{
+  low:"Your body is the one keeping score out loud. Everything else on this list gets harder when you're running on five hours and food you didn't choose — the discipline problems and the purpose problems both get louder when the machine is under-maintained. The good news is this pillar responds fastest. It is the one where thirty deliberate days produce a difference you can feel.",
+  mid:"You're holding, not building. That's a real distinction and most men blur it. Holding works right up until something interrupts — an injury, a bad quarter, a stretch of nights — and then there's no margin underneath you. What you're missing isn't effort. It's a standard that survives a bad week.",
+  high:"The physical side is under control, which means it isn't the thing holding you down — and it also means it can hide the thing that is. Men who are fit and disciplined in the gym are the ones most able to avoid the other two pillars for years. Look at your lower scores."
+ },
+ M:{
+  low:"This is the one to look at. Your body isn't the problem — the operating system running it is. When your word to yourself has stopped meaning much, no program survives contact with a hard week, which is why nothing has stuck so far. That isn't a character flaw and it isn't fixed by trying harder. It's fixed by rebuilding the standard from something small enough that you cannot fail at it, and then not breaking it.",
+  mid:"You've got discipline in patches. It shows up when things are going well and disappears under pressure, which means what you actually have is momentum rather than structure. Momentum is fragile. Structure is what holds when you don't feel like it.",
+  high:"Mentally you're solid, and it's probably what's carried you this far. Watch for the failure mode that comes with it: men who can grind through anything often grind through the wrong thing for years without stopping to ask why. Discipline in service of nothing in particular is just an expensive habit."
+ },
+ S:{
+  low:"You're executing without a reason, and that works longer than it should — which is exactly why it's dangerous. Men run on momentum for years and only notice the tank is empty when something forces them to stop. This is the pillar that determines whether any of the rest holds when the novelty runs out. It's also the one nobody wants to talk about, which is why most programs skip it entirely.",
+  mid:"You know roughly what you're building toward but you couldn't defend it under pressure. That's usually enough to keep you moving and not enough to keep you from drifting, because a vague reason loses every argument with a concrete excuse.",
+  high:"You know why you're doing this, which is rarer than it should be and puts you ahead of most men who take this. Make sure the other two pillars are actually equipped to carry it — purpose without a body or a standard underneath it turns into frustration."
+ }
+};
+
+var idx = 0, answers = new Array(Q.length).fill(null);
+
+var el = function(id){ return document.getElementById(id); };
+var screens = {intro:el("s-intro"), q:el("s-q"), gate:el("s-gate"), result:el("s-result")};
+
+function show(name){
+  Object.keys(screens).forEach(function(k){ screens[k].classList.toggle("on", k===name); });
+  window.scrollTo(0,0);
+}
+
+function progress(n){
+  el("track").style.width = (n/Q.length*100) + "%";
+  var c = el("counter");
+  if(n>0 && n<=Q.length){ c.hidden=false; c.textContent = n + " / " + Q.length; }
+  else { c.hidden = true; }
+}
+
+function render(){
+  var q = Q[idx];
+  el("q-pill").textContent = NAMES[q.p];
+  el("q-pill").className = "pill " + CLS[q.p];
+  el("q-text").textContent = q.t;
+
+  var box = el("q-opts");
+  box.innerHTML = "";
+  q.o.forEach(function(text, i){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "opt" + (answers[idx]===i ? " sel" : "");
+    b.textContent = text;
+    b.addEventListener("click", function(){
+      answers[idx] = i;
+      box.querySelectorAll(".opt").forEach(function(x){ x.classList.remove("sel"); });
+      b.classList.add("sel");
+      setTimeout(next, 180);
+    });
+    box.appendChild(b);
+  });
+
+  el("back").hidden = (idx === 0);
+  progress(idx);
+}
+
+function next(){
+  if(idx < Q.length-1){ idx++; render(); }
+  else { finish(); }
+}
+
+el("back").addEventListener("click", function(){
+  if(idx > 0){ idx--; render(); }
+});
+
+el("start").addEventListener("click", function(){
+  try{ fbq("track","ViewContent",{content_name:"Standards Audit started"}); }catch(e){}
+  idx = 0; show("q"); render();
+});
+
+/* ---- scoring ---- */
+function score(pillar){
+  var raw = 0, max = 0;
+  Q.forEach(function(q,i){
+    if(q.p !== pillar) return;
+    max += 3;
+    raw += (answers[i] === null ? 0 : answers[i]);
+  });
+  return Math.round(raw / max * 100);
+}
+function band(v){
+  if(v < 34) return {k:"low",  label:"Critical"};
+  if(v < 60) return {k:"low",  label:"Declining"};
+  if(v < 80) return {k:"mid",  label:"Holding"};
+  return {k:"high", label:"Aligned"};
+}
+
+var S = {};
+
+function finish(){
+  progress(Q.length);
+  S = { P:score("P"), M:score("M"), S:score("S") };
+  var lowest = ["P","M","S"].reduce(function(a,b){ return S[b] < S[a] ? b : a; });
+
+  el("h-phys").value = S.P;
+  el("h-ment").value = S.M;
+  el("h-spir").value = S.S;
+  el("h-low").value  = NAMES[lowest];
+
+  show("gate");
+}
+
+/* ---- gate submit ---- */
+el("gate-form").addEventListener("submit", function(ev){
+  var f = ev.currentTarget;
+  if(!f.EMAIL.value || !f.FNAME.value){ return; } // let the browser prompt
+  try{
+    fbq("track","Lead",{content_name:"Standards Audit", value:0, currency:"USD"});
+  }catch(e){}
+  // Mailchimp posts in a new tab (target=_blank); we reveal results immediately.
+  setTimeout(results, 60);
+});
+
+function results(){
+  var lowest = ["P","M","S"].reduce(function(a,b){ return S[b] < S[a] ? b : a; });
+  var name = "";
+  try{ name = (document.getElementById("fname").value || "").trim().split(" ")[0]; }catch(e){}
+
+  el("r-head").textContent = name ? (name + ", here's where you stand") : "Here's where you stand";
+
+  var box = el("r-scores");
+  box.innerHTML = "";
+  ["P","M","S"].forEach(function(p){
+    var v = S[p], b = band(v), isLow = (p === lowest);
+    var d = document.createElement("div");
+    d.className = "sc " + CLS[p] + (isLow ? " low" : "");
+    d.innerHTML =
+      '<div class="row"><span class="nm">' + NAMES[p] + (isLow ? ' — weakest' : '') + '</span>' +
+      '<span class="vl">' + v + '</span></div>' +
+      '<div class="band">' + b.label + '</div>' +
+      '<div class="meter"><i></i></div>';
+    box.appendChild(d);
+    setTimeout(function(){ d.querySelector(".meter i").style.width = v + "%"; }, 120);
+  });
+
+  var b = band(S[lowest]);
+  var copy = VERDICT[lowest][b.k === "low" ? "low" : b.k];
+  el("r-verdict").innerHTML =
+    '<p><strong>Your lowest score is ' + NAMES[lowest] + ', at ' + S[lowest] + '.</strong></p>' +
+    '<p>' + copy + '</p>' +
+    '<p>Most men come in assuming the problem is physical, because that’s the one they can see in a mirror. It usually isn’t.</p>';
+
+  try{
+    el("cta").href = el("cta").getAttribute("href") +
+      "?p=" + S.P + "&m=" + S.M + "&s=" + S.S + "&low=" + NAMES[lowest];
+  }catch(e){}
+
+  el("cta").addEventListener("click", function(){
+    try{ fbq("track","InitiateCheckout",{content_name:"Assessment from audit", value:150, currency:"USD"}); }catch(e){}
+  });
+
+  show("result");
+}
+
+})();
+</script>
+</body>
+</html>
