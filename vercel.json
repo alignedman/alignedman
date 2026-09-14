@@ -1,6 +1,46 @@
 {
   "rewrites": [
-    { "source": "/optimizer", "destination": "/optimizer.html" },
-    { "source": "/cheat-sheet", "destination": "/cheat-sheet.html" }
+    {
+      "source": "/optimizer",
+      "destination": "/optimizer.html"
+    },
+    {
+      "source": "/cheat-sheet",
+      "destination": "/cheat-sheet.html"
+    },
+    {
+      "source": "/coaching",
+      "destination": "/coaching.html"
+    },
+    {
+      "source": "/audit",
+      "destination": "/audit.html"
+    },
+    {
+      "source": "/bio",
+      "destination": "/bio.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/foundation",
+      "destination": "/coaching.html#foundation",
+      "permanent": false
+    },
+    {
+      "source": "/alignment",
+      "destination": "/coaching.html#alignment",
+      "permanent": false
+    },
+    {
+      "source": "/ascension",
+      "destination": "/coaching.html#ascension",
+      "permanent": false
+    },
+    {
+      "source": "/assessment",
+      "destination": "/coaching.html#assessment",
+      "permanent": false
+    }
   ]
 }
