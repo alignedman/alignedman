@@ -1,4 +1,4 @@
-<!-- AMP VERSION STAMP | index.html | Homepage | LAST UPDATED: 2026-08-26 | STATUS: LIVE (public) | The Aligned Man Project LLC -->
+<!-- AMP VERSION STAMP | index.html | Homepage | LAST UPDATED: 2026-09-12 | STATUS: LIVE (public) | The Aligned Man Project LLC -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -388,6 +388,7 @@
     <li><a href="#affiliates">Resources</a></li>
     <li><a href="#protocols">Free Protocols</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="/audit.html">Audit</a></li>
     <li><a href="#apply" class="nav-cta">Apply Now</a></li>
   </ul>
   <button class="nav-mobile-btn" id="mobileBtn" onclick="toggleNav()">
@@ -409,8 +410,9 @@
   <p class="hero-quote">This isn't for the 22-year-old chasing aesthetics. This is for the man with real responsibilities, real experience, and a burning drive to become everything he was built to be.</p>
   <div class="hero-btns">
     <a href="#apply" class="btn-gold">Apply to Work With Robert</a>
-    <a href="#pillars" class="btn-ghost">The Method</a>
+    <a href="/audit.html" class="btn-ghost" id="cta-hero-audit">Find Your Weakest Pillar &mdash; Free</a>
   </div>
+  <div style="margin-top:14px;"><a href="#pillars" style="color:#8a8a8a;font-size:12px;letter-spacing:3px;text-decoration:none;">THE METHOD &darr;</a></div>
   <div class="hero-stats">
     <div class="hstat"><div class="hstat-num">9<em>K+</em></div><div class="hstat-label">Instagram</div></div>
     <div class="hstat"><div class="hstat-num">7<em>K+</em></div><div class="hstat-label">TikTok</div></div>
@@ -611,31 +613,29 @@
     </div>
     <div class="merch-grid reveal">
       <div class="merch-card">
-        <img src="/merch-tee.jpg" alt="AMP Tee — black tee printed with the AMP logo and the words Built, Not Broken" style="width:100%; aspect-ratio:1/1; object-fit:contain; border:1px solid var(--grey3); margin-bottom:24px;" />
-        <div class="cs-badge">New</div>
-        <div class="merch-name">AMP Tee — Drop 1</div>
-        <div class="merch-price">$29.99 · $5 Flat US Shipping</div>
-        <div class="merch-note">Black Tee · Chest Print · Unisex S – 2XL</div>
-        <div style="margin-top:20px;"><a href="https://buy.stripe.com/aFa00i0wA8Kl4pgeyP3sI0d" class="btn-gold" style="font-size:10px;padding:13px 28px;display:inline-block;">Buy the Tee</a></div>
-      </div>
-      <div class="merch-card">
-        <img src="/merch-hat.jpg" alt="AMP Hat — black snapback with the AMP logo embroidered in white and gold" style="width:100%; aspect-ratio:1/1; object-fit:contain; border:1px solid var(--grey3); margin-bottom:24px;" />
-        <div class="cs-badge">New</div>
-        <div class="merch-name">AMP Hat — Drop 1</div>
-        <div class="merch-price">$34.99 · $5 Flat US Shipping</div>
-        <div class="merch-note">Flat Bill · White + Gold Embroidery · One Size</div>
-        <div style="margin-top:20px;"><a href="https://buy.stripe.com/fZu4gy4MQaSt4pg3Ub3sI0c" class="btn-gold" style="font-size:10px;padding:13px 28px;display:inline-block;">Buy the Hat</a></div>
-      </div>
-      <div class="merch-card">
-        <img src="/merch-hoodie.jpg" alt="AMP Hoodie — black hoodie printed with the AMP logo and the words Built, Not Broken" style="width:100%; aspect-ratio:1/1; object-fit:contain; border:1px solid var(--grey3); margin-bottom:24px;" />
+        <div class="merch-placeholder"><span class="merch-placeholder-text">Product Photo Coming Soon</span></div>
         <div class="cs-badge">Coming Soon</div>
-        <div class="merch-name">AMP Hoodie — Drop 2</div>
+        <div class="merch-name">Signature Tee</div>
         <div class="merch-price">— / —</div>
-        <div class="merch-note">Premium Fleece · Front Chest Print</div>
+        <div class="merch-note">Premium Heavyweight Cotton · Dark Colorways</div>
+      </div>
+      <div class="merch-card">
+        <div class="merch-placeholder"><span class="merch-placeholder-text">Product Photo Coming Soon</span></div>
+        <div class="cs-badge">Coming Soon</div>
+        <div class="merch-name">Aligned Cap</div>
+        <div class="merch-price">— / —</div>
+        <div class="merch-note">Structured Fit · Embroidered Logo</div>
+      </div>
+      <div class="merch-card">
+        <div class="merch-placeholder"><span class="merch-placeholder-text">Product Photo Coming Soon</span></div>
+        <div class="cs-badge">Coming Soon</div>
+        <div class="merch-name">Training Hoodie</div>
+        <div class="merch-price">— / —</div>
+        <div class="merch-note">Premium Fleece · Oversized Fit</div>
       </div>
     </div>
     <div style="margin-top:40px; text-align:center;">
-      <a href="/merch.html" class="btn-ghost" style="font-size:10px;padding:13px 32px;display:inline-block;">View All Merch</a>
+      <a href="#free-download" class="btn-ghost" style="font-size:10px;padding:13px 32px;display:inline-block;">Notify Me When Available</a>
     </div>
   </div>
 </section>
@@ -693,17 +693,18 @@
 <!-- EMAIL CAPTURE -->
 <section class="email-wrap" id="free-download">
   <div class="email-inner">
-    <div class="email-box reveal">
-      <div>
-        <div class="section-tag" style="margin-bottom:16px;">Free Download</div>
-        <h2 class="email-h2">Get the Free<br/>Physical Optimization<br/>Cheat Sheet</h2>
-        <p class="email-body">The full reference Rob built for himself — <strong>nothing held back</strong>. Training, recovery, body composition, energy, focus, and the resources he actually uses. Enter your email and get it free.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;" class="reveal">
+      <div style="border:1px solid var(--gold);background:linear-gradient(160deg,rgba(201,168,76,0.10),rgba(10,10,10,0));padding:38px 32px;">
+        <div class="section-tag" style="margin-bottom:14px;">Free &middot; 4 Minutes</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,4vw,42px);letter-spacing:2px;color:#fff;line-height:.95;margin-bottom:14px;">Find your weakest pillar.</h2>
+        <p style="font-size:14px;color:#b9b9b9;font-weight:300;line-height:1.7;margin-bottom:22px;">Twenty-one questions. Three scores &mdash; Physical, Mental, Spiritual &mdash; and the one that&rsquo;s holding the other two down. Your results by email, straight away.</p>
+        <a href="/audit.html" class="btn-gold" id="cta-home-audit">Take the Standards Audit &rarr;</a>
       </div>
-      <div>
-        <div class="email-form">
-          <a href="/cheat-sheet.html" class="email-submit" style="text-decoration:none; text-align:center; display:block;">Send Me the Cheat Sheet</a>
-          <p class="email-disclaimer">No spam. Ever. Unsubscribe anytime.</p>
-        </div>
+      <div style="border:1px solid var(--border);background:var(--surface);padding:38px 32px;">
+        <div class="section-tag" style="margin-bottom:14px;">Free &middot; No Email Required</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,4vw,42px);letter-spacing:2px;color:#fff;line-height:.95;margin-bottom:14px;">The Alignment Stack.</h2>
+        <p style="font-size:14px;color:#b9b9b9;font-weight:300;line-height:1.7;margin-bottom:22px;">Every stack Rob runs. All 17, open, nothing held back.</p>
+        <a href="/cheat-sheet.html" class="btn-ghost" id="cta-home-stacks">Open the Stacks &rarr;</a>
       </div>
     </div>
   </div>
