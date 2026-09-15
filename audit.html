@@ -17,9 +17,9 @@
      Already wired:
        · Posts to /api/audit — works for new AND existing contacts
        · Writes scores into merge fields PHYS / MENT / SPIR / LOWEST
-       · Applies the "Standards Audit" tag → triggers the 5-email sequence
+       · Applies the "Standards Audit" tag → triggers the 3-email sequence (sells Foundation)
        · No reCAPTCHA page, no new tab — scores appear in place
-       · Final CTA points at /coaching.html
+       · Final CTA points at /foundation (→ coaching.html#foundation). Muted line for the assessment call below it.
 
      OPTIONAL / LATER:
        EDIT-1  Meta Pixel ID — only needed when you start running ads.
@@ -249,18 +249,18 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:22px 0 40px;text
     </div>
 
     <div class="offer">
-      <h2>Sixty minutes. Three pillars. One honest answer.</h2>
-      <p style="color:var(--text-2);margin:0">A score tells you where you stand. It doesn't tell you what to do about it, in what order, or what's actually holding the rest down. That's what the assessment is for.</p>
+      <h2>You know the weak pillar. Now build all three.</h2>
+      <p style="color:var(--text-2);margin:0">A low score isn&rsquo;t fixed by paying more attention to it. It&rsquo;s fixed by a structure that trains all three pillars whether or not you feel like it that week. That&rsquo;s Foundation: month-to-month, open enrollment, no application, nothing to schedule.</p>
       <ul>
-        <li>A written three-pillar assessment in your hands within 48 hours</li>
-        <li>Your weakest link named, and why it's the one holding the rest down</li>
-        <li>A 90-day sequence — in order, not a list of everything at once</li>
-        <li>A straight answer on whether coaching is right for you. Including no, if it's no.</li>
+        <li>A monthly protocol drop &mdash; training, nutrition, and the mental and spiritual work in one package</li>
+        <li>A standard training program and nutrition plan, structured by goal</li>
+        <li>A monthly group coaching call with Rob</li>
+        <li>The private community and full Daily Optimization Planner access</li>
       </ul>
-      <!-- Points at coaching.html, where the $150 Stripe link lives. Works today.
-           If you later build a dedicated /assessment.html, swap the href below. -->
-      <a class="btn" id="cta" href="/coaching.html">Book the assessment — $150</a>
-      <p class="fine">Credited back in full when you start a program within 14 days. If you don't start, the written report is still yours.</p>
+      <!-- /foundation redirects to coaching.html#foundation (vercel.json). He reads what he's buying before he pays. -->
+      <a class="btn" id="cta" href="/foundation">Start Foundation &mdash; $150/month</a>
+      <p class="fine">Standardized programming, not individually tailored. Cancel whenever.</p>
+      <p class="fine" style="margin-top:14px;opacity:.8">Have a protocol or bloodwork question that needs a one-to-one answer? Foundation doesn&rsquo;t include that. <a href="/coaching.html#assessment" id="cta-assessment-line" style="color:var(--gold);text-decoration:none;border-bottom:1px solid currentColor">The Aligned Assessment Call &mdash; $150</a></p>
     </div>
 
     <a class="btn ghost" href="/">Back to The Aligned Man Project</a>
@@ -509,7 +509,7 @@ function results(){
      and a URL carrying PHYS/MENT/SPIR/LOWEST would be transmitted to Meta by the pixel. */
 
   el("cta").addEventListener("click", function(){
-    try{ fbq("track","InitiateCheckout",{content_name:"Assessment from audit", value:150, currency:"USD"}); }catch(e){}
+    try{ fbq("track","InitiateCheckout",{content_name:"Foundation from Audit", value:150, currency:"USD"}); }catch(e){}
   });
 
   show("result");
