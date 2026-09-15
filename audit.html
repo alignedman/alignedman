@@ -267,7 +267,7 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:22px 0 40px;text
   </div>
 </div>
 
-<footer>Physical · Mental · Spiritual</footer>
+<footer>Physical · Mental · Spiritual<br><span style="letter-spacing:.06em;text-transform:none;">The Aligned Man Project LLC · 418 Broadway STE N, Albany, NY 12207</span></footer>
 
 <script>
 (function(){
@@ -447,7 +447,6 @@ el("gate-form").addEventListener("submit", async function(ev){
   if(!name || !email || email.indexOf("@")<0){ alertGate("Enter your first name and a real email."); return; }
   var btn = f.querySelector('button[type="submit"]');
   btn.disabled = true; btn.textContent = "One second\u2026";
-  try{ fbq("track","Lead",{content_name:"Standards Audit", value:0, currency:"USD"}); }catch(e){}
   try{
     var r = await fetch("/api/audit", {
       method:"POST", headers:{"Content-Type":"application/json"},
@@ -462,6 +461,8 @@ el("gate-form").addEventListener("submit", async function(ev){
     });
     var j = await r.json().catch(function(){ return {}; });
     if(!r.ok || j.error){ alertGate(j.error || "Something went wrong. Try again."); btn.disabled=false; btn.textContent="Show me my scores"; return; }
+    /* Lead fires only after the server confirmed the contact was saved. No scores, no answers — name/value only. */
+    try{ fbq("track","Lead",{content_name:"Standards Audit", value:0, currency:"USD"}); }catch(e){}
   }catch(e){
     alertGate("Couldn\u2019t reach the server. Check your connection and try again.");
     btn.disabled=false; btn.textContent="Show me my scores"; return;
@@ -504,10 +505,8 @@ function results(){
     '<p>' + copy + '</p>' +
     '<p>Most men come in assuming the problem is physical, because that’s the one they can see in a mirror. It usually isn’t.</p>';
 
-  try{
-    el("cta").href = el("cta").getAttribute("href") +
-      "?p=" + S.P + "&m=" + S.M + "&s=" + S.S + "&low=" + NAMES[lowest];
-  }catch(e){}
+  /* 2026-09-15: scores are no longer appended to the CTA URL. coaching.html never read them,
+     and a URL carrying PHYS/MENT/SPIR/LOWEST would be transmitted to Meta by the pixel. */
 
   el("cta").addEventListener("click", function(){
     try{ fbq("track","InitiateCheckout",{content_name:"Assessment from audit", value:150, currency:"USD"}); }catch(e){}
