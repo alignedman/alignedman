@@ -188,9 +188,20 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></noscript>
-<!-- Purchase: Stripe returns the buyer to this page after the $150 Assessment payment. Fires once per browser session. -->
+<!-- Purchase: fires ONLY when Stripe returns the buyer here with ?session_id={CHECKOUT_SESSION_ID} in the URL
+     (set on the Stripe payment link's success URL). A plain visit to this page fires PageView only.
+     The session id gates the event and is never sent to Meta. Once per browser session so a refresh counts once. -->
 <script>
-try{ if(!sessionStorage.getItem('amp_purchase_fired')){ fbq('track','Purchase',{value:150.00,currency:'USD',content_name:'Aligned Assessment'}); sessionStorage.setItem('amp_purchase_fired','1'); } }catch(e){ try{ fbq('track','Purchase',{value:150.00,currency:'USD',content_name:'Aligned Assessment'}); }catch(_){} }
+(function(){
+  try{
+    var sid = new URLSearchParams(window.location.search).get('session_id');
+    if(!sid){ return; }
+    var key = 'amp_purchase_' + sid;
+    if(sessionStorage.getItem(key)){ return; }
+    fbq('track','Purchase',{value:150.00,currency:'USD',content_name:'Aligned Assessment'});
+    sessionStorage.setItem(key,'1');
+  }catch(e){}
+})();
 </script>
 </head>
 <body>
