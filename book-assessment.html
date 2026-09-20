@@ -1,226 +1,64 @@
+<!-- AMP VERSION STAMP | book-assessment.html | Post-Purchase Booking / Aligned Assessment Call — 60 Minutes | LAST UPDATED: 2026-09-20 | STATUS: LIVE (public) | The Aligned Man Project LLC -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Merch | The Aligned Man Project | Built, Not Broken</title>
-  <meta name="description" content="Official Aligned Man Project merchandise. AMP Hat and AMP Tee — Drop 1. Premium dark apparel for the man who operates at a different level. $5 flat US shipping." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://alignedmanproject.com/merch.html" />
-  <meta property="og:title" content="AMP Merch | Built, Not Broken" />
-  <meta property="og:description" content="AMP Hat and AMP Tee — Drop 1. Premium dark apparel. $5 flat US shipping." />
-  <meta property="og:url" content="https://alignedmanproject.com/merch.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://alignedmanproject.com/merch-hat.jpg" />
-  <link rel="icon" href="/favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet" />
-
-  <style>
-    :root {
-      --gold: #C9A84C;
-      --gold-bright: #E2C06A;
-      --gold-dim: rgba(201,168,76,0.10);
-      --gold-border: rgba(201,168,76,0.22);
-      --black: #060606;
-      --dark1: #0C0C0C;
-      --dark2: #111111;
-      --dark3: #171717;
-      --white: #F0EDE8;
-      --grey1: #999999;
-      --grey2: #666666;
-      --grey3: #2A2A2A;
-    }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-
-    /* ── NAV ── */
-    nav {
-      position:fixed; top:0; left:0; right:0; z-index:998;
-      height:68px; display:flex; align-items:center; justify-content:space-between;
-      padding:0 48px;
-      background:rgba(6,6,6,0.96); border-bottom:1px solid var(--gold-border);
-      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-    }
-    .nav-brand { text-decoration:none; display:flex; flex-direction:column; gap:2px; }
-    .nav-brand-name { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:5px; color:var(--white); line-height:1; }
-    .nav-brand-name span { color:var(--gold); }
-    .nav-brand-sub { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--grey2); }
-    .nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
-    .nav-links a { font-size:10px; font-weight:500; letter-spacing:2px; text-transform:uppercase; color:var(--grey1); text-decoration:none; transition:color 0.2s; }
-    .nav-links a:hover { color:var(--white); }
-    .nav-links a.current { color:var(--gold); }
-    .nav-cta { background:var(--gold); color:var(--black) !important; padding:9px 20px; font-weight:700 !important; transition:background 0.2s !important; }
-    .nav-cta:hover { background:var(--gold-bright) !important; }
-    .nav-mobile-btn { display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:4px; }
-    .nav-mobile-btn span { display:block; width:22px; height:2px; background:var(--white); transition:all 0.3s; }
-
-    /* ── HEADER ── */
-    .merch-hero { position:relative; padding:160px 48px 70px; overflow:hidden; }
-    .merch-hero-line { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--gold),var(--gold-bright),var(--gold),transparent); }
-    .merch-hero-glow { position:absolute; top:-200px; right:-200px; width:700px; height:700px; background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%); pointer-events:none; }
-    .merch-hero-inner { max-width:1100px; margin:0 auto; }
-    .section-tag { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:12px; margin-bottom:20px; }
-    .section-tag::before { content:''; display:block; width:20px; height:1px; background:var(--gold); }
-    .merch-h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(64px,10vw,140px); line-height:0.88; letter-spacing:2px; margin-bottom:28px; }
-    .merch-h1 .l1 { display:block; color:var(--white); }
-    .merch-h1 .l2 { display:block; color:var(--gold); }
-    .merch-h1 .l3 { display:block; -webkit-text-stroke:1.5px rgba(240,237,232,0.18); color:transparent; }
-    .merch-hero-sub { font-size:15px; font-weight:300; line-height:1.9; color:var(--grey1); max-width:560px; }
-    .merch-hero-sub strong { color:var(--white); font-weight:500; }
-
-    /* ── SHOP ── */
-    .shop-wrap { padding:70px 48px 110px; background:var(--dark1); }
-    .shop-inner { max-width:1100px; margin:0 auto; }
-    .shop-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; }
-    .product-card { background:var(--dark2); padding:44px 36px; transition:background 0.3s; display:flex; flex-direction:column; }
-    .product-card:hover { background:var(--dark3); }
-    .product-img { width:100%; aspect-ratio:1/1; object-fit:contain; border:1px solid var(--grey3); margin-bottom:24px; background:var(--dark3); }
-    .product-badge { display:inline-block; align-self:flex-start; background:var(--gold-dim); border:1px solid var(--gold-border); color:var(--gold); font-size:9px; letter-spacing:3px; text-transform:uppercase; padding:5px 12px; margin-bottom:16px; }
-    .product-name { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:var(--white); margin-bottom:8px; }
-    .product-price { font-size:14px; color:var(--gold); letter-spacing:2px; margin-bottom:14px; }
-    .product-note { font-size:11px; color:var(--grey2); letter-spacing:2px; text-transform:uppercase; line-height:1.9; margin-bottom:28px; flex-grow:1; }
-    .btn-gold { display:inline-block; text-align:center; background:var(--gold); color:var(--black); font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:16px 36px; text-decoration:none; border:none; cursor:pointer; transition:background 0.25s,transform 0.2s; }
-    .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); }
-    .shop-terms { margin-top:56px; padding-top:28px; border-top:1px solid var(--grey3); display:flex; flex-wrap:wrap; gap:12px 40px; }
-    .shop-term { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--grey2); }
-    .shop-term em { color:var(--gold); font-style:normal; }
-
-    /* ── BACK STRIP ── */
-    .back-strip { padding:70px 48px; background:var(--black); text-align:center; }
-    .back-strip-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(15px,1.5vw,18px); color:var(--grey2); max-width:520px; margin:0 auto 32px; line-height:1.7; }
-    .btn-ghost { display:inline-block; background:transparent; color:var(--white); font-size:11px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; padding:15px 36px; border:1px solid var(--grey3); text-decoration:none; transition:border-color 0.25s,color 0.25s,transform 0.2s; }
-    .btn-ghost:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-2px); }
-
-    /* ── FOOTER ── */
-    footer { background:var(--dark1); border-top:1px solid var(--grey3); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; }
-    .footer-brand { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:4px; color:var(--gold); }
-    .footer-copy { font-size:11px; letter-spacing:1.5px; color:var(--grey2); text-transform:uppercase; }
-    .footer-links { display:flex; gap:24px; }
-    .footer-links a { font-size:11px; letter-spacing:1.5px; color:var(--grey2); text-transform:uppercase; text-decoration:none; transition:color 0.2s; }
-    .footer-links a:hover { color:var(--white); }
-
-    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
-    .reveal.in { opacity:1; transform:translateY(0); }
-    @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } }
-
-    @media (max-width:860px) {
-      nav { padding:0 24px; }
-      .nav-links { display:none; }
-      .nav-links.open { display:flex; flex-direction:column; position:fixed; top:68px; left:0; right:0; background:var(--dark1); border-bottom:1px solid var(--gold-border); padding:20px; gap:16px; z-index:997; }
-      .nav-mobile-btn { display:flex; }
-      .merch-hero { padding:130px 24px 50px; }
-      .shop-wrap { padding:50px 24px 80px; }
-      .shop-grid { grid-template-columns:1fr; }
-      .back-strip { padding:60px 24px; }
-      footer { flex-direction:column; gap:14px; padding:28px 24px; text-align:center; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="robots" content="noindex, nofollow" />
+  <title>Book Your Assessment Call | The Aligned Man Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{--gold:#C9A84C;--gold-light:#E2C270;--gold-dim:#8A6E30;--black:#0A0A0A;--surface:#111111;--surface2:#181818;--border:#2A2A2A;--text:#E8E8E8;--muted:#888888;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;}
+  a{color:var(--gold);text-decoration:none;}
+  .topbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.97);border-bottom:1px solid var(--border);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(12px);}
+  .topbar .brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--gold);}
+  .topbar .back{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:10px 18px;transition:all .2s;}
+  .topbar .back:hover{border-color:var(--gold);color:var(--gold);}
+  .hero{flex:1;background:linear-gradient(165deg,#0d0d0d 0%,#151009 55%,#0a0a0a 100%);padding:100px 40px 80px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;height:420px;background:radial-gradient(ellipse,rgba(201,168,76,0.13) 0%,transparent 70%);pointer-events:none;}
+  .eyebrow{font-size:11px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:14px;justify-content:center;}
+  .eyebrow::before,.eyebrow::after{content:'';display:block;width:36px;height:1px;background:var(--gold);}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,92px);letter-spacing:3px;line-height:.92;color:#fff;margin-bottom:16px;}
+  h1 span{color:var(--gold);}
+  .tier{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:22px;}
+  .sub{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:var(--muted);max-width:560px;margin:0 auto 44px;}
+  .cta{display:inline-block;background:var(--gold);color:var(--black);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:19px 46px;transition:background .2s;}
+  .cta:hover{background:var(--gold-light);}
+  .cta-note{display:block;margin-top:14px;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+  .steps{max-width:720px;margin:70px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;text-align:left;}
+  .step{background:var(--surface);border-left:3px solid var(--gold-dim);padding:22px 24px;}
+  .step .num{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;color:var(--gold);line-height:1;}
+  .step .lbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text);margin-top:8px;}
+  .step .sm{font-size:12px;color:var(--muted);margin-top:6px;letter-spacing:.3px;text-transform:none;line-height:1.5;}
+  .fallback{margin-top:56px;font-size:12px;color:var(--muted);letter-spacing:.5px;}
+  .fallback a{color:var(--gold);}
+  footer{border-top:1px solid var(--border);padding:26px 40px;text-align:center;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+  @media(max-width:640px){.topbar{padding:14px 20px;}.hero{padding:70px 20px 60px;}.steps{grid-template-columns:1fr;margin-top:50px;}}
+</style>
 </head>
 <body>
-
-<nav>
-  <a href="/" class="nav-brand">
-    <div class="nav-brand-name">THE <span>ALIGNED</span> MAN</div>
-    <div class="nav-brand-sub">Physical · Mental · Spiritual</div>
-  </a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="/#pillars">The Method</a></li>
-    <li><a href="/#coaching">Coaching</a></li>
-    <li><a href="/merch.html" class="current">Merch</a></li>
-    <li><a href="/#optimizer">Optimizer</a></li>
-    <li><a href="/cheat-sheet.html">Cheat Sheet</a></li>
-    <li><a href="/#apply" class="nav-cta">Apply</a></li>
-  </ul>
-  <button class="nav-mobile-btn" id="navBtn" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<header class="merch-hero">
-  <div class="merch-hero-line"></div>
-  <div class="merch-hero-glow"></div>
-  <div class="merch-hero-inner">
-    <div class="section-tag">Merchandise</div>
-    <h1 class="merch-h1">
-      <span class="l1">Built,</span>
-      <span class="l2">Not</span>
-      <span class="l3">Broken.</span>
-    </h1>
-    <p class="merch-hero-sub">You didn't get here by accident. Divorce, pressure, setbacks, decline — you took the hit and rebuilt anyway. <strong>Wear the proof.</strong> Premium dark apparel carrying the AMP mark.</p>
+  <div class="topbar">
+    <div class="brand">THE ALIGNED MAN PROJECT</div>
+    <a class="back" href="/index.html">Back to Site</a>
   </div>
-</header>
-
-<section class="shop-wrap">
-  <div class="shop-inner">
-    <div class="shop-grid reveal">
-
-      <div class="product-card">
-        <img src="/merch-hat.jpg" alt="AMP Hat — black snapback with the AMP logo embroidered in white and gold" class="product-img" width="1000" height="1000" />
-        <div class="product-badge">New</div>
-        <div class="product-name">AMP Hat — Drop 1</div>
-        <div class="product-price">$34.99 · $5 Flat US Shipping</div>
-        <div class="product-note">Structured Black Snapback · Flat Bill<br/>White + Gold Embroidery Front Center · One Size</div>
-        <a href="https://buy.stripe.com/fZu4gy4MQaSt4pg3Ub3sI0c" class="btn-gold">Buy the Hat</a>
-      </div>
-
-      <div class="product-card">
-        <img src="/merch-tee.jpg" alt="AMP Tee — black tee printed with the AMP logo and the words Built, Not Broken" class="product-img" width="1000" height="1000" />
-        <div class="product-badge">New</div>
-        <div class="product-name">AMP Tee — Drop 1</div>
-        <div class="product-price">$29.99 · $5 Flat US Shipping</div>
-        <div class="product-note">Black Tee · AMP Mark Printed Across the Chest<br/>Unisex S – 2XL · Size Selected at Checkout<br/>For the Man That Never Surrenders for Average</div>
-        <a href="https://buy.stripe.com/aFa00i0wA8Kl4pgeyP3sI0d" class="btn-gold">Buy the Tee</a>
-      </div>
-
-      <div class="product-card">
-        <img src="/merch-hoodie.jpg" alt="AMP Hoodie — black hoodie printed with the AMP logo and the words Built, Not Broken" class="product-img" width="1000" height="1000" />
-        <div class="product-badge">Coming Soon</div>
-        <div class="product-name">AMP Hoodie — Drop 2</div>
-        <div class="product-price">Drop 2 · Not Yet Available</div>
-        <div class="product-note">Premium Fleece · Front Chest Print<br/>Joins the Lineup After Drop 1</div>
-      </div>
-
+  <div class="hero">
+    <div class="eyebrow">Payment Received</div>
+    <img src="/card-assessment.jpg" alt="The Aligned Man Project" style="width:200px;max-width:60vw;height:auto;display:block;margin:18px auto 8px;border-radius:8px;" />
+    <h1>You're <span>In.</span></h1>
+    <div class="tier">Aligned Assessment Call — 60 Minutes</div>
+    <p class="sub">One hour, one-on-one, fully personalized. You leave with a protocol-based guide to where you stand and the supplementation you actually need. Your $150 credits toward any program within 14 days.</p>
+    <a class="cta" href="https://calendar.app.google/aT8nxkBRupuzrkBw6" target="_blank" rel="noopener">Book Your Call Now</a>
+    <span class="cta-note">60 min &middot; Google Meet &middot; Takes 2 minutes to book</span>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><div class="lbl">Pick Your Time</div><div class="sm">Choose a slot that works. Mon&ndash;Fri, 9am&ndash;5pm ET.</div></div>
+      <div class="step"><div class="num">02</div><div class="lbl">Check Your Inbox</div><div class="sm">Your confirmation and Google Meet link arrive by email.</div></div>
+      <div class="step"><div class="num">03</div><div class="lbl">Come Ready to Be Honest</div><div class="sm">The more real you are, the more we get done in the hour.</div></div>
     </div>
-
-    <div class="shop-terms reveal">
-      <div class="shop-term"><em>Ships in 7–10 business days</em></div>
-      <div class="shop-term">$5 flat US shipping · US only</div>
-      <div class="shop-term">Secure checkout by Stripe</div>
-      <div class="shop-term">Made to order</div>
-    </div>
+    <p class="fallback">Booking link not loading? Email <a href="mailto:rob@alignedmanproject.com">rob@alignedmanproject.com</a> and Rob will lock in your time directly.</p>
   </div>
-</section>
-
-<section class="back-strip">
-  <p class="back-strip-quote">"The gear doesn't make the man. It reminds him who he decided to become."</p>
-  <a href="/" class="btn-ghost">Back to the Project</a>
-</section>
-
-<footer>
-  <div class="footer-brand">The Aligned Man Project</div>
-  <div class="footer-links">
-    <a href="/#pillars">The Method</a>
-    <a href="/#coaching">Coaching</a>
-    <a href="/merch.html">Merch</a>
-    <a href="/#optimizer">Optimizer</a>
-    <a href="/#apply">Apply</a>
-  </div>
-  <div class="footer-copy">© 2026 Robert Gonnerman</div>
-</footer>
-
-<script>
-  const navBtn = document.getElementById('navBtn');
-  const navLinks = document.getElementById('navLinks');
-  if (navBtn) navBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
-
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-</script>
-
+  <footer>The Aligned Man Project LLC &middot; Physical &middot; Mental &middot; Spiritual</footer>
 </body>
 </html>
