@@ -1,318 +1,522 @@
-<!-- AMP VERSION STAMP | bio.html | Bio / Meet Your Coach | LAST UPDATED: 2026-08-27 | STATUS: LIVE (public) | The Aligned Man Project LLC -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Meet Rob Gonnerman | Bio | The Aligned Man Project</title>
-<meta name="description" content="Meet Robert Gonnerman — Registered Nurse, father, and founder of The Aligned Man Project. 140 lbs lost, three hip surgeries overcome. The story behind the method." />
-<script defer src="/_vercel/insights/script.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
-<style>
-  :root{--gold:#C9A84C;--gold-light:#E2C270;--gold-dim:#8A6E30;--black:#0A0A0A;--surface:#111111;--surface2:#181818;--border:#2A2A2A;--text:#E8E8E8;--muted:#888888;}
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;}
-  a{color:var(--gold);text-decoration:none;}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Standards Audit — The Aligned Man Project</title>
+  <link rel="canonical" href="https://alignedmanproject.com/audit.html">
+<meta name="description" content="21 questions. Three scores. Four minutes. An honest read on where your standard actually is — Physical, Mental, Spiritual.">
 
-  .topbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.97);border-bottom:1px solid var(--border);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(12px);}
-  .topbar .brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--gold);}
-  .topbar-cta{background:var(--gold);color:var(--black);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:12px 24px;transition:background .2s;}
-  .topbar-cta:hover{background:var(--gold-light);}
-  .topbar .back{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:10px 18px;margin-right:14px;transition:all .2s;}
-  .topbar .back:hover{border-color:var(--gold);color:var(--gold);}
+<!-- ============================================================
+     THE STANDARDS AUDIT  ·  drop-in page for alignedmanproject.com
+     ============================================================
+     THIS FILE IS READY TO DEPLOY. NOTHING TO EDIT.
 
-  /* HERO */
-  .hero{background:linear-gradient(165deg,#0d0d0d 0%,#151009 55%,#0a0a0a 100%);border-bottom:1px solid var(--border);padding:110px 40px 90px;text-align:center;position:relative;overflow:hidden;}
-  .hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:900px;height:420px;background:radial-gradient(ellipse,rgba(201,168,76,0.13) 0%,transparent 70%);pointer-events:none;}
-  .hero .eyebrow{font-size:11px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:14px;justify-content:center;}
-  .hero .eyebrow::before,.hero .eyebrow::after{content:'';display:block;width:36px;height:1px;background:var(--gold);}
-  .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,104px);letter-spacing:3px;line-height:.92;color:#fff;margin-bottom:18px;}
-  .hero h1 span{color:var(--gold);}
-  .hero .sub{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:var(--muted);max-width:620px;margin:0 auto 14px;}
-  .hero .position{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:44px;}
-  .hero-cta{display:inline-block;background:var(--gold);color:var(--black);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:19px 46px;transition:background .2s;}
-  .hero-cta:hover{background:var(--gold-light);}
-  .hero-note{display:block;margin-top:14px;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+     REQUIRES: api/audit.js in the repo (same folder as api/subscribe.js).
+     Uses the same Mailchimp env vars already set in Vercel.
 
-  .wrap{max-width:1080px;margin:0 auto;padding:0 40px;}
-  section{padding:90px 0;}
-  .sec-tag{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
-  .sec-tag::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
-  h2.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5.5vw,62px);letter-spacing:2px;line-height:.95;color:#fff;margin-bottom:26px;}
-  h2.sec-title span{color:var(--gold);}
+     Already wired:
+       · Posts to /api/audit — works for new AND existing contacts
+       · Writes scores into merge fields PHYS / MENT / SPIR / LOWEST
+       · Applies the "Standards Audit" tag → triggers the 3-email sequence (sells Foundation)
+       · No reCAPTCHA page, no new tab — scores appear in place
+       · Final CTA points at /foundation (→ coaching.html#foundation). Muted line for the assessment call below it.
 
-  /* STORY */
-  .story{background:var(--black);}
-  .story-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:start;}
-  .story-copy p{font-size:16px;font-weight:300;color:#c9c9c9;margin-bottom:20px;}
-  .story-copy p strong{color:#fff;font-weight:600;}
-  .story-quote{border-left:3px solid var(--gold);background:var(--surface);padding:26px 30px;margin:30px 0;}
-  .story-quote .q{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:var(--gold-light);line-height:1.6;margin-bottom:10px;}
-  .story-quote .who{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
-  .story-facts{display:flex;flex-direction:column;gap:2px;position:sticky;top:96px;}
-  .fact{background:var(--surface);border-left:3px solid var(--gold-dim);padding:22px 26px;transition:border-color .25s,background .25s;}
-  .fact:hover{border-left-color:var(--gold);background:var(--surface2);}
-  .fact .num{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;color:var(--gold);line-height:1;}
-  .fact .lbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+     OPTIONAL / LATER:
+       EDIT-1  Meta Pixel ID — only needed when you start running ads.
+               Leave it as-is until then; the page works fine without it.
+       Swap the CTA to /assessment.html if you build that page.
+     ============================================================ -->
 
-  /* TRAP */
-  .trap{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-  .trap-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-  .trap-copy p{font-size:16px;font-weight:300;color:#c9c9c9;margin-bottom:18px;}
-  .trap-copy p strong{color:var(--gold);font-weight:600;}
-  .trap-box{background:var(--black);border:1px solid var(--gold-dim);padding:44px 40px;position:relative;}
-  .trap-box::before{content:'THE DIFFERENTIATOR';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 20px;white-space:nowrap;}
-  .trap-box .big{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,76px);letter-spacing:2px;color:#fff;line-height:.95;text-align:center;}
-  .trap-box .big span{color:var(--gold);}
-  .trap-box .small{font-size:13px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.8;}
-
-  /* PHASES */
-  .phases-list{display:flex;flex-direction:column;gap:2px;margin-top:44px;}
-  .phase{display:grid;grid-template-columns:120px 1fr;gap:34px;background:var(--surface);border-left:3px solid transparent;padding:38px 40px;transition:border-color .25s,background .25s;}
-  .phase:hover{border-left-color:var(--gold);background:var(--surface2);}
-  .phase-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--gold);line-height:1;letter-spacing:2px;}
-  .phase-num small{display:block;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px;}
-  .phase h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;color:#fff;margin-bottom:10px;}
-  .phase p{font-size:15px;font-weight:300;color:#bdbdbd;}
-  .phase .pillars-line{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-top:14px;}
-
-  /* PILLARS */
-  .pillars{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-  .pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:44px;}
-  .pillar{background:var(--black);padding:46px 36px;border-top:3px solid var(--gold-dim);transition:border-color .25s;}
-  .pillar:hover{border-top-color:var(--gold);}
-  .pillar .ico{font-size:26px;margin-bottom:18px;}
-  .pillar h3{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px;color:var(--gold);margin-bottom:14px;}
-  .pillar p.lead{font-size:14px;color:#c9c9c9;font-weight:300;margin-bottom:20px;}
-  .pillar ul{list-style:none;}
-  .pillar li{font-size:13px;color:var(--muted);padding:9px 0 9px 22px;border-bottom:1px solid var(--border);position:relative;}
-  .pillar li::before{content:'◆';position:absolute;left:0;color:var(--gold);font-size:8px;top:14px;}
-  .pillar li:last-child{border-bottom:none;}
-
-  /* TIERS */
-  .tier-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;}
-  .tier{background:var(--surface);border:1px solid var(--border);padding:44px 40px;position:relative;display:flex;flex-direction:column;transition:border-color .25s;}
-  .tier:hover{border-color:var(--gold-dim);}
-  .tier.featured{border:1px solid var(--gold);}
-  .tier.featured::before{content:'MOST POPULAR';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 20px;}
-  .tier .t-name{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:#fff;}
-  .tier .t-price{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:1px;color:var(--gold);line-height:1;margin:14px 0 4px;}
-  .tier .t-per{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-  .tier .t-for{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.6;}
-  .tier ul{list-style:none;margin-bottom:34px;flex:1;}
-  .tier li{font-size:14px;color:#c9c9c9;font-weight:300;padding:10px 0 10px 26px;border-bottom:1px solid var(--border);position:relative;}
-  .tier li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:700;}
-  .tier li:last-child{border-bottom:none;}
-  .tier li strong{color:#fff;font-weight:600;}
-  .tier-btn{display:block;text-align:center;background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px;transition:all .2s;}
-  .tier-btn:hover{background:var(--gold);color:var(--black);}
-  .tier.featured .tier-btn{background:var(--gold);color:var(--black);}
-  .tier.featured .tier-btn:hover{background:var(--gold-light);}
-
-  /* GUARANTEE STRIP */
-  .strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 40px;text-align:center;}
-  .strip .line{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,4vw,42px);letter-spacing:3px;color:#fff;}
-  .strip .line span{color:var(--gold);}
-  .strip .sub{font-size:13px;color:var(--muted);margin-top:10px;letter-spacing:1px;}
-
-  /* FINAL CTA */
-  .final{background:linear-gradient(165deg,#0d0d0d 0%,#151009 55%,#0a0a0a 100%);text-align:center;padding:110px 40px;}
-  .final h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,84px);letter-spacing:3px;line-height:.95;color:#fff;margin-bottom:18px;}
-  .final h2 span{color:var(--gold);}
-  .final p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto 40px;font-weight:300;}
-
-  /* FOOTER */
-  .site-footer{background:var(--black);border-top:1px solid var(--border);padding:48px 40px;text-align:center;}
-  .site-footer .brand{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px;color:var(--gold);margin-bottom:6px;}
-  .site-footer .pillars-line{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:24px;}
-  .site-footer .disclaimer{font-size:11px;color:#666;max-width:720px;margin:0 auto;line-height:1.8;}
-
-  img{max-width:100%;height:auto;}
-  @media(max-width:1024px){
-    html,body{overflow-x:hidden;}
-    .topbar,.hero,.strip,.final,.site-footer{padding-left:20px;padding-right:20px;}
-    .wrap{padding:0 20px;}
-    section{padding:64px 0;}
-    .story-grid,.trap-inner{grid-template-columns:1fr;gap:36px;}
-    .founder-grid{grid-template-columns:1fr !important;gap:32px !important;max-width:420px;margin:0 auto;}
-    .story-facts{position:static;}
-    .pillar-grid{grid-template-columns:1fr;}
-    .tier-grid{grid-template-columns:1fr;}
-    .phase{grid-template-columns:1fr;gap:14px;padding:30px 24px;}
-  }
-</style>
-<link rel="canonical" href="https://alignedmanproject.com/bio.html" />
-<meta property="og:title" content="Meet Rob Gonnerman | The Aligned Man Project" />
-<meta property="og:description" content="Registered Nurse, father, founder. The story behind The Aligned Method." />
-<meta property="og:url" content="https://alignedmanproject.com/bio.html" />
-<meta property="og:type" content="profile" />
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Robert Gonnerman",
-  "url": "https://alignedmanproject.com/bio.html",
-  "jobTitle": "Founder & Coach, The Aligned Man Project",
-  "hasCredential": { "@type": "EducationalOccupationalCredential", "credentialCategory": "Registered Nurse (RN)" },
-  "worksFor": { "@type": "Organization", "name": "The Aligned Man Project", "url": "https://alignedmanproject.com" },
-  "sameAs": ["https://www.instagram.com/alignwithrob","https://www.tiktok.com/@alignwithrob"]
-}
-</script>
-<link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<meta property="og:image" content="https://alignedmanproject.com/og-image.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Meet Rob Gonnerman | The Aligned Man Project" />
-<meta name="twitter:description" content="Registered Nurse, father, founder. The story behind The Aligned Method." />
-<meta name="twitter:image" content="https://alignedmanproject.com/og-image.png" />
-<!-- Meta Pixel — added 2026-09-15. No scores, answers or health values are ever passed as parameters. -->
+<!-- EDIT-1 ▸ replace YOUR_PIXEL_ID with your Meta pixel ID -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window,document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1552694942734116');
 fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+:root{
+  --bg:#0E1110;
+  --panel:#171B19;
+  --panel-2:#1F2421;
+  --line:#2C332E;
+  --line-2:#404940;
+  --text:#EDEFEA;
+  --text-2:#9BA398;
+  --text-3:#6E766B;
+  --accent:#8FB865;
+  --accent-dim:#1E2618;
+  --phys:#D69C5A;
+  --ment:#6FAAC0;
+  --spir:#A18FC9;
+  --crit:#D97757;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.ui,button,label{font-family:Archivo,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+
+/* ---------- top bar ---------- */
+.bar{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(14,17,16,.94);backdrop-filter:blur(8px);z-index:10}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:52px}
+.brand{font-family:Archivo,sans-serif;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--text-2);text-decoration:none}
+.counter{font-family:Archivo,sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--text-3);font-variant-numeric:tabular-nums}
+.track{height:2px;background:var(--line)}
+.track i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s ease}
+@media(prefers-reduced-motion:reduce){.track i{transition:none}}
+
+/* ---------- intro ---------- */
+.screen{display:none;padding:44px 0 80px}
+.screen.on{display:block}
+.eyebrow{font-family:Archivo,sans-serif;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:Archivo,sans-serif;font-size:clamp(32px,8vw,46px);line-height:1.02;font-weight:800;letter-spacing:-.025em;text-transform:uppercase;margin:14px 0 0;text-wrap:balance}
+.lede{font-size:19px;color:var(--text-2);margin:18px 0 0}
+.facts{list-style:none;padding:0;margin:28px 0 0;border-top:1px solid var(--line)}
+.facts li{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);font-size:16px;color:var(--text-2)}
+.facts b{color:var(--accent);font-family:Archivo,sans-serif;font-size:12px;font-weight:800;letter-spacing:.1em;min-width:64px;padding-top:3px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:block;width:100%;font-family:Archivo,sans-serif;font-size:14px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;padding:17px 20px;border-radius:3px;
+  background:var(--accent);color:#0E1110;border:0;cursor:pointer;text-align:center;
+  text-decoration:none;margin-top:26px;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{background:var(--line);color:var(--text-3);cursor:not-allowed}
+.btn.ghost{background:transparent;border:1px solid var(--line-2);color:var(--text-2);margin-top:12px}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);filter:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.fine{font-size:13px;color:var(--text-3);text-align:center;margin:14px 0 0;line-height:1.5}
+
+/* ---------- questions ---------- */
+.pill{
+  display:inline-block;font-family:Archivo,sans-serif;font-size:10px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border:1px solid currentColor;border-radius:2px;
+}
+.pill.p{color:var(--phys)} .pill.m{color:var(--ment)} .pill.s{color:var(--spir)}
+.qtext{font-size:24px;line-height:1.3;font-weight:600;margin:18px 0 26px;text-wrap:balance}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{
+  display:block;border:1px solid var(--line);background:var(--panel);border-radius:3px;
+  padding:15px 17px;cursor:pointer;font-family:"Source Serif 4",serif;font-size:16.5px;
+  line-height:1.4;color:var(--text);transition:border-color .12s,background .12s;text-align:left;width:100%;
+}
+.opt:hover{border-color:var(--line-2);background:var(--panel-2)}
+.opt.sel{border-color:var(--accent);background:var(--accent-dim)}
+.navrow{display:flex;gap:10px;margin-top:26px;align-items:center}
+.back{
+  background:transparent;border:0;color:var(--text-3);font-family:Archivo,sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:10px 0;
+}
+.back:hover{color:var(--text)}
+.back[hidden]{display:none!important}
+
+/* ---------- gate ---------- */
+.gatebox{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:26px 22px;margin-top:26px}
+label.f{display:block;font-family:Archivo,sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);margin-bottom:8px}
+input[type=text],input[type=email],input[type=tel]{
+  width:100%;background:var(--bg);border:1px solid var(--line-2);color:var(--text);
+  border-radius:3px;padding:14px 15px;font-family:"Source Serif 4",serif;font-size:17px;margin-bottom:18px;
+}
+input::placeholder{color:var(--text-3)}
+.optin{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;font-size:14px;color:var(--text-2);line-height:1.45}
+.optin input{margin:3px 0 0;width:17px;height:17px;accent-color:var(--accent)}
+
+/* ---------- results ---------- */
+.scores{display:grid;gap:10px;margin:26px 0 0}
+.sc{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:18px 20px}
+.sc.low{border-color:currentColor;background:var(--panel-2)}
+.sc .row{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sc .nm{font-family:Archivo,sans-serif;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.sc .vl{font-family:Archivo,sans-serif;font-size:34px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.sc .band{font-family:Archivo,sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-top:6px}
+.meter{height:5px;background:var(--line);border-radius:3px;margin-top:13px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:currentColor;transition:width .7s cubic-bezier(.2,.7,.3,1)}
+@media(prefers-reduced-motion:reduce){.meter i{transition:none}}
+.sc.p{color:var(--phys)} .sc.m{color:var(--ment)} .sc.s{color:var(--spir)}
+.sc .nm,.sc .vl{color:currentColor}
+.verdict{border-left:3px solid var(--accent);background:var(--panel);padding:20px 22px;margin:30px 0 0;border-radius:0 3px 3px 0}
+.verdict h3{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.verdict p{margin:0 0 14px;color:var(--text)}
+.verdict p:last-child{margin:0}
+.offer{border:1px solid var(--accent);background:var(--accent-dim);border-radius:4px;padding:26px 22px;margin-top:30px}
+.offer h2{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:0 0 12px;line-height:1.15;text-wrap:balance}
+.offer ul{margin:16px 0 0;padding-left:19px;color:var(--text-2);font-size:16px}
+.offer li{margin-bottom:7px}
+footer{border-top:1px solid var(--line);margin-top:60px;padding:22px 0 40px;text-align:center;font-family:Archivo,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+</style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brand">THE ALIGNED MAN PROJECT</div>
-  <div style="display:flex;align-items:center;gap:0;">
-    <a href="/" class="back" style="margin-right:14px;">← Main Site</a>
-    <a href="/bio.html" class="back" style="margin-right:14px;">Bio</a>
-    <a href="/coaching.html" class="back" style="margin-right:14px;">Coaching</a>
-    <a href="/#apply" class="topbar-cta">Apply Now</a>
+<div class="bar">
+  <div class="wrap">
+    <a class="brand" href="/">The Aligned Man Project</a>
+    <span class="counter" id="counter" hidden></span>
+  </div>
+  <div class="track"><i id="track"></i></div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<div class="screen on" id="s-intro">
+  <div class="wrap">
+    <span class="eyebrow">Free · 4 minutes · No pitch until you ask</span>
+    <h1>The Standards Audit</h1>
+    <p class="lede">Twenty-one questions. Three scores. An honest read on where your standard actually is — and it's usually not where you think.</p>
+    <ul class="facts">
+      <li><b>Physical</b><span>Training, sleep, food, bloodwork, the body you're operating out of.</span></li>
+      <li><b>Mental</b><span>Discipline, recovery from setbacks, whether your word still means something.</span></li>
+      <li><b>Spiritual</b><span>Purpose, service, what you're carrying, who's watching you.</span></li>
+    </ul>
+    <button class="btn" id="start">Start the audit</button>
+    <p class="fine">Answer these honestly or don't bother. Nobody sees your answers but you and me.</p>
   </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="eyebrow">For Disciplined Men, Late 20s to 50s — Who Don't Break</div>
-  <h1>I DIDN'T READ ABOUT THIS.<br/><span>I LIVED IT.</span></h1>
-  <p class="sub" style="margin-bottom:26px;">Not a guru who read the books. A man who lived every word of it —<br/>and built <strong style="color:#fff;font-style:normal;">The Aligned Method&trade;</strong> from every trial that tried to break him and didn't.</p>
-  <div class="position">The Story Behind The Method · Physical · Mental · Spiritual</div>
-  <a href="/coaching.html" class="hero-cta">Explore Coaching</a>
-  <span class="hero-note">We don't accept everyone. Applications are reviewed personally by Rob.</span>
-</section>
-
-<!-- STORY -->
-<section class="hero">
-  <div class="eyebrow">The Man Behind The Method</div>
-  <h1>MEET YOUR<br/><span>COACH</span></h1>
-  <p class="sub">Not a guru who read the books. A man who lived every word of it.</p>
-</section>
-<!-- STORY -->
-<section class="story">
+<!-- ============ QUESTIONS ============ -->
+<div class="screen" id="s-q">
   <div class="wrap">
-    <div class="sec-tag">The Proof Behind The Method</div>
-    <h2 class="sec-title">I Didn't Read About This.<br/><span>I Lived It.</span></h2>
-    <p style="font-size:14px;letter-spacing:1px;color:var(--muted);margin-bottom:34px;">Built by a Registered Nurse who spent a decade rebuilding — physically, mentally, and spiritually — before ever coaching another man through it.</p>
-    <div class="story-grid">
-      <div class="story-copy">
-        <p><strong>I was 140+ pounds overweight.</strong> Burnt out. Watching my body, my marriage, and my identity fall apart at the same time. I know exactly what it feels like to look in the mirror and not recognize the man staring back.</p>
-        <figure style="margin:28px auto;max-width:430px;text-align:center;">
-          <img src="/transformation-before-after.jpg" loading="lazy" decoding="async" alt="Rob's transformation — 140+ pounds lost, before and after" style="width:100%;height:auto;display:block;" />
-          <figcaption style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:12px;">140+ pounds. Same man. Different decision.</figcaption>
-        </figure>
-        <p>The physical rebuild came first — because it had to. When your body is failing, everything built on top of it fails with it. I lost the 140+ pounds. I rebuilt my strength, my energy, and my health from the ground up. Not with a magic program. With discipline, with knowledge earned from a decade learning under the pioneer coaches of men's optimization — and with a decision I refused to take back.</p>
-        <div class="story-quote">
-          <div class="q">"You're gonna go through hell. So you might as well just go through it one way or another."</div>
-          <div class="who">— My mother. The philosophy behind every trial I've faced.</div>
-        </div>
-        <p><strong>Then life tested everything else.</strong> Divorce. Losing everything. Going back to school at 35 while raising my two sons, becoming a Registered Nurse at 39. Working the transplant floor and psychiatric units. Five years as an Athlete Manager inside a major supplement company, training and educating alongside the best in the game.</p>
-        <p>Every pillar of this program exists because I had to rebuild it in my own life first. <strong>I'm not selling theory. I'm selling a life I actually lived</strong> — and a system built from every trial that tried to break me and didn't.</p>
-      </div>
-      <div class="story-facts">
-        <div class="fact"><div class="num">140+</div><div class="lbl">Pounds Lost</div></div>
-        <div class="fact"><div class="num">39</div><div class="lbl">Age Became a Registered Nurse</div></div>
-        <div class="fact"><div class="num">10</div><div class="lbl">Years in Men's Optimization</div></div>
-        <div class="fact"><div class="num">RN</div><div class="lbl">Registered Nurse — Medical &amp; Psychiatric</div></div>
-        <div class="fact"><div class="num">5</div><div class="lbl">Years Athlete Manager — Supplement Industry</div></div>
-        <div class="fact"><div class="num">2</div><div class="lbl">Sons — My Daily Purpose</div></div>
-      </div>
-    </div>
+    <span class="pill" id="q-pill">Physical</span>
+    <h2 class="qtext" id="q-text"></h2>
+    <div class="opts" id="q-opts"></div>
+    <div class="navrow"><button class="back" id="back" hidden>← Back</button></div>
   </div>
-</section>
+</div>
 
-
-
-<!-- BIO -->
-<section style="background:var(--black);">
+<!-- ============ EMAIL GATE ============ -->
+<div class="screen" id="s-gate">
   <div class="wrap">
-    <div class="sec-tag">Meet Your Coach</div>
-    <h2 class="sec-title">Rob Gonnerman.<br/><span>Founder, The Aligned Man Project.</span></h2>
-    <div class="founder-grid" style="display:grid;grid-template-columns:280px 1fr;gap:50px;align-items:start;margin-top:10px;">
-      <div>
-        <img src="/rob-scrubs.jpg" fetchpriority="high" decoding="async" alt="Rob Gonnerman, Registered Nurse" style="width:100%;border:1px solid var(--border);display:block;" />
-        <div style="margin-top:16px;text-align:center;">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--gold);">ROB GONNERMAN</div>
-          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px;">Founder &middot; RN &middot; Coach</div>
-        </div>
-      </div>
-      <div>
-        <p style="font-size:15px;font-weight:300;color:#c9c9c9;margin-bottom:18px;">Before The Aligned Man Project, Rob spent five years as an Athlete Manager inside a major supplement company — trained and educated alongside pioneer coaches in men's optimization, bodybuilding, and performance.</p>
-        <p style="font-size:15px;font-weight:300;color:#c9c9c9;margin-bottom:18px;">Went back to school at 35 while raising his two sons — became a Registered Nurse at 39. Now works medical and psychiatric units, bringing a clinical understanding of the mind and body that no online coach can match.</p>
-        <p style="font-size:15px;font-weight:300;color:#c9c9c9;margin-bottom:18px;">Over the past decade, Rob has studied a wide range of spiritual traditions and gone through intensive personal therapy — doing the internal work himself before ever asking a client to do it. The Mental and Spiritual pillars aren't borrowed frameworks. They're the product of his own alignment, tested and rebuilt over ten years.</p>
-        <p style="font-size:15px;font-weight:300;color:#c9c9c9;margin-bottom:18px;"><strong style="color:#fff;">Successfully co-parenting two sons</strong> who are his daily purpose. Lost 140+ pounds and rebuilt his body, his mind, and his life from the ground up — not once, but every time it was tested.</p>
-        <div style="border-left:3px solid var(--gold);background:var(--surface);padding:20px 26px;margin-top:26px;">
-          <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--gold-light);line-height:1.6;">"I'm not a guru who read the books. I'm a man who lived every word of this — and now I give it to the men who need it."</p>
-        </div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:44px;">
-      <div style="position:relative;background:var(--surface);">
-        <img src="/rob-and-sons.jpg" loading="lazy" decoding="async" alt="Rob with his two sons" style="width:100%;height:100%;object-fit:cover;display:block;" />
-      </div>
-      <div style="position:relative;background:var(--surface);">
-        <img src="/rob-and-son-pool.jpg" loading="lazy" decoding="async" alt="Rob with his son" style="width:100%;height:100%;object-fit:cover;display:block;" />
-      </div>
-    </div>
-    <p style="font-size:12px;color:#666;margin-top:14px;letter-spacing:1px;text-align:center;">His daily purpose. The reason none of this was ever optional.</p>
-  </div>
-</section>
+    <span class="eyebrow">Done — 21 of 21</span>
+    <h1>Your scores are ready</h1>
+    <p class="lede">Where should I send the full breakdown? You'll see your three scores on the next screen either way.</p>
 
-<!-- THE TRANSFORMATION -->
-<section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <!-- WIRED — posts to /api/audit (Vercel function). Works for NEW and EXISTING
+         contacts: upserts merge fields PHYS/MENT/SPIR/LOWEST and applies the
+         "Standards Audit" tag, which triggers the 5-email sequence. -->
+    <form class="gatebox" id="gate-form" novalidate>
+      <label class="f" for="fname">First name</label>
+      <input type="text" id="fname" name="FNAME" placeholder="Rob" autocomplete="given-name" required>
+
+      <label class="f" for="email">Email</label>
+      <input type="email" id="email" name="EMAIL" placeholder="you@email.com" autocomplete="email" required>
+
+      <label class="f" for="phone">Mobile <span style="color:var(--text-3);letter-spacing:0;text-transform:none;font-weight:400">— optional</span></label>
+      <input type="tel" id="phone" name="PHONE" placeholder="Optional" autocomplete="tel">
+
+      <label class="optin">
+        <input type="checkbox" name="SMSOK" value="yes">
+        <span>Text me too. Three messages over eight days, then I stop. Reply STOP anytime.</span>
+      </label>
+
+      <input type="hidden" name="PHYS" id="h-phys">
+      <input type="hidden" name="MENT" id="h-ment">
+      <input type="hidden" name="SPIR" id="h-spir">
+      <input type="hidden" name="LOWEST" id="h-low">
+      <!-- Honeypot for api/audit.js — humans never see it; bots fill it. -->
+      <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" value=""></div>
+      <input type="hidden" name="ts" id="h-ts">
+
+      <button class="btn" type="submit">Show me my scores</button>
+      <p class="fine">No spam. Unsubscribe any time. I don't sell lists.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ============ RESULTS ============ -->
+<div class="screen" id="s-result">
   <div class="wrap">
-    <div class="sec-tag">The Transformation</div>
-    <h2 class="sec-title">140+ Pounds. <span>One Decision.</span></h2>
-    <p style="font-size:15px;color:var(--muted);max-width:620px;font-weight:300;margin-bottom:40px;">This is not a stock photo program. This is the founder's own rebuild — the same method, the same pillars, the same standard you'll be held to.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;max-width:760px;">
-      <div style="position:relative;background:var(--black);">
-        <img src="/before-front.jpg" loading="lazy" decoding="async" alt="Rob before transformation" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(45%) contrast(0.95);" />
-        <div style="position:absolute;top:16px;left:16px;background:rgba(10,10,10,0.88);border:1px solid var(--border);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:3px;padding:7px 16px;">BEFORE</div>
-      </div>
-      <div style="position:relative;background:var(--black);">
-        <img src="/after-1.jpg" loading="lazy" decoding="async" alt="Rob after transformation — the rebuild" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        <div style="position:absolute;top:16px;left:16px;background:var(--gold);color:var(--black);font-size:10px;font-weight:700;letter-spacing:3px;padding:7px 16px;">AFTER</div>
-      </div>
-    </div>
-    <p style="font-size:11px;color:#666;margin-top:14px;letter-spacing:1px;">Individual results vary. This transformation reflects years of consistent work across all three pillars.</p>
-  </div>
-</section>
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="brand">THE ALIGNED MAN PROJECT</div>
-  <div class="pillars-line">Physical · Mental · Spiritual</div>
-  <p class="disclaimer">
-    The Aligned Man Project provides coaching, educational, and motivational content only. Nothing on this page constitutes medical advice, nursing advice, diagnosis, or treatment. Robert Gonnerman is a Registered Nurse; however, no content or coaching provided through The Aligned Man Project is delivered in his capacity as a nurse, and no nurse-patient or provider-patient relationship is created. Always consult a licensed physician before beginning any exercise, nutrition, or optimization program. Individual results vary.
-    <br/><br/>© The Aligned Man Project · alignedmanproject.com
-  </p>
-  <div style="margin-top:22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;">
-    <a href="/privacy.html" style="color:var(--muted);margin:0 10px;">Privacy Policy</a>
-    <a href="/terms.html" style="color:var(--muted);margin:0 10px;">Terms of Service</a>
-  </div>
-</footer>
+    <span class="eyebrow">Your Standards Audit</span>
+    <h1 id="r-head">Here's where you stand</h1>
 
+    <div class="scores" id="r-scores"></div>
+
+    <div class="verdict">
+      <h3>The read</h3>
+      <div id="r-verdict"></div>
+    </div>
+
+    <div class="offer">
+      <h2>You know the weak pillar. Now build all three.</h2>
+      <p style="color:var(--text-2);margin:0">A low score isn&rsquo;t fixed by paying more attention to it. It&rsquo;s fixed by a structure that trains all three pillars whether or not you feel like it that week. That&rsquo;s Foundation: seven days free, then month-to-month. Open enrollment, no application, nothing to schedule.</p>
+      <ul>
+        <li>A monthly protocol drop &mdash; training, nutrition, and the mental and spiritual work in one package</li>
+        <li>A standard training program and nutrition plan, structured by goal</li>
+        <li>A monthly group coaching call with Rob</li>
+        <li>The private community and full Daily Optimization Planner access</li>
+      </ul>
+      <!-- /foundation redirects to coaching.html#foundation (vercel.json). He reads what he's buying before he pays. -->
+      <a class="btn" id="cta" href="/foundation">Start Foundation &mdash; 7 days free, then $150/month</a>
+      <p class="fine">Standardized programming, not individually tailored. Nothing charged for the first seven days; cancel whenever.</p>
+      <p class="fine" style="margin-top:14px;opacity:.8">Have a protocol or bloodwork question that needs a one-to-one answer? Foundation doesn&rsquo;t include that. <a href="/coaching.html#assessment" id="cta-assessment-line" style="color:var(--gold);text-decoration:none;border-bottom:1px solid currentColor">The Aligned Assessment Call &mdash; $150</a></p>
+    </div>
+
+    <a class="btn ghost" href="/">Back to The Aligned Man Project</a>
+  </div>
+</div>
+
+<footer>Physical · Mental · Spiritual<br><span style="letter-spacing:.06em;text-transform:none;">The Aligned Man Project LLC · Serving Westchester County, New York</span></footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------------------------------------------------------
+   QUESTIONS — 7 per pillar. Options are scored 0 (worst) to 3 (best).
+   Edit the wording freely; keep four options and keep them in
+   worst-to-best order or the scoring breaks.
+   --------------------------------------------------------------- */
+var Q = [
+ {p:"P",t:"How many days in the last 30 did you train with intent — not just 'went to the gym'?",
+  o:["None","A handful, when the week allowed","Around 12 to 15","Twenty or more"]},
+ {p:"P",t:"How many hours do you actually sleep? Not the number you tell people.",
+  o:["Under five","Five to six","Six to seven","Seven or more, most nights"]},
+ {p:"P",t:"When did you last see your own bloodwork?",
+  o:["Never, or I can't remember","Years ago","Within the last two years","This year — and I know the numbers"]},
+ {p:"P",t:"Carry something heavy up two flights of stairs. What happens?",
+  o:["I'd find a reason not to","I'd do it and need a minute","Fine, but I'd notice","Wouldn't think about it"]},
+ {p:"P",t:"How many days last week did you eat like a man with a goal?",
+  o:["None","One or two","Most of them","All of them"]},
+ {p:"P",t:"What time do you stop eating, drinking, or scrolling at night?",
+  o:["Whenever I fall asleep","It varies wildly","Usually around the same time","Same time, deliberately"]},
+ {p:"P",t:"If your doctor ran every test tomorrow, would you want to see the results?",
+  o:["No. I'd rather not know","I'd be nervous about it","Yes, with some hesitation","Yes — I'd want the data"]},
+
+ {p:"M",t:"Something knocks you off. How long until you're back on standard?",
+  o:["Weeks — or I don't come back","About a week","A couple of days","Same day or the next one"]},
+ {p:"M",t:"How many things did you say you'd do this month and didn't?",
+  o:["More than I want to count","Several","One or two","I did what I said"]},
+ {p:"M",t:"Who holds you to a standard you can't talk your way out of?",
+  o:["Nobody","Someone, but I can dodge it","One person, sometimes","Someone real, consistently"]},
+ {p:"M",t:"What's the last hard thing you finished that nobody made you do?",
+  o:["I can't think of one","A long time ago","Sometime this year","Recently — and there's another one running"]},
+ {p:"M",t:"How much of your day runs on decisions you already made in advance?",
+  o:["Almost none. I decide as I go","Mornings, maybe","About half of it","Most of it is already decided"]},
+ {p:"M",t:"Be honest. What are you avoiding right now?",
+  o:["Something big, and I know exactly what","A few things I keep pushing","One thing, and I've put a date on it","Nothing I'm not already handling"]},
+ {p:"M",t:"Are you rebuilding, or maintaining a version of yourself you've outgrown?",
+  o:["Maintaining, and I know it","Mostly maintaining","Starting to rebuild","Actively rebuilding"]},
+
+ {p:"S",t:"Can you say what you're building toward in one sentence?",
+  o:["No","Vaguely","Roughly, yes","Yes — I could say it right now"]},
+ {p:"S",t:"Who depends on you being the man you say you are?",
+  o:["Nobody, and that's part of it","People do, and I'm not delivering","A few, and mostly I show up","People do, and I show up"]},
+ {p:"S",t:"When did you last do something for someone that cost you and gained you nothing?",
+  o:["I can't remember","A while back","This month","This week"]},
+ {p:"S",t:"What are you still carrying that you've never put down?",
+  o:["Something heavy I've never dealt with","A few things I don't look at","I've worked on it. Not finished","I've dealt with mine"]},
+ {p:"S",t:"Is there anything in your week that isn't about output?",
+  o:["No. Everything is production","Rarely","Some","Yes, deliberately"]},
+ {p:"S",t:"If your kids described your values from watching you, would they get it right?",
+  o:["No — and that's hard to admit","Partly","Mostly","Yes"]},
+ {p:"S",t:"What would the man you were at 25 say about the man you are now?",
+  o:["He'd be disappointed","He'd be confused","He'd be alright with it","He'd be proud"]}
+];
+
+var NAMES = {P:"Physical", M:"Mental", S:"Spiritual"};
+var CLS   = {P:"p", M:"m", S:"s"};
+
+/* Verdict copy per pillar, per band. Edit freely — this is the
+   highest-leverage writing on the page. */
+var VERDICT = {
+ P:{
+  low:"Your body is the one keeping score out loud. Everything else on this list gets harder when you're running on five hours and food you didn't choose — the discipline problems and the purpose problems both get louder when the machine is under-maintained. The good news is this pillar responds fastest. It is the one where thirty deliberate days produce a difference you can feel.",
+  mid:"You're holding, not building. That's a real distinction and most men blur it. Holding works right up until something interrupts — an injury, a bad quarter, a stretch of nights — and then there's no margin underneath you. What you're missing isn't effort. It's a standard that survives a bad week.",
+  high:"The physical side is under control, which means it isn't the thing holding you down — and it also means it can hide the thing that is. Men who are fit and disciplined in the gym are the ones most able to avoid the other two pillars for years. Look at your lower scores."
+ },
+ M:{
+  low:"This is the one to look at. Your body isn't the problem — the operating system running it is. When your word to yourself has stopped meaning much, no program survives contact with a hard week, which is why nothing has stuck so far. That isn't a character flaw and it isn't fixed by trying harder. It's fixed by rebuilding the standard from something small enough that you cannot fail at it, and then not breaking it.",
+  mid:"You've got discipline in patches. It shows up when things are going well and disappears under pressure, which means what you actually have is momentum rather than structure. Momentum is fragile. Structure is what holds when you don't feel like it.",
+  high:"Mentally you're solid, and it's probably what's carried you this far. Watch for the failure mode that comes with it: men who can grind through anything often grind through the wrong thing for years without stopping to ask why. Discipline in service of nothing in particular is just an expensive habit."
+ },
+ S:{
+  low:"You're executing without a reason, and that works longer than it should — which is exactly why it's dangerous. Men run on momentum for years and only notice the tank is empty when something forces them to stop. This is the pillar that determines whether any of the rest holds when the novelty runs out. It's also the one nobody wants to talk about, which is why most programs skip it entirely.",
+  mid:"You know roughly what you're building toward but you couldn't defend it under pressure. That's usually enough to keep you moving and not enough to keep you from drifting, because a vague reason loses every argument with a concrete excuse.",
+  high:"You know why you're doing this, which is rarer than it should be and puts you ahead of most men who take this. Make sure the other two pillars are actually equipped to carry it — purpose without a body or a standard underneath it turns into frustration."
+ }
+};
+
+var idx = 0, answers = new Array(Q.length).fill(null);
+
+var el = function(id){ return document.getElementById(id); };
+var screens = {intro:el("s-intro"), q:el("s-q"), gate:el("s-gate"), result:el("s-result")};
+
+function show(name){
+  Object.keys(screens).forEach(function(k){ screens[k].classList.toggle("on", k===name); });
+  window.scrollTo(0,0);
+}
+
+function progress(n){
+  el("track").style.width = (n/Q.length*100) + "%";
+  var c = el("counter");
+  if(n>0 && n<=Q.length){ c.hidden=false; c.textContent = n + " / " + Q.length; }
+  else { c.hidden = true; }
+}
+
+function render(){
+  var q = Q[idx];
+  el("q-pill").textContent = NAMES[q.p];
+  el("q-pill").className = "pill " + CLS[q.p];
+  el("q-text").textContent = q.t;
+
+  var box = el("q-opts");
+  box.innerHTML = "";
+  q.o.forEach(function(text, i){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "opt" + (answers[idx]===i ? " sel" : "");
+    b.textContent = text;
+    b.addEventListener("click", function(){
+      answers[idx] = i;
+      box.querySelectorAll(".opt").forEach(function(x){ x.classList.remove("sel"); });
+      b.classList.add("sel");
+      setTimeout(next, 180);
+    });
+    box.appendChild(b);
+  });
+
+  el("back").hidden = (idx === 0);
+  progress(idx);
+}
+
+function next(){
+  if(idx < Q.length-1){ idx++; render(); }
+  else { finish(); }
+}
+
+el("back").addEventListener("click", function(){
+  if(idx > 0){ idx--; render(); }
+});
+
+el("start").addEventListener("click", function(){
+  START_TS = Date.now();
+  try{ fbq("track","ViewContent",{content_name:"Standards Audit started"}); }catch(e){}
+  idx = 0; show("q"); render();
+});
+
+/* ---- scoring ---- */
+function score(pillar){
+  var raw = 0, max = 0;
+  Q.forEach(function(q,i){
+    if(q.p !== pillar) return;
+    max += 3;
+    raw += (answers[i] === null ? 0 : answers[i]);
+  });
+  return Math.round(raw / max * 100);
+}
+function band(v){
+  if(v < 34) return {k:"low",  label:"Critical"};
+  if(v < 60) return {k:"low",  label:"Declining"};
+  if(v < 80) return {k:"mid",  label:"Holding"};
+  return {k:"high", label:"Aligned"};
+}
+
+var S = {}, LOW = "P", START_TS = 0;
+
+function finish(){
+  progress(Q.length);
+  S = { P:score("P"), M:score("M"), S:score("S") };
+  var lowest = ["P","M","S"].reduce(function(a,b){ return S[b] < S[a] ? b : a; });
+  LOW = lowest;
+
+  el("h-phys").value = S.P;
+  el("h-ment").value = S.M;
+  el("h-spir").value = S.S;
+  el("h-low").value  = NAMES[lowest];
+
+  show("gate");
+}
+
+/* ---- gate submit ---- */
+el("gate-form").addEventListener("submit", async function(ev){
+  ev.preventDefault();
+  var f = ev.currentTarget;
+  var name = (f.FNAME.value||"").trim(), email = (f.EMAIL.value||"").trim();
+  if(!name || !email || email.indexOf("@")<0){ alertGate("Enter your first name and a real email."); return; }
+  var btn = f.querySelector('button[type="submit"]');
+  btn.disabled = true; btn.textContent = "One second\u2026";
+  try{
+    var r = await fetch("/api/audit", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        name:name, email:email,
+        phone:(f.PHONE.value||"").trim(),
+        smsok: f.SMSOK && f.SMSOK.checked ? "yes" : "",
+        phys: S.P, ment: S.M, spir: S.S, lowest: NAMES[LOW],
+        website: f.website.value || "",
+        ts: START_TS
+      })
+    });
+    var j = await r.json().catch(function(){ return {}; });
+    if(!r.ok || j.error){ alertGate(j.error || "Something went wrong. Try again."); btn.disabled=false; btn.textContent="Show me my scores"; return; }
+    /* Lead fires only after the server confirmed the contact was saved. No scores, no answers — name/value only. */
+    try{ fbq("track","Lead",{content_name:"Standards Audit", value:0, currency:"USD"}); }catch(e){}
+  }catch(e){
+    alertGate("Couldn\u2019t reach the server. Check your connection and try again.");
+    btn.disabled=false; btn.textContent="Show me my scores"; return;
+  }
+  results();
+});
+function alertGate(msg){
+  var box = el("gate-form");
+  var p = box.querySelector(".gate-err");
+  if(!p){ p=document.createElement("p"); p.className="gate-err fine"; p.style.color="var(--crit)"; p.style.textAlign="left"; box.insertBefore(p, box.querySelector('button[type="submit"]')); }
+  p.textContent = msg;
+}
+
+function results(){
+  var lowest = ["P","M","S"].reduce(function(a,b){ return S[b] < S[a] ? b : a; });
+  var name = "";
+  try{ name = (document.getElementById("fname").value || "").trim().split(" ")[0]; }catch(e){}
+
+  el("r-head").textContent = name ? (name + ", here's where you stand") : "Here's where you stand";
+
+  var box = el("r-scores");
+  box.innerHTML = "";
+  ["P","M","S"].forEach(function(p){
+    var v = S[p], b = band(v), isLow = (p === lowest);
+    var d = document.createElement("div");
+    d.className = "sc " + CLS[p] + (isLow ? " low" : "");
+    d.innerHTML =
+      '<div class="row"><span class="nm">' + NAMES[p] + (isLow ? ' — weakest' : '') + '</span>' +
+      '<span class="vl">' + v + '</span></div>' +
+      '<div class="band">' + b.label + '</div>' +
+      '<div class="meter"><i></i></div>';
+    box.appendChild(d);
+    setTimeout(function(){ d.querySelector(".meter i").style.width = v + "%"; }, 120);
+  });
+
+  var b = band(S[lowest]);
+  var copy = VERDICT[lowest][b.k === "low" ? "low" : b.k];
+  el("r-verdict").innerHTML =
+    '<p><strong>Your lowest score is ' + NAMES[lowest] + ', at ' + S[lowest] + '.</strong></p>' +
+    '<p>' + copy + '</p>' +
+    '<p>Most men come in assuming the problem is physical, because that’s the one they can see in a mirror. It usually isn’t.</p>';
+
+  /* 2026-09-15: scores are no longer appended to the CTA URL. coaching.html never read them,
+     and a URL carrying PHYS/MENT/SPIR/LOWEST would be transmitted to Meta by the pixel. */
+
+  el("cta").addEventListener("click", function(){
+    try{ fbq("track","InitiateCheckout",{content_name:"Foundation from Audit", value:150, currency:"USD"}); }catch(e){}
+  });
+
+  show("result");
+}
+
+})();
+</script>
 </body>
 </html>
