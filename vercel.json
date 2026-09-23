@@ -19,6 +19,18 @@
     {
       "source": "/bio",
       "destination": "/bio.html"
+    },
+    {
+      "source": "/merch",
+      "destination": "/merch.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
     }
   ],
   "redirects": [
