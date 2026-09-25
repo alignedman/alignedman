@@ -50,8 +50,13 @@
       "permanent": false
     },
     {
+      "source": "/call",
+      "destination": "/#apply",
+      "permanent": false
+    },
+    {
       "source": "/assessment",
-      "destination": "/coaching.html#assessment",
+      "destination": "/#apply",
       "permanent": false
     }
   ]
