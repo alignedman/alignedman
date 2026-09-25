@@ -1,3 +1,4 @@
+<!-- AMP VERSION STAMP | audit.html | Standards Audit | LAST UPDATED: 2026-09-25 | STATUS: LIVE (public) | Text-message option removed, Foundation $49, free call line | The Aligned Man Project LLC -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,13 +215,6 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:22px 0 40px;text
       <label class="f" for="email">Email</label>
       <input type="email" id="email" name="EMAIL" placeholder="you@email.com" autocomplete="email" required>
 
-      <label class="f" for="phone">Mobile <span style="color:var(--text-3);letter-spacing:0;text-transform:none;font-weight:400">— optional</span></label>
-      <input type="tel" id="phone" name="PHONE" placeholder="Optional" autocomplete="tel">
-
-      <label class="optin">
-        <input type="checkbox" name="SMSOK" value="yes">
-        <span>Text me too. Three messages over eight days, then I stop. Reply STOP anytime.</span>
-      </label>
 
       <input type="hidden" name="PHYS" id="h-phys">
       <input type="hidden" name="MENT" id="h-ment">
@@ -259,9 +253,9 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:22px 0 40px;text
         <li>The private community and full Daily Optimization Planner access</li>
       </ul>
       <!-- /foundation redirects to coaching.html#foundation (vercel.json). He reads what he's buying before he pays. -->
-      <a class="btn" id="cta" href="/foundation">Start Foundation &mdash; 7 days free, then $150/month</a>
+      <a class="btn" id="cta" href="/foundation">Start Foundation &mdash; 7 days free, then $49/month</a>
       <p class="fine">Standardized programming, not individually tailored. Nothing charged for the first seven days; cancel whenever.</p>
-      <p class="fine" style="margin-top:14px;opacity:.8">Have a protocol or bloodwork question that needs a one-to-one answer? Foundation doesn&rsquo;t include that. <a href="/coaching.html#assessment" id="cta-assessment-line" style="color:var(--gold);text-decoration:none;border-bottom:1px solid currentColor">The Aligned Assessment Call &mdash; $150</a></p>
+      <p class="fine" style="margin-top:14px;opacity:.8">Want one-to-one coaching instead? <a href="/#apply" id="cta-call-line" style="color:var(--gold);text-decoration:none;border-bottom:1px solid currentColor">Book a free 15-minute call with Rob</a></p>
     </div>
 
     <a class="btn ghost" href="/">Back to The Aligned Man Project</a>
@@ -453,8 +447,6 @@ el("gate-form").addEventListener("submit", async function(ev){
       method:"POST", headers:{"Content-Type":"application/json"},
       body: JSON.stringify({
         name:name, email:email,
-        phone:(f.PHONE.value||"").trim(),
-        smsok: f.SMSOK && f.SMSOK.checked ? "yes" : "",
         phys: S.P, ment: S.M, spir: S.S, lowest: NAMES[LOW],
         website: f.website.value || "",
         ts: START_TS
@@ -510,7 +502,7 @@ function results(){
      and a URL carrying PHYS/MENT/SPIR/LOWEST would be transmitted to Meta by the pixel. */
 
   el("cta").addEventListener("click", function(){
-    try{ fbq("track","InitiateCheckout",{content_name:"Foundation from Audit", value:150, currency:"USD"}); }catch(e){}
+    try{ fbq("track","InitiateCheckout",{content_name:"Foundation from Audit", value:49, currency:"USD"}); }catch(e){}
   });
 
   show("result");
