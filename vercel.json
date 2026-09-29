@@ -50,6 +50,11 @@
       "permanent": false
     },
     {
+      "source": "/freecall",
+      "destination": "/#apply",
+      "permanent": false
+    },
+    {
       "source": "/call",
       "destination": "/#apply",
       "permanent": false
