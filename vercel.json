@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/freecall",
+      "destination": "/freecall.html"
+    },
+    {
+      "source": "/call",
+      "destination": "/freecall.html"
+    },
+    {
       "source": "/optimizer",
       "destination": "/optimizer.html"
     },
@@ -47,16 +55,6 @@
     {
       "source": "/ascension",
       "destination": "/coaching.html#ascension",
-      "permanent": false
-    },
-    {
-      "source": "/freecall",
-      "destination": "/#apply",
-      "permanent": false
-    },
-    {
-      "source": "/call",
-      "destination": "/#apply",
       "permanent": false
     },
     {
