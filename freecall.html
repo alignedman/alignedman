@@ -1,0 +1,621 @@
+<!-- AMP VERSION STAMP | freecall.html | Free 15-Minute Call (standalone) | LAST UPDATED: 2026-10-06 | STATUS: LIVE (public) | Served at /freecall and /call — same form and submission as the homepage | The Aligned Man Project LLC -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Free 15-Minute Call | The Aligned Man Project</title>
+  <meta name="description" content="Book a free 15-minute call with Robert Gonnerman, RN. Where you are, what's in the way, and whether coaching fits. No cost, no pressure." />
+  <meta name="keywords" content="men's coaching, men's personal development, physical optimization, mental clarity men, spiritual alignment, Robert Gonnerman, aligned man project, align with rob, men's coaching program" />
+  <meta name="author" content="Robert Gonnerman" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://alignedmanproject.com/freecall" />
+  <meta property="og:title" content="Book a Free 15-Minute Call | The Aligned Man Project" />
+  <meta property="og:description" content="Fifteen minutes with Rob. Where you are, what's in the way, and whether coaching fits. No cost, no pressure." />
+  <meta property="og:url" content="https://alignedmanproject.com/freecall" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-bright: #E2C06A;
+      --gold-dim: rgba(201,168,76,0.10);
+      --gold-border: rgba(201,168,76,0.22);
+      --black: #060606;
+      --dark1: #0C0C0C;
+      --dark2: #111111;
+      --dark3: #171717;
+      --white: #F0EDE8;
+      --grey1: #999999;
+      --grey2: #666666;
+      --grey3: #2A2A2A;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:998;
+      height:68px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 48px;
+      background:rgba(6,6,6,0.96); border-bottom:1px solid var(--gold-border);
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    }
+    .nav-brand { text-decoration:none; display:flex; flex-direction:column; gap:2px; }
+    .nav-brand-name { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:5px; color:var(--white); line-height:1; }
+    .nav-brand-name span { color:var(--gold); }
+    .nav-brand-sub { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--grey2); }
+    .nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
+    .nav-links a { font-size:10px; font-weight:500; letter-spacing:2px; text-transform:uppercase; color:var(--grey1); text-decoration:none; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--white); }
+    .nav-cta { background:var(--gold); color:var(--black) !important; padding:9px 20px; font-weight:700 !important; transition:background 0.2s !important; }
+    .nav-cta:hover { background:var(--gold-bright) !important; }
+    .nav-mobile-btn { display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:4px; }
+    .nav-mobile-btn span { display:block; width:22px; height:2px; background:var(--white); transition:all 0.3s; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; min-height:100vh;
+      display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:140px 48px 100px; overflow:hidden;
+    }
+    .hero-glow { position:absolute; top:-200px; right:-200px; width:800px; height:800px; background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%); pointer-events:none; }
+    .hero-line { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--gold),var(--gold-bright),var(--gold),transparent); }
+    .hero-tag { display:inline-flex; align-items:center; gap:12px; margin-bottom:32px; }
+    .hero-tag::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+    .hero-tag-text { font-size:11px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--gold); }
+    .hero-h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(80px,13vw,180px); line-height:0.86; letter-spacing:2px; margin-bottom:32px; }
+    .hero-h1 .l1 { display:block; color:var(--white); }
+    .hero-h1 .l2 { display:block; color:var(--gold); }
+    .hero-h1 .l3 { display:block; -webkit-text-stroke:1.5px rgba(240,237,232,0.18); color:transparent; }
+    .hero-rule { width:72px; height:1px; background:var(--gold); margin-bottom:28px; }
+    .hero-sub { font-size:clamp(15px,1.5vw,19px); font-weight:300; line-height:1.8; color:var(--grey1); max-width:520px; margin-bottom:14px; }
+    .hero-sub strong { color:var(--white); font-weight:500; }
+    .hero-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(14px,1.3vw,17px); color:var(--grey2); max-width:460px; line-height:1.7; margin-bottom:52px; }
+    .hero-btns { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:72px; }
+    .btn-gold { display:inline-block; background:var(--gold); color:var(--black); font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:16px 36px; text-decoration:none; border:none; cursor:pointer; transition:background 0.25s,transform 0.2s; }
+    .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); }
+    .btn-ghost { display:inline-block; background:transparent; color:var(--white); font-size:11px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; padding:15px 36px; border:1px solid var(--grey3); text-decoration:none; transition:border-color 0.25s,color 0.25s,transform 0.2s; }
+    .btn-ghost:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-2px); }
+    .hero-stats { display:flex; gap:0; }
+    .hstat { padding-right:36px; margin-right:36px; border-right:1px solid var(--grey3); }
+    .hstat:last-child { border-right:none; }
+    .hstat-num { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:2px; color:var(--white); line-height:1; }
+    .hstat-num em { color:var(--gold); font-style:normal; }
+    .hstat-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--grey2); margin-top:4px; }
+
+    /* ── TICKER ── */
+    .ticker { background:var(--gold); padding:13px 0; overflow:hidden; white-space:nowrap; }
+    .ticker-track { display:inline-flex; animation:ticker 40s linear infinite; }
+    .ticker-item { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:4px; color:var(--black); padding:0 32px; }
+    .ticker-sep { color:rgba(0,0,0,0.3); }
+    @keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+    /* ── SECTIONS SHARED ── */
+    .section-wrap { padding:110px 48px; }
+    .section-wrap.dark1 { background:var(--dark1); }
+    .section-wrap.dark2 { background:var(--dark2); }
+    .section-wrap.black { background:var(--black); }
+    .section-inner { max-width:1100px; margin:0 auto; }
+    .section-tag { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+    .section-tag::before { content:''; display:block; width:20px; height:1px; background:var(--gold); }
+    .section-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(44px,6vw,80px); line-height:0.92; letter-spacing:2px; color:var(--white); margin-bottom:24px; }
+    .section-body { font-size:15px; font-weight:300; line-height:1.9; color:var(--grey1); max-width:620px; }
+    .section-body strong { color:var(--white); font-weight:500; }
+
+    /* ── WHO IT'S FOR ── */
+    .for-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+    .for-list { display:flex; flex-direction:column; gap:2px; margin-top:16px; }
+    .for-item { background:var(--dark2); padding:22px 28px; display:flex; align-items:flex-start; gap:16px; border-left:3px solid transparent; transition:border-color 0.3s,background 0.3s; }
+    .for-item:hover { border-left-color:var(--gold); background:var(--dark3); }
+    .for-item-dot { color:var(--gold); font-size:12px; flex-shrink:0; margin-top:2px; }
+    .for-item-text { font-size:14px; font-weight:400; color:var(--grey1); line-height:1.5; }
+
+    /* ── PILLARS ── */
+    .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--grey3); margin-top:56px; }
+    .pillar { padding:52px 40px; border-right:1px solid var(--grey3); position:relative; transition:background 0.3s; }
+    .pillar:last-child { border-right:none; }
+    .pillar:hover { background:var(--dark2); }
+    .pillar::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
+    .pillar:hover::after { transform:scaleX(1); }
+    .pillar-num { font-size:10px; letter-spacing:4px; color:var(--grey2); margin-bottom:28px; text-transform:uppercase; }
+    .pillar-name { font-family:'Bebas Neue',sans-serif; font-size:42px; letter-spacing:3px; color:var(--gold); line-height:1; margin-bottom:6px; }
+    .pillar-sub { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--grey2); margin-bottom:20px; }
+    .pillar-rule { width:28px; height:1px; background:var(--gold); opacity:0.5; margin-bottom:20px; }
+    .pillar-body { font-size:14px; font-weight:300; line-height:1.85; color:var(--grey1); }
+
+    /* ── COACHING TIERS ── */
+    .tiers-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:56px; }
+    .tier { background:var(--dark2); padding:44px 32px; position:relative; display:flex; flex-direction:column; }
+    .tier.featured { background:var(--dark3); border-top:2px solid var(--gold); }
+    .tier.featured::before { content:'MOST POPULAR'; position:absolute; top:-1px; right:24px; background:var(--gold); color:var(--black); font-size:8px; font-weight:700; letter-spacing:2.5px; padding:5px 12px; }
+    .tier-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--grey2); margin-bottom:8px; }
+    .tier-name { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:3px; color:var(--white); margin-bottom:6px; }
+    .tier-price { font-family:'Bebas Neue',sans-serif; font-size:44px; color:var(--gold); letter-spacing:1px; line-height:1; margin-bottom:4px; }
+    .tier-price-note { font-size:10px; letter-spacing:2px; color:var(--grey2); text-transform:uppercase; margin-bottom:28px; }
+    .tier-divider { height:1px; background:var(--grey3); margin-bottom:24px; }
+    .tier-features { list-style:none; display:flex; flex-direction:column; gap:11px; margin-bottom:36px; flex:1; }
+    .tier-features li { font-size:13px; font-weight:300; color:var(--grey1); display:flex; align-items:flex-start; gap:10px; line-height:1.5; }
+    .tier-features li::before { content:'—'; color:var(--gold); flex-shrink:0; }
+    .tier-cta { margin-top:auto; }
+
+    /* ── ABOUT ── */
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:90px; align-items:center; }
+    .about-quote-mark { font-family:'Playfair Display',serif; font-size:90px; color:var(--gold); opacity:0.15; line-height:0.7; margin-bottom:10px; }
+    .about-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(18px,2vw,24px); line-height:1.55; color:var(--white); margin-bottom:32px; border-left:2px solid var(--gold); padding-left:24px; }
+    .about-body { font-size:15px; font-weight:300; line-height:1.9; color:var(--grey1); margin-bottom:16px; }
+    .about-body strong { color:var(--white); font-weight:500; }
+    .about-sig { margin-top:36px; padding-top:24px; border-top:1px solid var(--grey3); display:flex; align-items:center; gap:16px; }
+    .about-sig-dot { width:36px; height:36px; border:1px solid var(--gold-border); background:var(--gold-dim); flex-shrink:0; }
+    .about-sig-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:4px; color:var(--white); }
+    .about-sig-handle { font-size:11px; letter-spacing:2px; color:var(--gold); margin-top:3px; }
+    .creds { display:flex; flex-direction:column; gap:2px; }
+    .cred { background:var(--dark2); padding:18px 24px; display:flex; align-items:center; gap:14px; transition:background 0.25s; border-left:3px solid transparent; }
+    .cred:hover { background:var(--dark3); border-left-color:var(--gold); }
+    .cred-icon { font-size:18px; flex-shrink:0; width:32px; text-align:center; }
+    .cred-name { font-size:12px; font-weight:600; color:var(--white); }
+    .cred-detail { font-size:11px; color:var(--grey1); margin-top:2px; font-weight:300; }
+
+    /* ── OPTIMIZER ── */
+    .optimizer-box { border:1px solid var(--gold-border); padding:64px; position:relative; background:linear-gradient(135deg,var(--dark2),var(--black)); display:grid; grid-template-columns:1fr auto; gap:48px; align-items:center; }
+    .optimizer-box::before { content:'FREE TOOL'; position:absolute; top:-1px; left:52px; background:var(--gold); color:var(--black); font-size:9px; font-weight:700; letter-spacing:3px; padding:6px 14px; }
+    .optimizer-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,60px); letter-spacing:2px; color:var(--white); line-height:1; margin-bottom:14px; }
+    .optimizer-body { font-size:15px; font-weight:300; line-height:1.8; color:var(--grey1); max-width:500px; }
+
+    /* ── SUPPLEMENTS ── */
+    .supps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+    .supp-card { background:var(--dark2); padding:44px 36px; position:relative; transition:background 0.3s; border-top:1px solid var(--grey3); }
+    .supp-card:hover { background:var(--dark3); }
+    .supp-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
+    .supp-card:hover::after { transform:scaleX(1); }
+    .supp-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    .supp-name { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:3px; color:var(--white); margin-bottom:14px; line-height:1; }
+    .supp-body { font-size:13px; font-weight:300; color:var(--grey1); line-height:1.8; margin-bottom:28px; }
+    .supp-tag { display:inline-block; border:1px solid var(--gold-border); color:var(--gold); font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; margin-bottom:8px; margin-right:4px; }
+
+    /* ── MERCH ── */
+    .merch-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+    .merch-card { background:var(--dark2); padding:44px 36px; transition:background 0.3s; position:relative; }
+    .merch-card:hover { background:var(--dark3); }
+    .merch-placeholder { width:100%; height:180px; background:var(--dark3); border:1px solid var(--grey3); display:flex; align-items:center; justify-content:center; margin-bottom:24px; }
+    .merch-placeholder-text { font-size:10px; letter-spacing:3px; color:var(--grey3); text-transform:uppercase; }
+    .merch-name { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:var(--white); margin-bottom:8px; }
+    .merch-price { font-size:14px; color:var(--gold); letter-spacing:2px; margin-bottom:20px; }
+    .merch-note { font-size:11px; color:var(--grey2); letter-spacing:2px; text-transform:uppercase; }
+
+    /* ── APPLY ── */
+    .apply-wrap { padding:110px 48px; background:var(--gold); text-align:center; }
+    .apply-inner { max-width:700px; margin:0 auto; }
+    .apply-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,8vw,96px); letter-spacing:3px; color:var(--black); line-height:0.9; margin-bottom:20px; }
+    .apply-sub { font-size:16px; font-weight:400; color:rgba(0,0,0,0.65); line-height:1.7; margin-bottom:40px; max-width:500px; margin-left:auto; margin-right:auto; }
+    .btn-black { display:inline-block; background:var(--black); color:var(--gold); font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:18px 48px; text-decoration:none; border:none; cursor:pointer; transition:background 0.25s,transform 0.2s; }
+    .btn-black:hover { background:#111; transform:translateY(-2px); }
+
+    /* ── APPLICATION FORM ── */
+    .appform-wrap { padding:100px 48px 120px; background:var(--dark1); border-top:1px solid var(--gold-border); }
+    .appform-inner { max-width:720px; margin:0 auto; }
+    .appform-eyebrow { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:14px; }
+    .appform-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(34px,5vw,54px); letter-spacing:3px; color:var(--white); line-height:1; text-align:center; margin-bottom:16px; }
+    .appform-note { font-size:14px; color:var(--grey1); line-height:1.7; text-align:center; max-width:520px; margin:0 auto 56px; }
+    .q { margin-bottom:38px; }
+    .q-num { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:3px; color:var(--gold); display:block; margin-bottom:6px; }
+    .q-label { display:block; font-size:15px; font-weight:500; color:var(--white); line-height:1.5; margin-bottom:14px; }
+    .q-label span { color:var(--grey2); font-weight:400; font-size:13px; }
+    .q input[type=text], .q input[type=email], .q input[type=tel], .q select, .q textarea {
+      width:100%; background:var(--black); border:1px solid var(--grey3); color:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:15px; padding:14px 16px; border-radius:0;
+      transition:border-color 0.2s; -webkit-appearance:none; appearance:none;
+    }
+    .q select { background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%); background-position:calc(100% - 20px) 21px,calc(100% - 14px) 21px; background-size:6px 6px,6px 6px; background-repeat:no-repeat; }
+    .q textarea { min-height:110px; resize:vertical; line-height:1.6; }
+    .q input:focus, .q select:focus, .q textarea:focus { outline:none; border-color:var(--gold); }
+    .q-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .q-choices { display:flex; flex-direction:column; gap:2px; }
+    .q-choice { display:flex; align-items:center; gap:14px; background:var(--black); border:1px solid var(--grey3); padding:14px 16px; cursor:pointer; transition:all 0.2s; }
+    .q-choice:hover { border-color:var(--gold-border); background:var(--dark2); }
+    .q-choice input { accent-color:var(--gold); width:16px; height:16px; flex:none; }
+    .q-choice span { font-size:14px; color:var(--white); }
+    .q-choice.on { border-color:var(--gold); background:var(--gold-dim); }
+    .appform-submit { width:100%; background:var(--gold); color:var(--black); font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:20px; border:none; cursor:pointer; transition:background 0.25s; margin-top:12px; }
+    .appform-submit:hover { background:var(--gold-bright); }
+    .appform-submit:disabled { opacity:0.5; cursor:wait; }
+    .appform-legal { font-size:11px; color:var(--grey2); line-height:1.7; text-align:center; margin-top:26px; }
+    .appform-success { display:none; text-align:center; padding:70px 20px; }
+    .appform-success .as-mark { font-family:'Bebas Neue',sans-serif; font-size:56px; letter-spacing:3px; color:var(--gold); line-height:1; margin-bottom:18px; }
+    .appform-success p { font-size:15px; color:var(--grey1); line-height:1.8; max-width:460px; margin:0 auto; }
+    .appform-error { display:none; font-size:14px; color:#E06B5A; text-align:center; margin-top:18px; }
+    .hp { position:absolute; left:-9999px; opacity:0; height:0; width:0; }
+
+    /* ── CONTACT ── */
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:90px; }
+    .contact-email { font-family:'Bebas Neue',sans-serif; font-size:clamp(20px,2.5vw,30px); letter-spacing:2px; color:var(--gold); text-decoration:none; display:block; margin:24px 0 36px; transition:color 0.25s; }
+    .contact-email:hover { color:var(--gold-bright); }
+    .social-rows { display:flex; flex-direction:column; gap:2px; }
+    .social-row { display:flex; align-items:center; justify-content:space-between; background:var(--dark2); padding:18px 24px; text-decoration:none; border-left:3px solid transparent; transition:all 0.25s; }
+    .social-row:hover { background:var(--dark3); border-left-color:var(--gold); }
+    .social-name { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--white); }
+    .social-handle { font-size:12px; color:var(--grey1); }
+    .social-arr { color:var(--gold); }
+
+    /* ── FOOTER ── */
+    footer { background:var(--dark1); border-top:1px solid var(--grey3); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; }
+    .footer-brand { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:4px; color:var(--gold); }
+    .footer-copy { font-size:11px; letter-spacing:1.5px; color:var(--grey2); text-transform:uppercase; }
+    .footer-links { display:flex; gap:24px; }
+    .footer-links a { font-size:11px; letter-spacing:1.5px; color:var(--grey2); text-transform:uppercase; text-decoration:none; transition:color 0.2s; }
+    .footer-links a:hover { color:var(--gold); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.in { opacity:1; transform:translateY(0); }
+
+    /* ── COMING SOON BADGE ── */
+    .cs-badge { display:inline-block; background:var(--gold-dim); border:1px solid var(--gold-border); color:var(--gold); font-size:9px; letter-spacing:3px; text-transform:uppercase; padding:5px 12px; margin-bottom:16px; }
+
+    /* ── EMAIL CAPTURE ── */
+    .email-wrap { padding:110px 48px; background:var(--dark1); }
+    .email-inner { max-width:1100px; margin:0 auto; }
+    .email-box { border:1px solid var(--gold-border); padding:72px 64px; background:linear-gradient(135deg,var(--dark2),var(--black)); position:relative; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .email-box::before { content:'FREE DOWNLOAD'; position:absolute; top:-1px; left:52px; background:var(--gold); color:var(--black); font-size:9px; font-weight:700; letter-spacing:3px; padding:6px 14px; }
+    .email-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,60px); letter-spacing:2px; color:var(--white); line-height:1; margin-bottom:14px; }
+    .email-body { font-size:15px; font-weight:300; line-height:1.8; color:var(--grey1); margin-bottom:0; }
+    .email-body strong { color:var(--white); font-weight:500; }
+    .email-form { display:flex; flex-direction:column; gap:12px; }
+    .email-input { background:var(--dark2); border:1px solid var(--grey3); border-bottom:1px solid var(--gold-border); color:var(--white); font-family:'DM Sans',sans-serif; font-size:14px; padding:16px 20px; outline:none; transition:border-color 0.25s; letter-spacing:1px; }
+    .email-input:focus { border-bottom-color:var(--gold); }
+    .email-input::placeholder { color:var(--grey2); font-size:13px; }
+    .email-submit { background:var(--gold); color:var(--black); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:16px; border:none; cursor:pointer; transition:background 0.25s; }
+    .email-submit:hover { background:var(--gold-bright); }
+    .email-disclaimer { font-size:10px; letter-spacing:1px; color:var(--grey2); text-align:center; margin-top:4px; }
+    .email-success { display:none; text-align:center; padding:20px; }
+    .email-success-text { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:3px; color:var(--gold); }
+    .email-success-sub { font-size:13px; color:var(--grey1); margin-top:8px; }
+
+    /* ── AFFILIATES ── */
+    .aff-wrap { padding:110px 48px; background:var(--black); }
+    .aff-inner { max-width:1100px; margin:0 auto; }
+    .aff-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:56px; }
+    .aff-card { background:var(--dark2); padding:48px 44px; position:relative; border-left:3px solid transparent; transition:all 0.3s; }
+    .aff-card:hover { background:var(--dark3); border-left-color:var(--gold); }
+    .aff-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    .aff-name { font-family:'Bebas Neue',sans-serif; font-size:38px; letter-spacing:3px; color:var(--white); margin-bottom:8px; line-height:1; }
+    .aff-body { font-size:14px; font-weight:300; color:var(--grey1); line-height:1.8; margin-bottom:24px; }
+    .aff-code { display:inline-flex; align-items:center; gap:12px; background:var(--dark3); border:1px solid var(--gold-border); padding:12px 20px; margin-bottom:28px; }
+    .aff-code-label { font-size:10px; letter-spacing:2px; color:var(--grey2); text-transform:uppercase; }
+    .aff-code-value { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:4px; color:var(--gold); }
+    .aff-products { display:flex; flex-direction:column; gap:2px; margin-bottom:28px; }
+    .aff-product { background:var(--black); padding:12px 16px; display:flex; align-items:center; justify-content:space-between; text-decoration:none; transition:background 0.2s; }
+    .aff-product:hover { background:var(--dark3); }
+    .aff-product-name { font-size:13px; color:var(--grey1); font-weight:300; }
+    .aff-product-arr { color:var(--gold); font-size:14px; }
+
+    @media (max-width:960px) {
+      .email-wrap,.aff-wrap { padding:72px 20px; }
+      .email-box { grid-template-columns:1fr; gap:32px; padding:40px 24px; }
+      .aff-grid { grid-template-columns:1fr; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width:960px) {
+      nav { padding:0 20px; }
+      .nav-links { display:none; }
+      .nav-links.open { display:flex; flex-direction:column; position:fixed; top:68px; left:0; right:0; background:var(--dark1); border-bottom:1px solid var(--gold-border); padding:20px; gap:16px; z-index:997; }
+      .nav-mobile-btn { display:flex; }
+      .hero { padding:100px 20px 60px; }
+      .hero-stats { flex-wrap:wrap; gap:16px; }
+      .hstat { border-right:none; padding-right:0; margin-right:0; }
+      .section-wrap { padding:72px 20px; }
+      .for-grid,.about-grid,.contact-grid { grid-template-columns:1fr; gap:40px; }
+      .pillars-grid { grid-template-columns:1fr; }
+      .pillar { border-right:none; border-bottom:1px solid var(--grey3); }
+      .pillar:last-child { border-bottom:none; }
+      .tiers-grid { grid-template-columns:1fr; }
+      .supps-grid,.merch-grid { grid-template-columns:1fr; }
+      .optimizer-box { grid-template-columns:1fr; gap:28px; padding:40px 24px; }
+      .apply-wrap { padding:72px 20px; }
+      .appform-wrap { padding:64px 20px 88px; }
+      .q-row { grid-template-columns:1fr; gap:0; }
+      .q-row .q { margin-bottom:24px; }
+      footer { flex-direction:column; gap:12px; text-align:center; padding:24px 20px; }
+      .footer-links { flex-wrap:wrap; justify-content:center; }
+    }
+
+    /* PASSWORD LOCK */
+    #lock{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
+    .lock-top{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+    .lock-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--grey2);margin-bottom:40px;}
+    .lock-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,12vw,100px);letter-spacing:3px;line-height:0.9;text-align:center;margin-bottom:8px;color:var(--white);}
+    .lock-title span{color:var(--gold);}
+    .lock-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--grey1);margin-bottom:48px;}
+    .lock-input{width:100%;max-width:300px;background:var(--dark2);border:1px solid var(--grey3);border-bottom:1px solid var(--gold-border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;letter-spacing:6px;text-align:center;padding:16px 20px;outline:none;text-transform:uppercase;display:block;margin-bottom:12px;transition:border-color 0.25s;}
+    .lock-input:focus{border-bottom-color:var(--gold);}
+    .lock-input::placeholder{letter-spacing:3px;color:var(--grey2);font-size:11px;}
+    .lock-btn{width:100%;max-width:300px;background:var(--gold);color:var(--black);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px;border:none;cursor:pointer;transition:background 0.25s;display:block;}
+    .lock-btn:hover{background:var(--gold-bright);}
+    .lock-error{font-size:11px;letter-spacing:2px;color:#c0392b;text-transform:uppercase;height:20px;text-align:center;margin-top:12px;}
+    .lock-footer{position:absolute;bottom:32px;font-size:10px;letter-spacing:4px;color:var(--grey3);text-transform:uppercase;}
+</style>
+<script defer src="/_vercel/insights/script.js"></script>
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:image" content="https://alignedmanproject.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Aligned Man Project" />
+<meta name="twitter:description" content="Men's transformation coaching — Physical, Mental, Spiritual. For disciplined men who don't break." />
+<meta name="twitter:image" content="https://alignedmanproject.com/og-image.png" />
+<!-- Meta Pixel — added 2026-09-15. No scores, answers or health values are ever passed as parameters. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1552694942734116');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+<div id="siteWrap" style="display:block;">
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-brand" style="display:flex;align-items:center;gap:12px;">
+    <img src="/favicon.png" alt="AMP — The Aligned Man Project" style="height:44px;width:44px;display:block;" />
+    <div>
+      <div class="nav-brand-name">THE <span>ALIGNED</span> MAN PROJECT.</div>
+      <div class="nav-brand-sub">Physical · Mental · Spiritual</div>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/">Home</a></li>
+    <li><a href="/bio.html">The Story</a></li>
+    <li><a href="/coaching">Coaching</a></li>
+    <li><a href="/audit.html">Free Audit</a></li>
+    <li><a href="/merch">Merch</a></li>
+    <li><a href="#apply-form" class="nav-cta">Free Call</a></li>
+  </ul>
+  <button class="nav-mobile-btn" id="mobileBtn" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- APPLY -->
+<div class="apply-wrap" id="apply">
+  <div class="apply-inner">
+    <h2 class="apply-h2">Book a Free<br/>15-Minute Call</h2>
+    <p class="apply-sub" style="margin-bottom:0;">Fifteen minutes with Rob. Where you are, what's in the way, and whether coaching fits. No cost, no pressure. Fill this out — takes about a minute — and Rob will reach out to set the time.</p>
+    <div style="margin-top:24px; font-size:11px; letter-spacing:2px; color:rgba(0,0,0,0.5); text-transform:uppercase;">Free · 15 Minutes · With Rob Directly</div>
+  </div>
+</div>
+
+<!-- APPLICATION FORM -->
+<section class="appform-wrap" id="apply-form">
+  <div class="appform-inner">
+
+    <div id="applyFormBox">
+      <div class="appform-eyebrow">Free 15-Minute Call</div>
+      <h2 class="appform-h2">Tell Me Where You Are</h2>
+      <p class="appform-note">Rob reads every one himself and reaches out within 24 hours to set a time. Be honest — it makes the fifteen minutes count.</p>
+
+      <form id="applyForm" novalidate>
+        <input type="hidden" name="access_key" id="w3fKey" value="a4c0c63e-4d50-4632-b956-322900bc5f0c" />
+        <input type="hidden" name="subject" value="FREE CALL REQUEST — The Aligned Man Project" />
+        <input type="hidden" name="from_name" value="Aligned Man Project — Free Call" />
+        <input type="hidden" name="Submitted From" value="alignedmanproject.com/freecall" />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+        <div class="q-row">
+          <div class="q">
+            <span class="q-num">01</span>
+            <label class="q-label" for="f-name">First name</label>
+            <input type="text" id="f-name" name="Name" autocomplete="given-name" required />
+          </div>
+          <div class="q">
+            <span class="q-num">02</span>
+            <label class="q-label" for="f-email">Email</label>
+            <input type="email" id="f-email" name="Email" autocomplete="email" required />
+          </div>
+        </div>
+        <div class="q-row">
+          <div class="q">
+            <span class="q-num">03</span>
+            <label class="q-label" for="f-phone">Phone <span>(fastest way to set the time)</span></label>
+            <input type="tel" id="f-phone" name="Phone" autocomplete="tel" />
+          </div>
+          <div class="q">
+            <span class="q-num">04</span>
+            <label class="q-label" for="f-time">Best time for the call</label>
+            <select id="f-time" name="Best Time" required>
+              <option value="">Select one</option>
+              <option>Weekday mornings</option>
+              <option>Weekday afternoons</option>
+              <option>Weekday evenings</option>
+              <option>Weekends</option>
+            </select>
+          </div>
+        </div>
+        <div class="q">
+          <span class="q-num">05</span>
+          <label class="q-label" for="f-now">What's the one thing you most want to change right now? <span>Body, mind, purpose — be blunt.</span></label>
+          <textarea id="f-now" name="What They Want To Change" required></textarea>
+        </div>
+        <div class="q">
+          <span class="q-num">06</span>
+          <label class="q-label">If it's a fit, are you ready to invest in coaching?</label>
+          <div class="q-choices">
+            <label class="q-choice"><input type="radio" name="Investment Readiness" value="Yes — ready to start now" required /><span>Yes — ready to start now</span></label>
+            <label class="q-choice"><input type="radio" name="Investment Readiness" value="Yes — within the next 30 days" /><span>Yes — within the next 30 days</span></label>
+            <label class="q-choice"><input type="radio" name="Investment Readiness" value="Need to know the numbers first" /><span>Need to know the numbers first</span></label>
+            <label class="q-choice"><input type="radio" name="Investment Readiness" value="Just exploring for now" /><span>Just exploring for now</span></label>
+          </div>
+        </div>
+        <div class="q">
+          <span class="q-num">07</span>
+          <label class="q-label" for="f-found">How did you find me? <span>(optional)</span></label>
+          <input type="text" id="f-found" name="How They Found Us" />
+        </div>
+        <button type="submit" class="appform-submit" id="applyBtn">Request My Free Call</button>
+        <div class="appform-error" id="applyError"></div>
+
+        <p class="appform-legal">
+          The Aligned Man Project provides coaching and education. It is not medical advice, diagnosis, or treatment, and it does not replace care from your own licensed provider. Individual results vary. Submitting this application does not guarantee acceptance.
+        </p>
+      </form>
+    </div>
+
+    <div class="appform-success" id="applySuccess">
+      <div class="as-mark">Request Received</div>
+      <p>You're on Rob's list for a free 15-minute call. He'll reach out within 24 hours by text or email to set the time. Check spam once, just in case.</p>
+      <p style="margin-top:26px; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold);">Physical · Mental · Spiritual</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">The Aligned Man Project</div>
+  <div class="footer-links">
+    <a href="/#pillars">The Method</a>
+    <a href="/coaching">Coaching</a>
+    <a href="/#affiliates">Supplements</a>
+    <a href="/#merch">Merch</a>
+        <a href="#apply">Free Call</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+  </div>
+  <div class="footer-copy">© 2026 The Aligned Man Project&trade; LLC</div>
+      <div class="footer-copy" style="margin-top:6px;">The Aligned Man Project LLC · Serving Westchester County, New York</div>
+      <div class="footer-copy" style="margin-top:6px;">All rights reserved. The Aligned Man Project&trade;, The Aligned Method&trade; and Built, Not Broken&trade; are trademarks of The Aligned Man Project LLC.</div>
+</footer>
+
+<script>
+  const W3F_ENDPOINT = 'https://api.web3forms.com/submit';
+const FORM_OPENED_AT = Date.now(); // time check required by /api/subscribe
+  function ampKey() {
+    const k = document.getElementById('w3fKey');
+    const v = k ? k.value.trim() : '';
+    return (v && v.indexOf('REPLACE_WITH') === -1) ? v : null;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.q-choice input[type=radio]').forEach(r => {
+      r.addEventListener('change', () => {
+        const group = document.getElementsByName(r.name);
+        group.forEach ? group.forEach(x => x.closest('.q-choice').classList.remove('on'))
+                      : Array.prototype.forEach.call(group, x => x.closest('.q-choice').classList.remove('on'));
+        r.closest('.q-choice').classList.add('on');
+      });
+    });
+
+    const form = document.getElementById('applyForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('applyBtn');
+      const err = document.getElementById('applyError');
+      err.style.display = 'none';
+
+      const missing = Array.prototype.filter.call(form.querySelectorAll('[required]'), el => {
+        if (el.type === 'radio') return !form.querySelector('input[name="' + el.name + '"]:checked');
+        return !el.value.trim();
+      });
+      if (missing.length) {
+        err.textContent = 'A few answers are still blank. Fill them in and send again.';
+        err.style.display = 'block';
+        missing[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (missing[0].focus) missing[0].focus();
+        return;
+      }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      const key = ampKey();
+
+      if (!key) {
+        const body = Object.keys(data)
+          .filter(k => ['access_key','subject','from_name','botcheck'].indexOf(k) === -1)
+          .map(k => k + ':\n' + data[k]).join('\n\n');
+        window.location.href = 'mailto:rob@alignedmanproject.com?subject='
+          + encodeURIComponent('Free Call Request — ' + (data.Name || ''))
+          + '&body=' + encodeURIComponent(body);
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      // Also add applicant to Mailchimp (silent — never blocks the application)
+      try {
+        const applicantEmail = data.Email || data.email || '';
+        const applicantName = data.Name || data.name || '';
+        if (applicantEmail) {
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: applicantName, email: applicantEmail, tag: 'coaching-applicant', website: '', ts: FORM_OPENED_AT })
+          }).catch(function(){});
+        }
+      } catch (mcErr) {}
+
+      try {
+        const res = await fetch(W3F_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        if (!json.success) throw new Error(json.message || 'Send failed');
+        try { fbq('track','Lead',{content_name:'Free Call Request', value:0, currency:'USD'}); } catch(e) {}
+      document.getElementById('applyFormBox').style.display = 'none';
+        document.getElementById('applySuccess').style.display = 'block';
+        document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+      } catch (ex) {
+        btn.disabled = false;
+        btn.textContent = 'Request My Free Call';
+        err.innerHTML = 'That did not send. Email your answers directly to <a href="mailto:rob@alignedmanproject.com" style="color:var(--gold);">rob@alignedmanproject.com</a> and Robert will pick it up.';
+        err.style.display = 'block';
+      }
+    });
+  });
+
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    // Fallback: never let a section stay invisible
+    function revealCheck(){
+      document.querySelectorAll('.reveal:not(.in)').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.95) el.classList.add('in');
+      });
+    }
+    window.addEventListener('scroll', revealCheck, { passive:true });
+    window.addEventListener('load', revealCheck);
+    setTimeout(revealCheck, 600);
+    // Close mobile menu when a link is tapped
+    document.querySelectorAll('#navLinks a').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+    });
+  });
+</script>
+
+</div><!-- /siteWrap -->
+</body>
+</html>
