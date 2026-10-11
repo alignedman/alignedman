@@ -1,4 +1,4 @@
-<!-- AMP VERSION STAMP | index.html | Homepage | LAST UPDATED: 2026-09-25 | STATUS: LIVE (public) | Free 15-min call front door, form fix, menu trimmed | The Aligned Man Project LLC -->
+<!-- AMP VERSION STAMP | index.html | Homepage | LAST UPDATED: 2026-10-10 | STATUS: LIVE (public) | Beanie added to #merch, "Drop" labels removed | The Aligned Man Project LLC -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,7 +175,7 @@
     .pillar-body { font-size:14px; font-weight:300; line-height:1.85; color:var(--grey1); }
 
     /* ── COACHING TIERS ── */
-    .tiers-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:56px; }
+    .tiers-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:32px; }
     .tier { background:var(--dark2); padding:44px 32px; position:relative; display:flex; flex-direction:column; }
     .tier.featured { background:var(--dark3); border-top:2px solid var(--gold); }
     .tier.featured::before { content:'MOST POPULAR'; position:absolute; top:-1px; right:24px; background:var(--gold); color:var(--black); font-size:8px; font-weight:700; letter-spacing:2.5px; padding:5px 12px; }
@@ -213,7 +213,7 @@
     .optimizer-body { font-size:15px; font-weight:300; line-height:1.8; color:var(--grey1); max-width:500px; }
 
     /* ── SUPPLEMENTS ── */
-    .supps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
+    .supps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:32px; }
     .supp-card { background:var(--dark2); padding:44px 36px; position:relative; transition:background 0.3s; border-top:1px solid var(--grey3); }
     .supp-card:hover { background:var(--dark3); }
     .supp-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
@@ -224,13 +224,14 @@
     .supp-tag { display:inline-block; border:1px solid var(--gold-border); color:var(--gold); font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; margin-bottom:8px; margin-right:4px; }
 
     /* ── MERCH ── */
-    .merch-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:56px; }
-    .merch-card { background:var(--dark2); padding:44px 36px; transition:background 0.3s; position:relative; }
+    .merch-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:32px; }
+    @media (max-width:1100px) { .merch-grid { grid-template-columns:repeat(2,1fr); } }
+    .merch-card { background:var(--dark2); padding:22px 20px; transition:background 0.3s; position:relative; }
     .merch-card:hover { background:var(--dark3); }
     .merch-placeholder { width:100%; height:180px; background:var(--dark3); border:1px solid var(--grey3); display:flex; align-items:center; justify-content:center; margin-bottom:24px; }
     .merch-placeholder-text { font-size:10px; letter-spacing:3px; color:var(--grey3); text-transform:uppercase; }
-    .merch-name { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:var(--white); margin-bottom:8px; }
-    .merch-price { font-size:14px; color:var(--gold); letter-spacing:2px; margin-bottom:20px; }
+    .merch-name { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--white); margin-bottom:4px; }
+    .merch-price { font-size:13px; color:var(--gold); letter-spacing:2px; margin-bottom:10px; }
     .merch-note { font-size:11px; color:var(--grey2); letter-spacing:2px; text-transform:uppercase; }
 
     /* ── APPLY ── */
@@ -324,7 +325,7 @@
     /* ── AFFILIATES ── */
     .aff-wrap { padding:110px 48px; background:var(--black); }
     .aff-inner { max-width:1100px; margin:0 auto; }
-    .aff-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:56px; }
+    .aff-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:32px; }
     .aff-card { background:var(--dark2); padding:48px 44px; position:relative; border-left:3px solid transparent; transition:all 0.3s; }
     .aff-card:hover { background:var(--dark3); border-left-color:var(--gold); }
     .aff-badge { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
@@ -610,29 +611,38 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
     <div class="reveal">
       <div class="section-tag">Merchandise</div>
       <h2 class="section-h2">Wear What You<br/>Stand For.</h2>
-      <p class="section-body">Built, Not Broken.&trade; All three pieces are live &mdash; made to order, $5 flat US shipping.</p>
+      <p class="section-body">Built, Not Broken.&trade; All four pieces are live &mdash; made to order, $5 flat US shipping.</p>
+      <!-- RAISED SO FAR — hand-updated, keep in sync with merch.html -->
+      <p style="margin-top:10px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);">$0 raised for men's mental health &middot; $2 from every item</p>
     </div>
     <div class="merch-grid reveal">
       <div class="merch-card">
-        <img src="/merch-hat.jpg" alt="AMP Hat — black structured snapback with white and gold embroidered AMP logo" style="width:100%;height:auto;display:block;border:1px solid var(--gold-border);margin-bottom:18px;" width="1000" height="1000" loading="lazy" decoding="async"/>
-        <div class="merch-name">AMP Hat &mdash; Drop 1</div>
+        <img src="/merch-hat.jpg" alt="AMP Hat — black structured snapback with white and gold embroidered AMP logo" style="width:100%;height:auto;display:block;border:1px solid var(--gold-border);margin-bottom:12px;" width="1000" height="1000" loading="lazy" decoding="async"/>
+        <div class="merch-name">AMP Hat</div>
         <div class="merch-price">$34.99 &middot; $5 Flat US Shipping</div>
         <div class="merch-note">Structured Black Snapback &middot; Flat Bill<br/>White + Gold Embroidery &middot; One Size</div>
         <div style="margin-top:16px;"><a href="https://buy.stripe.com/3cI3cuenqaStcVM1M33sI0g" class="btn-gold" style="font-size:10px;padding:12px 26px;display:inline-block;">Buy the Hat</a></div>
       </div>
       <div class="merch-card">
-        <img src="/merch-tee.jpg" alt="AMP Tee — black tee printed with the AMP logo and the words Built, Not Broken" style="width:100%;height:auto;display:block;border:1px solid var(--gold-border);margin-bottom:18px;" width="1000" height="1000" loading="lazy" decoding="async"/>
-        <div class="merch-name">AMP Tee &mdash; Drop 1</div>
+        <img src="/merch-tee.jpg" alt="AMP Tee — black tee printed with the AMP logo and the words Built, Not Broken" style="width:100%;height:auto;display:block;border:1px solid var(--gold-border);margin-bottom:12px;" width="1000" height="1000" loading="lazy" decoding="async"/>
+        <div class="merch-name">AMP Tee</div>
         <div class="merch-price">$29.99 &middot; $5 Flat US Shipping</div>
         <div class="merch-note">Black Tee &middot; AMP Mark Across the Chest<br/>Unisex S&ndash;2XL &middot; Size Selected at Checkout</div>
         <div style="margin-top:16px;"><a href="https://buy.stripe.com/dRmaEWbbeaSt090fCT3sI0f" class="btn-gold" style="font-size:10px;padding:12px 26px;display:inline-block;">Buy the Tee</a></div>
       </div>
       <div class="merch-card">
-        <img src="/merch-hoodie.jpg" alt="AMP Hoodie — washed charcoal hoodie printed with the AMP logo and the words Built, Not Broken" style="width:100%;height:auto;display:block;border:1px solid var(--gold-border);margin-bottom:18px;" width="1000" height="1000" loading="lazy" decoding="async"/>
-        <div class="merch-name">AMP Hoodie &mdash; Drop 2</div>
+        <img src="/merch-hoodie.jpg" alt="AMP Hoodie — washed charcoal hoodie printed with the AMP logo and the words Built, Not Broken" style="width:100%;height:auto;display:block;border:1px solid var(--gold-border);margin-bottom:12px;" width="1000" height="1000" loading="lazy" decoding="async"/>
+        <div class="merch-name">AMP Hoodie</div>
         <div class="merch-price">$65.00 &middot; $5 Flat US Shipping</div>
         <div class="merch-note">Washed Charcoal Heavyweight Hoodie &middot; Front Chest Print<br/>Unisex S&ndash;2XL &middot; Size Selected at Checkout</div>
         <div style="margin-top:16px;"><a href="https://buy.stripe.com/6oUaEW3IM0dP3lcfCT3sI0i" class="btn-gold" style="font-size:10px;padding:12px 26px;display:inline-block;">Buy the Hoodie</a></div>
+      </div>
+      <div class="merch-card">
+        <img src="/merch-beanie.jpg" alt="AMP Beanie — black knit beanie with the AMP logo" style="width:100%;height:auto;display:block;border:1px solid var(--gold-border);margin-bottom:12px;" width="1000" height="1000" loading="lazy" decoding="async" />
+        <div class="merch-name">AMP Beanie</div>
+        <div class="merch-price">$29.99 &middot; $5 Flat US Shipping</div>
+        <div class="merch-note">Black Knit Beanie &middot; AMP Logo Front<br/>One Size</div>
+        <div style="margin-top:16px;"><a href="https://buy.stripe.com/6oU28qenq3q16xobmD3sI0j" class="btn-gold" style="font-size:10px;padding:12px 26px;display:inline-block;">Buy the Beanie</a></div>
       </div>
     </div>
     <p style="margin-top:28px;text-align:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--grey2);">Ships in 7&ndash;10 business days &middot; $5 flat US shipping &middot; US only &middot; Sales tax calculated at checkout</p>
