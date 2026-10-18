@@ -188,14 +188,13 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
      "cheatsheet-tailored", which triggers the 2-email cheat sheet follow-up in Mailchimp.
      Everyone who signs up joins the main list, so they also get the weekly email. -->
 <section id="cs-updates" style="background:#0C0C0C;border-bottom:1px solid #2A2A2A;padding:26px 40px">
-  <div style="max-width:1100px;margin:0 auto;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-    <div style="max-width:520px">
+  <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+    <div style="max-width:620px">
       <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:#fff;margin-bottom:6px">WEEKLY UPDATES</div>
       <div style="font-size:14px;color:#999;line-height:1.6">Get weekly updates: new products, new stacks, and what Robert changed in his own stack. Straight to your inbox.</div>
     </div>
-    <form id="cs-form" novalidate style="display:flex;gap:10px;flex-wrap:wrap;flex:1;min-width:260px;max-width:520px;position:relative">
-      <input id="cs-name" type="text" autocomplete="given-name" placeholder="First name" aria-label="First name" style="flex:1 1 130px;min-width:0;background:#060606;border:1px solid #2A2A2A;border-bottom:1px solid rgba(201,168,76,0.4);color:#fff;font-family:'DM Sans',sans-serif;font-size:16px;padding:14px;outline:none">
-      <input id="cs-email" type="email" autocomplete="email" required placeholder="Email" aria-label="Email" style="flex:2 1 180px;min-width:0;background:#060606;border:1px solid #2A2A2A;border-bottom:1px solid rgba(201,168,76,0.4);color:#fff;font-family:'DM Sans',sans-serif;font-size:16px;padding:14px;outline:none">
+    <form id="cs-form" novalidate style="display:flex;gap:10px;flex-wrap:wrap;width:100%;max-width:620px;position:relative">
+      <input id="cs-email" type="email" autocomplete="email" required placeholder="Email" aria-label="Email" style="flex:1 1 100%;min-width:0;background:#060606;border:1px solid #2A2A2A;border-bottom:1px solid rgba(201,168,76,0.4);color:#fff;font-family:'DM Sans',sans-serif;font-size:16px;padding:14px;outline:none">
       <div style="position:absolute;left:-5000px" aria-hidden="true"><input id="cs-website" type="text" name="website" tabindex="-1" autocomplete="off" value=""></div>
       <button id="cs-btn" type="submit" style="flex:1 1 100%;background:#C9A84C;color:#0A0A0A;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:14px 20px;border:none;cursor:pointer">SEND ME THE UPDATES &rarr;</button>
       <p id="cs-msg" style="flex:1 1 100%;margin:0;font-size:12px;color:#777;line-height:1.5">No spam. Unsubscribe anytime.</p>
@@ -208,7 +207,7 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
   var f = document.getElementById('cs-form'); if(!f) return;
   f.addEventListener('submit', async function(ev){
     ev.preventDefault();
-    var name = document.getElementById('cs-name').value.trim();
+    var name = '';
     var email = document.getElementById('cs-email').value.trim();
     var msg = document.getElementById('cs-msg'), btn = document.getElementById('cs-btn');
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ msg.style.color='#c0392b'; msg.textContent='Enter a real email.'; return; }
