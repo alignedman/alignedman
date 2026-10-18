@@ -1,4 +1,4 @@
-<!-- AMP VERSION STAMP | cheat-sheet.html | Cheat Sheet / Lead Magnet | LAST UPDATED: 2026-10-01 | STATUS: LIVE (public) | FULL LIBRARY — all 17 open; top: free call box, weekly updates signup, audit; affiliate line | The Aligned Man Project LLC -->
+<!-- AMP VERSION STAMP | cheat-sheet.html | Cheat Sheet / Lead Magnet | LAST UPDATED: 2026-10-17 | STATUS: LIVE (public, noindex) | STACK plan: noindex, Paid link labels, Updated date + What changed box. Rob Oct 17: doses and cycles removed from every product, each points to /freecall. Disclaimer, stacks, links, code ROBERT kept | The Aligned Man Project LLC -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,14 +58,14 @@
   .stack-card-body { padding: 24px; }
   .stack-summary { font-family: 'Playfair Display', serif; font-style: italic; font-size: 14px; color: var(--muted); border-left: 2px solid var(--gold-dim); padding-left: 14px; margin-bottom: 24px; line-height: 1.6; }
   .compound-list { display: flex; flex-direction: column; gap: 12px; }
-  .compound-row { background: var(--black); border: 1px solid var(--border); border-radius: 2px; padding: 16px 20px; display: grid; grid-template-columns: 220px 1fr 1fr 80px; gap: 16px; align-items: start; }
+  .compound-row { background: var(--black); border: 1px solid var(--border); border-radius: 2px; padding: 16px 20px; display: grid; grid-template-columns: 220px 1fr 80px; gap: 16px; align-items: start; }
   .compound-row .comp-name { font-weight: 600; font-size: 14px; color: var(--text); }
   .compound-row .comp-name a { color: var(--text); border-bottom: 1px solid var(--gold-dim); transition: color 0.2s; }
   .compound-row .comp-name a:hover { color: var(--gold); text-decoration: none; }
   .compound-row .comp-dosage { font-size: 13px; color: var(--muted); }
   .compound-row .comp-dosage strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
-  .compound-row .comp-duration { font-size: 13px; color: var(--muted); }
-  .compound-row .comp-duration strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+  .compound-row .dose-call { font-size: 13px; font-weight: 600; letter-spacing: .5px; color: var(--gold); border-bottom: 1px solid var(--gold-dim); }
+  .compound-row .dose-call:hover { color: var(--gold-bright); text-decoration: none; }
   .natty-badge { font-size: 11px; text-align: center; padding: 4px 8px; border-radius: 2px; font-weight: 600; }
   .natty-1 { background: rgba(80,180,80,0.12); color: #6ec96e; border: 1px solid rgba(80,180,80,0.25); }
   .natty-2 { background: rgba(120,200,80,0.1); color: #8ecf5e; border: 1px solid rgba(120,200,80,0.2); }
@@ -98,10 +98,18 @@
     .sources-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
     .sources-bar .code-badge { margin-left: 0; }
   }
-  @media (max-width: 500px) { .compound-row { grid-template-columns: 1fr; } }
+  @media (max-width: 500px) { .compound-row { grid-template-columns: 1fr; } .compound-row .natty-badge { grid-column: auto; } }
+  .paid-tag { display:inline-block; margin-left:6px; padding:1px 5px; border:1px solid var(--border); border-radius:2px; font-family:'DM Sans',sans-serif; font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); vertical-align:middle; white-space:nowrap; text-decoration:none; }
+  .cs-updated { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin:-14px 0 24px; }
+  #cs-changed[hidden]{display:none} #cs-changed { background:#0C0C0C; border-bottom:1px solid #2A2A2A; padding:22px 40px; }
+  #cs-changed .wrap { max-width:1100px; margin:0 auto; }
+  #cs-changed .h { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; color:#fff; margin-bottom:8px; }
+  #cs-changed ul { margin:0; padding-left:18px; color:#bbb; font-size:14px; line-height:1.7; }
+  @media (max-width: 768px) { #cs-changed { padding:20px; } }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 <meta name="description" content="The Alignment Stack — the complete free optimization protocol from The Aligned Man Project. Training, nutrition, recovery and daily structure for men who want the full system. Free download." />
+<meta name="robots" content="noindex, follow" />
 <link rel="canonical" href="https://alignedmanproject.com/cheat-sheet.html" />
 <meta property="og:title" content="The Alignment Stack — Free Optimization Protocol" />
 <meta property="og:description" content="Rob's complete free protocol — training, nutrition, recovery and daily structure for disciplined men." />
@@ -152,6 +160,7 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
   <p class="eyebrow">The Aligned Man Project</p>
   <h1>The Alignment<br /><span>Stack</span></h1>
   <p class="sub">Every stack. Every protocol. Exactly what Rob uses and what has worked — nothing held back.</p>
+  <p class="cs-updated">Updated Oct 17, 2026</p>
   <div class="principle-block">
     <strong>The Aligned Man Protocol Principle:</strong> Experiment to find effective combinations of compounds at dosages and cycle durations that elicit negligible observable side effects — from both a subjective standpoint and a bloodwork standpoint. Refuse to sacrifice your holistic wellbeing for anatomical vanity. Make rational decisions based on how compounds affect your wellbeing. Not emotional decisions based on outdated identity labels. <strong>Naturalness is a spectrum, not a dichotomy.</strong>
   </div>
@@ -231,12 +240,21 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
     </div>
   </div>
 </section>
+<!-- HIDDEN until filled: write 1-3 lines, then delete the word hidden from the section tag. WHAT CHANGED THIS WEEK — refresh every week with the "Updated" date in the hero. 1 to 3 lines. No doses. -->
+<section id="cs-changed" hidden>
+  <div class="wrap">
+    <div class="h">WHAT CHANGED THIS WEEK</div>
+    <ul>
+      <li>ROB_FILLS_THIS_IN</li>
+    </ul>
+  </div>
+</section>
 <div class="sources-bar">
   <span class="label">Verified Sources</span>
   <div class="source-links">
-    <a href="http://swisschems.is/ref/510/" target="_blank" rel="noopener">SwissChems.is</a>
-    <a href="https://nextchems.com/ref/2/" target="_blank" rel="noopener">NextChems.com</a>
-    <a href="https://enhancedlabs.com/?ref=DYyov5JCnSp9j" target="_blank" rel="noopener">EnhancedLabs.com</a>
+    <a href="http://swisschems.is/ref/510/" target="_blank" rel="sponsored noopener">SwissChems.is</a><span class="paid-tag">Paid link</span>
+    <a href="https://nextchems.com/ref/2/" target="_blank" rel="sponsored noopener">NextChems.com</a><span class="paid-tag">Paid link</span>
+    <a href="https://enhancedlabs.com/?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">EnhancedLabs.com</a><span class="paid-tag">Paid link</span>
   </div>
   <div class="code-badge">Use Code: <span>ROBERT</span> &nbsp;·&nbsp; Every batch HPLC verified</div>
 </div>
@@ -275,30 +293,26 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">RAD-140 and MK-677 synergistically drive lean muscle growth, recovery, and strength. Enclomiphene keeps your natural testosterone protected throughout. SLIN Pills ensure every nutrient goes where it belongs and blood sugar stays locked under MK-677.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/rad-140/ref/510/" target="_blank">RAD-140</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>1–2 pills/day · Pre-workout or split AM/PM</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 3 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/rad-140/ref/510/" target="_blank" rel="sponsored noopener">RAD-140</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-5"><span class="natty-label">Spectrum</span>5.0</div>
             <div class="comp-detail">A potent SARM known for aggressive anabolic gains but carries the highest risk of hormonal suppression in this stack. Always run with testosterone support and liver protection.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/mk-677-ibutamoren-380mg-10mg-60-caps/ref/510/" target="_blank">MK-677 (Ibutamoren)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>10–20mg/day · Split AM &amp; PM</div>
-            <div class="comp-duration"><strong>Cycle</strong>8 weeks on · 2 weeks off · OR 5 days on, 2 off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/mk-677-ibutamoren-380mg-10mg-60-caps/ref/510/" target="_blank" rel="sponsored noopener">MK-677 (Ibutamoren)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
             <div class="comp-detail">Stimulates GH release and elevates IGF-1. Always stack with SLIN Pills to mitigate potential insulin resistance.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank">Enclomiphene</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>12.5–25mg daily · Morning</div>
-            <div class="comp-duration"><strong>Cycle</strong>Run throughout the cycle</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank" rel="sponsored noopener">Enclomiphene</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
             <div class="comp-detail">SERM that significantly boosts natural testosterone by blocking estrogen receptors in the brain. Non-negotiable on RAD-140.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/slin?ref=DYyov5JCnSp9j" target="_blank">SLIN Pills</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>2–4 capsules per carb meal · or 2 caps 3×/day</div>
-            <div class="comp-duration"><strong>Cycle</strong>During MK-677 cycle</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/slin?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">SLIN Pills</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.25</div>
             <div class="comp-detail">Natural insulin mimetic — shuttles carbs into muscle glycogen instead of fat storage. Do not skip this.</div>
           </div>
@@ -311,23 +325,20 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">The most advanced fat-loss protocol in The Aligned Man arsenal. Retatrutide is a triple-receptor agonist (GLP-1, GIP, Glucagon) that drives aggressive fat loss while actively preserving lean muscle mass. Tesamorelin specifically targets visceral abdominal fat while elevating GH to protect muscle during the cut. 5-Amino-1MQ inhibits NNMT, unlocking stored fat at the cellular level.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://nextchems.com/ref/2/" target="_blank">Retatrutide (GLP-3)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>Start 0.5–1mg/week · Titrate to 4–8mg/week</div>
-            <div class="comp-duration"><strong>Cycle</strong>12–24 weeks · Titrate slowly</div>
+            <div class="comp-name"><a href="https://nextchems.com/ref/2/" target="_blank" rel="sponsored noopener">Retatrutide (GLP-3)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Next-generation triple agonist beyond semaglutide. Activates GLP-1, GIP, and glucagon receptors simultaneously. Only if prescribed/monitored.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/tesamorelin-2mg/ref/510/" target="_blank">Tesamorelin</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>1–2mg daily · Subcutaneous injection</div>
-            <div class="comp-duration"><strong>Cycle</strong>8–12 weeks on · 4 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/tesamorelin-2mg/ref/510/" target="_blank" rel="sponsored noopener">Tesamorelin</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
             <div class="comp-detail">GHRH analog targeting visceral abdominal fat — the dangerous deep belly fat. Elevates GH to shred visceral fat and protect lean muscle simultaneously. The gut goes first on this compound.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/5-amino-1mq-3000-mg-60-caps-50-mg-1-capsule/ref/510/" target="_blank">5-Amino-1MQ</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>50–100mg daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>8 weeks on · 2 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/5-amino-1mq-3000-mg-60-caps-50-mg-1-capsule/ref/510/" target="_blank" rel="sponsored noopener">5-Amino-1MQ</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">NNMT inhibitor that unlocks stored fat at the cellular level by elevating NAD+ and activating metabolic pathways. Synergistic with Retatrutide and Tesamorelin.</div>
           </div>
@@ -340,37 +351,32 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">The most complete natural lean muscle protocol. CJC-1295 and Ipamorelin pulse growth hormone in a pattern that mirrors the body's own natural rhythm. Enclomiphene keeps natural testosterone elevated. Top T reinforces hormonal output. AC-262 adds targeted anabolic drive with minimal suppression.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/cjc-1295-with-dac-2mg-price-is-per-vial/ref/510/" target="_blank">CJC-1295 (with DAC)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>1–2mg · 1–2× per week (injectable)</div>
-            <div class="comp-duration"><strong>Cycle</strong>12 weeks on · 4 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/cjc-1295-with-dac-2mg-price-is-per-vial/ref/510/" target="_blank" rel="sponsored noopener">CJC-1295 (with DAC)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Synthetic GHRH analog that stimulates the pituitary to produce and release GH in sustained pulses. DAC modification extends half-life for twice-weekly dosing. <span class="priority-high">High Priority.</span></div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/ipamorelin-2mg-price-is-per-vial/ref/510/" target="_blank">Ipamorelin</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>200–300mcg · 2–3× daily (injectable)</div>
-            <div class="comp-duration"><strong>Cycle</strong>12 weeks on · 4 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/ipamorelin-2mg-price-is-per-vial/ref/510/" target="_blank" rel="sponsored noopener">Ipamorelin</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Selective GH secretagogue that triggers precise, clean GH pulses without cortisol spikes. Stacked with CJC-1295 creates a synergistic GH release pattern. <span class="priority-high">High Priority.</span></div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank">Enclomiphene</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>12.5–25mg daily · Morning</div>
-            <div class="comp-duration"><strong>Cycle</strong>Run throughout the full cycle</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank" rel="sponsored noopener">Enclomiphene</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
             <div class="comp-detail">The hormonal anchor. Blocks estrogen receptors in the hypothalamus to drive natural testosterone production. Non-negotiable alongside AC-262. <span class="priority-high">High Priority.</span></div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank">Top T</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Top T</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
             <div class="comp-detail">Most efficient natural testosterone booster available. Adds natural hormonal precursors, estrogen control, and vasodilators. <span class="priority-med">Medium Priority.</span></div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/ac-262-536-600mg-60capsules-10mg-capsule/ref/510/" target="_blank">AC-262</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>10–20mg/day · Pre-workout or split AM/PM</div>
-            <div class="comp-duration"><strong>Cycle</strong>8 weeks on · 2 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/ac-262-536-600mg-60capsules-10mg-capsule/ref/510/" target="_blank" rel="sponsored noopener">AC-262</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-5"><span class="natty-label">Spectrum</span>5.0</div>
             <div class="comp-detail">SARM with high receptor affinity and minimal suppression. Real anabolic stimulus on top of an optimized GH and testosterone base. <span class="priority-high">High Priority.</span></div>
           </div>
@@ -387,15 +393,13 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">Stimulant fat burner in the morning. Non-stimulant formula at night. Around-the-clock fat burning coverage.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/shred?ref=DYyov5JCnSp9j" target="_blank">Shred (AM)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>2–4 capsules in the morning</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/shred?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Shred (AM)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-2"><span class="natty-label">Spectrum</span>2.0</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/all-day-shred?ref=DYyov5JCnSp9j" target="_blank">All Day Shred (PM)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>1 scoop at night</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/all-day-shred?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">All Day Shred (PM)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-2"><span class="natty-label">Spectrum</span>2.0</div>
           </div>
         </div>
@@ -407,21 +411,18 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">S4 cuts and keeps you lean. Top T keeps testosterone in check. Semaglutide curbs appetite so adherence to your deficit becomes effortless.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/s4-andarine/ref/510/" target="_blank">S4 (Andarine)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>50–75mg/day · Split due to short half-life</div>
-            <div class="comp-duration"><strong>Cycle</strong>6–8 weeks on · 4 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/s4-andarine/ref/510/" target="_blank" rel="sponsored noopener">S4 (Andarine)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-5"><span class="natty-label">Spectrum</span>5.0</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank">Top T</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Top T</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://nextchems.com/product/semaglutide-glp-1-analogue-90mg-3mg-capsule/ref/2/" target="_blank">Semaglutide (GLP-1)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>Start 0.25mg/week · Titrate as needed</div>
-            <div class="comp-duration"><strong>Note</strong>Only if prescribed/monitored</div>
+            <div class="comp-name"><a href="https://nextchems.com/product/semaglutide-glp-1-analogue-90mg-3mg-capsule/ref/2/" target="_blank" rel="sponsored noopener">Semaglutide (GLP-1)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a><div style="margin-top:6px;font-size:12px;color:var(--muted)">Note: only if prescribed/monitored</div></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
           </div>
         </div>
@@ -437,21 +438,18 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">S23 delivers aggressive recomp — simultaneous fat loss and muscle gain. Enclomiphene keeps testosterone in range. Muscle Pro provides the anabolic building blocks to get huge while staying lean.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/s-23-10mg-60caps/ref/510/" target="_blank">S23</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>2 pills/day · Pre-workout or split on off days</div>
-            <div class="comp-duration"><strong>Cycle</strong>8 weeks on · 4 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/s-23-10mg-60caps/ref/510/" target="_blank" rel="sponsored noopener">S23</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-5"><span class="natty-label">Spectrum</span>5.0</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank">Enclomiphene</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>12.5–25mg daily · Morning</div>
-            <div class="comp-duration"><strong>Cycle</strong>2 weeks – indefinitely</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank" rel="sponsored noopener">Enclomiphene</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/muscle-pro?ref=DYyov5JCnSp9j" target="_blank">Muscle Pro (Epicatechin + Turkesterone)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4 capsules daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/muscle-pro?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Muscle Pro (Epicatechin + Turkesterone)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.25</div>
           </div>
         </div>
@@ -467,15 +465,13 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">The cleanest path to lean, hard gains without touching the upper spectrum.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank">Top T</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Top T</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/muscle-pro?ref=DYyov5JCnSp9j" target="_blank">Muscle Pro</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4 capsules daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/muscle-pro?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Muscle Pro</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.25</div>
           </div>
         </div>
@@ -487,16 +483,14 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">AC-262 — superior alternative to other SARMs — builds lean hard muscle with minimal suppression. Stack with Top T to keep testosterone elevated throughout.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/ac-262-536-600mg-60capsules-10mg-capsule/ref/510/" target="_blank">AC-262</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>10–20mg/day · Pre-workout or split</div>
-            <div class="comp-duration"><strong>Cycle</strong>8 weeks on · 2 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/ac-262-536-600mg-60capsules-10mg-capsule/ref/510/" target="_blank" rel="sponsored noopener">AC-262</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-5"><span class="natty-label">Spectrum</span>5.0</div>
             <div class="comp-detail">Selective androgen receptor modulator with high affinity and minimal testosterone suppression. Run with Enclomiphene and/or Top T.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank">Top T</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Top T</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
           </div>
         </div>
@@ -512,15 +506,13 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">Optimize your natural testosterone back into range after any cycle. Enclomiphene restores the HPT axis. Top T supports natural production throughout the recovery window.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank">Enclomiphene</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>12.5–25mg daily · Morning</div>
-            <div class="comp-duration"><strong>Cycle</strong>Minimum 4 weeks post-cycle</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/swiss-chems-enclomiphene-750-mg-60-caps/ref/510/" target="_blank" rel="sponsored noopener">Enclomiphene</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank">Top T</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>Through PCT window</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Top T</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
           </div>
         </div>
@@ -536,23 +528,20 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">Russian military-grade peptides meet foundational amino acid support. Semax for drive, focus, and neurological performance. Selank for stress elimination and anxiety-free clarity. Enhanced EAA+ as the daily cognitive and recovery backbone.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/semax-30mg/ref/510/" target="_blank">Semax</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>100–300mcg · 1–2× daily (intranasal)</div>
-            <div class="comp-duration"><strong>Cycle</strong>4–6 weeks on · 2 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/semax-30mg/ref/510/" target="_blank" rel="sponsored noopener">Semax</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-4"><span class="natty-label">Spectrum</span>4.0</div>
             <div class="comp-detail">Amplifies BDNF — the compound your brain uses to grow, adapt, and perform. Sharpens focus, accelerates cognitive processing, and enhances motivation without stimulant jitteriness. <span class="priority-high">High Priority.</span></div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/selank-5mg-price-is-per-vial/ref/510/" target="_blank">Selank</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>250–500mcg · 1–2× daily (intranasal)</div>
-            <div class="comp-duration"><strong>Cycle</strong>4–6 weeks on · 2 weeks off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/selank-5mg-price-is-per-vial/ref/510/" target="_blank" rel="sponsored noopener">Selank</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Semax's perfect counterpart. Modulates GABA and serotonin — eliminating stress and anxiety without sedation. Run Semax for drive. Run Selank for calm. Together: locked in, clear, and unshakeable. <span class="priority-high">High Priority.</span></div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/enhanced-eaa-new?ref=DYyov5JCnSp9j" target="_blank">Enhanced EAA+</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>1–2 scoops daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/enhanced-eaa-new?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Enhanced EAA+</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.5</div>
             <div class="comp-detail">Essential amino acids with powerful nootropics — increases focus and motivation during training and cognitive functioning throughout the day. <span class="priority-med">Medium Priority.</span></div>
           </div>
@@ -565,16 +554,14 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">Advanced cognitive compounds for when you need a sharper edge than any natural stack can deliver.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://nextchems.com/product/flmodafinil-crl-40940-50mg-60capules/ref/2/" target="_blank">FL-Modafinil</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>50–200mg</div>
-            <div class="comp-duration"><strong>Cycle</strong>4 weeks on · 2 weeks off</div>
+            <div class="comp-name"><a href="https://nextchems.com/product/flmodafinil-crl-40940-50mg-60capules/ref/2/" target="_blank" rel="sponsored noopener">FL-Modafinil</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-4"><span class="natty-label">Spectrum</span>4.0</div>
             <div class="comp-detail">Enhances wakefulness by inhibiting dopamine reuptake. Focus without jitteriness. <span class="priority-med">Medium Priority.</span></div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://nextchems.com/product/9-me-bc-9mbc-15mg-60-capsules/ref/2/" target="_blank">9-ME-BC</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>15–30mg/day</div>
-            <div class="comp-duration"><strong>Cycle</strong>2-week cycles when desensitized to dopamine</div>
+            <div class="comp-name"><a href="https://nextchems.com/product/9-me-bc-9mbc-15mg-60-capsules/ref/2/" target="_blank" rel="sponsored noopener">9-ME-BC</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-4"><span class="natty-label">Spectrum</span>4.0</div>
             <div class="comp-detail">Regenerates dopaminergic neurons while resensitizing you to dopamine. Acts as an MAOI. The only compound that repairs your reward system rather than just stimulating it. <span class="priority-med">Medium Priority.</span></div>
           </div>
@@ -591,44 +578,38 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
       <div class="stack-card-body">
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/creatine-monohydrate-5000mg?ref=DYyov5JCnSp9j" target="_blank">Creatine Monohydrate</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>5g daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>Indefinite — take forever</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/creatine-monohydrate-5000mg?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Creatine Monohydrate</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.25</div>
             <div class="comp-detail">Enhances phosphocreatine stores, boosting ATP production for greater power, strength, and training volume. <span class="priority-high">High Priority.</span></div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/blue-ox?ref=DYyov5JCnSp9j" target="_blank">Blue Ox Test Booster</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4–8 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/blue-ox?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Blue Ox Test Booster</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.5</div>
             <div class="comp-detail">Natural testosterone booster. High Priority if symptomatic; Low otherwise.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/arachidonic-acid?ref=DYyov5JCnSp9j" target="_blank">Arachidonic Acid</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>1400mg daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/arachidonic-acid?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Arachidonic Acid</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.25</div>
             <div class="comp-detail">Omega-6 fatty acid stimulating muscle inflammation and protein synthesis. High Priority for advanced lifters who no longer feel sore.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/alpha-yohimbine?ref=DYyov5JCnSp9j" target="_blank">Alpha Yohimbine</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>3–6mg daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/alpha-yohimbine?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Alpha Yohimbine</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.5</div>
             <div class="comp-detail">Blocks alpha-2 adrenergic receptors to suppress appetite and release stored fat. High Priority cutting. Low bulking.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/phytoturk-turkesterone?ref=DYyov5JCnSp9j" target="_blank">PhytoTurk (Turkesterone)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>1–2g daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/phytoturk-turkesterone?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">PhytoTurk (Turkesterone)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-2"><span class="natty-label">Spectrum</span>2.0</div>
             <div class="comp-detail">Natural ecdysteroid activating mTOR pathway to stimulate protein synthesis. Medium Priority.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/muscle-pro?ref=DYyov5JCnSp9j" target="_blank">Muscle Pro (Epicatechin + Turkesterone)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4 capsules daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/muscle-pro?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Muscle Pro (Epicatechin + Turkesterone)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.25</div>
             <div class="comp-detail">Increases follistatin and reduces myostatin. Stimulates nitric oxide for enhanced nutrient delivery. Medium Priority.</div>
           </div>
@@ -640,23 +621,20 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
       <div class="stack-card-body">
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/black-ox?ref=DYyov5JCnSp9j" target="_blank">Black Ox Test Booster</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>8–16 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/black-ox?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Black Ox Test Booster</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Powerful testosterone booster. Excellent standalone or as PCT after AC-262 or 3-AD. High Priority if suppressed or symptomatic.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/3-ad?ref=DYyov5JCnSp9j" target="_blank">3-AD (Prohormone)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>75–150mg daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>8 weeks on · 2 weeks off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/3-ad?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">3-AD (Prohormone)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-4"><span class="natty-label">Spectrum</span>4.0</div>
             <div class="comp-detail">Strongest DSHEA-compliant metabolite. Alternative to AC-262 — not alongside it. Less suppressive, slightly less potent. Medium Priority.</div>
           </div>
           <div class="compound-row">
             <div class="comp-name">Tesofensine</div>
-            <div class="comp-dosage"><strong>Dosage</strong>0.25mg · 2× per week up to daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>4–8 weeks on · 2–4 weeks off</div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Triple reuptake inhibitor — blocks dopamine, serotonin, and norepinephrine reuptake. Improves mood, productivity, significantly reduces appetite. Medium Priority for fat burning phases.</div>
           </div>
@@ -672,30 +650,26 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
       <div class="stack-card-body">
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/bpc-157-30000-mcg-60capsules-0-5mg-capsule/ref/510/" target="_blank">BPC-157</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>1–5mg (caps) · 0.2–1mg (injectable)</div>
-            <div class="comp-duration"><strong>Cycle</strong>Anytime — injury/recovery dependent</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/bpc-157-30000-mcg-60capsules-0-5mg-capsule/ref/510/" target="_blank" rel="sponsored noopener">BPC-157</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-2"><span class="natty-label">Spectrum</span>2.0</div>
             <div class="comp-detail">Broad-spectrum healing peptide. Heals gut, brain, blood cells, and immune function. Injectable for localized injuries. Capsules require 3–4× dose for equivalent systemic effect. Medium-High Priority.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/tudca?ref=DYyov5JCnSp9j" target="_blank">TUDCA</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>250mg daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>Anytime — liver stress dependent</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/tudca?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">TUDCA</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.25</div>
             <div class="comp-detail">Comprehensive liver protectant. Reduces ER stress, bile acid toxicity, oxidative stress, inflammation. Enhances mitochondrial function. Priority scales with compound load.</div>
           </div>
           <div class="compound-row">
             <div class="comp-name">Heart, Liver &amp; Kidney Support</div>
-            <div class="comp-dosage"><strong>Dosage</strong>3 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>Anytime</div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.25</div>
             <div class="comp-detail">Full-spectrum organ protection formula. Priority scales with compound load.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://swisschems.is/product/methylene-blue/ref/510/" target="_blank">Methylene Blue</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>5mg</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://swisschems.is/product/methylene-blue/ref/510/" target="_blank" rel="sponsored noopener">Methylene Blue</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Enhances mitochondrial function across every physiological system. Also acts as MAOI — improves mood and cognition. Medium Priority.</div>
           </div>
@@ -712,9 +686,8 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
         <p class="stack-summary">When your body is transforming at the rate The Aligned Man demands — losing fat, building muscle, rebuilding identity — the tissue beneath the surface is under enormous strain. GLOW is the all-in-one recovery compound that handles what everything else misses.</p>
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://nextchems.com/ref/2/" target="_blank">GLOW (GHK-Cu + BPC-157 + TB-500 Blend)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>1–2mg daily · Subcutaneous injection</div>
-            <div class="comp-duration"><strong>Cycle</strong>Ongoing during any transformation phase</div>
+            <div class="comp-name"><a href="https://nextchems.com/ref/2/" target="_blank" rel="sponsored noopener">GLOW (GHK-Cu + BPC-157 + TB-500 Blend)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-2"><span class="natty-label">Spectrum</span>2.0</div>
             <div class="comp-detail">
               <strong style="color:var(--text);">GHK-Cu (Copper Peptide)</strong> — Drives collagen synthesis and skin remodeling. Counteracts loose skin and elasticity loss from rapid fat reduction.<br/><br/>
@@ -735,16 +708,14 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
       <div class="stack-card-body">
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/alpha-yohimbine?ref=DYyov5JCnSp9j" target="_blank">Alpha Yohimbine</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>6mg daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/alpha-yohimbine?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Alpha Yohimbine</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-2"><span class="natty-label">Spectrum</span>2.0</div>
             <div class="comp-detail">Increases blood flow and boosts dopamine-mediated arousal. Reduces stress and anxiety for improved performance. <span class="priority-high">High Priority.</span></div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/blue-ox?ref=DYyov5JCnSp9j" target="_blank">Blue Ox Test Booster</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4–8 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/blue-ox?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Blue Ox Test Booster</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-1"><span class="natty-label">Spectrum</span>1.5</div>
             <div class="comp-detail">Boosts libido by elevating testosterone. High Priority if symptomatic; Low if already optimal.</div>
           </div>
@@ -756,30 +727,26 @@ src="https://www.facebook.com/tr?id=1552694942734116&ev=PageView&noscript=1"/></
       <div class="stack-card-body">
         <div class="compound-list">
           <div class="compound-row">
-            <div class="comp-name"><a href="https://nextchems.com/product/tadalafil-20mg-60-capsules/ref/2/" target="_blank">Tadalafil (Generic Cialis)</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>10–20mg every other day</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://nextchems.com/product/tadalafil-20mg-60-capsules/ref/2/" target="_blank" rel="sponsored noopener">Tadalafil (Generic Cialis)</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Inhibits PDE5 for significantly improved erectile function. <span class="priority-high">High Priority.</span></div>
           </div>
           <div class="compound-row">
             <div class="comp-name">PT-141 (Bremelanotide)</div>
-            <div class="comp-dosage"><strong>Dosage</strong>1mg per dose · As needed</div>
-            <div class="comp-duration"><strong>Cycle</strong>As needed</div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Binds to MC4 receptors, stimulating dopamine-related sexual arousal centrally. <span class="priority-high">High Priority.</span></div>
           </div>
           <div class="compound-row">
             <div class="comp-name">Melanotan II</div>
-            <div class="comp-dosage"><strong>Dosage</strong>250mcg per dose · As needed</div>
-            <div class="comp-duration"><strong>Cycle</strong>As needed</div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.0</div>
             <div class="comp-detail">Similar to PT-141 for sexual performance. Also increases melanin for a deeper tan. Choose PT-141 for performance only; Melanotan II if you also want the tanning effect.</div>
           </div>
           <div class="compound-row">
-            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank">Top T</a></div>
-            <div class="comp-dosage"><strong>Dosage</strong>4 pills daily</div>
-            <div class="comp-duration"><strong>Cycle</strong>6 weeks on · 1 week off</div>
+            <div class="comp-name"><a href="https://enhancedlabs.com/products/top-t?ref=DYyov5JCnSp9j" target="_blank" rel="sponsored noopener">Top T</a><span class="paid-tag">Paid link</span></div>
+            <div class="comp-dosage"><a href="/freecall" class="dose-call">Dosage: book your free 15-minute call &rarr;</a></div>
             <div class="natty-badge natty-3"><span class="natty-label">Spectrum</span>3.5</div>
             <div class="comp-detail">More vasodilators than Black Ox — the testosterone booster of choice for men prioritizing sexual performance. Medium Priority.</div>
           </div>
